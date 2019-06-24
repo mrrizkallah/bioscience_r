@@ -1,0 +1,41 @@
+name: "YUM-101"
+output_dir: "docs"
+navbar:
+  type: default
+  title: "Course Website"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Lectures"
+      href: lectures.html
+    - text: "Labs"
+      menu:
+      - text: "Lab 1"
+        href: lab1.html
+      - text: "Lab 2"
+        href: lab2.html
+      - text: "Lab 3"
+        href: lab1.html
+      - text: "Lab 4"
+        href: lab1.html
+      - text: "Lab 5"
+        href: lab1.html
+    - text: "Assignments"
+      href: assignments.html
+    - text: "Grade Dashboard"
+      href: grade_dashboard.html
+
+  right:
+    - icon: fa-github
+      href: https://github.com/rstudio4edu/basic-course-website
+    - icon: fa-university
+      href: https://en.wikipedia.org/wiki/Cooking_school
+      
+output: 
+  html_document:
+    theme: yeti
+    highlight: zenburn
+    toc: true
+    toc_float: true
+    code_download: true
+    

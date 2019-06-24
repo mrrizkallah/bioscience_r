@@ -1,0 +1,11 @@
+---
+title: "YUM 101- Lab 3"
+---
+
+# Lab 3: Classic Chocolate Cake  
+
+<center> ![](https://images.unsplash.com/photo-1540337706094-da10342c93d8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80){width=400px}</center> 
+
+
+
+For our third lab, we will be making a chocolate cake.

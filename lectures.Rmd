@@ -1,0 +1,66 @@
+---
+title: "YUM 101 - Lectures"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# History of Pizza
+Wed, Sep 25  
+
+Slides:
+Readings: 
+
+
+# Woodfired Thin Crust Pizza
+Wed, Oct 2  
+
+Slides:
+Readings:
+
+ 
+# Fusion Pizza and Creative Renditions
+Wed, Oct 9 
+
+Slides:
+Readings:
+
+
+# Intro to Pastries
+Wed, Oct 16
+
+Slides:
+Readings:
+
+# Danishes
+Wed, Oct 23
+
+Slides:
+Readings:
+
+# Icings, Frosing, & Glazes
+Wed, Oct 30
+
+Slides:
+Readings:
+
+# Cakes, Cupcakes, and Rolls
+Wed,  Nov 6
+
+Slides:
+Readings:
+
+# Cookies
+Wed,  Nov 13
+
+Slides:
+Readings:
+
+# Pies
+Wed, Nov 20 
+
+Slides:
+Readings:
+
+

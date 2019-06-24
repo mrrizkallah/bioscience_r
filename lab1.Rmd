@@ -1,0 +1,13 @@
+---
+title: "YUM 101- Lab 1"
+---
+
+# Lab 1: Pizza consumption  
+
+<center> ![](ipizza.jpg){width=400px}</center> 
+
+
+
+Our first lab will be pizza focused. We will analyze data from restaurants across the US that sell pizzas.
+[https://www.kaggle.com/datafiniti/pizza-restaurants-and-the-pizza-they-sell#8358_1.csv](https://www.kaggle.com/datafiniti/pizza-restaurants-and-the-pizza-they-sell#8358_1.csv)
+

@@ -1,0 +1,10 @@
+---
+title: "YUM 101 - Lab 2"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Lab 2
+
