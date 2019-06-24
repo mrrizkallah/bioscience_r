@@ -4,7 +4,7 @@ title: "YUM 101- Lab 1"
 
 # Lab 1: Pizza consumption  
 
-<center> ![](ipizza.jpg){width=400px}</center> 
+<center> ![](https://images.unsplash.com/photo-1474600056930-615c3d706456?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60){width=400px}</center> 
 
 
 
