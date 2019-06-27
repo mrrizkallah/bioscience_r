@@ -10,10 +10,13 @@ navbar:
       href: lectures.html
     - text: "Labs"
       menu:
+      - text: "Introductory"
       - text: "Lab 1"
         href: lab1.html
       - text: "Lab 2"
         href: lab2.html
+      - text: "Advanced"
+      - text: "---"
       - text: "Lab 3"
         href: lab1.html
       - text: "Lab 4"
