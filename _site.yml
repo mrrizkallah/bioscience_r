@@ -1,8 +1,8 @@
-name: "BioScience R"
+name: "Bioinformatics for Pharmacy"
 output_dir: "docs"
 navbar:
   type: default
-  title: "BioScience R Course"
+  title: "Bioinformatics for Pharmacy"
   left:
     - text: "Home"
       href: index.html

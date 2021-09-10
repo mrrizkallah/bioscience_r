@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Mariam R. Rizkallah" />
 
+<meta name="date" content="2021-01-01" />
 
-<title>index.utf8</title>
+<title>Bioinformatics for Pharmacy</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -337,7 +339,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">BioScience R Course</a>
+      <a class="navbar-brand" href="index.html">Bioinformatics for Pharmacy</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -404,11 +406,69 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Bioinformatics for Pharmacy</h1>
+<h4 class="author">Mariam R. Rizkallah</h4>
+<h4 class="date">2021</h4>
 
 </div>
 
 
-
+<div id="what-is-r" class="section level1">
+<h1>What is R</h1>
+<p>R is both a programming language and software environment for statistical computing, which is free and open-source (<a href="https://www.r-project.org/about.html" class="uri">https://www.r-project.org/about.html</a>).</p>
+<p>The  was initiated by Robert Gentleman and Ross Ihaka (University of Auckland) in the early 1990s as a different implementation of the S language, which was developed at Bell Laboratories.</p>
+<p>Since 1997, R has been developed by the .</p>
+<p>R is platform independent and can run on Microsoft Windows, Mac OS and Unix/Linux systems.</p>
+<p>Popularity: <a href="https://www.tiobe.com/tiobe-index/" class="uri">https://www.tiobe.com/tiobe-index/</a></p>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<ul>
+<li>Introduction to R for the Université Côte d’Azur: <a href="https://github.com/mattiaguerini/slides-intro-to-R" class="uri">https://github.com/mattiaguerini/slides-intro-to-R</a>"</li>
+<li>Applied Statistics for Bioinformatics using R by Wim P. Krijnen, 2009: <a href="https://faculty.ucr.edu/~tgirke/Documents/R_BioCond/documentation/Krijnen-IntroBioInfStatistics.pdf" class="uri">https://faculty.ucr.edu/~tgirke/Documents/R_BioCond/documentation/Krijnen-IntroBioInfStatistics.pdf</a></li>
+<li>Rstudio4edu: <a href="https://github.com/dcossyleon/basic-course-website" class="uri">https://github.com/dcossyleon/basic-course-website</a></li>
+</ul>
+</div>
+<div id="getting-started" class="section level2">
+<h2>Getting Started</h2>
+<p>To get started, you’ll need to install two pieces of software:</p>
+<ul>
+<li><p>R, the actual programming language. <a href="https://cran.r-project.org" class="uri">https://cran.r-project.org</a></p></li>
+<li><p>RStudio, an excellent IDE for working with R. <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a></p></li>
+</ul>
+<p>Why RStudio?</p>
+<ul>
+<li><p>Easier to use (everything is in one space)</p></li>
+<li><p>Many useful integrations (e.g. R-projects, R-markdown, shiny …)</p></li>
+<li><p>Plenty of shortcuts (alt + shift + k)</p></li>
+<li><p>Plenty of cheatsheets (see top panel)</p></li>
+</ul>
+</div>
+<div id="screenshot-of-rconsole" class="section level2">
+<h2>Screenshot of RConsole</h2>
+<div class="figure">
+<img src="figures/r_console.png" alt="" />
+<p class="caption">RConsole</p>
+</div>
+</div>
+<div id="screenshot-of-rstudio" class="section level2">
+<h2>Screenshot of RStudio</h2>
+<div class="figure">
+<img src="figures/r_studio.png" alt="" />
+<p class="caption">RStudio</p>
+</div>
+</div>
+<div id="glossary" class="section level2">
+<h2>Glossary</h2>
+<ul>
+<li><p><strong>command</strong>: user input (text or numbers) that R understands</p></li>
+<li><p><strong>script</strong>: a sequence of commands collected in a text file, each separated by a new line</p></li>
+<li><p><strong>environment</strong>: a list of named variables that we have generated/imported by means of a series of commands</p></li>
+<li><p><strong>history</strong>: the list of past commands thaty we have used</p></li>
+<li><p><strong>help</strong>: a documentation of all the functions available in R (the user manual)</p></li>
+<li><p><strong>package</strong>: a collection of additional functions and dataset</p></li>
+</ul>
+</div>
+</div>
 
 <div id="rmd-source-code">LS0tCnRpdGxlOiAgICAgICJCaW9pbmZvcm1hdGljcyBmb3IgUGhhcm1hY3kiCmF1dGhvcjogICAgICJNYXJpYW0gUi4gUml6a2FsbGFoIgpkYXRlOiAgICAgICAiMjAyMSIKIyBvdXRwdXQ6ICAgICBiZWFtZXJfcHJlc2VudGF0aW9uCnRoZW1lOiAgICAgIGJveGVzCmNvbG9ydGhlbWU6IGRvbHBoaW4KZm9udHRoZW1lOiAgc2VyaWYKdG9jOiAgICAgICAgVFJVRQotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFLCBlY2hvPUZBTFNFfQpsaWJyYXJ5KGtuaXRyKQpvcHRzX2NodW5rJHNldChlY2hvID0gRkFMU0UpCgpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShyZXNoYXBlMikKYGBgCgojIFdoYXQgaXMgUgoKUiBpcyBib3RoIGEgcHJvZ3JhbW1pbmcgbGFuZ3VhZ2UgYW5kIHNvZnR3YXJlIGVudmlyb25tZW50IGZvciBzdGF0aXN0aWNhbCBjb21wdXRpbmcsIHdoaWNoIGlzIGZyZWUgYW5kIG9wZW4tc291cmNlICg8aHR0cHM6Ly93d3cuci1wcm9qZWN0Lm9yZy9hYm91dC5odG1sPikuCgpUaGUgXGVtcGh7UiBQcm9qZWN0fSB3YXMgaW5pdGlhdGVkIGJ5IFJvYmVydCBHZW50bGVtYW4gYW5kIFJvc3MgSWhha2EgKFVuaXZlcnNpdHkgb2YgQXVja2xhbmQpIGluIHRoZSBlYXJseSAxOTkwcyBhcyBhIGRpZmZlcmVudCBpbXBsZW1lbnRhdGlvbiBvZiB0aGUgUyBsYW5ndWFnZSwgd2hpY2ggd2FzIGRldmVsb3BlZCBhdCBCZWxsIExhYm9yYXRvcmllcy4KClNpbmNlIDE5OTcsIFIgaGFzIGJlZW4gZGV2ZWxvcGVkIGJ5IHRoZSBcZW1waHtSIERldmVsb3BtZW50IENvcmUgVGVhbX0uCgpSIGlzIHBsYXRmb3JtIGluZGVwZW5kZW50IGFuZCBjYW4gcnVuIG9uIE1pY3Jvc29mdCBXaW5kb3dzLCBNYWMgT1MgYW5kIFVuaXgvTGludXggc3lzdGVtcy4KClBvcHVsYXJpdHk6IDxodHRwczovL3d3dy50aW9iZS5jb20vdGlvYmUtaW5kZXgvPgoKIyMgUmVzb3VyY2VzCiogSW50cm9kdWN0aW9uIHRvIFIgZm9yIHRoZSBVbml2ZXJzaXTDqSBDw7R0ZSBkJ0F6dXI6IGh0dHBzOi8vZ2l0aHViLmNvbS9tYXR0aWFndWVyaW5pL3NsaWRlcy1pbnRyby10by1SIgoqIEFwcGxpZWQgU3RhdGlzdGljcyBmb3IgQmlvaW5mb3JtYXRpY3MgdXNpbmcgUiBieSBXaW0gUC4gS3Jpam5lbiwgMjAwOTogaHR0cHM6Ly9mYWN1bHR5LnVjci5lZHUvfnRnaXJrZS9Eb2N1bWVudHMvUl9CaW9Db25kL2RvY3VtZW50YXRpb24vS3Jpam5lbi1JbnRyb0Jpb0luZlN0YXRpc3RpY3MucGRmCiogUnN0dWRpbzRlZHU6IGh0dHBzOi8vZ2l0aHViLmNvbS9kY29zc3lsZW9uL2Jhc2ljLWNvdXJzZS13ZWJzaXRlCgojIyBHZXR0aW5nIFN0YXJ0ZWQKVG8gZ2V0IHN0YXJ0ZWQsIHlvdSdsbCBuZWVkIHRvIGluc3RhbGwgdHdvIHBpZWNlcyBvZiBzb2Z0d2FyZToKCi0gUiwgdGhlIGFjdHVhbCBwcm9ncmFtbWluZyBsYW5ndWFnZS4gPGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnPgoKLSBSU3R1ZGlvLCBhbiBleGNlbGxlbnQgSURFIGZvciB3b3JraW5nIHdpdGggUi4gPGh0dHBzOi8vd3d3LnJzdHVkaW8uY29tPgoKV2h5IFJTdHVkaW8/XGZvb3Rub3Rle1xzY3JpcHRzaXplIFlvdSBtdXN0IGhhdmUgaW5zdGFsbGVkIFIgYmVmb3JlIHVzaW5nIFJTdHVkaW8ufQoKLSBFYXNpZXIgdG8gdXNlIChldmVyeXRoaW5nIGlzIGluIG9uZSBzcGFjZSkKCi0gTWFueSB1c2VmdWwgaW50ZWdyYXRpb25zIChlLmcuIFItcHJvamVjdHMsIFItbWFya2Rvd24sIHNoaW55IC4uLikKCi0gUGxlbnR5IG9mIHNob3J0Y3V0cyAoYWx0ICsgc2hpZnQgKyBrKQoKLSBQbGVudHkgb2YgY2hlYXRzaGVldHMgKHNlZSB0b3AgcGFuZWwpCgojIyBTY3JlZW5zaG90IG9mIFJDb25zb2xlCiFbUkNvbnNvbGVdKGZpZ3VyZXMvcl9jb25zb2xlLnBuZykKCiMjIFNjcmVlbnNob3Qgb2YgUlN0dWRpbwohW1JTdHVkaW9dKGZpZ3VyZXMvcl9zdHVkaW8ucG5nKQoKIyMgR2xvc3NhcnkKLSAqKmNvbW1hbmQqKjogdXNlciBpbnB1dCAodGV4dCBvciBudW1iZXJzKSB0aGF0IFIgdW5kZXJzdGFuZHMKCi0gKipzY3JpcHQqKjogYSBzZXF1ZW5jZSBvZiBjb21tYW5kcyBjb2xsZWN0ZWQgaW4gYSB0ZXh0IGZpbGUsIGVhY2ggc2VwYXJhdGVkIGJ5IGEgbmV3IGxpbmUKCi0gKiplbnZpcm9ubWVudCoqOiBhIGxpc3Qgb2YgbmFtZWQgdmFyaWFibGVzIHRoYXQgd2UgaGF2ZSBnZW5lcmF0ZWQvaW1wb3J0ZWQgYnkgbWVhbnMgb2YgYSBzZXJpZXMgb2YgY29tbWFuZHMKCi0gKipoaXN0b3J5Kio6IHRoZSBsaXN0IG9mIHBhc3QgY29tbWFuZHMgdGhhdHkgd2UgaGF2ZSB1c2VkCgotICoqaGVscCoqOiBhIGRvY3VtZW50YXRpb24gb2YgYWxsIHRoZSBmdW5jdGlvbnMgYXZhaWxhYmxlIGluIFIgKHRoZSB1c2VyIG1hbnVhbCkKCi0gKipwYWNrYWdlKio6IGEgY29sbGVjdGlvbiBvZiBhZGRpdGlvbmFsIGZ1bmN0aW9ucyBhbmQgZGF0YXNldAoKYGBge3Iga25pdF9leGl0LCBpbmNsdWRlPUYsIGVjaG89Rn0Ka25pdF9leGl0KCkKYGBgCg==</div>
 
