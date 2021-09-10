@@ -755,7 +755,7 @@ row.sums <- apply(x, 1, sum)
 # Scripts
 ## Scripts
 \scriptsize
-```{r script1, include=T, echo=T}
+```{r script1, include=T, echo=T, eval=F}
 source(file = "sample_script.R")
 ```
 
