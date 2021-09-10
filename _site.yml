@@ -1,8 +1,8 @@
-name: "YUM-101"
+name: "BioScience R"
 output_dir: "docs"
 navbar:
   type: default
-  title: "R Course Website"
+  title: "BioScience R Course"
   left:
     - text: "Home"
       href: index.html
@@ -14,21 +14,10 @@ navbar:
         href: lecture2.html
     - text: "Labs"
       menu:
-      - text: "Introductory"
       - text: "Lab 1"
         href: lab1.html
       - text: "Lab 2"
         href: lab2.html
-      - text: "Advanced"
-      - text: "---"
-      - text: "Lab 3"
-        href: lab1.html
-      - text: "Lab 4"
-        href: lab1.html
-      - text: "Lab 5"
-        href: lab1.html
-    - text: "Assignments"
-      href: assignments.html
 
   right:
     - icon: fa-github

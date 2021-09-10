@@ -1,10 +1,11 @@
 ---
-title: "YUM 101- Lab 1"
+title: "YUM 101 - Lab 1"
 ---
 
-# Lab 1: Pizza consumption  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-
-
+## Lab 1
 
 
