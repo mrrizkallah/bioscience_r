@@ -1,13 +1,13 @@
 ---
 title:      "R programming"
-subtitle:   "Based on: https://github.com/mattiaguerini/slides-intro-to-R"
-author:     "Mariam R. Rizkallah"
-date:       "2021"
-output:     beamer_presentation
-theme:      boxes
-colortheme: dolphin
-fonttheme:  serif
-toc:        TRUE
+# subtitle:   "Based on: https://github.com/mattiaguerini/slides-intro-to-R"
+# author:     "Mariam R. Rizkallah"
+# date:       "2021"
+# output:     beamer_presentation
+# theme:      boxes
+# colortheme: dolphin
+# fonttheme:  serif
+# toc:        TRUE
 ---
 
 ```{r setup, include=FALSE, echo=FALSE}
