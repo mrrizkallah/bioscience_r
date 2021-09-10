@@ -88,7 +88,6 @@ Readings:
 ## Cakes, Cupcakes, and Rolls
 Wed,  Nov 6
 
-Slides: `r xfun::embed_file('slides.pptx')`  
 Readings: 
 
 * [Article 5](https://en.wikipedia.org/wiki/History_of_pizza)  
@@ -100,7 +99,6 @@ Readings:
 ## Cookies
 Wed,  Nov 13
 
-Slides: `r xfun::embed_file('slides.pptx')`  
 Readings: 
 
 * [History of Cookies](https://en.wikipedia.org/wiki/Cookie)  

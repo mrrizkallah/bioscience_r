@@ -337,15 +337,27 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Course Website</a>
+      <a class="navbar-brand" href="index.html">R Course Website</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="lectures.html">Lectures</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lectures
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lecture1.html">Lecture 1</a>
+    </li>
+    <li>
+      <a href="lecture2.html">Lecture 2</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -377,13 +389,10 @@ div.tocify {
 <li>
   <a href="assignments.html">Assignments</a>
 </li>
-<li>
-  <a href="grade_dashboard.html">Grade Dashboard</a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/rstudio4edu/basic-course-website">
+  <a href="https://mrrizkallah.github.io/bioscience_r/">
     <span class="fa fa-github"></span>
      
   </a>
@@ -416,7 +425,7 @@ div.tocify {
 
 
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiWVVNIDEwMSAtIExlY3R1cmVzIgotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmBgYAoKYGBge3IsIGVjaG8gPUZBTFNFfQoKIyBkZXZ0b29sczo6aW5zdGFsbF9naXRodWIoJ3lpaHVpL3hmdW4nKQoKIyBhIHNpbmdsZSBSbUQgZmlsZQojIHhmdW46OmVtYmVkX2ZpbGUoJ2V4YW1wbGUuUm1kJykKYGBgCgoKPGJyPgoKCiMjIEhpc3Rvcnkgb2YgUGl6emEKV2VkLCBTZXAgMjUgIAoKU2xpZGVzOiBgciB4ZnVuOjplbWJlZF9maWxlKCdzbGlkZXMucHB0eCcpYCAgClJlYWRpbmdzOiAKCiogW0hpc3Rvcnkgb2YgUGl6emFdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0hpc3Rvcnlfb2ZfcGl6emEpCgo8YnI+CgojIyBXb29kZmlyZWQgVGhpbiBDcnVzdCBQaXp6YQpXZWQsIE9jdCAyICAKClNsaWRlczogYHIgeGZ1bjo6ZW1iZWRfZmlsZSgnc2xpZGVzLnBwdHgnKWAgIApSZWFkaW5nczogCgoqIFtIaXN0b3J5IG9mIFBpenphXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9IaXN0b3J5X29mX3BpenphKSAgCgo8YnI+CgoKIyMgRnVzaW9uIFBpenphIGFuZCBDcmVhdGl2ZSBSZW5kaXRpb25zCldlZCwgT2N0IDkgCgpTbGlkZXM6IGByIHhmdW46OmVtYmVkX2ZpbGUoJ3NsaWRlcy5wcHR4JylgICAKUmVhZGluZ3M6IAoKKiBbQXJ0aWNsZSAxXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9IaXN0b3J5X29mX3BpenphKSAgCiAKPGJyPgoKCiMjIEludHJvIHRvIFBhc3RyaWVzCldlZCwgT2N0IDE2CgpTbGlkZXM6IGByIHhmdW46OmVtYmVkX2ZpbGUoJ3NsaWRlcy5wcHR4JylgICAKUmVhZGluZ3M6IAoKKiBbQXJ0aWNsZSAyXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9IaXN0b3J5X29mX3BpenphKSAgCiAKPGJyPgoKCiMjIERhbmlzaGVzCldlZCwgT2N0IDIzCgoKU2xpZGVzOiBgciB4ZnVuOjplbWJlZF9maWxlKCdzbGlkZXMucHB0eCcpYCAgClJlYWRpbmdzOiAKCiogW0FydGljbGUgM10oaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSGlzdG9yeV9vZl9waXp6YSkgIAogCjxicj4KCiMjIEljaW5ncywgRnJvc2luZywgJiBHbGF6ZXMKV2VkLCBPY3QgMzAKCgpTbGlkZXM6IGByIHhmdW46OmVtYmVkX2ZpbGUoJ3NsaWRlcy5wcHR4JylgClJlYWRpbmdzOiAKCiogW0FydGljbGUgNF0oaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSGlzdG9yeV9vZl9waXp6YSkgIAogCiAKPGJyPgoKCiMjIENha2VzLCBDdXBjYWtlcywgYW5kIFJvbGxzCldlZCwgIE5vdiA2CgpTbGlkZXM6IGByIHhmdW46OmVtYmVkX2ZpbGUoJ3NsaWRlcy5wcHR4JylgICAKUmVhZGluZ3M6IAoKKiBbQXJ0aWNsZSA1XShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9IaXN0b3J5X29mX3BpenphKSAgCiAKIAo8YnI+CgoKIyMgQ29va2llcwpXZWQsICBOb3YgMTMKClNsaWRlczogYHIgeGZ1bjo6ZW1iZWRfZmlsZSgnc2xpZGVzLnBwdHgnKWAgIApSZWFkaW5nczogCgoqIFtIaXN0b3J5IG9mIENvb2tpZXNdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0Nvb2tpZSkgIAogCiAKPGJyPgoKCiMjIFBpZXMKV2VkLCBOb3YgMjAgCgpTbGlkZXM6IGByIHhmdW46OmVtYmVkX2ZpbGUoJ3NsaWRlcy5wcHR4JylgICAKUmVhZGluZ3M6IAoKKiBbVHlwZXMgb2YgUGllc10oaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9waWVzLF90YXJ0c19hbmRfZmxhbnMpICAKIAoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiWVVNIDEwMSAtIExlY3R1cmVzIgotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmBgYAoKYGBge3IsIGVjaG8gPUZBTFNFfQoKIyBkZXZ0b29sczo6aW5zdGFsbF9naXRodWIoJ3lpaHVpL3hmdW4nKQoKIyBhIHNpbmdsZSBSbUQgZmlsZQojIHhmdW46OmVtYmVkX2ZpbGUoJ2V4YW1wbGUuUm1kJykKYGBgCgoKPGJyPgoKCiMjIEhpc3Rvcnkgb2YgUGl6emEKV2VkLCBTZXAgMjUgIAoKU2xpZGVzOiBgciB4ZnVuOjplbWJlZF9maWxlKCdzbGlkZXMucHB0eCcpYCAgClJlYWRpbmdzOiAKCiogW0hpc3Rvcnkgb2YgUGl6emFdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0hpc3Rvcnlfb2ZfcGl6emEpCgo8YnI+CgojIyBXb29kZmlyZWQgVGhpbiBDcnVzdCBQaXp6YQpXZWQsIE9jdCAyICAKClNsaWRlczogYHIgeGZ1bjo6ZW1iZWRfZmlsZSgnc2xpZGVzLnBwdHgnKWAgIApSZWFkaW5nczogCgoqIFtIaXN0b3J5IG9mIFBpenphXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9IaXN0b3J5X29mX3BpenphKSAgCgo8YnI+CgoKIyMgRnVzaW9uIFBpenphIGFuZCBDcmVhdGl2ZSBSZW5kaXRpb25zCldlZCwgT2N0IDkgCgpTbGlkZXM6IGByIHhmdW46OmVtYmVkX2ZpbGUoJ3NsaWRlcy5wcHR4JylgICAKUmVhZGluZ3M6IAoKKiBbQXJ0aWNsZSAxXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9IaXN0b3J5X29mX3BpenphKSAgCiAKPGJyPgoKCiMjIEludHJvIHRvIFBhc3RyaWVzCldlZCwgT2N0IDE2CgpTbGlkZXM6IGByIHhmdW46OmVtYmVkX2ZpbGUoJ3NsaWRlcy5wcHR4JylgICAKUmVhZGluZ3M6IAoKKiBbQXJ0aWNsZSAyXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9IaXN0b3J5X29mX3BpenphKSAgCiAKPGJyPgoKCiMjIERhbmlzaGVzCldlZCwgT2N0IDIzCgoKU2xpZGVzOiBgciB4ZnVuOjplbWJlZF9maWxlKCdzbGlkZXMucHB0eCcpYCAgClJlYWRpbmdzOiAKCiogW0FydGljbGUgM10oaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSGlzdG9yeV9vZl9waXp6YSkgIAogCjxicj4KCiMjIEljaW5ncywgRnJvc2luZywgJiBHbGF6ZXMKV2VkLCBPY3QgMzAKCgpTbGlkZXM6IGByIHhmdW46OmVtYmVkX2ZpbGUoJ3NsaWRlcy5wcHR4JylgClJlYWRpbmdzOiAKCiogW0FydGljbGUgNF0oaHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvSGlzdG9yeV9vZl9waXp6YSkgIAogCiAKPGJyPgoKCiMjIENha2VzLCBDdXBjYWtlcywgYW5kIFJvbGxzCldlZCwgIE5vdiA2CgpSZWFkaW5nczogCgoqIFtBcnRpY2xlIDVdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0hpc3Rvcnlfb2ZfcGl6emEpICAKIAogCjxicj4KCgojIyBDb29raWVzCldlZCwgIE5vdiAxMwoKUmVhZGluZ3M6IAoKKiBbSGlzdG9yeSBvZiBDb29raWVzXShodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9Db29raWUpICAKIAogCjxicj4KCgojIyBQaWVzCldlZCwgTm92IDIwIAoKU2xpZGVzOiBgciB4ZnVuOjplbWJlZF9maWxlKCdzbGlkZXMucHB0eCcpYCAgClJlYWRpbmdzOiAKCiogW1R5cGVzIG9mIFBpZXNdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0xpc3Rfb2ZfcGllcyxfdGFydHNfYW5kX2ZsYW5zKSAgCiAKCgo=</div>
 
 
 </div>
