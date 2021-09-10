@@ -3,10 +3,10 @@ title:      "Bioinformatics for Pharmacy"
 author:     "Mariam R. Rizkallah"
 date:       "2021"
 # output:     beamer_presentation
-theme:      boxes
-colortheme: dolphin
-fonttheme:  serif
-toc:        TRUE
+# theme:      boxes
+# colortheme: dolphin
+# fonttheme:  serif
+# toc:        TRUE
 ---
 
 ```{r setup, include=FALSE, echo=FALSE}
@@ -33,6 +33,7 @@ Popularity: <https://www.tiobe.com/tiobe-index/>
 * Introduction to R for the Université Côte d'Azur: https://github.com/mattiaguerini/slides-intro-to-R"
 * Applied Statistics for Bioinformatics using R by Wim P. Krijnen, 2009: https://faculty.ucr.edu/~tgirke/Documents/R_BioCond/documentation/Krijnen-IntroBioInfStatistics.pdf
 * Rstudio4edu: https://github.com/dcossyleon/basic-course-website
+* Applied Statistics using R: https://github.com/daviddalpiaz/appliedstats/
 
 ## Getting Started
 To get started, you'll need to install two pieces of software:

@@ -1,5 +1,5 @@
 ---
-title: "YUM 101 - Lab 2"
+title: "Lab 2: Statistics and visualization"
 ---
 
 ```{r setup, include=FALSE}
