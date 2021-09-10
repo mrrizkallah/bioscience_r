@@ -1,5 +1,5 @@
 ---
-title:        "R programming"
+title:        "Lecture 1: R programming"
 # subtitle:   "Based on: https://github.com/mattiaguerini/slides-intro-to-R"
 # author:     "Mariam R. Rizkallah"
 # date:       "2021"
