@@ -372,57 +372,6 @@ my_letters <- cbind(my_letters, seq(1:length(letters)))
 \normalsize
 What number is the letter F in the English alphabet?
 
-
-## Exercise
-```{r dna_ex1, include = T, echo=T, eval=F}
-# vector ... etc.
-my_dna <- "AACGAATGAGTAAATGAGTAAATGAAGGAATGATTATTCCTTGCTTTAGAACTTCTGGAATTAGAGGACA
-ATATTAATAATACCATCGCACAGTGTTTCTTTGTTGTTAATGCTACAACATACAAAGAGGAAGCATGCAG"
-my_dna
-length(my_dna)
-class(my_dna)
-str(my_dna)
-nchar(my_dna)
-
-# appr1 
-my_dna_comma <- sapply(strsplit(
-  x = my_dna, split = "", fixed = TRUE), 
-       function(x) paste(x, collapse = "_")) 
-length(my_dna_comma)
-str(my_dna_comma)
-
-my_dna_list <- strsplit(x = my_dna, split = "", fixed = TRUE)
-length(my_dna_list)
-class(my_dna_list)
-my_dna_vector <- unlist(my_dna_list)
-length(my_dna_list[[1]])
-str(my_dna_vector)
-length(my_dna_vector)
-
-list()
-c()
-str()
-class()
-
-# first nucleotide
-my_dna_vector[1]
-# indexing 1:nchar(my_dna)
-my_dna_vector[1:50]
-# unique characters
-unique(my_dna_vector)
-
-# number of As
-(my_dna_vector == "A")
-length(my_dna_vector[my_dna_vector == "A"])
-
-# remove \n
-remove_nuc <- match("\n", my_dna_vector)
-which(my_dna_vector %in% c("\n", "X"))
-my_dna_vector[remove_nuc] <- "A"
-my_dna_vector_2 <- my_dna_vector[-71]
-unique(my_dna_vector_2)
-```
-
 ## Data Frames (I)
 A `data.frame` is similar to a typical `spreadsheet` in excel.
 
@@ -517,7 +466,7 @@ poll_cars
 ## Importing downloaded data frames (.csv)
 You can import csv data that you have downloaded from any external source using:
 \scriptsize
-```{r import_data2, include=T, echo=T, eval=F}
+```{r import_data2, include=T, echo=T}
 setwd("data")
 nyc_ab <- read.csv("AB_NYC_2020.csv")
 ```
@@ -534,7 +483,7 @@ You can similarly import almost any kind of data file stored in other formats (.
 ## Importing downloaded data frames (.txt)
 Interferon regulatory factor 6 mouse
 \scriptsize
-```{r import_data3, include=T, echo=T, eval=F}
+```{r import_data3, include=T, echo=T}
 setwd("data")
 irf6 <- read.table("irf6.txt", header = TRUE, row.names = 1)
 
@@ -545,7 +494,7 @@ dim(irf6)
 ```
 ## Importing downloaded data frames (.txt)
 \scriptsize
-```{r import_data4, include=T, echo=T, eval=F}
+```{r import_data4, include=T, echo=T}
 irf6 <- read.table("data/irf6.txt", header = TRUE, row.names = 1)
 class(irf6)
 str(irf6)
@@ -555,7 +504,7 @@ head(rownames(irf6))
 ```
 ## Importing downloaded data frames (.txt)
 \scriptsize
-```{r import_data5, include=T, echo=T, eval=F}
+```{r import_data5, include=T, echo=T}
 irf6 <- read.table("data/irf6.txt", header = TRUE, row.names = 1)
 
 head(irf6['E17.5KO1']) # Retrieve only E17.5KO1 data
