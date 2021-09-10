@@ -34,6 +34,7 @@ Popularity: <https://www.tiobe.com/tiobe-index/>
 * Applied Statistics for Bioinformatics using R by Wim P. Krijnen, 2009: https://faculty.ucr.edu/~tgirke/Documents/R_BioCond/documentation/Krijnen-IntroBioInfStatistics.pdf
 * Rstudio4edu: https://github.com/dcossyleon/basic-course-website
 * Applied Statistics using R: https://github.com/daviddalpiaz/appliedstats/
+* Boston University Course: https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/R/R2_SummaryStats-Graphs/R2_SummaryStats-Graphs_print.html
 
 ## Getting Started
 To get started, you'll need to install two pieces of software:

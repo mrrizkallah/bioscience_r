@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Tutorial: Summary and visualization</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bioinformatics for Pharmacy</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lectures
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lecture1.html">Lecture 1</a>
+    </li>
+    <li>
+      <a href="lecture2.html">Lecture 2</a>
+    </li>
+    <li>
+      <a href="data-summary.html">Data summary</a>
+    </li>
+    <li>
+      <a href="prob-and-stat.html">Probability</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Lab 1</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://mrrizkallah.github.io/bioscience_r/">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://en.wikipedia.org/wiki/Cooking_school">
+    <span class="fa fa-university"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Tutorial: Summary and visualization</h1>
+
+</div>
+
+
+<div id="summarizing-data" class="section level1">
+<h1>Summarizing Data</h1>
+<div id="summary-statistics" class="section level2">
+<h2>Summary Statistics</h2>
+<p><code>R</code> has built in functions for a large number of summary statistics. For numeric variables, we can summarize data with the center and spread. We’ll again look at the <code>mpg</code> dataset from the <code>ggplot2</code> package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(ggplot2)</span></code></pre></div>
+<div id="central-tendency" class="section level3 unnumbered">
+<h3>Central Tendency</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th><code>R</code></th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean</td>
+<td><code>mean(mpg$cty)</code></td>
+<td>16.8589744</td>
+</tr>
+<tr class="even">
+<td>Median</td>
+<td><code>median(mpg$cty)</code></td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="spread" class="section level3 unnumbered">
+<h3>Spread</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th><code>R</code></th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variance</td>
+<td><code>var(mpg$cty)</code></td>
+<td>18.1130736</td>
+</tr>
+<tr class="even">
+<td>Standard Deviation</td>
+<td><code>sd(mpg$cty)</code></td>
+<td>4.2559457</td>
+</tr>
+<tr class="odd">
+<td>IQR</td>
+<td><code>IQR(mpg$cty)</code></td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>Minimum</td>
+<td><code>min(mpg$cty)</code></td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>Maximum</td>
+<td><code>max(mpg$cty)</code></td>
+<td>35</td>
+</tr>
+<tr class="even">
+<td>Range</td>
+<td><code>range(mpg$cty)</code></td>
+<td>9, 35</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="categorical" class="section level3 unnumbered">
+<h3>Categorical</h3>
+<p>For categorical variables, counts and percentages can be used for summary.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">table</span>(mpg<span class="op">$</span>drv)</span></code></pre></div>
+<pre><code>## 
+##   4   f   r 
+## 103 106  25</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">table</span>(mpg<span class="op">$</span>drv) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(mpg)</span></code></pre></div>
+<pre><code>## 
+##         4         f         r 
+## 0.4401709 0.4529915 0.1068376</code></pre>
+</div>
+</div>
+<div id="plotting" class="section level2">
+<h2>Plotting</h2>
+<p>Now that we have some data to work with, and we have learned about the data at the most basic level, our next tasks is to visualize the data. Often, a proper visualization can illuminate features of the data that can inform further analysis.</p>
+<p>We will look at four methods of visualizing data that we will use throughout the course:</p>
+<ul>
+<li>Histograms</li>
+<li>Barplots</li>
+<li>Boxplots</li>
+<li>Scatterplots &lt;– ·Stem and Leaf Plots, Stacked and Grouped Bar Charts and Mosaic Plots, pie–&gt;</li>
+</ul>
+<div id="histograms" class="section level3">
+<h3>Histograms</h3>
+<p>When visualizing a single numerical variable, a <strong>histogram</strong> will be our go-to tool, which can be created in <code>R</code> using the <code>hist()</code> function.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">hist</span>(mpg<span class="op">$</span>cty)</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The histogram function has a number of parameters which can be changed to make our plot look much nicer. Use the <code>?</code> operator to read the documentation for the <code>hist()</code> to see a full list of these parameters.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">hist</span>(mpg<span class="op">$</span>cty,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>     <span class="dt">xlab   =</span> <span class="st">&quot;Miles Per Gallon (City)&quot;</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>     <span class="dt">main   =</span> <span class="st">&quot;Histogram of MPG (City)&quot;</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>     <span class="dt">breaks =</span> <span class="dv">12</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>     <span class="dt">col    =</span> <span class="st">&quot;dodgerblue&quot;</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>     <span class="dt">border =</span> <span class="st">&quot;darkorange&quot;</span>)</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Importantly, you should always be sure to label your axes and give the plot a title. The argument <code>breaks</code> is specific to <code>hist()</code>. Entering an integer will give a suggestion to <code>R</code> for how many bars to use for the histogram. By default <code>R</code> will attempt to intelligently guess a good number of <code>breaks</code>, but as we can see here, it is sometimes useful to modify this yourself.</p>
+</div>
+<div id="barplots" class="section level3">
+<h3>Barplots</h3>
+<p>Somewhat similar to a histogram, a barplot can provide a visual summary of a categorical variable, or a numeric variable with a finite number of values, like a ranking from 1 to 10.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(mpg<span class="op">$</span>drv))</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(mpg<span class="op">$</span>drv),</span>
+<span id="cb9-2"><a href="#cb9-2"></a>        <span class="dt">xlab   =</span> <span class="st">&quot;Drivetrain (f = FWD, r = RWD, 4 = 4WD)&quot;</span>,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>        <span class="dt">ylab   =</span> <span class="st">&quot;Frequency&quot;</span>,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>        <span class="dt">main   =</span> <span class="st">&quot;Drivetrains&quot;</span>,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>        <span class="dt">col    =</span> <span class="st">&quot;dodgerblue&quot;</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>        <span class="dt">border =</span> <span class="st">&quot;darkorange&quot;</span>)</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="boxplots" class="section level3">
+<h3>Boxplots</h3>
+<p>To visualize the relationship between a numerical and categorical variable, we will use a <strong>boxplot</strong>. In the <code>mpg</code> dataset, the <code>drv</code> variable takes a small, finite number of values. A car can only be front wheel drive, 4 wheel drive, or rear wheel drive.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">unique</span>(mpg<span class="op">$</span>drv)</span></code></pre></div>
+<pre><code>## [1] &quot;f&quot; &quot;4&quot; &quot;r&quot;</code></pre>
+<p>First note that we can use a single boxplot as an alternative to a histogram for visualizing a single numerical variable. To do so in <code>R</code>, we use the <code>boxplot()</code> function.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">boxplot</span>(mpg<span class="op">$</span>hwy)</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>However, more often we will use boxplots to compare a numerical variable for different values of a categorical variable.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">boxplot</span>(hwy <span class="op">~</span><span class="st"> </span>drv, <span class="dt">data =</span> mpg)</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Here we used the <code>boxplot()</code> command to create side-by-side boxplots. However, since we are now dealing with two variables, the syntax has changed. The <code>R</code> syntax <code>hwy ~ drv, data = mpg</code> reads “Plot the <code>hwy</code> variable against the <code>drv</code> variable using the dataset <code>mpg</code>.” We see the use of a <code>~</code> (which specifies a formula) and also a <code>data =</code> argument. This will be a syntax that is common to many functions we will use in this course.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">boxplot</span>(hwy <span class="op">~</span><span class="st"> </span>drv, <span class="dt">data =</span> mpg,</span>
+<span id="cb14-2"><a href="#cb14-2"></a>     <span class="dt">xlab   =</span> <span class="st">&quot;Drivetrain (f = FWD, r = RWD, 4 = 4WD)&quot;</span>,</span>
+<span id="cb14-3"><a href="#cb14-3"></a>     <span class="dt">ylab   =</span> <span class="st">&quot;Miles Per Gallon (Highway)&quot;</span>,</span>
+<span id="cb14-4"><a href="#cb14-4"></a>     <span class="dt">main   =</span> <span class="st">&quot;MPG (Highway) vs Drivetrain&quot;</span>,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>     <span class="dt">pch    =</span> <span class="dv">20</span>,</span>
+<span id="cb14-6"><a href="#cb14-6"></a>     <span class="dt">cex    =</span> <span class="dv">2</span>,</span>
+<span id="cb14-7"><a href="#cb14-7"></a>     <span class="dt">col    =</span> <span class="st">&quot;darkorange&quot;</span>,</span>
+<span id="cb14-8"><a href="#cb14-8"></a>     <span class="dt">border =</span> <span class="st">&quot;dodgerblue&quot;</span>)</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Again, <code>boxplot()</code> has a number of additional arguments which have the ability to make our plot more visually appealing.</p>
+</div>
+<div id="scatterplots" class="section level3">
+<h3>Scatterplots</h3>
+<p>Lastly, to visualize the relationship between two numeric variables we will use a <strong>scatterplot</strong>. This can be done with the <code>plot()</code> function and the <code>~</code> syntax we just used with a boxplot. (The function <code>plot()</code> can also be used more generally; see the documentation for details.)</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">plot</span>(hwy <span class="op">~</span><span class="st"> </span>displ, <span class="dt">data =</span> mpg)</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">plot</span>(hwy <span class="op">~</span><span class="st"> </span>displ, <span class="dt">data =</span> mpg,</span>
+<span id="cb16-2"><a href="#cb16-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Engine Displacement (in Liters)&quot;</span>,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Miles Per Gallon (Highway)&quot;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>     <span class="dt">main =</span> <span class="st">&quot;MPG (Highway) vs Engine Displacement&quot;</span>,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>     <span class="dt">pch  =</span> <span class="dv">20</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>     <span class="dt">cex  =</span> <span class="dv">2</span>,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>     <span class="dt">col  =</span> <span class="st">&quot;dodgerblue&quot;</span>)</span></code></pre></div>
+<p><img src="data-summary_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVHV0b3JpYWw6IFN1bW1hcnkgYW5kIHZpc3VhbGl6YXRpb24iCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgZXZhbCA9IFRSVUUpCmBgYAoKIyBTdW1tYXJpemluZyBEYXRhCgojIyBTdW1tYXJ5IFN0YXRpc3RpY3MKCmBSYCBoYXMgYnVpbHQgaW4gZnVuY3Rpb25zIGZvciBhIGxhcmdlIG51bWJlciBvZiBzdW1tYXJ5IHN0YXRpc3RpY3MuIEZvciBudW1lcmljIHZhcmlhYmxlcywgd2UgY2FuIHN1bW1hcml6ZSBkYXRhIHdpdGggdGhlIGNlbnRlciBhbmQgc3ByZWFkLiBXZSdsbCBhZ2FpbiBsb29rIGF0IHRoZSBgbXBnYCBkYXRhc2V0IGZyb20gdGhlIGBnZ3Bsb3QyYCBwYWNrYWdlLgoKYGBge3IsIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQpsaWJyYXJ5KGdncGxvdDIpCmBgYAoKIyMjIENlbnRyYWwgVGVuZGVuY3kgey19Cgp8IE1lYXN1cmUgfCBgUmAgICAgICAgICAgICAgICB8IFJlc3VsdCAgICAgICAgICAgICAgfAp8LS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tLS0tfAp8IE1lYW4gICAgfCBgbWVhbihtcGckY3R5KWAgICB8IGByIG1lYW4obXBnJGN0eSlgICAgfAp8IE1lZGlhbiAgfCBgbWVkaWFuKG1wZyRjdHkpYCB8IGByIG1lZGlhbihtcGckY3R5KWAgfAoKIyMjIFNwcmVhZCB7LX0KCnwgTWVhc3VyZSAgICAgICAgICAgIHwgYFJgICAgICAgICAgICAgICB8IFJlc3VsdCAgICAgICAgICAgICB8CnwtLS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tLS18CnwgVmFyaWFuY2UgICAgICAgICAgIHwgYHZhcihtcGckY3R5KWAgICB8IGByIHZhcihtcGckY3R5KWAgICB8CnwgU3RhbmRhcmQgRGV2aWF0aW9uIHwgYHNkKG1wZyRjdHkpYCAgICB8IGByIHNkKG1wZyRjdHkpYCAgICB8CnwgSVFSICAgICAgICAgICAgICAgIHwgYElRUihtcGckY3R5KWAgICB8IGByIElRUihtcGckY3R5KWAgICB8CnwgTWluaW11bSAgICAgICAgICAgIHwgYG1pbihtcGckY3R5KWAgICB8IGByIG1pbihtcGckY3R5KWAgICB8CnwgTWF4aW11bSAgICAgICAgICAgIHwgYG1heChtcGckY3R5KWAgICB8IGByIG1heChtcGckY3R5KWAgICB8CnwgUmFuZ2UgICAgICAgICAgICAgIHwgYHJhbmdlKG1wZyRjdHkpYCB8IGByIHJhbmdlKG1wZyRjdHkpYCB8CgojIyMgQ2F0ZWdvcmljYWwgey19CgpGb3IgY2F0ZWdvcmljYWwgdmFyaWFibGVzLCBjb3VudHMgYW5kIHBlcmNlbnRhZ2VzIGNhbiBiZSB1c2VkIGZvciBzdW1tYXJ5LgoKYGBge3J9CnRhYmxlKG1wZyRkcnYpCnRhYmxlKG1wZyRkcnYpIC8gbnJvdyhtcGcpCmBgYAoKIyMgUGxvdHRpbmcKCk5vdyB0aGF0IHdlIGhhdmUgc29tZSBkYXRhIHRvIHdvcmsgd2l0aCwgYW5kIHdlIGhhdmUgbGVhcm5lZCBhYm91dCB0aGUgZGF0YSBhdCB0aGUgbW9zdCBiYXNpYyBsZXZlbCwgb3VyIG5leHQgdGFza3MgaXMgdG8gdmlzdWFsaXplIHRoZSBkYXRhLiBPZnRlbiwgYSBwcm9wZXIgdmlzdWFsaXphdGlvbiBjYW4gaWxsdW1pbmF0ZSBmZWF0dXJlcyBvZiB0aGUgZGF0YSB0aGF0IGNhbiBpbmZvcm0gZnVydGhlciBhbmFseXNpcy4KCldlIHdpbGwgbG9vayBhdCBmb3VyIG1ldGhvZHMgb2YgdmlzdWFsaXppbmcgZGF0YSB0aGF0IHdlIHdpbGwgdXNlIHRocm91Z2hvdXQgdGhlIGNvdXJzZToKCi0gSGlzdG9ncmFtcwotIEJhcnBsb3RzCi0gQm94cGxvdHMKLSBTY2F0dGVycGxvdHMKPC0tIMK3U3RlbSBhbmQgTGVhZiBQbG90cywKU3RhY2tlZCBhbmQgR3JvdXBlZCBCYXIgQ2hhcnRzIGFuZCBNb3NhaWMgUGxvdHMsCnBpZS0tPgoKIyMjIEhpc3RvZ3JhbXMKCldoZW4gdmlzdWFsaXppbmcgYSBzaW5nbGUgbnVtZXJpY2FsIHZhcmlhYmxlLCBhICoqaGlzdG9ncmFtKiogd2lsbCBiZSBvdXIgZ28tdG8gdG9vbCwgd2hpY2ggY2FuIGJlIGNyZWF0ZWQgaW4gYFJgIHVzaW5nIHRoZSBgaGlzdCgpYCBmdW5jdGlvbi4KCmBgYHtyfQpoaXN0KG1wZyRjdHkpCmBgYAoKVGhlIGhpc3RvZ3JhbSBmdW5jdGlvbiBoYXMgYSBudW1iZXIgb2YgcGFyYW1ldGVycyB3aGljaCBjYW4gYmUgY2hhbmdlZCB0byBtYWtlIG91ciBwbG90IGxvb2sgbXVjaCBuaWNlci4gVXNlIHRoZSBgP2Agb3BlcmF0b3IgdG8gcmVhZCB0aGUgZG9jdW1lbnRhdGlvbiBmb3IgdGhlIGBoaXN0KClgIHRvIHNlZSBhIGZ1bGwgbGlzdCBvZiB0aGVzZSBwYXJhbWV0ZXJzLgoKYGBge3J9Cmhpc3QobXBnJGN0eSwKICAgICB4bGFiICAgPSAiTWlsZXMgUGVyIEdhbGxvbiAoQ2l0eSkiLAogICAgIG1haW4gICA9ICJIaXN0b2dyYW0gb2YgTVBHIChDaXR5KSIsCiAgICAgYnJlYWtzID0gMTIsCiAgICAgY29sICAgID0gImRvZGdlcmJsdWUiLAogICAgIGJvcmRlciA9ICJkYXJrb3JhbmdlIikKYGBgCgpJbXBvcnRhbnRseSwgeW91IHNob3VsZCBhbHdheXMgYmUgc3VyZSB0byBsYWJlbCB5b3VyIGF4ZXMgYW5kIGdpdmUgdGhlIHBsb3QgYSB0aXRsZS4gVGhlIGFyZ3VtZW50IGBicmVha3NgIGlzIHNwZWNpZmljIHRvIGBoaXN0KClgLiBFbnRlcmluZyBhbiBpbnRlZ2VyIHdpbGwgZ2l2ZSBhIHN1Z2dlc3Rpb24gdG8gYFJgIGZvciBob3cgbWFueSBiYXJzIHRvIHVzZSBmb3IgdGhlIGhpc3RvZ3JhbS4gQnkgZGVmYXVsdCBgUmAgd2lsbCBhdHRlbXB0IHRvIGludGVsbGlnZW50bHkgZ3Vlc3MgYSBnb29kIG51bWJlciBvZiBgYnJlYWtzYCwgYnV0IGFzIHdlIGNhbiBzZWUgaGVyZSwgaXQgaXMgc29tZXRpbWVzIHVzZWZ1bCB0byBtb2RpZnkgdGhpcyB5b3Vyc2VsZi4KCiMjIyBCYXJwbG90cwoKU29tZXdoYXQgc2ltaWxhciB0byBhIGhpc3RvZ3JhbSwgYSBiYXJwbG90IGNhbiBwcm92aWRlIGEgdmlzdWFsIHN1bW1hcnkgb2YgYSBjYXRlZ29yaWNhbCB2YXJpYWJsZSwgb3IgYSBudW1lcmljIHZhcmlhYmxlIHdpdGggYSBmaW5pdGUgbnVtYmVyIG9mIHZhbHVlcywgbGlrZSBhIHJhbmtpbmcgZnJvbSAxIHRvIDEwLgoKYGBge3J9CmJhcnBsb3QodGFibGUobXBnJGRydikpCmBgYAoKYGBge3J9CmJhcnBsb3QodGFibGUobXBnJGRydiksCiAgICAgICAgeGxhYiAgID0gIkRyaXZldHJhaW4gKGYgPSBGV0QsIHIgPSBSV0QsIDQgPSA0V0QpIiwKICAgICAgICB5bGFiICAgPSAiRnJlcXVlbmN5IiwKICAgICAgICBtYWluICAgPSAiRHJpdmV0cmFpbnMiLAogICAgICAgIGNvbCAgICA9ICJkb2RnZXJibHVlIiwKICAgICAgICBib3JkZXIgPSAiZGFya29yYW5nZSIpCmBgYAoKIyMjIEJveHBsb3RzCgpUbyB2aXN1YWxpemUgdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIGEgbnVtZXJpY2FsIGFuZCBjYXRlZ29yaWNhbCB2YXJpYWJsZSwgd2Ugd2lsbCB1c2UgYSAqKmJveHBsb3QqKi4gSW4gdGhlIGBtcGdgIGRhdGFzZXQsIHRoZSBgZHJ2YCB2YXJpYWJsZSB0YWtlcyBhIHNtYWxsLCBmaW5pdGUgbnVtYmVyIG9mIHZhbHVlcy4gQSBjYXIgY2FuIG9ubHkgYmUgZnJvbnQgd2hlZWwgZHJpdmUsIDQgd2hlZWwgZHJpdmUsIG9yIHJlYXIgd2hlZWwgZHJpdmUuCgpgYGB7cn0KdW5pcXVlKG1wZyRkcnYpCmBgYAoKRmlyc3Qgbm90ZSB0aGF0IHdlIGNhbiB1c2UgYSBzaW5nbGUgYm94cGxvdCBhcyBhbiBhbHRlcm5hdGl2ZSB0byBhIGhpc3RvZ3JhbSBmb3IgdmlzdWFsaXppbmcgYSBzaW5nbGUgbnVtZXJpY2FsIHZhcmlhYmxlLiBUbyBkbyBzbyBpbiBgUmAsIHdlIHVzZSB0aGUgYGJveHBsb3QoKWAgZnVuY3Rpb24uCgpgYGB7cn0KYm94cGxvdChtcGckaHd5KQpgYGAKCkhvd2V2ZXIsIG1vcmUgb2Z0ZW4gd2Ugd2lsbCB1c2UgYm94cGxvdHMgdG8gY29tcGFyZSBhIG51bWVyaWNhbCB2YXJpYWJsZSBmb3IgZGlmZmVyZW50IHZhbHVlcyBvZiBhIGNhdGVnb3JpY2FsIHZhcmlhYmxlLgoKYGBge3J9CmJveHBsb3QoaHd5IH4gZHJ2LCBkYXRhID0gbXBnKQpgYGAKCkhlcmUgd2UgdXNlZCB0aGUgYGJveHBsb3QoKWAgY29tbWFuZCB0byBjcmVhdGUgc2lkZS1ieS1zaWRlIGJveHBsb3RzLiBIb3dldmVyLCBzaW5jZSB3ZSBhcmUgbm93IGRlYWxpbmcgd2l0aCB0d28gdmFyaWFibGVzLCB0aGUgc3ludGF4IGhhcyBjaGFuZ2VkLiBUaGUgYFJgIHN5bnRheCBgaHd5IH4gZHJ2LCBkYXRhID0gbXBnYCByZWFkcyAiUGxvdCB0aGUgYGh3eWAgdmFyaWFibGUgYWdhaW5zdCB0aGUgYGRydmAgdmFyaWFibGUgdXNpbmcgdGhlIGRhdGFzZXQgYG1wZ2AuIiBXZSBzZWUgdGhlIHVzZSBvZiBhIGB+YCAod2hpY2ggc3BlY2lmaWVzIGEgZm9ybXVsYSkgYW5kIGFsc28gYSBgZGF0YSA9IGAgYXJndW1lbnQuIFRoaXMgd2lsbCBiZSBhIHN5bnRheCB0aGF0IGlzIGNvbW1vbiB0byBtYW55IGZ1bmN0aW9ucyB3ZSB3aWxsIHVzZSBpbiB0aGlzIGNvdXJzZS4KCmBgYHtyfQpib3hwbG90KGh3eSB+IGRydiwgZGF0YSA9IG1wZywKICAgICB4bGFiICAgPSAiRHJpdmV0cmFpbiAoZiA9IEZXRCwgciA9IFJXRCwgNCA9IDRXRCkiLAogICAgIHlsYWIgICA9ICJNaWxlcyBQZXIgR2FsbG9uIChIaWdod2F5KSIsCiAgICAgbWFpbiAgID0gIk1QRyAoSGlnaHdheSkgdnMgRHJpdmV0cmFpbiIsCiAgICAgcGNoICAgID0gMjAsCiAgICAgY2V4ICAgID0gMiwKICAgICBjb2wgICAgPSAiZGFya29yYW5nZSIsCiAgICAgYm9yZGVyID0gImRvZGdlcmJsdWUiKQpgYGAKCkFnYWluLCBgYm94cGxvdCgpYCBoYXMgYSBudW1iZXIgb2YgYWRkaXRpb25hbCBhcmd1bWVudHMgd2hpY2ggaGF2ZSB0aGUgYWJpbGl0eSB0byBtYWtlIG91ciBwbG90IG1vcmUgdmlzdWFsbHkgYXBwZWFsaW5nLgoKIyMjIFNjYXR0ZXJwbG90cwoKTGFzdGx5LCB0byB2aXN1YWxpemUgdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHR3byBudW1lcmljIHZhcmlhYmxlcyB3ZSB3aWxsIHVzZSBhICoqc2NhdHRlcnBsb3QqKi4gVGhpcyBjYW4gYmUgZG9uZSB3aXRoIHRoZSBgcGxvdCgpYCBmdW5jdGlvbiBhbmQgdGhlIGB+YCBzeW50YXggd2UganVzdCB1c2VkIHdpdGggYSBib3hwbG90LiAoVGhlIGZ1bmN0aW9uIGBwbG90KClgIGNhbiBhbHNvIGJlIHVzZWQgbW9yZSBnZW5lcmFsbHk7IHNlZSB0aGUgZG9jdW1lbnRhdGlvbiBmb3IgZGV0YWlscy4pCgpgYGB7cn0KcGxvdChod3kgfiBkaXNwbCwgZGF0YSA9IG1wZykKYGBgCgpgYGB7cn0KcGxvdChod3kgfiBkaXNwbCwgZGF0YSA9IG1wZywKICAgICB4bGFiID0gIkVuZ2luZSBEaXNwbGFjZW1lbnQgKGluIExpdGVycykiLAogICAgIHlsYWIgPSAiTWlsZXMgUGVyIEdhbGxvbiAoSGlnaHdheSkiLAogICAgIG1haW4gPSAiTVBHIChIaWdod2F5KSB2cyBFbmdpbmUgRGlzcGxhY2VtZW50IiwKICAgICBwY2ggID0gMjAsCiAgICAgY2V4ICA9IDIsCiAgICAgY29sICA9ICJkb2RnZXJibHVlIikKYGBgCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("data-summary.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

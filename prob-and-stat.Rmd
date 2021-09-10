@@ -1,0 +1,309 @@
+---
+title: "Tutorial: Probability and statistics"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+```
+
+# Probability and Statistics in `R`
+
+## Probability in `R`
+
+### Distributions
+
+When working with different statistical distributions, we often want to make probabilistic statements based on the distribution.
+
+We typically want to know one of four things:
+
+* The density (pdf) at a particular value.
+* The distribution (cdf) at a particular value.
+* The quantile value corresponding to a particular probability.
+* A random draw of values from a particular distribution.
+
+This used to be done with statistical tables printed in the back of textbooks. Now, `R` has functions for obtaining density, distribution, quantile and random values.
+
+The general naming structure of the relevant `R` functions is:
+
+* `dnorm` calculates density (pdf) at input `x`.
+* `pnorm` calculates distribution (cdf) at input `x`.
+* `qnorm` calculates the quantile at an input probability.
+* `rnorm` generates a random draw from a particular distribution.
+
+Note that `name` represents the name of the given distribution.
+
+For example, consider a random variable $X$ which is $N(\mu = 2, \sigma^2 = 25)$. (Note, we are parameterizing using the variance $\sigma^2$. `R` however uses the standard deviation.)
+
+To calculate the value of the pdf at `x <- 3`, that is, the height of the curve at `x <- 3`, use:
+
+```{r}
+dnorm(x = 3, mean = 2, sd = 5)
+```
+
+To calculate the value of the cdf at `x <- 3`, that is, $P(X \leq 3)$, the probability that $X$ is less than or equal to `3`, use:
+
+```{r}
+pnorm(q = 3, mean = 2, sd = 5)
+```
+
+Or, to calculate the quantile for probability 0.975, use:
+
+```{r}
+qnorm(p = 0.975, mean = 2, sd = 5)
+```
+
+Lastly, to generate a random sample of size `n <- 10`, use:
+
+```{r}
+rnorm(n = 10, mean = 2, sd = 5)
+```
+
+These functions exist for many other distributions, including but not limited to:
+
+| Command  | Distribution |
+|----------|--------------|
+| `*binom` | Binomial     |
+| `*t`     | t            |
+| `*pois`  | Poisson      |
+| `*f`     | F            |
+| `*chisq` | Chi-Squared  |
+
+Where `*` can be `d`, `p`, `q`, and `r`. Each distribution will have its own set of parameters which need to be passed to the functions as arguments. For example, `dbinom()` would not have arguments for `mean` and `sd`, since those are not parameters of the distribution. Instead a binomial distribution is usually parameterized by $n$ and $p$, however `R` chooses to call them something else. To find the names that `R` uses we would use `?dbinom` and see that `R` instead calls the arguments `size` and `prob`. For example:
+
+```{r}
+dbinom(x = 6, size = 10, prob = 0.75)
+```
+
+Also note that, when using the `dname` functions with discrete distributions, they are the pmf of the distribution. For example, the above command is $P(Y = 6)$ if $Y \sim b(n = 10, p = 0.75)$. (The probability of flipping an unfair coin `10` times and seeing `6` heads, if the probability of heads is `0.75`.)
+
+## Hypothesis Tests in `R`
+
+A prerequisite for STAT 420 is an understanding of the basics of hypothesis testing. Recall the basic structure of hypothesis tests:
+
+- An overall model and related assumptions are made. (The most common being observations following a normal distribution.)
+- The **null** ($H_{0}$) and **alternative** ($H_{1}$ or $H_{A}$) hypothesis are specified. Usually the null specifies a particular value of a parameter.
+- With given data, the **value** of the *test statistic* is calculated.
+- Under the general assumptions, as well as assuming the null hypothesis is true, the **distribution** of the *test statistic* is known.
+- Given the distribution and value of the test statistic, as well as the form of the alternative hypothesis, we can calculate a **p-value** of the test.
+- Based on the **p-value** and pre-specified level of significance, we make a decision. One of:
+    - Fail to reject the null hypothesis.
+    - Reject the null hypothesis.
+
+We'll do some quick review of two of the most common tests to show how they are performed using `R`.
+
+
+### One Sample t-Test: Example
+
+Suppose a grocery store sells "16 ounce" boxes of *Captain Crisp* cereal. A random sample of 9 boxes was taken and weighed. The weight in ounces are stored in the data frame `capt_crisp`.
+
+```{r}
+capt_crisp = data.frame(weight = c(15.5, 16.2, 16.1, 15.8, 15.6, 16.0, 15.8, 15.9, 16.2))
+```
+
+The company that makes *Captain Crisp* cereal claims that the average weight of a box is at least 16 ounces. We will assume the weight of cereal in a box is normally distributed and use a 0.05 level of significance to test the company's claim.
+
+To test $H_{0}: \mu \geq 16$ versus $H_{1}: \mu < 16$, the test statistic is
+
+\[
+t = \frac{\bar{x} - \mu_{0}}{s / \sqrt{n}}
+\]
+
+The sample mean $\bar{x}$ and the sample standard deviation $s$ can be easily computed using `R`. We also create variables which store the hypothesized mean and the sample size.
+
+```{r}
+x_bar <- mean(capt_crisp$weight)
+s     <- sd(capt_crisp$weight)
+mu_0  <- 16
+n     <- 9
+```
+
+We can then easily compute the test statistic.
+
+```{r}
+t = (x_bar - mu_0) / (s / sqrt(n))
+t
+```
+
+Under the null hypothesis, the test statistic has a $t$ distribution with $n - 1$ degrees of freedom, in this case `r n - 1`.
+
+To complete the test, we need to obtain the p-value of the test. Since this is a one-sided test with a less-than alternative, we need the area to the left of `r t` for a $t$ distribution with `r n - 1` degrees of freedom. That is,
+
+\[
+P(t_{`r n - 1`} < `r t`)
+\]
+
+```{r}
+pt(t, df = n - 1)
+```
+
+We now have the p-value of our test, which is greater than our significance level (0.05), so we fail to reject the null hypothesis.
+
+Alternatively, this entire process could have been completed using one line of `R` code.
+
+```{r}
+t.test(x = capt_crisp$weight, mu = 16, alternative = c("less"), conf.level = 0.95)
+```
+
+We supply `R` with the data, the hypothesized value of $\mu$, the alternative, and the confidence level. `R` then returns a wealth of information including:
+
+- The value of the test statistic.
+- The degrees of freedom of the distribution under the null hypothesis.
+- The p-value of the test.
+- The confidence interval which corresponds to the test.
+- An estimate of $\mu$.
+
+Since the test was one-sided, `R` returned a one-sided confidence interval. If instead we wanted a two-sided interval for the mean weight of boxes of *Captain Crisp* cereal we could modify our code.
+
+```{r}
+capt_test_results = t.test(capt_crisp$weight, mu = 16,
+                           alternative = c("two.sided"), conf.level = 0.95)
+```
+
+This time we have stored the results. By doing so, we can directly access portions of the output from `t.test()`. To see what information is available we use the `names()` function.
+
+```{r}
+names(capt_test_results)
+```
+
+We are interested in the confidence interval which is stored in `conf.int`.
+
+```{r}
+capt_test_results$conf.int
+```
+
+Let's check this interval "by hand." The one piece of information we are missing is the critical value, $t_{n-1}(\alpha/2) = t_{8}(0.025)$, which can be calculated in `R` using the `qt()` function.
+
+```{r}
+qt(0.975, df = 8)
+```
+
+So, the 95\% CI for the mean weight of a cereal box is calculated by plugging into the formula,
+
+\[
+\bar{x} \pm t_{n-1}(\alpha/2) \frac{s}{\sqrt{n}}
+\]
+
+```{r}
+c(mean(capt_crisp$weight) - qt(0.975, df = 8) * sd(capt_crisp$weight) / sqrt(9),
+  mean(capt_crisp$weight) + qt(0.975, df = 8) * sd(capt_crisp$weight) / sqrt(9))
+```
+
+
+### Two Sample t-Test: Example
+
+Assume that the distributions of $X$ and $Y$ are $\mathrm{N}(\mu_{1},\sigma^{2})$ and $\mathrm{N}(\mu_{2},\sigma^{2})$, respectively. Given the $n = 6$ observations of $X$,
+
+```{r}
+x = c(70, 82, 78, 74, 94, 82)
+n = length(x)
+```
+
+and the $m = 8$ observations of $Y$,
+
+```{r}
+y = c(64, 72, 60, 76, 72, 80, 84, 68)
+m = length(y)
+```
+
+we will test $H_{0}: \mu_{1} = \mu_{2}$ versus $H_{1}: \mu_{1} > \mu_{2}$.
+
+First, note that we can calculate the sample means and standard deviations.
+
+```{r}
+x_bar = mean(x)
+s_x   = sd(x)
+y_bar = mean(y)
+s_y   = sd(y)
+```
+
+We can then calculate the pooled standard deviation.
+
+\[
+s_{p} = \sqrt{\frac{(n-1)s_{x}^{2}+(m-1)s_{y}^{2}}{n+m-2}}
+\]
+
+```{r}
+s_p = sqrt(((n - 1) * s_x ^ 2 + (m - 1) * s_y ^ 2) / (n + m - 2))
+```
+
+Thus, the relevant $t$ test statistic is given by
+
+\[
+t = \frac{(\bar{x}-\bar{y})-\mu_{0}}{s_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}.
+\]
+
+```{r}
+t = ((x_bar - y_bar) - 0) / (s_p * sqrt(1 / n + 1 / m))
+t
+```
+
+Note that $t \sim t_{n + m - 2} = t_{`r n + m - 2`}$, so we can calculate the p-value, which is
+
+\[
+P(t_{`r n + m - 2`} > `r t`).
+\]
+
+```{r}
+1 - pt(t, df = n + m - 2)
+```
+
+But, then again, we could have simply performed this test in one line of `R`.
+
+```{r}
+t.test(x, y, alternative = c("greater"), var.equal = TRUE)
+```
+
+Recall that a two-sample $t$-test can be done with or without an equal variance assumption. Here `var.equal = TRUE` tells `R` we would like to perform the test under the equal variance assumption.
+
+Above we carried out the analysis using two vectors `x` and `y`. In general, we will have a preference for using data frames.
+
+```{r}
+t_test_data = data.frame(values = c(x, y),
+                         group  = c(rep("A", length(x)), rep("B", length(y))))
+```
+
+We now have the data stored in a single variables (`values`) and have created a second variable (`group`) which indicates which "sample" the value belongs to.
+
+```{r}
+t_test_data
+```
+
+Now to perform the test, we still use the `t.test()` function but with the `~` syntax and a `data` argument.
+
+```{r}
+t.test(values ~ group, data = t_test_data,
+       alternative = c("greater"), var.equal = TRUE)
+```
+
+## Chi-square test: Effectiveness of a Drug Treatment
+
+To test the effectiveness of a drug for a certain medical condition, we will consider a hypothetical case.
+
+Suppose we have 105 patients under study and 50 of them were treated with the drug. Moreover, the remaining 55 patients were kept under control samples. Thus, the health condition of all patients was checked after a week.
+
+With the following table, we can assess if their condition has improved or not. By observing this table, one can you tell if the drug had a positive effect on the patient?
+
+Here in this example, we can see that 35 out of the 50 patients showed improvement. Suppose if the drug had no effect, the 50 will split the same proportion of the patients who were not given the treatment. Here, in this case, improvement of the control case is high as about 70% of patients showed improvement, since both categorical variables which we have already defined must have only 2 levels. Also, it was sort of perceptive today that the drug treatment and health condition are dependent.
+
+Must Learn – How to create contingency tables in R
+
+Particularly in this test, we have to check the p-values. Moreover, like all statistical tests, we assume this test as a null hypothesis and an alternate hypothesis.
+
+The main thing is, we reject the null hypothesis if the p-value that comes out in the result is less than a predetermined significance level, which is 0.05 usually, then we reject the null hypothesis.
+
+H0: The two variables are independent.
+H1: The two variables relate to each other.
+
+In the case of a null hypothesis, a chi-square test is to test the two variables that are independent.
+
+```{r}
+data_frame <- read.csv("https://goo.gl/j6lRXD")  #Reading CSV
+table(data_frame$treatment, data_frame$improvement)
+```
+
+Let’s do the chi-squared test using the chisq.test() function. It takes the two vectors as the input. We also set `correct=FALSE` to turn off Yates’ continuity correction.
+
+```{r}
+chisq.test(data_frame$treatment, data_frame$improvement, correct=FALSE)
+```
+We have a chi-squared value of 5.5569. Since we get a p-Value less than the significance level of 0.05, we reject the null hypothesis and conclude that the two variables are in fact dependent

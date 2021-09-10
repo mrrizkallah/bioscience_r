@@ -1,4 +1,4 @@
-name: "Bioinformatics for Pharmacy"
+name: "bioinformatics-for-pharmacy"
 output_dir: "docs"
 navbar:
   type: default
@@ -12,24 +12,25 @@ navbar:
         href: lecture1.html
       - text: "Lecture 2"
         href: lecture2.html
+      - text: "Data summary"
+        href: data-summary.html
+      - text: "Probability"
+        href: prob-and-stat.html
     - text: "Labs"
       menu:
       - text: "Lab 1"
         href: lab1.html
-      - text: "Lab 2"
-        href: lab2.html
 
   right:
     - icon: fa-github
       href: https://mrrizkallah.github.io/bioscience_r/
     - icon: fa-university
       href: https://en.wikipedia.org/wiki/Cooking_school
-      
-output: 
+
+output:
   html_document:
     theme: yeti
     highlight: zenburn
     toc: true
     toc_float: true
     code_download: true
-    
