@@ -1,303 +1,53 @@
 ---
-title: "Tutorial: Summary and visualization"
+title: "Tutorial: Basic statistics and visualizations"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## DNA exercise
+```{r dna_ex2, include = T, echo=T, eval=T}
+# vector ... etc.
+my_dna <- "AACGAATGAGTAAATGAGTAAATGAAGGAATGATTATTCCTTGCTTTAGAACTTCTGGAATTAGAGGACAATATTAATAATACCATCGCACAGTGTTTCTTTGTTGTTAATGCTACAACATACAAAGAGGAAGCATGCAG"
+my_dna
+length(my_dna)
+class(my_dna)
+str(my_dna)
+nchar(my_dna)
+```
+
+```{r dna_ex3, include = T, echo=T, eval=T}
+my_dna_list <- strsplit(x = my_dna, split = "", fixed = TRUE)
+length(my_dna_list)
+class(my_dna_list)
+my_dna_vector <- unlist(my_dna_list)
+length(my_dna_list[[1]])
+str(my_dna_vector)
+length(my_dna_vector)
+
+# unique characters
+unique(my_dna_vector)
+
+# number of As
+(my_dna_vector == "A")
+length(my_dna_vector[my_dna_vector == "A"])
+
 ```
 
 
-# Another example: Air quality
-## Summary Statistics
+## Frequency distribution
+A gene consists of a sequence of nucleotides {A, C, G, T}.The number of each nucleotide can be displayed in a frequency table. This will be illustrated by the Zyxin gene which plays an important role in cell adhesion (Golub et al., 1999).  The accession number (X94991.1) of oneof its variants can be found via an NCBI UniGene search. The code below illustrates how to install the package ape, to load it, to read gene ”X94991.1”of the species homo sapiens from GenBank, and to make a frequency table of the four nucleotides
 
-Can you explain each of the following data types and give examples of each?
-  * Categorical (Binary as a special case)
-  * Ordinal
-  * Continuous
-
-Can you outline the summary statistics one would use for each of these data types?
-
-The first module in this series provided an introduction to working with datasets and computing some descriptive statistics. We will continue this with the airquality data.
-
-### Example
-To recall the components of the data set, print out the first 5 rows.
-
-```{r}
-airquality[1:5, ]
+```{r freq1, include = T, echo=T, eval=T}
+# install.packages(c("ape"), repo="http://cran.r-project.org", dep=TRUE)
+library(ape)
+gene <- read.GenBank(c("X94991.1"),  as.character=TRUE)
+table(gene)
+pie(table(gene))
 ```
 
-Recall that we can compute the mean Temp by "extracting" the variable Temp from the dataset using the $ function as follows:
-
-```{r}
-mean(airquality$Temp)
+```{r knit_exit, include=F, echo=F}
+knit_exit()
 ```
-
-Similarly, we can compute the median Temp:
-```{r}
-median(airquality$Temp)
-var(airquality$Wind)
-````
-
-### The Attach Command
-If we don't want to keep using the "$" sign to point to the data set, we a can use the attach command to keep the data set as the current or working one in R, and then just call the variables by name. For example, the above can then be accomplished by:
-
-```{r}
-attach(airquality)
-var(Wind)
-```
-**Never attach two data sets that share the same variable names- this could lead to confusion and errors! A good idea is to detach a data set as soon as you have finished working with it.**
-
-Once we are finished working with this data set, we can use the `detach()` command to remove this data set from the working memory.
-
-For now, let's keep this data set attached, while we test out some other functions.
-
-By default you get the minimum, the maximum, and the three quartiles — the 0.25, 0.50, and 0.75 quantiles. The difference between the first and third quartiles is called the interquartile range (IQR) and is sometimes used as an alternative to the standard deviation.
-
-```{r}
-quantile(airquality$Temp)
-```
-
-
-It is also possible to obtain other quantiles; this is done by adding an argument containing the desired percentage cut points. To get the deciles, use the sequence function:
-
-```{r}
-pvec <- seq(0,1,0.1) #sequence of digits from 0 to 1, by 0.1
-pvec
-quantile(airquality$Temp, pvec)
-```
-
-### Apply() Commands
-
-We can also get summary statistics for multiple columns at once, using the apply() command. apply() is extremely useful, as are its cousins tapply() and lapply() (more on these functions later).
-
-Let's first find the column means using the apply command:
-
-```{r}
-apply(airquality, 2, mean) #do for multiple columns at once
-```
-
-We get an error because the data contains missing observations! R will not skip missing values unless explicitly requested to do so. You can give the na.rm argument (not available, remove) to request that missing values be removed:
-
-```{r}
-apply(airquality, 2, mean, na.rm=T)
-```
-
-This can be done even when calculating a summary for a single column as well:
-
-```{r}
-mean(airquality$Ozone, na.rm=T)
-```
-
-**Find the standard deviations (SDs) of all the numeric variables in the air quality data set, using the apply function.**
-
-### Summary Function
-
-There is also a summary function that gives a number of summaries on a numeric variable (or even the whole data frame!) in a nice vector format:
-
-```{r}
-summary(airquality$Ozone)  #note we don't need "na.rm" here
-```
-
-```{r}
-summary(airquality)
-```
-
-Notice that "Month" and "Day" are coded as numeric variables even though they are clearly categorical. This can be mended as follows, e.g.:
-
-```{r}
-airquality$Month = factor(airquality$Month)
-summary(airquality)
-``````
-Notice how the display changes for the factor variables.
-
-## Graphical Displays of Data
-
-### Histograms
-
-The simplest display for the shape of a distribution of data can be done using a histogram- a count of how many observations fall within specified divisions ("bins") of the x-axis.
-
-```{r}
-hist(airquality$Temp)
-```
-
-
-A sensible number of classes (bins) is usually chosen by R, but a recommendation can be given with the nclass (number of classes) or breaks argument.
-
-```{r}
-hist(airquality$Temp, breaks = 20)
-```
-
-
-By choosing breaks as a vector rather than a number, you can have full control over the interval divisions. By default, R plots the frequencies in the histogram, if you would rather plot the relative frequencies, you need to use the argument prob=T.
-
-```{r}
-hist(airquality$Temp, prob=T)
-```
-
-
- There are a LOT of options to spruce this up. Here is code for a much nicer histogram
-
-```{r}
-hist(airquality$Temp,prob=T,main="Temperature")
-```
-
-```{r}
-points(density(airquality$Temp),type="l",col="blue")
-rug(airquality$Temp,col="red")
-```
-
-If we want to fit a normal curve over the data, instead of the command density() we can use dnorm() and curve() like so:
-
-```{r}
-m <- mean(airquality$Temp);std<-sqrt(var(airquality$Temp))
-
-hist(airquality$Temp,prob=T,main="Temperature")
-
-curve(dnorm(x, mean=m, sd=std), col="darkblue", lwd=2, add=TRUE)
-```
-
-**Note : You need to make sure that you have prob=T as an argument in your historgram !**
-
-If you type help(hist) into the command line, it shows all the possible parameters you can add to a standard histogram. There are a lot of options.
-
-### More plots
-If you want two or more plots in the same window, you can use the command
-
-`par(mfrow=c(#rows,#columns))`
-
-With the airquality dataset, we can do
-
-```{r}
-par(mfrow=c(2,2))
-hist(airquality$Temp, prob=T)
-hist(airquality$Ozone, prob=T)
-hist(airquality$Wind, prob=T)
-hist(airquality$Solar.R, prob=T)
-```
-
-### QQ Plots
-
-To see whether data can be assumed normally distributed, it is often useful to create a qq-plot. In a qq-plot, we plot the kth smallest observation against the expected value of the kth smallest observation out of n in a standard normal distribution.
-
-We expect to obtain a straight line if data come from a normal distribution with any mean and standard deviation.
-
-```{r}
-qqnorm(airquality$Temp)
-```
-
-
-The observed (empirical) quantiles are drawn along the vertical axis, while the theoretical quantiles are along the horizontal axis. With this convention the distribution is normal if the slope follows a diagonal line, curves towards the end indicate a heavy tail. This will come in handy when we move on to linear regression.
-
-
-
-After the plot has been generated, use the function `qqline()` to fit a line going through the first and third quartile. This can be used to judge the goodness-of-fit of the QQ-plot to a straight line.
-
-**Use a histogram and qq-plot to determine whether the Ozone measurements in the air quality data can be considered normally distributed.**
-
-### Box Plots
-
-A "boxplot", or "box-and-whiskers plot" is a graphical summary of a distribution; the box in the middle indicates "hinges" (close to the first and third quartiles) and median. The lines ("whiskers") show the largest or smallest observation that falls within a distance of 1.5 times the box size from the nearest hinge. If any observations fall farther away, the additional points are considered "extreme" values and are shown separately. A boxplot can often give a good idea of the data distribution, and is often more useful to compare distributions side-by-side, as it is more compact than a histogram. We will see an example soon.
-
-```{r}
-boxplot(airquality$Ozone)
-```
-
-We can use the boxplot function to calculate quick summaries for all the variables in our data set—by default, R computes boxplots column by column. Notice that missing data causes no problems to the boxplot function (similar to summary).
-
-```{r}
-boxplot(airquality[,1:4])
-```
-
-Figure is not really meaningful as the variables may not be on comparable scales. The real power of box plots is really to do comparisons of variables by sub-grouping. For example, we may be interested in comparing the fluctuations in temperature across months. To create boxplots of temperature data grouped by the factor "month", we use the command:
-
-```{r}
-boxplot(airquality$Temp ~ airquality$Month)
-```
-
-We can also write the same command using a slightly more readable language:
-
-```{r}
-boxplot(Temp ~ Month, data = airquality)
-```
-
-The tilde symbol `~` indicates which factor to group by. We will come back to more discussion on plotting grouped data later on.
-
-### Scatter Plots
-
-One very commonly used tool in exploratory analysis of multivariate data is the scatterplot. We will look at this in more detail later when we discuss regression and correlation. The R command for drawing a scatterplot of two variables is a simple command of the form "plot(x,y)."
-
-```{r}
-plot(airquality$Temp, airquality$Ozone)   # How do Ozone and temperature measurements relate?
-```
-
-With more than two variables, the `pairs()` command draws a scatterplot matrix.
-
-The default plotting symbols in R are not always pretty! You can actually change the plotting symbols, or colors to something nicer. For example, the following command
-
-```{r}
-plot(airquality$Temp, airquality$Ozone, col="red", pch =19)
-```
-
-, which repeats the scatterplot, this time with red filled circles that are nicer to look at. "col" refers to the color of symbols plotted. The full range of point plotting symbols used in R are given by "pch" in the range 1 to 25; see the help on "points" to see what each of these represent.
-
-**Write the following command in R and describe what you see in terms of relationships between the variables: pairs(airquality[,1:4])**
-
-
-### Stem and Leaf Plots
-
-A neat way to summarize data that could just as easily be put in a histogram is to use a stem-and-leaf plot (compare to a histogram):
-
-```{r}
-stem(rnorm(40,100))
-```
-
-The decimal point is 1 digit(s) to the right of the |
-
-Note that the command rnorm(40,100) that generated these data is a standard R command that generates 40 random normal variables with mean 100 and variance 1 (by default). For more information, use the help function. Type ?rnorm to see the options for this command.
-
-### Summary Statistics for Groups
-
-When dealing with grouped data, you will often want to have various summary statistics computed within groups; for example, a table of means and standard deviations. This can be done using the tapply() command. For example, we might want to compute the mean temperatures in each month:
-
-```{r}
-tapply(airquality$Temp, airquality$Month, mean)
-```
-
-If there are any missing values, these can be excluded if we simply adding an extra argument na.rm=T to `tapply`.
-
-**Compute the range and mean of Ozone levels for each month, using the tapply command.**
-
-### Graphics for Grouped Data
-
-With grouped data, it is important to be able not only to create plots for each group but also to compare the plots between groups. We have already looked at examples with histograms and boxplots. As a further example, let us consider another data set esoph in R, relating to a case-control study of esophageal cancer in France, containing records for 88 age/alcohol/tobacco combinations. (Look up the R help on this data set to find out more about the variables.) The first 5 rows of the data are shown below:
-
-```{r}
-esoph[1:5,]
-```
-
-We can draw a boxplot of the number of cancer cases according to each level of alcohol consumption (alcgp):
-
-```{r}
-boxplot(esoph$ncases ~ esoph$alcgp)
-```
-
-
-We could also equivalently write:
-
-```{r}
-boxplot(ncases ~ alcgp, data = esoph)
-```
-
-
-Notation of the type `y ~ x` can be read as "y described using x". This is an example of a "model formula". We will encounter many more examples of model formulas later on- such as when we use R for regression analysis.
-
-
-
-If the data set is small, sometimes a boxplot may not be very accurate, as the quartiles are not well estimated from the data and may give a falsely inflated or deflated figure. In those cases, plotting the raw data may be more desirable. This can be done using a strip chart. By hand, this is equivalent to a dot diagram where every number is marked with a dot on a number line.
-
-**What does the following command do?: stripchart(ncases ~ agegp)**
-
-**Detach the esoph data set and attach the air quality data set. Next, create the following plots in R, using the commands you have learnt above:
-    Do a boxplot of ozone levels by month and wind speed by month.
-    Do a strip chart of ozone levels by month.
-**

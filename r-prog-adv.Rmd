@@ -1,0 +1,201 @@
+---
+title:        "Lecture 3: R programming II"
+# subtitle:   "Based on: https://github.com/mattiaguerini/slides-intro-to-R"
+# author:     "Mariam R. Rizkallah"
+# date:       "2021"
+# output:     beamer_presentation
+# theme:      boxes
+# colortheme: dolphin
+# fonttheme:  serif
+# toc:        TRUE
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Basic programming
+
+## Variables
+In programming, a variable denotes an object (i.e. a variable is a name or a label for something).
+\scriptsize
+```{r variables, include=T, echo=T}
+x <- 1
+my_function <- function(x){x*2+2}
+```
+\normalsize
+Notice that the argument x of the function is different from the x previously defined. The second is only local to the function and always required to be specified.
+
+Try to compute `r my_function(1)` or `r my_function(9)`.
+
+## Control Flows (I)
+Also known as an if/else statement. It relates to ways in which you can adapt your code to different circumstances.
+
+Based on a condition being TRUE, your program will do one thing, as opposed to another thing.
+
+In R, the if/else syntax has the following structure:
+\scriptsize
+```{r controlflow_prepare, include=F, echo=F}
+condition <- T
+do_something <- "do something"
+do_something_different <- "do something different"
+```
+\normalsize
+
+\scriptsize
+```{r controlflow, include=T, echo=T}
+if (condition == TRUE) {
+  do_something
+} else {
+  do_something_different
+}
+```
+\normalsize
+
+## Control Flows (II) - Example
+\scriptsize
+```{r controlflow2, include=T, echo=T}
+x <- 1
+y <- 3
+if (x>y) {
+  print("x is larger than y")
+  z <- x*y
+  print(paste0("z is equal to ", z))
+} else {
+  print("x is smaller or equal than y")
+  z <- x*y - 1
+  print(paste0("z is equal to ", z))
+}
+```
+\normalsize
+
+## Control Flows (III) - Example with more conditions
+\scriptsize
+```{r controlflow3, include=T, echo=T}
+x <- 3
+y <- 3
+if (x>y) {
+  print("x is larger than y")
+  z <- x*y + 1
+  print(paste0("z is equal to ", z))
+} else if (x==y) {
+  print("x is equal than y")
+  z <- x*y
+  print(paste0("z is equal to ", z))
+} else {
+  print("x is smaller than y")
+  z <- x*y - 1
+  print(paste0("z is equal to ", z))
+}
+```
+\normalsize
+
+## Loops (I)
+As the name suggests, in a loop the program repeats a set of instructions many times, until some condition tells it to stop.
+
+A very powerful, yet simple, construction is that the program can count how many steps it has done already - which may be important to know for many algorithms.
+
+The syntax of a `for` loop is the following:
+\scriptsize
+```{r loops, include=T, echo=T}
+for (i in 1:10){
+  # does not have to be 1:10!
+  # loop body: gets executed each time
+  # the value of i changes with each iteration
+}
+```
+\normalsize
+
+## Loops (II) - Example
+Produce a loop that displays the double of the loop round.
+\scriptsize
+```{r loops2, include=T, echo=T}
+for (i in 1:5){
+  y <- i*2
+  print(y)
+}
+```
+\normalsize
+
+## Loops (III) - Example with more loops
+You can even have loops into other loops.
+
+These can be useful for exploring combinations of events:
+\scriptsize
+```{r loops3, include=T, echo=T}
+quantity <- c(2,3)
+fruits <- c("mangos", "apples", "bananas")
+
+for (i in quantity){ # first nest: for each i
+  for (j in fruits){ # second nest: for each j
+    print(paste("Can I get",i,j,"please?"))
+    }
+}
+```
+\normalsize
+
+## Functions (I)
+So far we have been using functions, but haven’t actually discussed some of their details.
+
+A function is a set of instructions that R executes for us, much like those collected in a script file.
+
+The good thing is that functions are much more flexible than scripts, since they can depend on input arguments, which change the way the function behaves.
+
+## Functions (II)
+Here is how to define a function in general:
+\scriptsize
+```{r functions, include=T, echo=T}
+function_name <- function(arg1 ,arg2=default_value){
+  # function body
+  # you do stuff with arg1 and arg2
+  # you can have any number of arguments, with or without defaults
+  # any valid `R` commands can be included here
+  # the last line is returned
+}
+```
+\normalsize
+
+## Function (III) - Example
+\scriptsize
+```{r functions2, include=T, echo=T}
+hello <- function(your_name = "Lord Vader"){
+  paste("You R most welcome,", your_name)
+  # we could also write:
+  # return(paste("You R most welcome,",your_name))
+}
+# we call the function by typing it's name with round brackets
+```
+
+```{r functions3, include=T, echo=T}
+hello()
+hello("Mariam")
+```
+\normalsize
+
+# Scripts
+## Scripts
+\scriptsize
+```{r script1, include=T, echo=T, eval=F}
+source(file = "sample_script.R")
+```
+
+```{r script2, include=T, echo=T}
+# A comment: this is a sample script.
+y <- c(12,15,28,17,18)
+x <- c(22,39,50,25,18)
+mean(y)
+mean(x)
+```
+\normalsize
+
+
+## Challenge
+* Script and function (and parameters)
+```{r script3, include=T, echo=T, eval=F}
+Rscript myname.R Delta
+```
+
+```{r knit_exit, include=F, echo=F}
+knit_exit()
+```

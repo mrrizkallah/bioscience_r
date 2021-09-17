@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Tutorial: Data summary and visualization</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bioinformatics for Pharmacy</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lectures
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r-prog.html">Lecture 1: R programming</a>
+    </li>
+    <li>
+      <a href="data-summary.html">Lecture 2: Data summary</a>
+    </li>
+    <li>
+      <a href="prob-and-stat.html">Lecture 2: Probability</a>
+    </li>
+    <li>
+      <a href="func.Rmd">Lecture 3: Functions</a>
+    </li>
+    <li>
+      <a href="cond.Rmd">Lecture 3: Conditioning</a>
+    </li>
+    <li>
+      <a href="r-prog-adv.Rmd">Lecture 3: Condition, functions and scripts</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Lab 1: DNA exercise</a>
+    </li>
+    <li>
+      <a href="lab2.html">Lab 2: Air quality</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://mrrizkallah.github.io/bioscience_r/">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://en.wikipedia.org/wiki/Cooking_school">
+    <span class="fa fa-university"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Tutorial: Data summary and visualization</h1>
+
+</div>
+
+
+<div id="another-example-air-quality" class="section level1">
+<h1>Another example: Air quality</h1>
+<div id="summary-statistics" class="section level2">
+<h2>Summary Statistics</h2>
+<p>Can you explain each of the following data types and give examples of each? * Categorical (Binary as a special case) * Ordinal * Continuous</p>
+<p>Can you outline the summary statistics one would use for each of these data types?</p>
+<p>The first module in this series provided an introduction to working with datasets and computing some descriptive statistics. We will continue this with the airquality data.</p>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<p>To recall the components of the data set, print out the first 5 rows.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>airquality[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]</span></code></pre></div>
+<p>Recall that we can compute the mean Temp by “extracting” the variable Temp from the dataset using the $ function as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">mean</span>(airquality<span class="op">$</span>Temp)</span></code></pre></div>
+<p>Similarly, we can compute the median Temp:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">median</span>(airquality<span class="op">$</span>Temp)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">var</span>(airquality<span class="op">$</span>Wind)</span></code></pre></div>
+</div>
+<div id="the-attach-command" class="section level3">
+<h3>The Attach Command</h3>
+<p>If we don’t want to keep using the “$” sign to point to the data set, we a can use the attach command to keep the data set as the current or working one in R, and then just call the variables by name. For example, the above can then be accomplished by:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">attach</span>(airquality)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">var</span>(Wind)</span></code></pre></div>
+<p><strong>Never attach two data sets that share the same variable names- this could lead to confusion and errors! A good idea is to detach a data set as soon as you have finished working with it.</strong></p>
+<p>Once we are finished working with this data set, we can use the <code>detach()</code> command to remove this data set from the working memory.</p>
+<p>For now, let’s keep this data set attached, while we test out some other functions.</p>
+<p>By default you get the minimum, the maximum, and the three quartiles — the 0.25, 0.50, and 0.75 quantiles. The difference between the first and third quartiles is called the interquartile range (IQR) and is sometimes used as an alternative to the standard deviation.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">quantile</span>(airquality<span class="op">$</span>Temp)</span></code></pre></div>
+<p>It is also possible to obtain other quantiles; this is done by adding an argument containing the desired percentage cut points. To get the deciles, use the sequence function:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>pvec &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>) <span class="co">#sequence of digits from 0 to 1, by 0.1</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>pvec</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">quantile</span>(airquality<span class="op">$</span>Temp, pvec)</span></code></pre></div>
+</div>
+<div id="apply-commands" class="section level3">
+<h3>Apply() Commands</h3>
+<p>We can also get summary statistics for multiple columns at once, using the apply() command. apply() is extremely useful, as are its cousins tapply() and lapply() (more on these functions later).</p>
+<p>Let’s first find the column means using the apply command:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">apply</span>(airquality, <span class="dv">2</span>, mean) <span class="co">#do for multiple columns at once</span></span></code></pre></div>
+<p>We get an error because the data contains missing observations! R will not skip missing values unless explicitly requested to do so. You can give the na.rm argument (not available, remove) to request that missing values be removed:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">apply</span>(airquality, <span class="dv">2</span>, mean, <span class="dt">na.rm=</span>T)</span></code></pre></div>
+<p>This can be done even when calculating a summary for a single column as well:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">mean</span>(airquality<span class="op">$</span>Ozone, <span class="dt">na.rm=</span>T)</span></code></pre></div>
+<p><strong>Find the standard deviations (SDs) of all the numeric variables in the air quality data set, using the apply function.</strong></p>
+</div>
+<div id="summary-function" class="section level3">
+<h3>Summary Function</h3>
+<p>There is also a summary function that gives a number of summaries on a numeric variable (or even the whole data frame!) in a nice vector format:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">summary</span>(airquality<span class="op">$</span>Ozone)  <span class="co">#note we don&#39;t need &quot;na.rm&quot; here</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">summary</span>(airquality)</span></code></pre></div>
+<p>Notice that “Month” and “Day” are coded as numeric variables even though they are clearly categorical. This can be mended as follows, e.g.:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>airquality<span class="op">$</span>Month =<span class="st"> </span><span class="kw">factor</span>(airquality<span class="op">$</span>Month)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">summary</span>(airquality)</span></code></pre></div>
+<p>Notice how the display changes for the factor variables.</p>
+</div>
+</div>
+<div id="graphical-displays-of-data" class="section level2">
+<h2>Graphical Displays of Data</h2>
+<div id="histograms" class="section level3">
+<h3>Histograms</h3>
+<p>The simplest display for the shape of a distribution of data can be done using a histogram- a count of how many observations fall within specified divisions (“bins”) of the x-axis.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Temp)</span></code></pre></div>
+<p>A sensible number of classes (bins) is usually chosen by R, but a recommendation can be given with the nclass (number of classes) or breaks argument.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Temp, <span class="dt">breaks =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p>By choosing breaks as a vector rather than a number, you can have full control over the interval divisions. By default, R plots the frequencies in the histogram, if you would rather plot the relative frequencies, you need to use the argument prob=T.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Temp, <span class="dt">prob=</span>T)</span></code></pre></div>
+<p>There are a LOT of options to spruce this up. Here is code for a much nicer histogram</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Temp,<span class="dt">prob=</span>T,<span class="dt">main=</span><span class="st">&quot;Temperature&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">points</span>(<span class="kw">density</span>(airquality<span class="op">$</span>Temp),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">rug</span>(airquality<span class="op">$</span>Temp,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p>If we want to fit a normal curve over the data, instead of the command density() we can use dnorm() and curve() like so:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>m &lt;-<span class="st"> </span><span class="kw">mean</span>(airquality<span class="op">$</span>Temp);std&lt;-<span class="kw">sqrt</span>(<span class="kw">var</span>(airquality<span class="op">$</span>Temp))</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Temp,<span class="dt">prob=</span>T,<span class="dt">main=</span><span class="st">&quot;Temperature&quot;</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">curve</span>(<span class="kw">dnorm</span>(x, <span class="dt">mean=</span>m, <span class="dt">sd=</span>std), <span class="dt">col=</span><span class="st">&quot;darkblue&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><strong>Note : You need to make sure that you have prob=T as an argument in your historgram !</strong></p>
+<p>If you type help(hist) into the command line, it shows all the possible parameters you can add to a standard histogram. There are a lot of options.</p>
+</div>
+<div id="more-plots" class="section level3">
+<h3>More plots</h3>
+<p>If you want two or more plots in the same window, you can use the command</p>
+<p><code>par(mfrow=c(#rows,#columns))</code></p>
+<p>With the airquality dataset, we can do</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Temp, <span class="dt">prob=</span>T)</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Ozone, <span class="dt">prob=</span>T)</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Wind, <span class="dt">prob=</span>T)</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">hist</span>(airquality<span class="op">$</span>Solar.R, <span class="dt">prob=</span>T)</span></code></pre></div>
+</div>
+<div id="qq-plots" class="section level3">
+<h3>QQ Plots</h3>
+<p>To see whether data can be assumed normally distributed, it is often useful to create a qq-plot. In a qq-plot, we plot the kth smallest observation against the expected value of the kth smallest observation out of n in a standard normal distribution.</p>
+<p>We expect to obtain a straight line if data come from a normal distribution with any mean and standard deviation.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">qqnorm</span>(airquality<span class="op">$</span>Temp)</span></code></pre></div>
+<p>The observed (empirical) quantiles are drawn along the vertical axis, while the theoretical quantiles are along the horizontal axis. With this convention the distribution is normal if the slope follows a diagonal line, curves towards the end indicate a heavy tail. This will come in handy when we move on to linear regression.</p>
+<p>After the plot has been generated, use the function <code>qqline()</code> to fit a line going through the first and third quartile. This can be used to judge the goodness-of-fit of the QQ-plot to a straight line.</p>
+<p><strong>Use a histogram and qq-plot to determine whether the Ozone measurements in the air quality data can be considered normally distributed.</strong></p>
+</div>
+<div id="box-plots" class="section level3">
+<h3>Box Plots</h3>
+<p>A “boxplot”, or “box-and-whiskers plot” is a graphical summary of a distribution; the box in the middle indicates “hinges” (close to the first and third quartiles) and median. The lines (“whiskers”) show the largest or smallest observation that falls within a distance of 1.5 times the box size from the nearest hinge. If any observations fall farther away, the additional points are considered “extreme” values and are shown separately. A boxplot can often give a good idea of the data distribution, and is often more useful to compare distributions side-by-side, as it is more compact than a histogram. We will see an example soon.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">boxplot</span>(airquality<span class="op">$</span>Ozone)</span></code></pre></div>
+<p>We can use the boxplot function to calculate quick summaries for all the variables in our data set—by default, R computes boxplots column by column. Notice that missing data causes no problems to the boxplot function (similar to summary).</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">boxplot</span>(airquality[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</span></code></pre></div>
+<p>Figure is not really meaningful as the variables may not be on comparable scales. The real power of box plots is really to do comparisons of variables by sub-grouping. For example, we may be interested in comparing the fluctuations in temperature across months. To create boxplots of temperature data grouped by the factor “month”, we use the command:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">boxplot</span>(airquality<span class="op">$</span>Temp <span class="op">~</span><span class="st"> </span>airquality<span class="op">$</span>Month)</span></code></pre></div>
+<p>We can also write the same command using a slightly more readable language:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">boxplot</span>(Temp <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data =</span> airquality)</span></code></pre></div>
+<p>The tilde symbol <code>~</code> indicates which factor to group by. We will come back to more discussion on plotting grouped data later on.</p>
+</div>
+<div id="scatter-plots" class="section level3">
+<h3>Scatter Plots</h3>
+<p>One very commonly used tool in exploratory analysis of multivariate data is the scatterplot. We will look at this in more detail later when we discuss regression and correlation. The R command for drawing a scatterplot of two variables is a simple command of the form “plot(x,y).”</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">plot</span>(airquality<span class="op">$</span>Temp, airquality<span class="op">$</span>Ozone)   <span class="co"># How do Ozone and temperature measurements relate?</span></span></code></pre></div>
+<p>With more than two variables, the <code>pairs()</code> command draws a scatterplot matrix.</p>
+<p>The default plotting symbols in R are not always pretty! You can actually change the plotting symbols, or colors to something nicer. For example, the following command</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">plot</span>(airquality<span class="op">$</span>Temp, airquality<span class="op">$</span>Ozone, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">pch =</span><span class="dv">19</span>)</span></code></pre></div>
+<p>, which repeats the scatterplot, this time with red filled circles that are nicer to look at. “col” refers to the color of symbols plotted. The full range of point plotting symbols used in R are given by “pch” in the range 1 to 25; see the help on “points” to see what each of these represent.</p>
+<p><strong>Write the following command in R and describe what you see in terms of relationships between the variables: pairs(airquality[,1:4])</strong></p>
+</div>
+<div id="stem-and-leaf-plots" class="section level3">
+<h3>Stem and Leaf Plots</h3>
+<p>A neat way to summarize data that could just as easily be put in a histogram is to use a stem-and-leaf plot (compare to a histogram):</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">stem</span>(<span class="kw">rnorm</span>(<span class="dv">40</span>,<span class="dv">100</span>))</span></code></pre></div>
+<p>The decimal point is 1 digit(s) to the right of the |</p>
+<p>Note that the command rnorm(40,100) that generated these data is a standard R command that generates 40 random normal variables with mean 100 and variance 1 (by default). For more information, use the help function. Type ?rnorm to see the options for this command.</p>
+</div>
+<div id="summary-statistics-for-groups" class="section level3">
+<h3>Summary Statistics for Groups</h3>
+<p>When dealing with grouped data, you will often want to have various summary statistics computed within groups; for example, a table of means and standard deviations. This can be done using the tapply() command. For example, we might want to compute the mean temperatures in each month:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">tapply</span>(airquality<span class="op">$</span>Temp, airquality<span class="op">$</span>Month, mean)</span></code></pre></div>
+<p>If there are any missing values, these can be excluded if we simply adding an extra argument na.rm=T to <code>tapply</code>.</p>
+<p><strong>Compute the range and mean of Ozone levels for each month, using the tapply command.</strong></p>
+</div>
+<div id="graphics-for-grouped-data" class="section level3">
+<h3>Graphics for Grouped Data</h3>
+<p>With grouped data, it is important to be able not only to create plots for each group but also to compare the plots between groups. We have already looked at examples with histograms and boxplots. As a further example, let us consider another data set esoph in R, relating to a case-control study of esophageal cancer in France, containing records for 88 age/alcohol/tobacco combinations. (Look up the R help on this data set to find out more about the variables.) The first 5 rows of the data are shown below:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>esoph[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,]</span></code></pre></div>
+<p>We can draw a boxplot of the number of cancer cases according to each level of alcohol consumption (alcgp):</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">boxplot</span>(esoph<span class="op">$</span>ncases <span class="op">~</span><span class="st"> </span>esoph<span class="op">$</span>alcgp)</span></code></pre></div>
+<p>We could also equivalently write:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">boxplot</span>(ncases <span class="op">~</span><span class="st"> </span>alcgp, <span class="dt">data =</span> esoph)</span></code></pre></div>
+<p>Notation of the type <code>y ~ x</code> can be read as “y described using x”. This is an example of a “model formula”. We will encounter many more examples of model formulas later on- such as when we use R for regression analysis.</p>
+<p>If the data set is small, sometimes a boxplot may not be very accurate, as the quartiles are not well estimated from the data and may give a falsely inflated or deflated figure. In those cases, plotting the raw data may be more desirable. This can be done using a strip chart. By hand, this is equivalent to a dot diagram where every number is marked with a dot on a number line.</p>
+<p><strong>What does the following command do?: stripchart(ncases ~ agegp)</strong></p>
+<p><strong>Detach the esoph data set and attach the air quality data set. Next, create the following plots in R, using the commands you have learnt above: Do a boxplot of ozone levels by month and wind speed by month. Do a strip chart of ozone levels by month. </strong></p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVHV0b3JpYWw6IERhdGEgc3VtbWFyeSBhbmQgdmlzdWFsaXphdGlvbiIKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBldmFsID0gRkFMU0UpCmBgYAoKCiMgQW5vdGhlciBleGFtcGxlOiBBaXIgcXVhbGl0eQojIyBTdW1tYXJ5IFN0YXRpc3RpY3MKCkNhbiB5b3UgZXhwbGFpbiBlYWNoIG9mIHRoZSBmb2xsb3dpbmcgZGF0YSB0eXBlcyBhbmQgZ2l2ZSBleGFtcGxlcyBvZiBlYWNoPwogICogQ2F0ZWdvcmljYWwgKEJpbmFyeSBhcyBhIHNwZWNpYWwgY2FzZSkKICAqIE9yZGluYWwKICAqIENvbnRpbnVvdXMKCkNhbiB5b3Ugb3V0bGluZSB0aGUgc3VtbWFyeSBzdGF0aXN0aWNzIG9uZSB3b3VsZCB1c2UgZm9yIGVhY2ggb2YgdGhlc2UgZGF0YSB0eXBlcz8KClRoZSBmaXJzdCBtb2R1bGUgaW4gdGhpcyBzZXJpZXMgcHJvdmlkZWQgYW4gaW50cm9kdWN0aW9uIHRvIHdvcmtpbmcgd2l0aCBkYXRhc2V0cyBhbmQgY29tcHV0aW5nIHNvbWUgZGVzY3JpcHRpdmUgc3RhdGlzdGljcy4gV2Ugd2lsbCBjb250aW51ZSB0aGlzIHdpdGggdGhlIGFpcnF1YWxpdHkgZGF0YS4KCiMjIyBFeGFtcGxlClRvIHJlY2FsbCB0aGUgY29tcG9uZW50cyBvZiB0aGUgZGF0YSBzZXQsIHByaW50IG91dCB0aGUgZmlyc3QgNSByb3dzLgoKYGBge3J9CmFpcnF1YWxpdHlbMTo1LCBdCmBgYAoKUmVjYWxsIHRoYXQgd2UgY2FuIGNvbXB1dGUgdGhlIG1lYW4gVGVtcCBieSAiZXh0cmFjdGluZyIgdGhlIHZhcmlhYmxlIFRlbXAgZnJvbSB0aGUgZGF0YXNldCB1c2luZyB0aGUgJCBmdW5jdGlvbiBhcyBmb2xsb3dzOgoKYGBge3J9Cm1lYW4oYWlycXVhbGl0eSRUZW1wKQpgYGAKClNpbWlsYXJseSwgd2UgY2FuIGNvbXB1dGUgdGhlIG1lZGlhbiBUZW1wOgpgYGB7cn0KbWVkaWFuKGFpcnF1YWxpdHkkVGVtcCkKdmFyKGFpcnF1YWxpdHkkV2luZCkKYGBgYAoKIyMjIFRoZSBBdHRhY2ggQ29tbWFuZApJZiB3ZSBkb24ndCB3YW50IHRvIGtlZXAgdXNpbmcgdGhlICIkIiBzaWduIHRvIHBvaW50IHRvIHRoZSBkYXRhIHNldCwgd2UgYSBjYW4gdXNlIHRoZSBhdHRhY2ggY29tbWFuZCB0byBrZWVwIHRoZSBkYXRhIHNldCBhcyB0aGUgY3VycmVudCBvciB3b3JraW5nIG9uZSBpbiBSLCBhbmQgdGhlbiBqdXN0IGNhbGwgdGhlIHZhcmlhYmxlcyBieSBuYW1lLiBGb3IgZXhhbXBsZSwgdGhlIGFib3ZlIGNhbiB0aGVuIGJlIGFjY29tcGxpc2hlZCBieToKCmBgYHtyfQphdHRhY2goYWlycXVhbGl0eSkKdmFyKFdpbmQpCmBgYAoqKk5ldmVyIGF0dGFjaCB0d28gZGF0YSBzZXRzIHRoYXQgc2hhcmUgdGhlIHNhbWUgdmFyaWFibGUgbmFtZXMtIHRoaXMgY291bGQgbGVhZCB0byBjb25mdXNpb24gYW5kIGVycm9ycyEgQSBnb29kIGlkZWEgaXMgdG8gZGV0YWNoIGEgZGF0YSBzZXQgYXMgc29vbiBhcyB5b3UgaGF2ZSBmaW5pc2hlZCB3b3JraW5nIHdpdGggaXQuKioKCk9uY2Ugd2UgYXJlIGZpbmlzaGVkIHdvcmtpbmcgd2l0aCB0aGlzIGRhdGEgc2V0LCB3ZSBjYW4gdXNlIHRoZSBgZGV0YWNoKClgIGNvbW1hbmQgdG8gcmVtb3ZlIHRoaXMgZGF0YSBzZXQgZnJvbSB0aGUgd29ya2luZyBtZW1vcnkuCgpGb3Igbm93LCBsZXQncyBrZWVwIHRoaXMgZGF0YSBzZXQgYXR0YWNoZWQsIHdoaWxlIHdlIHRlc3Qgb3V0IHNvbWUgb3RoZXIgZnVuY3Rpb25zLgoKQnkgZGVmYXVsdCB5b3UgZ2V0IHRoZSBtaW5pbXVtLCB0aGUgbWF4aW11bSwgYW5kIHRoZSB0aHJlZSBxdWFydGlsZXMg4oCUIHRoZSAwLjI1LCAwLjUwLCBhbmQgMC43NSBxdWFudGlsZXMuIFRoZSBkaWZmZXJlbmNlIGJldHdlZW4gdGhlIGZpcnN0IGFuZCB0aGlyZCBxdWFydGlsZXMgaXMgY2FsbGVkIHRoZSBpbnRlcnF1YXJ0aWxlIHJhbmdlIChJUVIpIGFuZCBpcyBzb21ldGltZXMgdXNlZCBhcyBhbiBhbHRlcm5hdGl2ZSB0byB0aGUgc3RhbmRhcmQgZGV2aWF0aW9uLgoKYGBge3J9CnF1YW50aWxlKGFpcnF1YWxpdHkkVGVtcCkKYGBgCgoKSXQgaXMgYWxzbyBwb3NzaWJsZSB0byBvYnRhaW4gb3RoZXIgcXVhbnRpbGVzOyB0aGlzIGlzIGRvbmUgYnkgYWRkaW5nIGFuIGFyZ3VtZW50IGNvbnRhaW5pbmcgdGhlIGRlc2lyZWQgcGVyY2VudGFnZSBjdXQgcG9pbnRzLiBUbyBnZXQgdGhlIGRlY2lsZXMsIHVzZSB0aGUgc2VxdWVuY2UgZnVuY3Rpb246CgpgYGB7cn0KcHZlYyA8LSBzZXEoMCwxLDAuMSkgI3NlcXVlbmNlIG9mIGRpZ2l0cyBmcm9tIDAgdG8gMSwgYnkgMC4xCnB2ZWMKcXVhbnRpbGUoYWlycXVhbGl0eSRUZW1wLCBwdmVjKQpgYGAKCiMjIyBBcHBseSgpIENvbW1hbmRzCgpXZSBjYW4gYWxzbyBnZXQgc3VtbWFyeSBzdGF0aXN0aWNzIGZvciBtdWx0aXBsZSBjb2x1bW5zIGF0IG9uY2UsIHVzaW5nIHRoZSBhcHBseSgpIGNvbW1hbmQuIGFwcGx5KCkgaXMgZXh0cmVtZWx5IHVzZWZ1bCwgYXMgYXJlIGl0cyBjb3VzaW5zIHRhcHBseSgpIGFuZCBsYXBwbHkoKSAobW9yZSBvbiB0aGVzZSBmdW5jdGlvbnMgbGF0ZXIpLgoKTGV0J3MgZmlyc3QgZmluZCB0aGUgY29sdW1uIG1lYW5zIHVzaW5nIHRoZSBhcHBseSBjb21tYW5kOgoKYGBge3J9CmFwcGx5KGFpcnF1YWxpdHksIDIsIG1lYW4pICNkbyBmb3IgbXVsdGlwbGUgY29sdW1ucyBhdCBvbmNlCmBgYAoKV2UgZ2V0IGFuIGVycm9yIGJlY2F1c2UgdGhlIGRhdGEgY29udGFpbnMgbWlzc2luZyBvYnNlcnZhdGlvbnMhIFIgd2lsbCBub3Qgc2tpcCBtaXNzaW5nIHZhbHVlcyB1bmxlc3MgZXhwbGljaXRseSByZXF1ZXN0ZWQgdG8gZG8gc28uIFlvdSBjYW4gZ2l2ZSB0aGUgbmEucm0gYXJndW1lbnQgKG5vdCBhdmFpbGFibGUsIHJlbW92ZSkgdG8gcmVxdWVzdCB0aGF0IG1pc3NpbmcgdmFsdWVzIGJlIHJlbW92ZWQ6CgpgYGB7cn0KYXBwbHkoYWlycXVhbGl0eSwgMiwgbWVhbiwgbmEucm09VCkKYGBgCgpUaGlzIGNhbiBiZSBkb25lIGV2ZW4gd2hlbiBjYWxjdWxhdGluZyBhIHN1bW1hcnkgZm9yIGEgc2luZ2xlIGNvbHVtbiBhcyB3ZWxsOgoKYGBge3J9Cm1lYW4oYWlycXVhbGl0eSRPem9uZSwgbmEucm09VCkKYGBgCgoqKkZpbmQgdGhlIHN0YW5kYXJkIGRldmlhdGlvbnMgKFNEcykgb2YgYWxsIHRoZSBudW1lcmljIHZhcmlhYmxlcyBpbiB0aGUgYWlyIHF1YWxpdHkgZGF0YSBzZXQsIHVzaW5nIHRoZSBhcHBseSBmdW5jdGlvbi4qKgoKIyMjIFN1bW1hcnkgRnVuY3Rpb24KClRoZXJlIGlzIGFsc28gYSBzdW1tYXJ5IGZ1bmN0aW9uIHRoYXQgZ2l2ZXMgYSBudW1iZXIgb2Ygc3VtbWFyaWVzIG9uIGEgbnVtZXJpYyB2YXJpYWJsZSAob3IgZXZlbiB0aGUgd2hvbGUgZGF0YSBmcmFtZSEpIGluIGEgbmljZSB2ZWN0b3IgZm9ybWF0OgoKYGBge3J9CnN1bW1hcnkoYWlycXVhbGl0eSRPem9uZSkgICNub3RlIHdlIGRvbid0IG5lZWQgIm5hLnJtIiBoZXJlCmBgYAoKYGBge3J9CnN1bW1hcnkoYWlycXVhbGl0eSkKYGBgCgpOb3RpY2UgdGhhdCAiTW9udGgiIGFuZCAiRGF5IiBhcmUgY29kZWQgYXMgbnVtZXJpYyB2YXJpYWJsZXMgZXZlbiB0aG91Z2ggdGhleSBhcmUgY2xlYXJseSBjYXRlZ29yaWNhbC4gVGhpcyBjYW4gYmUgbWVuZGVkIGFzIGZvbGxvd3MsIGUuZy46CgpgYGB7cn0KYWlycXVhbGl0eSRNb250aCA9IGZhY3RvcihhaXJxdWFsaXR5JE1vbnRoKQpzdW1tYXJ5KGFpcnF1YWxpdHkpCmBgYGBgYApOb3RpY2UgaG93IHRoZSBkaXNwbGF5IGNoYW5nZXMgZm9yIHRoZSBmYWN0b3IgdmFyaWFibGVzLgoKIyMgR3JhcGhpY2FsIERpc3BsYXlzIG9mIERhdGEKCiMjIyBIaXN0b2dyYW1zCgpUaGUgc2ltcGxlc3QgZGlzcGxheSBmb3IgdGhlIHNoYXBlIG9mIGEgZGlzdHJpYnV0aW9uIG9mIGRhdGEgY2FuIGJlIGRvbmUgdXNpbmcgYSBoaXN0b2dyYW0tIGEgY291bnQgb2YgaG93IG1hbnkgb2JzZXJ2YXRpb25zIGZhbGwgd2l0aGluIHNwZWNpZmllZCBkaXZpc2lvbnMgKCJiaW5zIikgb2YgdGhlIHgtYXhpcy4KCmBgYHtyfQpoaXN0KGFpcnF1YWxpdHkkVGVtcCkKYGBgCgoKQSBzZW5zaWJsZSBudW1iZXIgb2YgY2xhc3NlcyAoYmlucykgaXMgdXN1YWxseSBjaG9zZW4gYnkgUiwgYnV0IGEgcmVjb21tZW5kYXRpb24gY2FuIGJlIGdpdmVuIHdpdGggdGhlIG5jbGFzcyAobnVtYmVyIG9mIGNsYXNzZXMpIG9yIGJyZWFrcyBhcmd1bWVudC4KCmBgYHtyfQpoaXN0KGFpcnF1YWxpdHkkVGVtcCwgYnJlYWtzID0gMjApCmBgYAoKCkJ5IGNob29zaW5nIGJyZWFrcyBhcyBhIHZlY3RvciByYXRoZXIgdGhhbiBhIG51bWJlciwgeW91IGNhbiBoYXZlIGZ1bGwgY29udHJvbCBvdmVyIHRoZSBpbnRlcnZhbCBkaXZpc2lvbnMuIEJ5IGRlZmF1bHQsIFIgcGxvdHMgdGhlIGZyZXF1ZW5jaWVzIGluIHRoZSBoaXN0b2dyYW0sIGlmIHlvdSB3b3VsZCByYXRoZXIgcGxvdCB0aGUgcmVsYXRpdmUgZnJlcXVlbmNpZXMsIHlvdSBuZWVkIHRvIHVzZSB0aGUgYXJndW1lbnQgcHJvYj1ULgoKYGBge3J9Cmhpc3QoYWlycXVhbGl0eSRUZW1wLCBwcm9iPVQpCmBgYAoKCiBUaGVyZSBhcmUgYSBMT1Qgb2Ygb3B0aW9ucyB0byBzcHJ1Y2UgdGhpcyB1cC4gSGVyZSBpcyBjb2RlIGZvciBhIG11Y2ggbmljZXIgaGlzdG9ncmFtCgpgYGB7cn0KaGlzdChhaXJxdWFsaXR5JFRlbXAscHJvYj1ULG1haW49IlRlbXBlcmF0dXJlIikKYGBgCgpgYGB7cn0KcG9pbnRzKGRlbnNpdHkoYWlycXVhbGl0eSRUZW1wKSx0eXBlPSJsIixjb2w9ImJsdWUiKQpydWcoYWlycXVhbGl0eSRUZW1wLGNvbD0icmVkIikKYGBgCgpJZiB3ZSB3YW50IHRvIGZpdCBhIG5vcm1hbCBjdXJ2ZSBvdmVyIHRoZSBkYXRhLCBpbnN0ZWFkIG9mIHRoZSBjb21tYW5kIGRlbnNpdHkoKSB3ZSBjYW4gdXNlIGRub3JtKCkgYW5kIGN1cnZlKCkgbGlrZSBzbzoKCmBgYHtyfQptIDwtIG1lYW4oYWlycXVhbGl0eSRUZW1wKTtzdGQ8LXNxcnQodmFyKGFpcnF1YWxpdHkkVGVtcCkpCgpoaXN0KGFpcnF1YWxpdHkkVGVtcCxwcm9iPVQsbWFpbj0iVGVtcGVyYXR1cmUiKQoKY3VydmUoZG5vcm0oeCwgbWVhbj1tLCBzZD1zdGQpLCBjb2w9ImRhcmtibHVlIiwgbHdkPTIsIGFkZD1UUlVFKQpgYGAKCioqTm90ZSA6IFlvdSBuZWVkIHRvIG1ha2Ugc3VyZSB0aGF0IHlvdSBoYXZlIHByb2I9VCBhcyBhbiBhcmd1bWVudCBpbiB5b3VyIGhpc3RvcmdyYW0gISoqCgpJZiB5b3UgdHlwZSBoZWxwKGhpc3QpIGludG8gdGhlIGNvbW1hbmQgbGluZSwgaXQgc2hvd3MgYWxsIHRoZSBwb3NzaWJsZSBwYXJhbWV0ZXJzIHlvdSBjYW4gYWRkIHRvIGEgc3RhbmRhcmQgaGlzdG9ncmFtLiBUaGVyZSBhcmUgYSBsb3Qgb2Ygb3B0aW9ucy4KCiMjIyBNb3JlIHBsb3RzCklmIHlvdSB3YW50IHR3byBvciBtb3JlIHBsb3RzIGluIHRoZSBzYW1lIHdpbmRvdywgeW91IGNhbiB1c2UgdGhlIGNvbW1hbmQKCmBwYXIobWZyb3c9Yygjcm93cywjY29sdW1ucykpYAoKV2l0aCB0aGUgYWlycXVhbGl0eSBkYXRhc2V0LCB3ZSBjYW4gZG8KCmBgYHtyfQpwYXIobWZyb3c9YygyLDIpKQpoaXN0KGFpcnF1YWxpdHkkVGVtcCwgcHJvYj1UKQpoaXN0KGFpcnF1YWxpdHkkT3pvbmUsIHByb2I9VCkKaGlzdChhaXJxdWFsaXR5JFdpbmQsIHByb2I9VCkKaGlzdChhaXJxdWFsaXR5JFNvbGFyLlIsIHByb2I9VCkKYGBgCgojIyMgUVEgUGxvdHMKClRvIHNlZSB3aGV0aGVyIGRhdGEgY2FuIGJlIGFzc3VtZWQgbm9ybWFsbHkgZGlzdHJpYnV0ZWQsIGl0IGlzIG9mdGVuIHVzZWZ1bCB0byBjcmVhdGUgYSBxcS1wbG90LiBJbiBhIHFxLXBsb3QsIHdlIHBsb3QgdGhlIGt0aCBzbWFsbGVzdCBvYnNlcnZhdGlvbiBhZ2FpbnN0IHRoZSBleHBlY3RlZCB2YWx1ZSBvZiB0aGUga3RoIHNtYWxsZXN0IG9ic2VydmF0aW9uIG91dCBvZiBuIGluIGEgc3RhbmRhcmQgbm9ybWFsIGRpc3RyaWJ1dGlvbi4KCldlIGV4cGVjdCB0byBvYnRhaW4gYSBzdHJhaWdodCBsaW5lIGlmIGRhdGEgY29tZSBmcm9tIGEgbm9ybWFsIGRpc3RyaWJ1dGlvbiB3aXRoIGFueSBtZWFuIGFuZCBzdGFuZGFyZCBkZXZpYXRpb24uCgpgYGB7cn0KcXFub3JtKGFpcnF1YWxpdHkkVGVtcCkKYGBgCgoKVGhlIG9ic2VydmVkIChlbXBpcmljYWwpIHF1YW50aWxlcyBhcmUgZHJhd24gYWxvbmcgdGhlIHZlcnRpY2FsIGF4aXMsIHdoaWxlIHRoZSB0aGVvcmV0aWNhbCBxdWFudGlsZXMgYXJlIGFsb25nIHRoZSBob3Jpem9udGFsIGF4aXMuIFdpdGggdGhpcyBjb252ZW50aW9uIHRoZSBkaXN0cmlidXRpb24gaXMgbm9ybWFsIGlmIHRoZSBzbG9wZSBmb2xsb3dzIGEgZGlhZ29uYWwgbGluZSwgY3VydmVzIHRvd2FyZHMgdGhlIGVuZCBpbmRpY2F0ZSBhIGhlYXZ5IHRhaWwuIFRoaXMgd2lsbCBjb21lIGluIGhhbmR5IHdoZW4gd2UgbW92ZSBvbiB0byBsaW5lYXIgcmVncmVzc2lvbi4KCgoKQWZ0ZXIgdGhlIHBsb3QgaGFzIGJlZW4gZ2VuZXJhdGVkLCB1c2UgdGhlIGZ1bmN0aW9uIGBxcWxpbmUoKWAgdG8gZml0IGEgbGluZSBnb2luZyB0aHJvdWdoIHRoZSBmaXJzdCBhbmQgdGhpcmQgcXVhcnRpbGUuIFRoaXMgY2FuIGJlIHVzZWQgdG8ganVkZ2UgdGhlIGdvb2RuZXNzLW9mLWZpdCBvZiB0aGUgUVEtcGxvdCB0byBhIHN0cmFpZ2h0IGxpbmUuCgoqKlVzZSBhIGhpc3RvZ3JhbSBhbmQgcXEtcGxvdCB0byBkZXRlcm1pbmUgd2hldGhlciB0aGUgT3pvbmUgbWVhc3VyZW1lbnRzIGluIHRoZSBhaXIgcXVhbGl0eSBkYXRhIGNhbiBiZSBjb25zaWRlcmVkIG5vcm1hbGx5IGRpc3RyaWJ1dGVkLioqCgojIyMgQm94IFBsb3RzCgpBICJib3hwbG90Iiwgb3IgImJveC1hbmQtd2hpc2tlcnMgcGxvdCIgaXMgYSBncmFwaGljYWwgc3VtbWFyeSBvZiBhIGRpc3RyaWJ1dGlvbjsgdGhlIGJveCBpbiB0aGUgbWlkZGxlIGluZGljYXRlcyAiaGluZ2VzIiAoY2xvc2UgdG8gdGhlIGZpcnN0IGFuZCB0aGlyZCBxdWFydGlsZXMpIGFuZCBtZWRpYW4uIFRoZSBsaW5lcyAoIndoaXNrZXJzIikgc2hvdyB0aGUgbGFyZ2VzdCBvciBzbWFsbGVzdCBvYnNlcnZhdGlvbiB0aGF0IGZhbGxzIHdpdGhpbiBhIGRpc3RhbmNlIG9mIDEuNSB0aW1lcyB0aGUgYm94IHNpemUgZnJvbSB0aGUgbmVhcmVzdCBoaW5nZS4gSWYgYW55IG9ic2VydmF0aW9ucyBmYWxsIGZhcnRoZXIgYXdheSwgdGhlIGFkZGl0aW9uYWwgcG9pbnRzIGFyZSBjb25zaWRlcmVkICJleHRyZW1lIiB2YWx1ZXMgYW5kIGFyZSBzaG93biBzZXBhcmF0ZWx5LiBBIGJveHBsb3QgY2FuIG9mdGVuIGdpdmUgYSBnb29kIGlkZWEgb2YgdGhlIGRhdGEgZGlzdHJpYnV0aW9uLCBhbmQgaXMgb2Z0ZW4gbW9yZSB1c2VmdWwgdG8gY29tcGFyZSBkaXN0cmlidXRpb25zIHNpZGUtYnktc2lkZSwgYXMgaXQgaXMgbW9yZSBjb21wYWN0IHRoYW4gYSBoaXN0b2dyYW0uIFdlIHdpbGwgc2VlIGFuIGV4YW1wbGUgc29vbi4KCmBgYHtyfQpib3hwbG90KGFpcnF1YWxpdHkkT3pvbmUpCmBgYAoKV2UgY2FuIHVzZSB0aGUgYm94cGxvdCBmdW5jdGlvbiB0byBjYWxjdWxhdGUgcXVpY2sgc3VtbWFyaWVzIGZvciBhbGwgdGhlIHZhcmlhYmxlcyBpbiBvdXIgZGF0YSBzZXTigJRieSBkZWZhdWx0LCBSIGNvbXB1dGVzIGJveHBsb3RzIGNvbHVtbiBieSBjb2x1bW4uIE5vdGljZSB0aGF0IG1pc3NpbmcgZGF0YSBjYXVzZXMgbm8gcHJvYmxlbXMgdG8gdGhlIGJveHBsb3QgZnVuY3Rpb24gKHNpbWlsYXIgdG8gc3VtbWFyeSkuCgpgYGB7cn0KYm94cGxvdChhaXJxdWFsaXR5WywxOjRdKQpgYGAKCkZpZ3VyZSBpcyBub3QgcmVhbGx5IG1lYW5pbmdmdWwgYXMgdGhlIHZhcmlhYmxlcyBtYXkgbm90IGJlIG9uIGNvbXBhcmFibGUgc2NhbGVzLiBUaGUgcmVhbCBwb3dlciBvZiBib3ggcGxvdHMgaXMgcmVhbGx5IHRvIGRvIGNvbXBhcmlzb25zIG9mIHZhcmlhYmxlcyBieSBzdWItZ3JvdXBpbmcuIEZvciBleGFtcGxlLCB3ZSBtYXkgYmUgaW50ZXJlc3RlZCBpbiBjb21wYXJpbmcgdGhlIGZsdWN0dWF0aW9ucyBpbiB0ZW1wZXJhdHVyZSBhY3Jvc3MgbW9udGhzLiBUbyBjcmVhdGUgYm94cGxvdHMgb2YgdGVtcGVyYXR1cmUgZGF0YSBncm91cGVkIGJ5IHRoZSBmYWN0b3IgIm1vbnRoIiwgd2UgdXNlIHRoZSBjb21tYW5kOgoKYGBge3J9CmJveHBsb3QoYWlycXVhbGl0eSRUZW1wIH4gYWlycXVhbGl0eSRNb250aCkKYGBgCgpXZSBjYW4gYWxzbyB3cml0ZSB0aGUgc2FtZSBjb21tYW5kIHVzaW5nIGEgc2xpZ2h0bHkgbW9yZSByZWFkYWJsZSBsYW5ndWFnZToKCmBgYHtyfQpib3hwbG90KFRlbXAgfiBNb250aCwgZGF0YSA9IGFpcnF1YWxpdHkpCmBgYAoKVGhlIHRpbGRlIHN5bWJvbCBgfmAgaW5kaWNhdGVzIHdoaWNoIGZhY3RvciB0byBncm91cCBieS4gV2Ugd2lsbCBjb21lIGJhY2sgdG8gbW9yZSBkaXNjdXNzaW9uIG9uIHBsb3R0aW5nIGdyb3VwZWQgZGF0YSBsYXRlciBvbi4KCiMjIyBTY2F0dGVyIFBsb3RzCgpPbmUgdmVyeSBjb21tb25seSB1c2VkIHRvb2wgaW4gZXhwbG9yYXRvcnkgYW5hbHlzaXMgb2YgbXVsdGl2YXJpYXRlIGRhdGEgaXMgdGhlIHNjYXR0ZXJwbG90LiBXZSB3aWxsIGxvb2sgYXQgdGhpcyBpbiBtb3JlIGRldGFpbCBsYXRlciB3aGVuIHdlIGRpc2N1c3MgcmVncmVzc2lvbiBhbmQgY29ycmVsYXRpb24uIFRoZSBSIGNvbW1hbmQgZm9yIGRyYXdpbmcgYSBzY2F0dGVycGxvdCBvZiB0d28gdmFyaWFibGVzIGlzIGEgc2ltcGxlIGNvbW1hbmQgb2YgdGhlIGZvcm0gInBsb3QoeCx5KS4iCgpgYGB7cn0KcGxvdChhaXJxdWFsaXR5JFRlbXAsIGFpcnF1YWxpdHkkT3pvbmUpICAgIyBIb3cgZG8gT3pvbmUgYW5kIHRlbXBlcmF0dXJlIG1lYXN1cmVtZW50cyByZWxhdGU/CmBgYAoKV2l0aCBtb3JlIHRoYW4gdHdvIHZhcmlhYmxlcywgdGhlIGBwYWlycygpYCBjb21tYW5kIGRyYXdzIGEgc2NhdHRlcnBsb3QgbWF0cml4LgoKVGhlIGRlZmF1bHQgcGxvdHRpbmcgc3ltYm9scyBpbiBSIGFyZSBub3QgYWx3YXlzIHByZXR0eSEgWW91IGNhbiBhY3R1YWxseSBjaGFuZ2UgdGhlIHBsb3R0aW5nIHN5bWJvbHMsIG9yIGNvbG9ycyB0byBzb21ldGhpbmcgbmljZXIuIEZvciBleGFtcGxlLCB0aGUgZm9sbG93aW5nIGNvbW1hbmQKCmBgYHtyfQpwbG90KGFpcnF1YWxpdHkkVGVtcCwgYWlycXVhbGl0eSRPem9uZSwgY29sPSJyZWQiLCBwY2ggPTE5KQpgYGAKCiwgd2hpY2ggcmVwZWF0cyB0aGUgc2NhdHRlcnBsb3QsIHRoaXMgdGltZSB3aXRoIHJlZCBmaWxsZWQgY2lyY2xlcyB0aGF0IGFyZSBuaWNlciB0byBsb29rIGF0LiAiY29sIiByZWZlcnMgdG8gdGhlIGNvbG9yIG9mIHN5bWJvbHMgcGxvdHRlZC4gVGhlIGZ1bGwgcmFuZ2Ugb2YgcG9pbnQgcGxvdHRpbmcgc3ltYm9scyB1c2VkIGluIFIgYXJlIGdpdmVuIGJ5ICJwY2giIGluIHRoZSByYW5nZSAxIHRvIDI1OyBzZWUgdGhlIGhlbHAgb24gInBvaW50cyIgdG8gc2VlIHdoYXQgZWFjaCBvZiB0aGVzZSByZXByZXNlbnQuCgoqKldyaXRlIHRoZSBmb2xsb3dpbmcgY29tbWFuZCBpbiBSIGFuZCBkZXNjcmliZSB3aGF0IHlvdSBzZWUgaW4gdGVybXMgb2YgcmVsYXRpb25zaGlwcyBiZXR3ZWVuIHRoZSB2YXJpYWJsZXM6IHBhaXJzKGFpcnF1YWxpdHlbLDE6NF0pKioKCgojIyMgU3RlbSBhbmQgTGVhZiBQbG90cwoKQSBuZWF0IHdheSB0byBzdW1tYXJpemUgZGF0YSB0aGF0IGNvdWxkIGp1c3QgYXMgZWFzaWx5IGJlIHB1dCBpbiBhIGhpc3RvZ3JhbSBpcyB0byB1c2UgYSBzdGVtLWFuZC1sZWFmIHBsb3QgKGNvbXBhcmUgdG8gYSBoaXN0b2dyYW0pOgoKYGBge3J9CnN0ZW0ocm5vcm0oNDAsMTAwKSkKYGBgCgpUaGUgZGVjaW1hbCBwb2ludCBpcyAxIGRpZ2l0KHMpIHRvIHRoZSByaWdodCBvZiB0aGUgfAoKTm90ZSB0aGF0IHRoZSBjb21tYW5kIHJub3JtKDQwLDEwMCkgdGhhdCBnZW5lcmF0ZWQgdGhlc2UgZGF0YSBpcyBhIHN0YW5kYXJkIFIgY29tbWFuZCB0aGF0IGdlbmVyYXRlcyA0MCByYW5kb20gbm9ybWFsIHZhcmlhYmxlcyB3aXRoIG1lYW4gMTAwIGFuZCB2YXJpYW5jZSAxIChieSBkZWZhdWx0KS4gRm9yIG1vcmUgaW5mb3JtYXRpb24sIHVzZSB0aGUgaGVscCBmdW5jdGlvbi4gVHlwZSA/cm5vcm0gdG8gc2VlIHRoZSBvcHRpb25zIGZvciB0aGlzIGNvbW1hbmQuCgojIyMgU3VtbWFyeSBTdGF0aXN0aWNzIGZvciBHcm91cHMKCldoZW4gZGVhbGluZyB3aXRoIGdyb3VwZWQgZGF0YSwgeW91IHdpbGwgb2Z0ZW4gd2FudCB0byBoYXZlIHZhcmlvdXMgc3VtbWFyeSBzdGF0aXN0aWNzIGNvbXB1dGVkIHdpdGhpbiBncm91cHM7IGZvciBleGFtcGxlLCBhIHRhYmxlIG9mIG1lYW5zIGFuZCBzdGFuZGFyZCBkZXZpYXRpb25zLiBUaGlzIGNhbiBiZSBkb25lIHVzaW5nIHRoZSB0YXBwbHkoKSBjb21tYW5kLiBGb3IgZXhhbXBsZSwgd2UgbWlnaHQgd2FudCB0byBjb21wdXRlIHRoZSBtZWFuIHRlbXBlcmF0dXJlcyBpbiBlYWNoIG1vbnRoOgoKYGBge3J9CnRhcHBseShhaXJxdWFsaXR5JFRlbXAsIGFpcnF1YWxpdHkkTW9udGgsIG1lYW4pCmBgYAoKSWYgdGhlcmUgYXJlIGFueSBtaXNzaW5nIHZhbHVlcywgdGhlc2UgY2FuIGJlIGV4Y2x1ZGVkIGlmIHdlIHNpbXBseSBhZGRpbmcgYW4gZXh0cmEgYXJndW1lbnQgbmEucm09VCB0byBgdGFwcGx5YC4KCioqQ29tcHV0ZSB0aGUgcmFuZ2UgYW5kIG1lYW4gb2YgT3pvbmUgbGV2ZWxzIGZvciBlYWNoIG1vbnRoLCB1c2luZyB0aGUgdGFwcGx5IGNvbW1hbmQuKioKCiMjIyBHcmFwaGljcyBmb3IgR3JvdXBlZCBEYXRhCgpXaXRoIGdyb3VwZWQgZGF0YSwgaXQgaXMgaW1wb3J0YW50IHRvIGJlIGFibGUgbm90IG9ubHkgdG8gY3JlYXRlIHBsb3RzIGZvciBlYWNoIGdyb3VwIGJ1dCBhbHNvIHRvIGNvbXBhcmUgdGhlIHBsb3RzIGJldHdlZW4gZ3JvdXBzLiBXZSBoYXZlIGFscmVhZHkgbG9va2VkIGF0IGV4YW1wbGVzIHdpdGggaGlzdG9ncmFtcyBhbmQgYm94cGxvdHMuIEFzIGEgZnVydGhlciBleGFtcGxlLCBsZXQgdXMgY29uc2lkZXIgYW5vdGhlciBkYXRhIHNldCBlc29waCBpbiBSLCByZWxhdGluZyB0byBhIGNhc2UtY29udHJvbCBzdHVkeSBvZiBlc29waGFnZWFsIGNhbmNlciBpbiBGcmFuY2UsIGNvbnRhaW5pbmcgcmVjb3JkcyBmb3IgODggYWdlL2FsY29ob2wvdG9iYWNjbyBjb21iaW5hdGlvbnMuIChMb29rIHVwIHRoZSBSIGhlbHAgb24gdGhpcyBkYXRhIHNldCB0byBmaW5kIG91dCBtb3JlIGFib3V0IHRoZSB2YXJpYWJsZXMuKSBUaGUgZmlyc3QgNSByb3dzIG9mIHRoZSBkYXRhIGFyZSBzaG93biBiZWxvdzoKCmBgYHtyfQplc29waFsxOjUsXQpgYGAKCldlIGNhbiBkcmF3IGEgYm94cGxvdCBvZiB0aGUgbnVtYmVyIG9mIGNhbmNlciBjYXNlcyBhY2NvcmRpbmcgdG8gZWFjaCBsZXZlbCBvZiBhbGNvaG9sIGNvbnN1bXB0aW9uIChhbGNncCk6CgpgYGB7cn0KYm94cGxvdChlc29waCRuY2FzZXMgfiBlc29waCRhbGNncCkKYGBgCgoKV2UgY291bGQgYWxzbyBlcXVpdmFsZW50bHkgd3JpdGU6CgpgYGB7cn0KYm94cGxvdChuY2FzZXMgfiBhbGNncCwgZGF0YSA9IGVzb3BoKQpgYGAKCgpOb3RhdGlvbiBvZiB0aGUgdHlwZSBgeSB+IHhgIGNhbiBiZSByZWFkIGFzICJ5IGRlc2NyaWJlZCB1c2luZyB4Ii4gVGhpcyBpcyBhbiBleGFtcGxlIG9mIGEgIm1vZGVsIGZvcm11bGEiLiBXZSB3aWxsIGVuY291bnRlciBtYW55IG1vcmUgZXhhbXBsZXMgb2YgbW9kZWwgZm9ybXVsYXMgbGF0ZXIgb24tIHN1Y2ggYXMgd2hlbiB3ZSB1c2UgUiBmb3IgcmVncmVzc2lvbiBhbmFseXNpcy4KCgoKSWYgdGhlIGRhdGEgc2V0IGlzIHNtYWxsLCBzb21ldGltZXMgYSBib3hwbG90IG1heSBub3QgYmUgdmVyeSBhY2N1cmF0ZSwgYXMgdGhlIHF1YXJ0aWxlcyBhcmUgbm90IHdlbGwgZXN0aW1hdGVkIGZyb20gdGhlIGRhdGEgYW5kIG1heSBnaXZlIGEgZmFsc2VseSBpbmZsYXRlZCBvciBkZWZsYXRlZCBmaWd1cmUuIEluIHRob3NlIGNhc2VzLCBwbG90dGluZyB0aGUgcmF3IGRhdGEgbWF5IGJlIG1vcmUgZGVzaXJhYmxlLiBUaGlzIGNhbiBiZSBkb25lIHVzaW5nIGEgc3RyaXAgY2hhcnQuIEJ5IGhhbmQsIHRoaXMgaXMgZXF1aXZhbGVudCB0byBhIGRvdCBkaWFncmFtIHdoZXJlIGV2ZXJ5IG51bWJlciBpcyBtYXJrZWQgd2l0aCBhIGRvdCBvbiBhIG51bWJlciBsaW5lLgoKKipXaGF0IGRvZXMgdGhlIGZvbGxvd2luZyBjb21tYW5kIGRvPzogc3RyaXBjaGFydChuY2FzZXMgfiBhZ2VncCkqKgoKKipEZXRhY2ggdGhlIGVzb3BoIGRhdGEgc2V0IGFuZCBhdHRhY2ggdGhlIGFpciBxdWFsaXR5IGRhdGEgc2V0LiBOZXh0LCBjcmVhdGUgdGhlIGZvbGxvd2luZyBwbG90cyBpbiBSLCB1c2luZyB0aGUgY29tbWFuZHMgeW91IGhhdmUgbGVhcm50IGFib3ZlOgogICAgRG8gYSBib3hwbG90IG9mIG96b25lIGxldmVscyBieSBtb250aCBhbmQgd2luZCBzcGVlZCBieSBtb250aC4KICAgIERvIGEgc3RyaXAgY2hhcnQgb2Ygb3pvbmUgbGV2ZWxzIGJ5IG1vbnRoLgoqKgo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("lab2.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

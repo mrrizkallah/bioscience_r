@@ -35,6 +35,7 @@ Popularity: <https://www.tiobe.com/tiobe-index/>
 * Rstudio4edu: https://github.com/dcossyleon/basic-course-website
 * Applied Statistics using R: https://github.com/daviddalpiaz/appliedstats/
 * Boston University Course: https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/R/R2_SummaryStats-Graphs/R2_SummaryStats-Graphs_print.html
+* Software Carpentry: https://github.com/swcarpentry/r-novice-inflammation and https://github.com/swcarpentry/r-novice-gapminder
 
 ## Getting Started
 To get started, you'll need to install two pieces of software:

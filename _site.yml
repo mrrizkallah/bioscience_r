@@ -8,18 +8,24 @@ navbar:
       href: index.html
     - text: "Lectures"
       menu:
-      - text: "Lecture 1"
-        href: lecture1.html
-      - text: "Lecture 2"
-        href: lecture2.html
-      - text: "Data summary"
+      - text: "Lecture 1: R programming"
+        href: r-prog.html
+      - text: "Lecture 2: Data summary"
         href: data-summary.html
-      - text: "Probability"
+      - text: "Lecture 2: Probability"
         href: prob-and-stat.html
+      - text: "Lecture 3: Functions"
+        href: func.Rmd
+      - text: "Lecture 3: Conditioning"
+        href: cond.Rmd
+      - text: "Lecture 3: Condition, functions and scripts"
+        href: r-prog-adv.Rmd
     - text: "Labs"
       menu:
-      - text: "Lab 1"
+      - text: "Lab 1: DNA exercise"
         href: lab1.html
+      - text: "Lab 2: Air quality"
+        href: lab2.html
 
   right:
     - icon: fa-github

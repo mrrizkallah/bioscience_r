@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Probability and statistics"
+title: "Lecture 2: Probability and statistics"
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +30,7 @@ The general naming structure of the relevant `R` functions is:
 * `qnorm` calculates the quantile at an input probability.
 * `rnorm` generates a random draw from a particular distribution.
 
-Note that `name` represents the name of the given distribution.
+Note that `norm` represents the name of the given distribution.
 
 For example, consider a random variable $X$ which is $N(\mu = 2, \sigma^2 = 25)$. (Note, we are parameterizing using the variance $\sigma^2$. `R` however uses the standard deviation.)
 
@@ -74,7 +74,7 @@ Where `*` can be `d`, `p`, `q`, and `r`. Each distribution will have its own set
 dbinom(x = 6, size = 10, prob = 0.75)
 ```
 
-Also note that, when using the `dname` functions with discrete distributions, they are the pmf of the distribution. For example, the above command is $P(Y = 6)$ if $Y \sim b(n = 10, p = 0.75)$. (The probability of flipping an unfair coin `10` times and seeing `6` heads, if the probability of heads is `0.75`.)
+Also note that, when using the `dnorm` functions with discrete distributions, they are the pmf of the distribution. For example, the above command is $P(Y = 6)$ if $Y \sim b(n = 10, p = 0.75)$. (The probability of flipping an unfair coin `10` times and seeing `6` heads, if the probability of heads is `0.75`.)
 
 ## Hypothesis Tests in `R`
 

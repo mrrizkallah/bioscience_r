@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Summary and visualization"
+title: "Lecture 2: Summary and visualization"
 ---
 
 ```{r setup, include=FALSE}
