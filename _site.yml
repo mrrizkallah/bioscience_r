@@ -18,8 +18,8 @@ navbar:
         href: func.html
       - text: "Lecture 3: Conditioning"
         href: cond.html
-      - text: "Lecture 3: Condition, functions and scripts"
-        href: r-prog-adv.html
+      - text: "Lecture 3: Chemical informatics"
+        href: chem.html
     - text: "Labs"
       menu:
       - text: "Lab 1: DNA exercise"

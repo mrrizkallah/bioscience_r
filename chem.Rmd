@@ -1,0 +1,105 @@
+---
+title: "Lecture 3: Chemical informatics primer"
+source: Rmd
+---
+
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+## Tutorial after this paper:
+* Chemoinformatic Analysis of Combinatorial Libraries, Drugs, Natural Products and Molecular Libraries Small Molecule Repository: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2686115/
+
+.. compared the properties of molecules found in four different chemical libraries.
+
+## Introduction:
+The authors did several types of analysis. First, they generated a bunch of different features or "descriptors" for each molecule. A descriptor can be any property of the molecule, from trivial stuff like **molecular weight and charge**. Then they did a **principal components analysis** on the molecules and then **scatterplotted** the molecules in each library versus the set of FDA-approved drugs. Results: most of the molecules in these libraries occupy a chemical space quite **distant** from the approved drugs... therefore, not therapeutically active.
+
+## Getting started
+R packages:`rcdk` and `rpubchem`.  `rJava` is needed for visualization.
+
+```{r, eval = FALSE}
+install.packages(c("rJava", "rcdk")) # huge, takes a few mins to download
+```
+```{r}
+library(rcdk) # docs at http://cran.r-project.org/web/packages/rcdk/rcdk.pdf, paper at http://www.jstatsoft.org/v18/i05/paper
+```
+
+## Create a molecule object
+Next I sought to manually create a Java object for a molecule from its `SMILES`.  SMILES is a systematic, unambiguous plain-text representation of molecular structure.  I found anle138b‘s SMILES in its `PubChem` entry.
+
+```{r}
+# parse.smiles accepts a vector of SMILES strings and returns a list of type AtomContainer,
+# containing items of type IAtomContainer
+# if you have just one molecule of interest, just grab the first item with [[1]]
+anle138b <- parse.smiles("C1OC2=C(O1)C=C(C=C2)C3=CC(=NN3)C4=CC(=CC=C4)Br")[[1]]
+```
+
+### Exercise: Parse acetaminophen
+Search for acetaminophen in PubChem, get the SMILES format: https://pubchem.ncbi.nlm.nih.gov/compound/acetaminophen
+Parse it in `rcdk`
+
+```{r}
+ac <- parse.smiles("CC(=O)NC1=CC=C(C=C1)O")[[1]]
+```
+
+## View/draw it
+The next thing I wanted to do is plot it. The `draw.molecule.2d `function draws it in a separate Java window:
+
+```{r, eval = FALSE}
+# draws it in a separate Java window
+view.molecule.2d(anle138b)
+```
+
+### Exercise: Draw acetaminophen
+
+<!-- That function is especially nice because if you pass it multiple molecules it can plot them all in a grid for comparison.  But for just one molecule I thought it would be nicer to plot directly in R, so adapting a bit of code from the rcdk docs I wrote this function:
+
+```{r}
+rcdkplot <- function(molecule,width = 500, height = 500) {
+    par(mar=c(0,0,0,0)) # set margins to zero since this isn't a real plot
+    temp1 = view.image.2d(molecule,width,height) # get Java representation into an image matrix. set number of pixels you want horiz and vertical
+    plot(NA,NA,xlim=c(1,10),ylim=c(1,10),xaxt='n',yaxt='n',xlab='',ylab='') # create an empty plot
+    rasterImage(temp1,1,1,10,10) # boundaries of raster: xmin, ymin, xmax, ymax. here i set them equal to plot boundaries
+}
+rcdkplot(anle138b)
+``` -->
+
+## Get descriptors
+The next thing I learned about `rcdk` is how to get these descriptors of molecules.  rcdk comes with access to a whole list of descriptors which you can get like so:
+
+```{r}
+descriptors <- get.desc.names(type = "all")
+```
+This gave me a `vector` of character strings, the names of fifty descriptors you can calculate on your molecule. I figured a good one to try out would be the number of strikes a molecule has against it as a drug according to the [Rule of Five](https://en.wikipedia.org/wiki/Lipinski's_rule_of_five):
+
+```{r}
+# get one descriptor, for instance Rule of Five descriptors http://en.wikipedia.org/wiki/Lipinski's_rule_of_five
+eval.desc(anle138b, "org.openscience.cdk.qsar.descriptors.molecular.RuleOfFiveDescriptor")
+```
+
+### Exercise: Other properties
+Try to get some properties of a molecule using rcdk’s base functions, like `get.total.charge`, `get.volume`, `get.exact.mass`
+
+```{r}
+get.exact.mass(ac)
+```
+
+## Another way of getting drugs
+Load it as `sdf`
+
+```{r}
+# Download the chemical structure in SDF format from PubChem (Diclofenac)
+dic <- load.molecules("data/Structure2D_CID_3033.sdf")
+```
+
+## Evaluate the new target drug
+```{r}
+sapply(descriptors, eval.desc, molecules = anle138b)
+```
+
+
+```{r knit_exit, include=F, echo=F}
+knit_exit()
+```

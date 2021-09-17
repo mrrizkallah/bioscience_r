@@ -33,11 +33,17 @@ Popularity: <https://www.tiobe.com/tiobe-index/>
 ## Resources and Disclaimer
 The material is largely based on:
 * Introduction to R for the Université Côte d'Azur: https://github.com/mattiaguerini/slides-intro-to-R
+
 * Applied Statistics for Bioinformatics using R by Wim P. Krijnen, 2009: https://faculty.ucr.edu/~tgirke/Documents/R_BioCond/documentation/Krijnen-IntroBioInfStatistics.pdf
+
 * Rstudio4edu: https://github.com/dcossyleon/basic-course-website
+
 * Applied Statistics using R: https://github.com/daviddalpiaz/appliedstats/
+
 * Boston University Course: https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/R/R2_SummaryStats-Graphs/R2_SummaryStats-Graphs_print.html
+
 * Software Carpentry: https://github.com/swcarpentry/r-novice-inflammation and https://github.com/swcarpentry/r-novice-gapminder
+
 * A Quick Intro to Chemical Informatics in R: https://www.cureffi.org/2013/09/23/a-quick-intro-to-chemical-informatics-in-r/
 
 ## Getting Started

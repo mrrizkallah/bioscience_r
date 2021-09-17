@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Basic statistics and visualizations"
+title: "Lab 2: DNA exercise"
 ---
 
 ```{r setup, include=FALSE}
