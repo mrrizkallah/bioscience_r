@@ -30,8 +30,6 @@ navbar:
   right:
     - icon: fa-github
       href: https://mrrizkallah.github.io/bioscience_r/
-    - icon: fa-university
-      href: https://en.wikipedia.org/wiki/Cooking_school
 
 output:
   html_document:

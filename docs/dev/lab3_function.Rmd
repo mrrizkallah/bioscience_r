@@ -1,0 +1,76 @@
+
+> ## Nesting Function Calls
+>
+> This example showed the output of `fahrenheit_to_celsius` assigned to `temp_C`, which
+> is then passed to `celsius_to_kelvin` to get the final result. It is also possible
+> to perform this calculation in one line of code, by "nesting" one function call
+> inside another, like so:
+>
+> ```{r chained-example}
+> # freezing point of water in Fahrenheit
+> celsius_to_kelvin(fahrenheit_to_celsius(32.0))
+> ```
+> Here, we call `fahrenheit_to_celsius` to convert `32.0` from Fahrenheit to
+> Celsius, and immediately pass the value returned from `fahrenheit_to_celsius`
+> to `celsius_to_kelvin` to convert from Celsius to Kelvin. Our conversion
+> from Fahrenheit to Kelvin is done, all in one go!
+>
+> This is convenient, but you should be careful not to nest too many function
+> calls at once - it can become confusing and difficult to read!
+
+> ## Create a Function
+>
+> In the last lesson, we learned to **c**ombine elements into a vector using the `c` function,
+> e.g. `x <- c("A", "B", "C")` creates a vector `x` with three elements.
+> Furthermore, we can extend that vector again using `c`, e.g. `y <- c(x, "D")` creates a vector `y` with four elements.
+> Write a function called `highlight` that takes two vectors as arguments, called
+> `content` and `wrapper`, and returns a new vector that has the wrapper vector
+> at the beginning and end of the content:
+>
+> ```{r, echo=-1}
+> highlight <- function(content, wrapper) {
+>    answer <- c(wrapper, content, wrapper)
+>    return(answer)
+> }
+> best_practice <- c("Write", "programs", "for", "people", "not", "computers")
+> asterisk <- "***"  # R interprets a variable with a single value as a vector
+>                    # with one element.
+> highlight(best_practice, asterisk)
+> ```
+>
+> > ## Solution
+> > ~~~
+> > highlight <- function(content, wrapper) {
+> >   answer <- c(wrapper, content, wrapper)
+> >   return(answer)
+> > }
+> > ~~~
+> > {: .language-r}
+> {: .solution}
+>
+> If the variable `v` refers to a vector, then `v[1]` is the vector's first element and `v[length(v)]` is its last (the function `length` returns the number of elements in a vector).
+> Write a function called `edges` that returns a vector made up of just the first and last elements of its input:
+>
+> ```{r, echo=-1}
+> edges <- function(v) {
+>    first <- v[1]
+>    last <- v[length(v)]
+>    answer <- c(first, last)
+>    return(answer)
+> }
+> dry_principle <- c("Don't", "repeat", "yourself", "or", "others")
+> edges(dry_principle)
+> ```
+>
+> > ## Solution
+> > ~~~
+> > edges <- function(v) {
+> >    first <- v[1]
+> >    last <- v[length(v)]
+> >    answer <- c(first, last)
+> >    return(answer)
+> > }
+> > ~~~
+> > {: .language-r}
+> {: .solution}
+{: .challenge}
