@@ -11,7 +11,7 @@
 
 
 
-<title>cond.utf8</title>
+<title>Lecture 3: Making choices</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,6 +30,98 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -410,11 +502,215 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Lecture 3: Making choices</h1>
 
 </div>
 
 
-
+<!-- ```{r, include = FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("04-cond-")
+``` -->
+<p>Our previous lessons have shown us how to manipulate data, define our own functions, and repeat things. However, the programs we have written so far always do the same things, regardless of what data they’re given. We want programs to make choices based on the values they are manipulating.</p>
+<div id="saving-plots-to-a-file" class="section level3">
+<h3>Saving Plots to a File</h3>
+<p>So far, we have built a function <code>analyze</code> to plot summary statistics of the inflammation data:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>analyze &lt;-<span class="st"> </span><span class="cf">function</span>(filename) {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="co"># Plots the average, min, and max inflammation over time.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="co"># Input is character string of a csv file.</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> filename, <span class="dt">header =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  avg_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, mean)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">plot</span>(avg_day_inflammation)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  max_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, max)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="kw">plot</span>(max_day_inflammation)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  min_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, min)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="kw">plot</span>(min_day_inflammation)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>}</span></code></pre></div>
+<p>And also built the function <code>analyze_all</code> to automate the processing of each data file:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>analyze_all &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">folder =</span> <span class="st">&quot;data&quot;</span>, pattern) {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="co"># Runs the function analyze for each file in the given folder</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="co"># that contains the given pattern.</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  filenames &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> folder, <span class="dt">pattern =</span> pattern, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="cf">for</span> (f <span class="cf">in</span> filenames) {</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="kw">analyze</span>(f)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  }</span>
+<span id="cb2-8"><a href="#cb2-8"></a>}</span></code></pre></div>
+<p>While these are useful in an interactive R session, what if we want to send our results to our collaborators? Since we currently have 12 data sets, running <code>analyze_all</code> creates 36 plots. Saving each of these individually would be tedious and error-prone. And in the likely situation that we want to change how the data is processed or the look of the plots, we would have to once again save all 36 before sharing the updated results with our collaborators.</p>
+<p>Here’s how we can save all three plots of the first inflammation data set in a pdf file:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">pdf</span>(<span class="st">&quot;inflammation-01.pdf&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">analyze</span>(<span class="st">&quot;data/inflammation-01.csv&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+<p>The function <code>pdf</code> redirects all the plots generated by R into a pdf file, which in this case we have named “inflammation-01.pdf”. After we are done generating the plots to be saved in the pdf file, we stop R from redirecting plots with the function <code>dev.off</code>.</p>
+<blockquote>
+<h2 id="overwriting-plots">Overwriting Plots</h2>
+<p>If you run <code>pdf</code> multiple times without running <code>dev.off</code>, you will save plots to the most recently opened file. However, you won’t be able to open the previous pdf files because the connections were not closed. In order to get out of this situation, you’ll need to run <code>dev.off</code> until all the pdf connections are closed. You can check your current status using the function <code>dev.cur</code>. If it says “pdf”, all your plots are being saved in the last pdf specified. If it says “null device” or “RStudioGD”, the plots will be visualized normally. {: .callout}</p>
+</blockquote>
+<p>We can update the <code>analyze</code> function so that it always saves the plots in a pdf. But that would make it more difficult to interactively test out new changes. It would be ideal if <code>analyze</code> would either save or not save the plots based on its input.</p>
+</div>
+<div id="conditionals" class="section level3">
+<h3>Conditionals</h3>
+<p>In order to update our function to decide between saving or not, we need to write code that automatically decides between multiple options. The computer can make these deicisons through logical comparisons.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>num &lt;-<span class="st"> </span><span class="dv">37</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>num <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>As 37 is not greater than 100, this returns a <code>FALSE</code> object. And as you likely guessed, the opposite of <code>FALSE</code> is <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>num <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>We pair these logical comparison tools with what R calls a <a href="%7B%7B%20page.root%20%7D%7D/reference.html#conditional-statement">conditional statement</a>, and it looks like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>num &lt;-<span class="st"> </span><span class="dv">37</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="cf">if</span> (num <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>) {</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="kw">print</span>(<span class="st">&quot;greater&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>} <span class="cf">else</span> {</span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="kw">print</span>(<span class="st">&quot;not greater&quot;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>}</span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">print</span>(<span class="st">&quot;done&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;not greater&quot;
+## [1] &quot;done&quot;</code></pre>
+<p>The second line of this code uses an <code>if</code> statement to tell R that we want to make a choice. If the following test is <code>TRUE</code>, the body of the <code>if</code> (i.e., the lines in the curly braces underneath it) are executed. If the test is <code>FALSE</code>, the body of the <code>else</code> is executed instead. Only one or the other is ever executed:</p>
+<p><img src="../fig/python-flowchart-conditional.svg" alt="Executing a Conditional" /></p>
+<p>In the example above, the test <code>num &gt; 100</code> returns the value <code>FALSE</code>, which is why the code inside the <code>if</code> block was skipped and the code inside the <code>else</code> statement was run instead.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>num <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>And as you likely guessed, the opposite of <code>FALSE</code> is <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>num <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Conditional statements don’t have to include an <code>else</code>. If there isn’t one, R simply does nothing if the test is false:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>num &lt;-<span class="st"> </span><span class="dv">53</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="cf">if</span> (num <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>) {</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="kw">print</span>(<span class="st">&quot;num is greater than 100&quot;</span>)</span>
+<span id="cb14-4"><a href="#cb14-4"></a>}</span></code></pre></div>
+<p>We can also chain several tests together when there are more than two options. This makes it simple to write a function that returns the sign of a number:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>sign &lt;-<span class="st"> </span><span class="cf">function</span>(num) {</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="cf">if</span> (num <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb15-3"><a href="#cb15-3"></a>    <span class="kw">return</span>(<span class="dv">1</span>)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>  } <span class="cf">else</span> <span class="cf">if</span> (num <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="kw">return</span>(<span class="dv">0</span>)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  } <span class="cf">else</span> {</span>
+<span id="cb15-7"><a href="#cb15-7"></a>    <span class="kw">return</span>(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>  }</span>
+<span id="cb15-9"><a href="#cb15-9"></a>}</span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="kw">sign</span>(<span class="op">-</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] -1</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">sign</span>(<span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">sign</span>(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Note that when combining <code>else</code> and <code>if</code> in an <code>else if</code> statement, the <code>if</code> portion still requires a direct input condition. This is never the case for the <code>else</code> statement alone, which is only executed if all other conditions go unsatisfied. Note that the test for equality uses two equal signs, <code>==</code>.</p>
+<blockquote>
+<h2 id="other-comparisons">Other Comparisons</h2>
+<p>Other tests include greater than or equal to (<code>&gt;=</code>), less than or equal to (<code>&lt;=</code>), and not equal to (<code>!=</code>). {: .callout}</p>
+</blockquote>
+<p>We can also combine tests. Two ampersands, <code>&amp;&amp;</code>, symbolize “and”. Two vertical bars, <code>||</code>, symbolize “or”. <code>&amp;&amp;</code> is only true if both parts are true:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="cf">if</span> (<span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span><span class="dv">-1</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb21-2"><a href="#cb21-2"></a>    <span class="kw">print</span>(<span class="st">&quot;both parts are true&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a>} <span class="cf">else</span> {</span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="kw">print</span>(<span class="st">&quot;at least one part is not true&quot;</span>)</span>
+<span id="cb21-5"><a href="#cb21-5"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;at least one part is not true&quot;</code></pre>
+<p>while <code>||</code> is true if either part is true:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="cf">if</span> (<span class="dv">1</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span><span class="dv">-1</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb23-2"><a href="#cb23-2"></a>    <span class="kw">print</span>(<span class="st">&quot;at least one part is true&quot;</span>)</span>
+<span id="cb23-3"><a href="#cb23-3"></a>} <span class="cf">else</span> {</span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="kw">print</span>(<span class="st">&quot;neither part is true&quot;</span>)</span>
+<span id="cb23-5"><a href="#cb23-5"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;at least one part is true&quot;</code></pre>
+<p>In this case, “either” means “either or both”, not “either one or the other but not both”.</p>
+</div>
+<div id="saving-automatically-generated-figures" class="section level3">
+<h3>Saving Automatically Generated Figures</h3>
+<p>Now that we know how to have R make decisions based on input values, let’s update <code>analyze</code>:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>analyze &lt;-<span class="st"> </span><span class="cf">function</span>(filename, <span class="dt">output =</span> <span class="ot">NULL</span>) {</span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="co"># Plots the average, min, and max inflammation over time.</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="co"># Input:</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="co">#    filename: character string of a csv file</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="co">#    output: character string of pdf file for saving</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(output)) {</span>
+<span id="cb25-7"><a href="#cb25-7"></a>    <span class="kw">pdf</span>(output)</span>
+<span id="cb25-8"><a href="#cb25-8"></a>  }</span>
+<span id="cb25-9"><a href="#cb25-9"></a>  dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> filename, <span class="dt">header =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb25-10"><a href="#cb25-10"></a>  avg_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, mean)</span>
+<span id="cb25-11"><a href="#cb25-11"></a>  <span class="kw">plot</span>(avg_day_inflammation)</span>
+<span id="cb25-12"><a href="#cb25-12"></a>  max_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, max)</span>
+<span id="cb25-13"><a href="#cb25-13"></a>  <span class="kw">plot</span>(max_day_inflammation)</span>
+<span id="cb25-14"><a href="#cb25-14"></a>  min_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, min)</span>
+<span id="cb25-15"><a href="#cb25-15"></a>  <span class="kw">plot</span>(min_day_inflammation)</span>
+<span id="cb25-16"><a href="#cb25-16"></a>  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(output)) {</span>
+<span id="cb25-17"><a href="#cb25-17"></a>    <span class="kw">dev.off</span>()</span>
+<span id="cb25-18"><a href="#cb25-18"></a>  }</span>
+<span id="cb25-19"><a href="#cb25-19"></a>}</span></code></pre></div>
+<p>We added an argument, <code>output</code>, that by default is set to <code>NULL</code>. An <code>if</code> statement at the beginning checks the argument <code>output</code> to decide whether or not to save the plots to a pdf. Let’s break it down. The function <code>is.null</code> returns <code>TRUE</code> if a variable is <code>NULL</code> and <code>FALSE</code> otherwise. The exclamation mark, <code>!</code>, stands for “not”. Therefore the line in the <code>if</code> block is only executed if <code>output</code> is “not null”.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>output &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="kw">is.null</span>(output)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="op">!</span><span class="kw">is.null</span>(output)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Now we can use <code>analyze</code> interactively, as before,</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">analyze</span>(<span class="st">&quot;data/inflammation-01.csv&quot;</span>)</span></code></pre></div>
+<p><img src="cond_files/figure-html/inflammation-01-1.png" width="672" /><img src="cond_files/figure-html/inflammation-01-2.png" width="672" /><img src="cond_files/figure-html/inflammation-01-3.png" width="672" /></p>
+<p>but also use it to save plots,</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">analyze</span>(<span class="st">&quot;data/inflammation-01.csv&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;inflammation-01.pdf&quot;</span>)</span></code></pre></div>
+<p>Before going further, we will create a directory <code>results</code> for saving our plots. It is <a href="http://swcarpentry.github.io/good-enough-practices-in-scientific-computing/">good practice</a> in data analysis projects to save all output to a directory separate from the data and analysis code. You can create this directory using the shell command <a href="%7B%7B%20site.swc_pages%20%7D%7D/shell-novice/03-create/">mkdir</a>, or the R function <code>dir.create()</code></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">dir.create</span>(<span class="st">&quot;results&quot;</span>)</span></code></pre></div>
+<p>Now run <code>analyze</code> and save the plot in the <code>results</code> directory,</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">analyze</span>(<span class="st">&quot;data/inflammation-01.csv&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;results/inflammation-01.pdf&quot;</span>)</span></code></pre></div>
+<p>This now works well when we want to process one data file at a time, but how can we specify the output file in <code>analyze_all</code>? We need to do two things:</p>
+<ol style="list-style-type: decimal">
+<li>Substitute the filename ending “csv” with “pdf”.</li>
+<li>Save the plot to the <code>results</code> directory.</li>
+</ol>
+<p>To change the extension to “pdf”, we will use the function <code>sub</code>,</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>f &lt;-<span class="st"> &quot;inflammation-01.csv&quot;</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="kw">sub</span>(<span class="st">&quot;csv&quot;</span>, <span class="st">&quot;pdf&quot;</span>, f)</span></code></pre></div>
+<pre><code>## [1] &quot;inflammation-01.pdf&quot;</code></pre>
+<p>To add the “results” directory to the filename use the function <code>file.path</code>,</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">file.path</span>(<span class="st">&quot;results&quot;</span>, <span class="kw">sub</span>(<span class="st">&quot;csv&quot;</span>, <span class="st">&quot;pdf&quot;</span>, f))</span></code></pre></div>
+<pre><code>## [1] &quot;results/inflammation-01.pdf&quot;</code></pre>
+<p>Now let’s update <code>analyze_all</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>analyze_all &lt;-<span class="st"> </span><span class="cf">function</span>(pattern) {</span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="co"># Directory name containing the data</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a>  data_dir &lt;-<span class="st"> &quot;data&quot;</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a>  <span class="co"># Directory name for results</span></span>
+<span id="cb38-5"><a href="#cb38-5"></a>  results_dir &lt;-<span class="st"> &quot;results&quot;</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a>  <span class="co"># Runs the function analyze for each file in the current working directory</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a>  <span class="co"># that contains the given pattern.</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a>  filenames &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> data_dir, <span class="dt">pattern =</span> pattern)</span>
+<span id="cb38-9"><a href="#cb38-9"></a>  <span class="cf">for</span> (f <span class="cf">in</span> filenames) {</span>
+<span id="cb38-10"><a href="#cb38-10"></a>    pdf_name &lt;-<span class="st"> </span><span class="kw">file.path</span>(results_dir, <span class="kw">sub</span>(<span class="st">&quot;csv&quot;</span>, <span class="st">&quot;pdf&quot;</span>, f))</span>
+<span id="cb38-11"><a href="#cb38-11"></a>    <span class="kw">analyze</span>(<span class="kw">file.path</span>(data_dir, f), <span class="dt">output =</span> pdf_name)</span>
+<span id="cb38-12"><a href="#cb38-12"></a>  }</span>
+<span id="cb38-13"><a href="#cb38-13"></a>}</span></code></pre></div>
+<p>Now we can save all of the results with just one line of code:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">analyze_all</span>(<span class="st">&quot;inflammation.*csv&quot;</span>)</span></code></pre></div>
+<p>Now if we need to make any changes to our analysis, we can edit the <code>analyze</code> function and quickly regenerate all the figures with <code>analyze_all</code>.</p>
+<blockquote>
+<h2 id="changing-the-behavior-of-the-plot-command">Changing the Behavior of the Plot Command</h2>
+<p>One of your collaborators asks if you can recreate the figures with lines instead of points. Find the relevant argument to <code>plot</code> by reading the documentation (<code>?plot</code>), update <code>analyze</code>, and then recreate all the figures with <code>analyze_all</code>.</p>
+<blockquote>
+<h2 id="solution">Solution</h2>
+<pre><code>analyze &lt;- function(filename, output = NULL) {
+  # Plots the average, min, and max inflammation over time.
+  # Input:
+  #    filename: character string of a csv file
+  #    output: character string of pdf file for saving
+  if (!is.null(output)) {
+    pdf(output)
+  }
+  dat &lt;- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation &lt;- apply(dat, 2, mean)
+  plot(avg_day_inflammation, type = &quot;l&quot;)
+  max_day_inflammation &lt;- apply(dat, 2, max)
+  plot(max_day_inflammation, type = &quot;l&quot;)
+  min_day_inflammation &lt;- apply(dat, 2, min)
+  plot(min_day_inflammation, type = &quot;l&quot;)
+  if (!is.null(output)) {
+    dev.off()
+  }
+}</code></pre>
+<p>{: .language-r} {: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+</div>
 
 <div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjdHVyZSAzOiBNYWtpbmcgY2hvaWNlcyIKcXVlc3Rpb25zOgotICJIb3cgZG8gSSBtYWtlIGNob2ljZXMgdXNpbmcgYGlmYCBhbmQgYGVsc2VgIHN0YXRlbWVudHM/IgotICJIb3cgZG8gSSBjb21wYXJlIHZhbHVlcz8iCi0gIkhvdyBkbyBJIHNhdmUgbXkgcGxvdHMgdG8gYSBQREYgZmlsZT8iCm9iamVjdGl2ZXM6Ci0gIlNhdmUgcGxvdChzKSBpbiBhIFBERiBmaWxlLiIKLSAiV3JpdGUgY29uZGl0aW9uYWwgc3RhdGVtZW50cyB3aXRoIGBpZmAgYW5kIGBlbHNlYC4iCi0gIkNvcnJlY3RseSBldmFsdWF0ZSBleHByZXNzaW9ucyBjb250YWluaW5nIGAmJmAgKCdhbmQnKSBhbmQgYHx8YCAoJ29yJykuIgprZXlwb2ludHM6Ci0gIlNhdmUgYSBwbG90IGluIGEgcGRmIGZpbGUgdXNpbmcgYHBkZihcIm5hbWUucGRmXCIpYCBhbmQgc3RvcCB3cml0aW5nIHRvIHRoZSBwZGYgZmlsZSB3aXRoIGBkZXYub2ZmKClgLiIKLSAiVXNlIGBpZiAoY29uZGl0aW9uKWAgdG8gc3RhcnQgYSBjb25kaXRpb25hbCBzdGF0ZW1lbnQsIGBlbHNlIGlmIChjb25kaXRpb24pYCB0byBwcm92aWRlIGFkZGl0aW9uYWwgdGVzdHMsIGFuZCBgZWxzZWAgdG8gcHJvdmlkZSBhIGRlZmF1bHQuIgotICJUaGUgYm9kaWVzIG9mIGNvbmRpdGlvbmFsIHN0YXRlbWVudHMgbXVzdCBiZSBzdXJyb3VuZGVkIGJ5IGN1cmx5IGJyYWNlcyBgeyB9YC4iCi0gIlVzZSBgPT1gIHRvIHRlc3QgZm9yIGVxdWFsaXR5LiIKLSAiYFggJiYgWWAgaXMgb25seSB0cnVlIGlmIGJvdGggWCBhbmQgWSBhcmUgdHJ1ZS4iCi0gImBYIHx8IFlgIGlzIHRydWUgaWYgZWl0aGVyIFggb3IgWSwgb3IgYm90aCwgYXJlIHRydWUuIgpzb3VyY2U6IFJtZAotLS0KCjwhLS0gYGBge3IsIGluY2x1ZGUgPSBGQUxTRX0Kc291cmNlKCIuLi9iaW4vY2h1bmstb3B0aW9ucy5SIikKa25pdHJfZmlnX3BhdGgoIjA0LWNvbmQtIikKYGBgIC0tPgoKCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQpsaWJyYXJ5KGtuaXRyKQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmBgYAoKT3VyIHByZXZpb3VzIGxlc3NvbnMgaGF2ZSBzaG93biB1cyBob3cgdG8gbWFuaXB1bGF0ZSBkYXRhLCBkZWZpbmUgb3VyIG93biBmdW5jdGlvbnMsIGFuZCByZXBlYXQgdGhpbmdzLgpIb3dldmVyLCB0aGUgcHJvZ3JhbXMgd2UgaGF2ZSB3cml0dGVuIHNvIGZhciBhbHdheXMgZG8gdGhlIHNhbWUgdGhpbmdzLCByZWdhcmRsZXNzIG9mIHdoYXQgZGF0YSB0aGV5J3JlIGdpdmVuLgpXZSB3YW50IHByb2dyYW1zIHRvIG1ha2UgY2hvaWNlcyBiYXNlZCBvbiB0aGUgdmFsdWVzIHRoZXkgYXJlIG1hbmlwdWxhdGluZy4KCiMjIyBTYXZpbmcgUGxvdHMgdG8gYSBGaWxlCgpTbyBmYXIsIHdlIGhhdmUgYnVpbHQgYSBmdW5jdGlvbiBgYW5hbHl6ZWAgdG8gcGxvdCBzdW1tYXJ5IHN0YXRpc3RpY3Mgb2YgdGhlIGluZmxhbW1hdGlvbiBkYXRhOgoKYGBge3IgYW5hbHl6ZX0KYW5hbHl6ZSA8LSBmdW5jdGlvbihmaWxlbmFtZSkgewogICMgUGxvdHMgdGhlIGF2ZXJhZ2UsIG1pbiwgYW5kIG1heCBpbmZsYW1tYXRpb24gb3ZlciB0aW1lLgogICMgSW5wdXQgaXMgY2hhcmFjdGVyIHN0cmluZyBvZiBhIGNzdiBmaWxlLgogIGRhdCA8LSByZWFkLmNzdihmaWxlID0gZmlsZW5hbWUsIGhlYWRlciA9IEZBTFNFKQogIGF2Z19kYXlfaW5mbGFtbWF0aW9uIDwtIGFwcGx5KGRhdCwgMiwgbWVhbikKICBwbG90KGF2Z19kYXlfaW5mbGFtbWF0aW9uKQogIG1heF9kYXlfaW5mbGFtbWF0aW9uIDwtIGFwcGx5KGRhdCwgMiwgbWF4KQogIHBsb3QobWF4X2RheV9pbmZsYW1tYXRpb24pCiAgbWluX2RheV9pbmZsYW1tYXRpb24gPC0gYXBwbHkoZGF0LCAyLCBtaW4pCiAgcGxvdChtaW5fZGF5X2luZmxhbW1hdGlvbikKfQpgYGAKCkFuZCBhbHNvIGJ1aWx0IHRoZSBmdW5jdGlvbiBgYW5hbHl6ZV9hbGxgIHRvIGF1dG9tYXRlIHRoZSBwcm9jZXNzaW5nIG9mIGVhY2ggZGF0YSBmaWxlOgoKYGBge3IgYW5hbHl6ZV9hbGx9CmFuYWx5emVfYWxsIDwtIGZ1bmN0aW9uKGZvbGRlciA9ICJkYXRhIiwgcGF0dGVybikgewogICMgUnVucyB0aGUgZnVuY3Rpb24gYW5hbHl6ZSBmb3IgZWFjaCBmaWxlIGluIHRoZSBnaXZlbiBmb2xkZXIKICAjIHRoYXQgY29udGFpbnMgdGhlIGdpdmVuIHBhdHRlcm4uCiAgZmlsZW5hbWVzIDwtIGxpc3QuZmlsZXMocGF0aCA9IGZvbGRlciwgcGF0dGVybiA9IHBhdHRlcm4sIGZ1bGwubmFtZXMgPSBUUlVFKQogIGZvciAoZiBpbiBmaWxlbmFtZXMpIHsKICAgIGFuYWx5emUoZikKICB9Cn0KYGBgCgpXaGlsZSB0aGVzZSBhcmUgdXNlZnVsIGluIGFuIGludGVyYWN0aXZlIFIgc2Vzc2lvbiwgd2hhdCBpZiB3ZSB3YW50IHRvIHNlbmQgb3VyIHJlc3VsdHMgdG8gb3VyIGNvbGxhYm9yYXRvcnM/ClNpbmNlIHdlIGN1cnJlbnRseSBoYXZlIDEyIGRhdGEgc2V0cywgcnVubmluZyBgYW5hbHl6ZV9hbGxgIGNyZWF0ZXMgMzYgcGxvdHMuClNhdmluZyBlYWNoIG9mIHRoZXNlIGluZGl2aWR1YWxseSB3b3VsZCBiZSB0ZWRpb3VzIGFuZCBlcnJvci1wcm9uZS4KQW5kIGluIHRoZSBsaWtlbHkgc2l0dWF0aW9uIHRoYXQgd2Ugd2FudCB0byBjaGFuZ2UgaG93IHRoZSBkYXRhIGlzIHByb2Nlc3NlZCBvciB0aGUgbG9vayBvZiB0aGUgcGxvdHMsIHdlIHdvdWxkIGhhdmUgdG8gb25jZSBhZ2FpbiBzYXZlIGFsbCAzNiBiZWZvcmUgc2hhcmluZyB0aGUgdXBkYXRlZCByZXN1bHRzIHdpdGggb3VyIGNvbGxhYm9yYXRvcnMuCgpIZXJlJ3MgaG93IHdlIGNhbiBzYXZlIGFsbCB0aHJlZSBwbG90cyBvZiB0aGUgZmlyc3QgaW5mbGFtbWF0aW9uIGRhdGEgc2V0IGluIGEgcGRmIGZpbGU6CgpgYGB7ciwgcmVzdWx0cz0naGlkZSd9CnBkZigiaW5mbGFtbWF0aW9uLTAxLnBkZiIpCmFuYWx5emUoImRhdGEvaW5mbGFtbWF0aW9uLTAxLmNzdiIpCmRldi5vZmYoKQpgYGAKClRoZSBmdW5jdGlvbiBgcGRmYCByZWRpcmVjdHMgYWxsIHRoZSBwbG90cyBnZW5lcmF0ZWQgYnkgUiBpbnRvIGEgcGRmIGZpbGUsIHdoaWNoIGluIHRoaXMgY2FzZSB3ZSBoYXZlIG5hbWVkICJpbmZsYW1tYXRpb24tMDEucGRmIi4KQWZ0ZXIgd2UgYXJlIGRvbmUgZ2VuZXJhdGluZyB0aGUgcGxvdHMgdG8gYmUgc2F2ZWQgaW4gdGhlIHBkZiBmaWxlLCB3ZSBzdG9wIFIgZnJvbSByZWRpcmVjdGluZyBwbG90cyB3aXRoIHRoZSBmdW5jdGlvbiBgZGV2Lm9mZmAuCgo+ICMjIE92ZXJ3cml0aW5nIFBsb3RzCj4KPiBJZiB5b3UgcnVuIGBwZGZgIG11bHRpcGxlIHRpbWVzIHdpdGhvdXQgcnVubmluZyBgZGV2Lm9mZmAsIHlvdSB3aWxsIHNhdmUgcGxvdHMgdG8gdGhlIG1vc3QgcmVjZW50bHkgb3BlbmVkIGZpbGUuCj4gSG93ZXZlciwgeW91IHdvbid0IGJlIGFibGUgdG8gb3BlbiB0aGUgcHJldmlvdXMgcGRmIGZpbGVzIGJlY2F1c2UgdGhlIGNvbm5lY3Rpb25zIHdlcmUgbm90IGNsb3NlZC4KPiBJbiBvcmRlciB0byBnZXQgb3V0IG9mIHRoaXMgc2l0dWF0aW9uLCB5b3UnbGwgbmVlZCB0byBydW4gYGRldi5vZmZgIHVudGlsIGFsbCB0aGUgcGRmIGNvbm5lY3Rpb25zIGFyZSBjbG9zZWQuCj4gWW91IGNhbiBjaGVjayB5b3VyIGN1cnJlbnQgc3RhdHVzIHVzaW5nIHRoZSBmdW5jdGlvbiBgZGV2LmN1cmAuCj4gSWYgaXQgc2F5cyAicGRmIiwgYWxsIHlvdXIgcGxvdHMgYXJlIGJlaW5nIHNhdmVkIGluIHRoZSBsYXN0IHBkZiBzcGVjaWZpZWQuCj4gSWYgaXQgc2F5cyAibnVsbCBkZXZpY2UiIG9yICJSU3R1ZGlvR0QiLCB0aGUgcGxvdHMgd2lsbCBiZSB2aXN1YWxpemVkIG5vcm1hbGx5Lgp7OiAuY2FsbG91dH0KCldlIGNhbiB1cGRhdGUgdGhlIGBhbmFseXplYCBmdW5jdGlvbiBzbyB0aGF0IGl0IGFsd2F5cyBzYXZlcyB0aGUgcGxvdHMgaW4gYSBwZGYuCkJ1dCB0aGF0IHdvdWxkIG1ha2UgaXQgbW9yZSBkaWZmaWN1bHQgdG8gaW50ZXJhY3RpdmVseSB0ZXN0IG91dCBuZXcgY2hhbmdlcy4KSXQgd291bGQgYmUgaWRlYWwgaWYgYGFuYWx5emVgIHdvdWxkIGVpdGhlciBzYXZlIG9yIG5vdCBzYXZlIHRoZSBwbG90cyBiYXNlZCBvbiBpdHMgaW5wdXQuCgojIyMgQ29uZGl0aW9uYWxzCgpJbiBvcmRlciB0byB1cGRhdGUgb3VyIGZ1bmN0aW9uIHRvIGRlY2lkZSBiZXR3ZWVuIHNhdmluZyBvciBub3QsIHdlIG5lZWQgdG8gd3JpdGUgY29kZSB0aGF0IGF1dG9tYXRpY2FsbHkgZGVjaWRlcyBiZXR3ZWVuIG11bHRpcGxlIG9wdGlvbnMuIFRoZSBjb21wdXRlciBjYW4gbWFrZSB0aGVzZSBkZWljaXNvbnMgdGhyb3VnaCBsb2dpY2FsIGNvbXBhcmlzb25zLgoKYGBge3J9Cm51bSA8LSAzNwpudW0gPiAxMDAKYGBgCgpBcyAzNyBpcyBub3QgZ3JlYXRlciB0aGFuIDEwMCwgdGhpcyByZXR1cm5zIGEgYEZBTFNFYCBvYmplY3QuIEFuZCBhcyB5b3UgbGlrZWx5IGd1ZXNzZWQsIHRoZSBvcHBvc2l0ZSBvZiBgRkFMU0VgIGlzIGBUUlVFYC4KCmBgYHtyfQpudW0gPCAxMDAKYGBgCgpXZSBwYWlyIHRoZXNlIGxvZ2ljYWwgY29tcGFyaXNvbiB0b29scyB3aXRoIHdoYXQgUiBjYWxscyBhIFtjb25kaXRpb25hbCBzdGF0ZW1lbnRdKHt7IHBhZ2Uucm9vdCB9fS9yZWZlcmVuY2UuaHRtbCNjb25kaXRpb25hbC1zdGF0ZW1lbnQpLCBhbmQgaXQgbG9va3MgbGlrZSB0aGlzOgoKYGBge3IsIHJlc3VsdHM9J2hvbGQnfQpudW0gPC0gMzcKaWYgKG51bSA+IDEwMCkgewogIHByaW50KCJncmVhdGVyIikKfSBlbHNlIHsKICBwcmludCgibm90IGdyZWF0ZXIiKQp9CnByaW50KCJkb25lIikKYGBgCgpUaGUgc2Vjb25kIGxpbmUgb2YgdGhpcyBjb2RlIHVzZXMgYW4gYGlmYCBzdGF0ZW1lbnQgdG8gdGVsbCBSIHRoYXQgd2Ugd2FudCB0byBtYWtlIGEgY2hvaWNlLgpJZiB0aGUgZm9sbG93aW5nIHRlc3QgaXMgYFRSVUVgLCB0aGUgYm9keSBvZiB0aGUgYGlmYCAoaS5lLiwgdGhlIGxpbmVzIGluIHRoZSBjdXJseSBicmFjZXMgdW5kZXJuZWF0aCBpdCkgYXJlIGV4ZWN1dGVkLgpJZiB0aGUgdGVzdCBpcyBgRkFMU0VgLCB0aGUgYm9keSBvZiB0aGUgYGVsc2VgIGlzIGV4ZWN1dGVkIGluc3RlYWQuCk9ubHkgb25lIG9yIHRoZSBvdGhlciBpcyBldmVyIGV4ZWN1dGVkOgoKPGltZyBzcmM9Ii4uL2ZpZy9weXRob24tZmxvd2NoYXJ0LWNvbmRpdGlvbmFsLnN2ZyIgYWx0PSJFeGVjdXRpbmcgYSBDb25kaXRpb25hbCIgLz4KCkluIHRoZSBleGFtcGxlIGFib3ZlLCB0aGUgdGVzdCBgbnVtID4gMTAwYCByZXR1cm5zIHRoZSB2YWx1ZSBgRkFMU0VgLCB3aGljaCBpcyB3aHkgdGhlIGNvZGUgaW5zaWRlIHRoZSBgaWZgIGJsb2NrIHdhcyBza2lwcGVkIGFuZCB0aGUgY29kZSBpbnNpZGUgdGhlIGBlbHNlYCBzdGF0ZW1lbnQgd2FzIHJ1biBpbnN0ZWFkLgoKYGBge3J9Cm51bSA+IDEwMApgYGAKCkFuZCBhcyB5b3UgbGlrZWx5IGd1ZXNzZWQsIHRoZSBvcHBvc2l0ZSBvZiBgRkFMU0VgIGlzIGBUUlVFYC4KCmBgYHtyfQpudW0gPCAxMDAKYGBgCgpDb25kaXRpb25hbCBzdGF0ZW1lbnRzIGRvbid0IGhhdmUgdG8gaW5jbHVkZSBhbiBgZWxzZWAuCklmIHRoZXJlIGlzbid0IG9uZSwgUiBzaW1wbHkgZG9lcyBub3RoaW5nIGlmIHRoZSB0ZXN0IGlzIGZhbHNlOgoKYGBge3J9Cm51bSA8LSA1MwppZiAobnVtID4gMTAwKSB7CiAgcHJpbnQoIm51bSBpcyBncmVhdGVyIHRoYW4gMTAwIikKfQpgYGAKCldlIGNhbiBhbHNvIGNoYWluIHNldmVyYWwgdGVzdHMgdG9nZXRoZXIgd2hlbiB0aGVyZSBhcmUgbW9yZSB0aGFuIHR3byBvcHRpb25zLgpUaGlzIG1ha2VzIGl0IHNpbXBsZSB0byB3cml0ZSBhIGZ1bmN0aW9uIHRoYXQgcmV0dXJucyB0aGUgc2lnbiBvZiBhIG51bWJlcjoKCmBgYHtyfQpzaWduIDwtIGZ1bmN0aW9uKG51bSkgewogIGlmIChudW0gPiAwKSB7CiAgICByZXR1cm4oMSkKICB9IGVsc2UgaWYgKG51bSA9PSAwKSB7CiAgICByZXR1cm4oMCkKICB9IGVsc2UgewogICAgcmV0dXJuKC0xKQogIH0KfQoKc2lnbigtMykKc2lnbigwKQpzaWduKDIvMykKYGBgCgpOb3RlIHRoYXQgd2hlbiBjb21iaW5pbmcgYGVsc2VgIGFuZCBgaWZgIGluIGFuIGBlbHNlIGlmYCBzdGF0ZW1lbnQsIHRoZSBgaWZgIHBvcnRpb24gc3RpbGwgcmVxdWlyZXMgYSBkaXJlY3QgaW5wdXQgY29uZGl0aW9uLiAgVGhpcyBpcyBuZXZlciB0aGUgY2FzZSBmb3IgdGhlIGBlbHNlYCBzdGF0ZW1lbnQgYWxvbmUsIHdoaWNoIGlzIG9ubHkgZXhlY3V0ZWQgaWYgYWxsIG90aGVyIGNvbmRpdGlvbnMgZ28gdW5zYXRpc2ZpZWQuCk5vdGUgdGhhdCB0aGUgdGVzdCBmb3IgZXF1YWxpdHkgdXNlcyB0d28gZXF1YWwgc2lnbnMsIGA9PWAuCgo+ICMjIE90aGVyIENvbXBhcmlzb25zCj4KPiBPdGhlciB0ZXN0cyBpbmNsdWRlIGdyZWF0ZXIgdGhhbiBvciBlcXVhbCB0byAoYD49YCksIGxlc3MgdGhhbiBvciBlcXVhbCB0bwo+IChgPD1gKSwgYW5kIG5vdCBlcXVhbCB0byAoYCE9YCkuCns6IC5jYWxsb3V0fQoKV2UgY2FuIGFsc28gY29tYmluZSB0ZXN0cy4KVHdvIGFtcGVyc2FuZHMsIGAmJmAsIHN5bWJvbGl6ZSAiYW5kIi4KVHdvIHZlcnRpY2FsIGJhcnMsIGB8fGAsIHN5bWJvbGl6ZSAib3IiLgpgJiZgIGlzIG9ubHkgdHJ1ZSBpZiBib3RoIHBhcnRzIGFyZSB0cnVlOgoKYGBge3J9CmlmICgxID4gMCAmJiAtMSA+IDApIHsKICAgIHByaW50KCJib3RoIHBhcnRzIGFyZSB0cnVlIikKfSBlbHNlIHsKICBwcmludCgiYXQgbGVhc3Qgb25lIHBhcnQgaXMgbm90IHRydWUiKQp9CmBgYAoKd2hpbGUgYHx8YCBpcyB0cnVlIGlmIGVpdGhlciBwYXJ0IGlzIHRydWU6CgpgYGB7cn0KaWYgKDEgPiAwIHx8IC0xID4gMCkgewogICAgcHJpbnQoImF0IGxlYXN0IG9uZSBwYXJ0IGlzIHRydWUiKQp9IGVsc2UgewogIHByaW50KCJuZWl0aGVyIHBhcnQgaXMgdHJ1ZSIpCn0KYGBgCgpJbiB0aGlzIGNhc2UsICJlaXRoZXIiIG1lYW5zICJlaXRoZXIgb3IgYm90aCIsIG5vdCAiZWl0aGVyIG9uZSBvciB0aGUgb3RoZXIgYnV0IG5vdCBib3RoIi4KCiMjIyBTYXZpbmcgQXV0b21hdGljYWxseSBHZW5lcmF0ZWQgRmlndXJlcwoKTm93IHRoYXQgd2Uga25vdyBob3cgdG8gaGF2ZSBSIG1ha2UgZGVjaXNpb25zIGJhc2VkIG9uIGlucHV0IHZhbHVlcywKbGV0J3MgdXBkYXRlIGBhbmFseXplYDoKCmBgYHtyIGFuYWx5emUtc2F2ZX0KYW5hbHl6ZSA8LSBmdW5jdGlvbihmaWxlbmFtZSwgb3V0cHV0ID0gTlVMTCkgewogICMgUGxvdHMgdGhlIGF2ZXJhZ2UsIG1pbiwgYW5kIG1heCBpbmZsYW1tYXRpb24gb3ZlciB0aW1lLgogICMgSW5wdXQ6CiAgIyAgICBmaWxlbmFtZTogY2hhcmFjdGVyIHN0cmluZyBvZiBhIGNzdiBmaWxlCiAgIyAgICBvdXRwdXQ6IGNoYXJhY3RlciBzdHJpbmcgb2YgcGRmIGZpbGUgZm9yIHNhdmluZwogIGlmICghaXMubnVsbChvdXRwdXQpKSB7CiAgICBwZGYob3V0cHV0KQogIH0KICBkYXQgPC0gcmVhZC5jc3YoZmlsZSA9IGZpbGVuYW1lLCBoZWFkZXIgPSBGQUxTRSkKICBhdmdfZGF5X2luZmxhbW1hdGlvbiA8LSBhcHBseShkYXQsIDIsIG1lYW4pCiAgcGxvdChhdmdfZGF5X2luZmxhbW1hdGlvbikKICBtYXhfZGF5X2luZmxhbW1hdGlvbiA8LSBhcHBseShkYXQsIDIsIG1heCkKICBwbG90KG1heF9kYXlfaW5mbGFtbWF0aW9uKQogIG1pbl9kYXlfaW5mbGFtbWF0aW9uIDwtIGFwcGx5KGRhdCwgMiwgbWluKQogIHBsb3QobWluX2RheV9pbmZsYW1tYXRpb24pCiAgaWYgKCFpcy5udWxsKG91dHB1dCkpIHsKICAgIGRldi5vZmYoKQogIH0KfQpgYGAKCldlIGFkZGVkIGFuIGFyZ3VtZW50LCBgb3V0cHV0YCwgdGhhdCBieSBkZWZhdWx0IGlzIHNldCB0byBgTlVMTGAuCkFuIGBpZmAgc3RhdGVtZW50IGF0IHRoZSBiZWdpbm5pbmcgY2hlY2tzIHRoZSBhcmd1bWVudCBgb3V0cHV0YCB0byBkZWNpZGUgd2hldGhlciBvciBub3QgdG8gc2F2ZSB0aGUgcGxvdHMgdG8gYSBwZGYuCkxldCdzIGJyZWFrIGl0IGRvd24uClRoZSBmdW5jdGlvbiBgaXMubnVsbGAgcmV0dXJucyBgVFJVRWAgaWYgYSB2YXJpYWJsZSBpcyBgTlVMTGAgYW5kIGBGQUxTRWAgb3RoZXJ3aXNlLgpUaGUgZXhjbGFtYXRpb24gbWFyaywgYCFgLCBzdGFuZHMgZm9yICJub3QiLgpUaGVyZWZvcmUgdGhlIGxpbmUgaW4gdGhlIGBpZmAgYmxvY2sgaXMgb25seSBleGVjdXRlZCBpZiBgb3V0cHV0YCBpcyAibm90IG51bGwiLgoKYGBge3J9Cm91dHB1dCA8LSBOVUxMCmlzLm51bGwob3V0cHV0KQohaXMubnVsbChvdXRwdXQpCmBgYAoKTm93IHdlIGNhbiB1c2UgYGFuYWx5emVgIGludGVyYWN0aXZlbHksIGFzIGJlZm9yZSwKCmBgYHtyIGluZmxhbW1hdGlvbi0wMX0KYW5hbHl6ZSgiZGF0YS9pbmZsYW1tYXRpb24tMDEuY3N2IikKYGBgCgpidXQgYWxzbyB1c2UgaXQgdG8gc2F2ZSBwbG90cywKCmBgYHtyIHJlc3VsdHM9J2hpZGUnfQphbmFseXplKCJkYXRhL2luZmxhbW1hdGlvbi0wMS5jc3YiLCBvdXRwdXQgPSAiaW5mbGFtbWF0aW9uLTAxLnBkZiIpCmBgYAoKQmVmb3JlIGdvaW5nIGZ1cnRoZXIsIHdlIHdpbGwgY3JlYXRlIGEgZGlyZWN0b3J5IGByZXN1bHRzYCBmb3Igc2F2aW5nIG91ciBwbG90cy4KSXQgaXMgW2dvb2QgcHJhY3RpY2VdKGh0dHA6Ly9zd2NhcnBlbnRyeS5naXRodWIuaW8vZ29vZC1lbm91Z2gtcHJhY3RpY2VzLWluLXNjaWVudGlmaWMtY29tcHV0aW5nLykgaW4gZGF0YSBhbmFseXNpcyBwcm9qZWN0cyB0byBzYXZlIGFsbCBvdXRwdXQgdG8gYSBkaXJlY3Rvcnkgc2VwYXJhdGUgZnJvbSB0aGUgZGF0YSBhbmQgYW5hbHlzaXMgY29kZS4KWW91IGNhbiBjcmVhdGUgdGhpcyBkaXJlY3RvcnkgdXNpbmcgdGhlIHNoZWxsIGNvbW1hbmQgW21rZGlyXSh7eyBzaXRlLnN3Y19wYWdlcyB9fS9zaGVsbC1ub3ZpY2UvMDMtY3JlYXRlLyksIG9yIHRoZSBSIGZ1bmN0aW9uIGBkaXIuY3JlYXRlKClgCmBgYHtyIHdhcm5pbmc9RkFMU0V9CmRpci5jcmVhdGUoInJlc3VsdHMiKQpgYGAKCk5vdyBydW4gYGFuYWx5emVgIGFuZCBzYXZlIHRoZSBwbG90IGluIHRoZSBgcmVzdWx0c2AgZGlyZWN0b3J5LApgYGB7ciByZXN1bHRzPSdoaWRlJ30KYW5hbHl6ZSgiZGF0YS9pbmZsYW1tYXRpb24tMDEuY3N2Iiwgb3V0cHV0ID0gInJlc3VsdHMvaW5mbGFtbWF0aW9uLTAxLnBkZiIpCmBgYAoKVGhpcyBub3cgd29ya3Mgd2VsbCB3aGVuIHdlIHdhbnQgdG8gcHJvY2VzcyBvbmUgZGF0YSBmaWxlIGF0IGEgdGltZSwgYnV0IGhvdyBjYW4gd2Ugc3BlY2lmeSB0aGUgb3V0cHV0IGZpbGUgaW4gYGFuYWx5emVfYWxsYD8KV2UgbmVlZCB0byBkbyB0d28gdGhpbmdzOgoKMS4gU3Vic3RpdHV0ZSB0aGUgZmlsZW5hbWUgZW5kaW5nICJjc3YiIHdpdGggInBkZiIuCjIuIFNhdmUgdGhlIHBsb3QgdG8gdGhlIGByZXN1bHRzYCBkaXJlY3RvcnkuCgpUbyBjaGFuZ2UgdGhlIGV4dGVuc2lvbiB0byAicGRmIiwgd2Ugd2lsbCB1c2UgdGhlIGZ1bmN0aW9uIGBzdWJgLApgYGB7cn0KZiA8LSAiaW5mbGFtbWF0aW9uLTAxLmNzdiIKc3ViKCJjc3YiLCAicGRmIiwgZikKYGBgClRvIGFkZCB0aGUgInJlc3VsdHMiIGRpcmVjdG9yeSB0byB0aGUgZmlsZW5hbWUgdXNlIHRoZSBmdW5jdGlvbiBgZmlsZS5wYXRoYCwKYGBge3J9CmZpbGUucGF0aCgicmVzdWx0cyIsIHN1YigiY3N2IiwgInBkZiIsIGYpKQpgYGAKCgpOb3cgbGV0J3MgdXBkYXRlIGBhbmFseXplX2FsbGA6CgpgYGB7ciBhbmFseXplX2FsbC1zYXZlfQphbmFseXplX2FsbCA8LSBmdW5jdGlvbihwYXR0ZXJuKSB7CiAgIyBEaXJlY3RvcnkgbmFtZSBjb250YWluaW5nIHRoZSBkYXRhCiAgZGF0YV9kaXIgPC0gImRhdGEiCiAgIyBEaXJlY3RvcnkgbmFtZSBmb3IgcmVzdWx0cwogIHJlc3VsdHNfZGlyIDwtICJyZXN1bHRzIgogICMgUnVucyB0aGUgZnVuY3Rpb24gYW5hbHl6ZSBmb3IgZWFjaCBmaWxlIGluIHRoZSBjdXJyZW50IHdvcmtpbmcgZGlyZWN0b3J5CiAgIyB0aGF0IGNvbnRhaW5zIHRoZSBnaXZlbiBwYXR0ZXJuLgogIGZpbGVuYW1lcyA8LSBsaXN0LmZpbGVzKHBhdGggPSBkYXRhX2RpciwgcGF0dGVybiA9IHBhdHRlcm4pCiAgZm9yIChmIGluIGZpbGVuYW1lcykgewogICAgcGRmX25hbWUgPC0gZmlsZS5wYXRoKHJlc3VsdHNfZGlyLCBzdWIoImNzdiIsICJwZGYiLCBmKSkKICAgIGFuYWx5emUoZmlsZS5wYXRoKGRhdGFfZGlyLCBmKSwgb3V0cHV0ID0gcGRmX25hbWUpCiAgfQp9CmBgYAoKTm93IHdlIGNhbiBzYXZlIGFsbCBvZiB0aGUgcmVzdWx0cyB3aXRoIGp1c3Qgb25lIGxpbmUgb2YgY29kZToKCmBgYHtyfQphbmFseXplX2FsbCgiaW5mbGFtbWF0aW9uLipjc3YiKQpgYGAKCk5vdyBpZiB3ZSBuZWVkIHRvIG1ha2UgYW55IGNoYW5nZXMgdG8gb3VyIGFuYWx5c2lzLCB3ZSBjYW4gZWRpdCB0aGUgYGFuYWx5emVgIGZ1bmN0aW9uIGFuZCBxdWlja2x5IHJlZ2VuZXJhdGUgYWxsIHRoZSBmaWd1cmVzIHdpdGggYGFuYWx5emVfYWxsYC4KCj4gIyMgQ2hhbmdpbmcgdGhlIEJlaGF2aW9yIG9mIHRoZSBQbG90IENvbW1hbmQKPgo+IE9uZSBvZiB5b3VyIGNvbGxhYm9yYXRvcnMgYXNrcyBpZiB5b3UgY2FuIHJlY3JlYXRlIHRoZSBmaWd1cmVzIHdpdGggbGluZXMgaW5zdGVhZCBvZiBwb2ludHMuCj4gRmluZCB0aGUgcmVsZXZhbnQgYXJndW1lbnQgdG8gYHBsb3RgIGJ5IHJlYWRpbmcgdGhlIGRvY3VtZW50YXRpb24gKGA/cGxvdGApLAo+IHVwZGF0ZSBgYW5hbHl6ZWAsIGFuZCB0aGVuIHJlY3JlYXRlIGFsbCB0aGUgZmlndXJlcyB3aXRoIGBhbmFseXplX2FsbGAuCj4KPiA+ICMjIFNvbHV0aW9uCj4gPiB+fn4KPiA+IGFuYWx5emUgPC0gZnVuY3Rpb24oZmlsZW5hbWUsIG91dHB1dCA9IE5VTEwpIHsKPiA+ICAgIyBQbG90cyB0aGUgYXZlcmFnZSwgbWluLCBhbmQgbWF4IGluZmxhbW1hdGlvbiBvdmVyIHRpbWUuCj4gPiAgICMgSW5wdXQ6Cj4gPiAgICMgICAgZmlsZW5hbWU6IGNoYXJhY3RlciBzdHJpbmcgb2YgYSBjc3YgZmlsZQo+ID4gICAjICAgIG91dHB1dDogY2hhcmFjdGVyIHN0cmluZyBvZiBwZGYgZmlsZSBmb3Igc2F2aW5nCj4gPiAgIGlmICghaXMubnVsbChvdXRwdXQpKSB7Cj4gPiAgICAgcGRmKG91dHB1dCkKPiA+ICAgfQo+ID4gICBkYXQgPC0gcmVhZC5jc3YoZmlsZSA9IGZpbGVuYW1lLCBoZWFkZXIgPSBGQUxTRSkKPiA+ICAgYXZnX2RheV9pbmZsYW1tYXRpb24gPC0gYXBwbHkoZGF0LCAyLCBtZWFuKQo+ID4gICBwbG90KGF2Z19kYXlfaW5mbGFtbWF0aW9uLCB0eXBlID0gImwiKQo+ID4gICBtYXhfZGF5X2luZmxhbW1hdGlvbiA8LSBhcHBseShkYXQsIDIsIG1heCkKPiA+ICAgcGxvdChtYXhfZGF5X2luZmxhbW1hdGlvbiwgdHlwZSA9ICJsIikKPiA+ICAgbWluX2RheV9pbmZsYW1tYXRpb24gPC0gYXBwbHkoZGF0LCAyLCBtaW4pCj4gPiAgIHBsb3QobWluX2RheV9pbmZsYW1tYXRpb24sIHR5cGUgPSAibCIpCj4gPiAgIGlmICghaXMubnVsbChvdXRwdXQpKSB7Cj4gPiAgICAgZGV2Lm9mZigpCj4gPiAgIH0KPiA+IH0KPiA+IH5+fgo+ID4gezogLmxhbmd1YWdlLXJ9Cj4gezogLnNvbHV0aW9ufQp7OiAuY2hhbGxlbmdlfQoKYGBge3Iga25pdF9leGl0LCBpbmNsdWRlPUYsIGVjaG89Rn0Ka25pdF9leGl0KCkKYGBgCg==</div>
 
