@@ -15,11 +15,11 @@ navbar:
       - text: "Lecture 2: Probability"
         href: prob-and-stat.html
       - text: "Lecture 3: Functions"
-        href: func.Rmd
+        href: func.html
       - text: "Lecture 3: Conditioning"
-        href: cond.Rmd
+        href: cond.html
       - text: "Lecture 3: Condition, functions and scripts"
-        href: r-prog-adv.Rmd
+        href: r-prog-adv.html
     - text: "Labs"
       menu:
       - text: "Lab 1: DNA exercise"
