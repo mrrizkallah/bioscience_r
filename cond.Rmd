@@ -110,6 +110,7 @@ Note that the test for equality uses two equal signs, `==`.
 
 ## Other Comparisons
 Other tests include:
+
 * greater than or equal to (`>=`),
 
 * less than or equal to(`<=`), and
@@ -117,6 +118,7 @@ Other tests include:
 * not equal to (`!=`).
 
 We can also combine tests:
+
 * two ampersands, `&&`, symbolize "and",
 
 * two vertical bars, `||`, symbolize "or",

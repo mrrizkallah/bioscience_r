@@ -8,13 +8,23 @@ source: Rmd
 library(knitr)
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
-## Tutorial after this paper:
-* Chemoinformatic Analysis of Combinatorial Libraries, Drugs, Natural Products and Molecular Libraries Small Molecule Repository: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2686115/
+
+## Introduction:
+
+Tutorial inspured by this paper: Chemoinformatic Analysis of Combinatorial Libraries, Drugs, Natural Products and Molecular Libraries Small Molecule Repository: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2686115/
 
 .. compared the properties of molecules found in four different chemical libraries.
 
-## Introduction:
 The authors did several types of analysis. First, they generated a bunch of different features or "descriptors" for each molecule. A descriptor can be any property of the molecule, from trivial stuff like **molecular weight and charge**. Then they did a **principal components analysis** on the molecules and then **scatterplotted** the molecules in each library versus the set of FDA-approved drugs. Results: most of the molecules in these libraries occupy a chemical space quite **distant** from the approved drugs... therefore, not therapeutically active.
+
+## Important databases:
+* PubChem
+
+* DrugBank
+
+* ChemBank
+
+* ChEMBL
 
 ## Getting started
 R packages:`rcdk` and `rpubchem`.  `rJava` is needed for visualization.
