@@ -1,0 +1,626 @@
+---
+title: "Lecture 3: ChemmineR"
+---
+
+
+```{r style, echo = FALSE, results = 'asis'}
+options(width=100, max.print=1000)
+knitr::opts_chunk$set(
+    eval=as.logical(Sys.getenv("KNITR_EVAL", "TRUE")),
+    cache=as.logical(Sys.getenv("KNITR_CACHE", "TRUE")))
+```
+
+```{r setup, echo=FALSE, messages=FALSE, warnings=FALSE}
+suppressPackageStartupMessages({
+    library(ChemmineR)
+    library(fmcsR)
+    library(ggplot2)
+	 #library(ChemmineOB)
+})
+```
+
+Note: the most recent version of this tutorial can be found <a href="https://htmlpreview.github.io/?https://github.com/girke-lab/ChemmineR/blob/master/vignettes/ChemmineR.html">here</a> and a short overview slide show [here](http://faculty.ucr.edu/~tgirke/HTML_Presentations/Manuals/Workshop_Dec_5_8_2014/Rcheminfo/Cheminfo.pdf).
+
+
+`ChemmineR` is a cheminformatics package for analyzing
+drug-like small molecule data in R. Its latest version contains
+functions for efficient processing of large numbers of small molecules,
+physicochemical/structural property predictions, structural similarity
+searching, classification and clustering of compound libraries with a
+wide spectrum of algorithms.
+
+
+## Installation
+------------
+
+The R software for running ChemmineR can be downloaded from CRAN
+(<http://cran.at.r-project.org/>). The ChemmineR package can be
+installed from R with:
+
+```{r eval=FALSE}
+ if (!requireNamespace("BiocManager", quietly=TRUE))
+     install.packages("BiocManager")
+ BiocManager::install("ChemmineR")
+```
+
+Loading the Package and Documentation
+-------------------------------------
+
+
+```{r eval=TRUE, tidy=FALSE}
+ library("ChemmineR") # Loads the package
+```
+
+```{r eval=FALSE, tidy=FALSE}
+ library(help="ChemmineR") # Lists all functions and classes
+ vignette("ChemmineR") # Opens this PDF manual from R
+```
+
+
+## Five Minute Tutorial
+--------------------
+
+The following code gives an overview of the most important
+functionalities provided by `ChemmineR`. Copy and paste
+of the commands into the R console will demonstrate their utilities.
+
+Create Instances of `SDFset` class:
+```{r eval=TRUE, tidy=FALSE}
+ data(sdfsample)
+ sdfset <- sdfsample
+ sdfset # Returns summary of SDFset
+ sdfset[1:4] # Subsetting of object
+
+ sdfset[[1]] # Returns summarized content of one SDF
+
+
+```{r eval=FALSE, tidy=FALSE}
+ view(sdfset[1:4]) # Returns summarized content of many SDFs, not printed here
+ as(sdfset[1:4], "list") # Returns complete content of many SDFs, not printed here
+
+```
+
+
+An `SDFset` is created during the import of an SD file:
+
+```{r eval=FALSE, tidy=FALSE}
+ sdfset <- read.SDFset("http://faculty.ucr.edu/~tgirke/Documents/R_BioCond/Samples/sdfsample.sdf")
+```
+
+
+Miscellaneous accessor methods for `SDFset` container:
+
+```{r eval=FALSE, tidy=FALSE}
+ header(sdfset[1:4]) # Not printed here
+```
+
+```{r eval=TRUE, tidy=FALSE}
+ header(sdfset[[1]])
+```
+
+```{r eval=FALSE, tidy=FALSE}
+ atomblock(sdfset[1:4]) # Not printed here
+```
+
+```{r eval=TRUE, tidy=FALSE}
+atomblock(sdfset[[1]])[1:4,]
+```
+
+```{r eval=FALSE, tidy=FALSE}
+bondblock(sdfset[1:4]) # Not printed here
+```
+
+```{r eval=TRUE, tidy=FALSE}
+ bondblock(sdfset[[1]])[1:4,]
+```
+```{r eval=FALSE, tidy=FALSE}
+ datablock(sdfset[1:4]) # Not printed here
+```
+
+```{r eval=TRUE, tidy=FALSE}
+ datablock(sdfset[[1]])[1:4]
+```
+
+
+Assigning compound IDs and keeping them unique:
+```{r eval=TRUE, tidy=FALSE}
+ cid(sdfset)[1:4] # Returns IDs from SDFset object
+ sdfid(sdfset)[1:4] # Returns IDs from SD file header block
+ unique_ids <- makeUnique(sdfid(sdfset))
+ cid(sdfset) <- unique_ids
+```
+
+
+Converting the data blocks in an `SDFset` to a matrix:
+
+```{r eval=TRUE, tidy=FALSE}
+ blockmatrix <- datablock2ma(datablocklist=datablock(sdfset)) # Converts data block to matrix
+ numchar <- splitNumChar(blockmatrix=blockmatrix) # Splits to numeric and character matrix
+ numchar[[1]][1:2,1:2] # Slice of numeric matrix
+ numchar[[2]][1:2,10:11] # Slice of character matrix
+```
+
+
+Compute atom frequency matrix, molecular weight and formula:
+
+```{r eval=TRUE, tidy=FALSE}
+ propma <- data.frame(MF=MF(sdfset), MW=MW(sdfset), atomcountMA(sdfset))
+ propma[1:4, ]
+```
+
+
+Assign matrix data to data block:
+```{r eval=TRUE, tidy=FALSE}
+ datablock(sdfset) <- propma
+ datablock(sdfset[1])
+```
+
+
+String searching in `SDFset`:
+```{r eval=FALSE, tidy=FALSE}
+ grepSDFset("650001", sdfset, field="datablock", mode="subset") # Returns summary view of matches. Not printed here.
+```
+
+```{r eval=TRUE, tidy=FALSE}
+ grepSDFset("650001", sdfset, field="datablock", mode="index")
+```
+
+
+Export SDFset to SD file:
+```{r eval=FALSE, tidy=FALSE}
+ write.SDF(sdfset[1:4], file="sub.sdf", sig=TRUE)
+```
+
+
+Plot molecule structure of one or many SDFs:
+```{r plotstruct, eval=TRUE, tidy=FALSE}
+ plot(sdfset[1:4], print=FALSE) # Plots structures to R graphics device
+```
+
+
+
+```{r eval=FALSE, tidy=FALSE}
+ sdf.visualize(sdfset[1:4]) # Compound viewing in web browser
+```
+
+![Figure: Visualization webpage created by calling
+`sdf.visualize`.](visualizescreenshot-small.png )
+
+Structure similarity searching and clustering:
+```{r eval=FALSE, tidy=FALSE}
+ apset <- sdf2ap(sdfset) # Generate atom pair descriptor database for searching
+```
+
+```{r eval=TRUE, tidy=FALSE}
+ data(apset) # Load sample apset data provided by library.
+ cmp.search(apset, apset[1], type=3, cutoff = 0.3, quiet=TRUE) # Search apset database with single compound.
+
+ cmp.cluster(db=apset, cutoff = c(0.65, 0.5), quiet=TRUE)[1:4,] # Binning clustering using variable similarity cutoffs.
+```
+
+
+### Molecular Structure Data
+------------------------
+
+Classes
+
+-   `SDFstr`: intermediate string class to facilitate SD
+    file import; not important for end user
+
+-   `SDF`: container for single molecule imported from an
+    SD file
+
+-   `SDFset`: container for many SDF objects; most
+    important structure container for end user
+
+-   `SMI`: container for a single SMILES string
+
+-   `SMIset`: container for many SMILES strings
+
+Functions/Methods (mainly for `SDFset` container,
+`SMIset` should be coerced with
+`smiles2sd` to `SDFset`)
+
+-   Accessor methods for `SDF/SDFset`
+
+    -   Object slots: `cid`, `header`, `atomblock`, `bondblock`,
+        `datablock` (`sdfid`, `datablocktag`)
+
+    -   Summary of `SDFset`: `view`
+
+    -   Matrix conversion of data block: `datablock2ma`,
+        `splitNumChar`
+
+    -   String search in SDFset: `grepSDFset`
+
+-   Coerce one class to another
+
+    -   Standard syntax `as(..., "...")` works in most
+        cases. For details see R help with
+       `?"SDFset-class"`.
+
+-   Utilities
+
+    -   Atom frequencies: `atomcountMA`, `atomcount`
+
+    -   Molecular weight: `MW`
+
+    -   Molecular formula: `MF`
+
+    -   ...
+
+-   Compound structure depictions
+
+    -   R graphics device: `plot`, `plotStruc`
+
+    -   Online: `cmp.visualize`
+
+<div align="right">[Back to Table of Contents]()</div>
+
+Structure Descriptor Data
+-------------------------
+
+Classes
+
+-   `AP`: container for atom pair descriptors of a single
+    molecule
+
+-   `APset`: container for many AP objects; most
+    important structure descriptor container for end user
+
+-   `FP`: container for fingerprint of a single molecule
+
+-   `FPset`: container for fingerprints of many
+    molecules, most important structure descriptor container for end
+    user
+
+Functions/Methods
+
+-   Create `AP/APset` instances
+
+    -   From `SDFset`: `sdf2ap`
+
+    -   From SD file: `cmp.parse`
+
+    -   Summary of `AP/APset`: `view`,
+        `db.explain`
+
+-   Accessor methods for AP/APset
+
+    -   Object slots: `ap`, `cid`
+
+-   Coerce one class to another
+
+    -   Standard syntax `as(..., "...")` works in most
+        cases. For details see R help with
+        `?"APset-class"`.
+
+-   Structure Similarity comparisons and Searching
+
+    -   Compute pairwise similarities : `cmp.similarity`,
+        `fpSim`
+
+    -   Search APset database: `cmp.search`, `fpSim`
+
+-   AP-based Structure Similarity Clustering
+
+    -   Single-linkage binning clustering: `cmp.cluster`
+
+    -   Visualize clustering result with MDS:
+        `cluster.visualize`
+
+    -   Size distribution of clusters: `cluster.sizestat`
+-   Folding
+    - Fold a descriptor with `fold`
+	 - Query the number of times a descriptor has been folded:
+		`foldCount`
+	 - Query the number of bits in a descriptor: `numBits`
+
+<div align="right">[Back to Table of Contents]()</div>
+
+Import of Compounds
+===================
+
+SDF Import
+----------
+
+The following gives an overview of the most important import/export
+functionalities for small molecules provided by
+`ChemmineR`. The given example creates an instance of the
+`SDFset` class using as sample data set the first 100
+compounds from this PubChem SD file (SDF):
+Compound\_00650001\_00675000.sdf.gz
+(<ftp://ftp.ncbi.nih.gov/pubchem/Compound/CURRENT-Full/SDF/>).
+
+SDFs can be imported with the `read.SDFset` function:
+
+```{r eval=FALSE, tidy=FALSE}
+ sdfset <- read.SDFset("http://faculty.ucr.edu/~tgirke/Documents/R_BioCond/Samples/sdfsample.sdf")
+```
+
+```{r eval=TRUE, tidy=FALSE}
+ data(sdfsample) # Loads the same SDFset provided by the library
+ sdfset <- sdfsample
+ valid <- validSDF(sdfset) # Identifies invalid SDFs in SDFset objects
+ sdfset <- sdfset[valid] # Removes invalid SDFs, if there are any
+```
+
+
+Import SD file into `SDFstr` container:
+```{r eval=FALSE, tidy=FALSE}
+ sdfstr <- read.SDFstr("http://faculty.ucr.edu/~tgirke/Documents/R_BioCond/Samples/sdfsample.sdf")
+```
+Create
+`SDFset` from `SDFstr` class:
+
+```{r eval=TRUE, tidy=FALSE}
+ sdfstr <- as(sdfset, "SDFstr")
+ sdfstr
+ as(sdfstr, "SDFset")
+```
+
+<div align="right">[Back to Table of Contents]()</div>
+
+SMILES Import
+-------------
+
+The `read.SMIset` function imports one or many molecules
+from a SMILES file and stores them in a `SMIset`
+container. The input file is expected to contain one SMILES string per
+row with tab-separated compound identifiers at the end of each line. The
+compound identifiers are optional.
+
+Create sample SMILES file and then import it:
+```{r eval=FALSE, tidy=FALSE}
+ data(smisample); smiset <- smisample
+ write.SMI(smiset[1:4], file="sub.smi")
+ smiset <- read.SMIset("sub.smi")
+```
+
+
+Inspect content of `SMIset`:
+```{r eval=TRUE, tidy=FALSE}
+ data(smisample) # Loads the same SMIset provided by the library
+ smiset <- smisample
+ smiset
+ view(smiset[1:2])
+```
+
+
+Accessor functions:
+```{r eval=TRUE, tidy=FALSE}
+ cid(smiset[1:4])
+ smi <- as.character(smiset[1:2])
+```
+
+
+Create `SMIset` from named character vector:
+
+```{r eval=TRUE, tidy=FALSE}
+ as(smi, "SMIset")
+```
+
+<div align="right">[Back to Table of Contents]()</div>
+
+Export of Compounds
+===================
+
+SDF Export
+----------
+
+Write objects of classes `SDFset/SDFstr/SDF` to SD file:
+
+```{r eval=FALSE, tidy=FALSE}
+ write.SDF(sdfset[1:4], file="sub.sdf")
+```
+
+
+Writing customized `SDFset` to file containing
+`ChemmineR` signature, IDs from `SDFset`
+and no data block:
+```{r eval=FALSE, tidy=FALSE}
+ write.SDF(sdfset[1:4], file="sub.sdf", sig=TRUE, cid=TRUE, db=NULL)
+```
+
+
+Example for injecting a custom matrix/data frame into the data block of
+an `SDFset` and then writing it to an SD file:
+
+```{r eval=FALSE, tidy=FALSE}
+ props <- data.frame(MF=MF(sdfset), MW=MW(sdfset), atomcountMA(sdfset))
+ datablock(sdfset) <- props
+ write.SDF(sdfset[1:4], file="sub.sdf", sig=TRUE, cid=TRUE)
+```
+
+
+Indirect export via `SDFstr` object:
+```{r eval=FALSE, tidy=FALSE}
+ sdf2str(sdf=sdfset[[1]], sig=TRUE, cid=TRUE) # Uses default components
+ sdf2str(sdf=sdfset[[1]], head=letters[1:4], db=NULL) # Uses custom components for header and data block
+```
+
+
+Write `SDF`, `SDFset` or
+`SDFstr` classes to file:
+```{r eval=FALSE, tidy=FALSE}
+ write.SDF(sdfset[1:4], file="sub.sdf", sig=TRUE, cid=TRUE, db=NULL)
+ write.SDF(sdfstr[1:4], file="sub.sdf")
+ cat(unlist(as(sdfstr[1:4], "list")), file="sub.sdf", sep="")
+```
+
+<div align="right">[Back to Table of Contents]()</div>
+
+SMILES Export
+-------------
+
+Write objects of class `SMIset` to SMILES file with and
+without compound identifiers:
+```{r eval=FALSE, tidy=FALSE}
+ data(smisample); smiset <- smisample # Sample data set
+
+ write.SMI(smiset[1:4], file="sub.smi", cid=TRUE) write.SMI(smiset[1:4], file="sub.smi", cid=FALSE)
+```
+
+<div align="right">[Back to Table of Contents]()</div>
+
+Format Interconversions
+=======================
+
+The `sdf2smiles` and `smiles2sdf`
+functions provide format interconversion between SMILES strings
+(Simplified Molecular Input Line Entry Specification) and
+`SDFset` containers.
+
+Convert an `SDFset` container to a SMILES
+`character` string:
+
+
+```{r sdf2smiles, eval=FALSE, tidy=FALSE}
+ data(sdfsample);
+ sdfset <- sdfsample[1]
+ smiles <- sdf2smiles(sdfset)
+ smiles
+```
+
+
+Convert a SMILES `character` string to an
+`SDFset` container:
+
+
+```{r smiles2sdf, eval=FALSE, tidy=FALSE}
+ sdf <- smiles2sdf("CC(=O)OC1=CC=CC=C1C(=O)O")
+ view(sdf)
+```
+
+
+When the `ChemineOB` package is installed these
+conversions are performed with the OpenBabel Open Source Chemistry
+Toolbox. Otherwise the functions will fall back to using the ChemMine
+Tools web service for this operation. The latter will require internet
+connectivity and is limited to only the first compound given.
+`ChemmineOB` provides access to the compound format
+conversion functions of OpenBabel. Currently, over 160 formats are
+supported by OpenBabel. The functions `convertFormat` and
+`convertFormatFile` can be used to convert files or
+strings between any two formats supported by OpenBabel. For example, to
+convert a SMILES string to an SDF string, one can use the
+`convertFormat` function.
+
+
+```{r eval=FALSE, tidy=FALSE}
+ sdfStr <- convertFormat("SMI","SDF","CC(=O)OC1=CC=CC=C1C(=O)O_name")
+```
+
+
+This will return the given compound as an SDF formatted string. 2D
+coordinates are also computed and included in the resulting SDF string.
+
+To convert a file with compounds encoded in one format to another
+format, the `convertFormatFile` function can be used
+instead.
+```{r eval=FALSE, tidy=FALSE}
+ convertFormatFile("SMI","SDF","test.smiles","test.sdf")
+```
+
+
+To see the whole list of file formats supported by OpenBabel, one can
+run from the command-line "obabel -L formats".
+
+<div align="right">[Back to Table of Contents]()</div>
+
+Splitting SD Files
+==================
+
+The following `write.SDFsplit` function allows to split
+SD Files into any number of smaller SD Files. This can become important
+when working with very big SD Files. Users should note that this
+function can output many files, thus one should run it in a dedicated
+directory!
+
+Create sample SD File with 100 molecules:
+```{r eval=FALSE, tidy=FALSE}
+ write.SDF(sdfset, "test.sdf")
+```
+
+
+Read in sample SD File. Note: reading file into SDFstr is much faster
+than into SDFset:
+```{r eval=FALSE, tidy=FALSE}
+ sdfstr <- read.SDFstr("test.sdf")
+```
+
+
+Run export on `SDFstr` object:
+```{r eval=FALSE, tidy=FALSE}
+ write.SDFsplit(x=sdfstr, filetag="myfile", nmol=10) # 'nmol' defines the number of molecules to write to each file
+```
+
+
+Run export on `SDFset` object:
+```{r eval=FALSE, tidy=FALSE}
+ write.SDFsplit(x=sdfset, filetag="myfile", nmol=10)
+```
+
+
+Searching PubChem
+=================
+
+Get Compounds from PubChem by Id
+--------------------------------
+
+The function `getIds` accepts one or more numeric PubChem
+compound ids and downloads the corresponding compounds from PubChem
+Power User Gateway (PUG) returning results in an `SDFset`
+container. The ChemMine Tools web service is used as an intermediate, to
+translate queries from plain HTTP POST to a PUG SOAP query.
+
+Fetch 2 compounds from PubChem:
+
+
+```{r getIds, eval=FALSE, tidy=FALSE}
+ compounds <- getIds(c(111,123))
+ compounds
+```
+
+<div align="right">[Back to Table of Contents]()</div>
+
+Search a SMILES Query in PubChem
+--------------------------------
+
+The function `searchString` accepts one SMILES string
+(Simplified Molecular Input Line Entry Specification) and performs a
+\>0.95 similarity PubChem fingerprint search, returning the hits in an
+`SDFset` container. The ChemMine Tools web service is
+used as an intermediate, to translate queries from plain HTTP POST to a
+PubChem Power User Gateway (PUG) query.
+
+Search a SMILES string on PubChem:
+
+
+```{r searchString, eval=FALSE, tidy=FALSE}
+ compounds <- searchString("CC(=O)OC1=CC=CC=C1C(=O)O") compounds
+```
+
+<div align="right">[Back to Table of Contents]()</div>
+
+Search an SDF Query in PubChem
+------------------------------
+
+The function `searchSim` performs a PubChem similarity
+search just like `searchString`, but accepts a query in
+an `SDFset` container. If the query contains more than
+one compound, only the first is searched.
+
+Search an `SDFset` container on PubChem:
+
+
+```{r searchSim, eval=FALSE, tidy=FALSE}
+ data(sdfsample);
+ sdfset <- sdfsample[1]
+ compounds <- searchSim(sdfset)
+ compounds
+```
+
+```{r knit_exit, include=F, echo=F}
+knit_exit()
+```

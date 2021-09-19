@@ -18,7 +18,9 @@ navbar:
         href: func.html
       - text: "Lecture 3: Conditioning"
         href: cond.html
-      - text: "Lecture 3: Chemical informatics"
+      - text: "Lecture 3: Chemical informatics I"
+        href: chem2.html
+      - text: "Lecture 3: Chemical informatics II"
         href: chem.html
     - text: "Labs"
       menu:
