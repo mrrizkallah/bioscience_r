@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>Lecture 3: Functions</title>
 
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,6 +47,74 @@
     </style>
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 <style type="text/css">
@@ -388,11 +456,179 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Lecture 3: Functions</h1>
 
 </div>
 
 
+<!-- ```{r, include = FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("02-func-R-")
+``` -->
+<p>If we only had one data set to analyze, it would probably be faster to load the file into a spreadsheet and use that to plot some simple statistics. But we have twelve files to check, and may have more in the future. In this lesson, we'll learn how to write a function so that we can repeat several operations with a single command.</p>
+<div id="defining-a-function" class="section level3">
+<h3>Defining a Function</h3>
+<p>You can write your own functions in order to make repetitive operations using a single command. Let's start by defining your function &quot;my_function&quot; and the input parameter(s) that the user will feed to the function. Afterwards you will define the operation that you desire to program in the body of the function within curly braces ({}). Finally, you need to assign the result (or output) of your function in the return statement.</p>
+<p>Now let's see this process with an example. We are going to define a function <code>fahrenheit_to_celsius</code> that converts temperatures from <a href="https://en.wikipedia.org/wiki/Temperature_conversion_formulas#Fahrenheit">Fahrenheit to Celsius</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fahrenheit_to_celsius &lt;-<span class="st"> </span>function(temp_F) {
+  temp_C &lt;-<span class="st"> </span>(temp_F -<span class="st"> </span><span class="dv">32</span>) *<span class="st"> </span><span class="dv">5</span> /<span class="st"> </span><span class="dv">9</span>
+  <span class="kw">return</span>(temp_C)
+}</code></pre></div>
+<p>We define <code>fahrenheit_to_celsius</code> by assigning it to the output of <code>function</code>. The list of argument names are contained within parentheses. Next, the <strong>body</strong> of the function--the statements that are executed when it runs--is contained within curly braces (<code>{}</code>). The statements in the body are indented by two spaces, which makes the code easier to read but does not affect how the code operates.</p>
+<p>When we call the function, the values we pass to it are assigned to those variables so that we can use them inside the function. Inside the function, we use a <strong>return statement</strong> to send a result back to whoever asked for it.</p>
+</div>
+<div id="automatic-returns" class="section level2">
+<h2>Automatic Returns</h2>
+<p>In R, it is not necessary to include the return statement. R automatically returns whichever variable is on the last line of the body of the function. While in the learning phase, we will explicitly define the return statement.</p>
+<p>Let's try running our function. Calling our own function is no different from calling any other function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># freezing point of water</span>
+<span class="kw">fahrenheit_to_celsius</span>(<span class="dv">32</span>)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># boiling point of water</span>
+<span class="kw">fahrenheit_to_celsius</span>(<span class="dv">212</span>)</code></pre></div>
+<pre><code>## [1] 100</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pizza oven temperature</span>
+<span class="kw">fahrenheit_to_celsius</span>(<span class="dv">700</span>)</code></pre></div>
+<pre><code>## [1] 371.1111</code></pre>
+<p>We've successfully called the function that we defined, and we have access to the value that we returned.</p>
+<div id="exercise-composing-functions" class="section level3">
+<h3>Exercise: Composing Functions</h3>
+<p>Now that we've seen how to turn Fahrenheit into Celsius, it's easy to turn Celsius into Kelvin: Hint: temp_C + 273.15 Calculate freezing point of water in Kelvin</p>
+<pre><code>## [1] 273.15</code></pre>
+<p>What about converting Fahrenheit to Kelvin? We could write out the formula, but we don't need to. Instead, we can <a href="%7B%7B%20page.root%20%7D%7D/reference.html#function-composition">compose</a> the two functions we have already created:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fahrenheit_to_kelvin &lt;-<span class="st"> </span>function(temp_F) {
+  temp_C &lt;-<span class="st"> </span><span class="kw">fahrenheit_to_celsius</span>(temp_F)
+  temp_K &lt;-<span class="st"> </span><span class="kw">celsius_to_kelvin</span>(temp_C)
+  <span class="kw">return</span>(temp_K)
+}
 
+<span class="co"># freezing point of water in Kelvin</span>
+<span class="kw">fahrenheit_to_kelvin</span>(<span class="fl">32.0</span>)</code></pre></div>
+<pre><code>## [1] 273.15</code></pre>
+<p>This is our first taste of how larger programs are built: we define basic operations, then combine them in ever-larger chunks to get the effect we want. Real-life functions will usually be larger than the ones shown here--typically half a dozen to a few dozen lines--but they shouldn't ever be much longer than that, or the next person who reads it won't be able to understand what's going on.</p>
+</div>
+</div>
+<div id="exercise-named-variables-and-the-scope-of-variables" class="section level2">
+<h2>Exercise: Named Variables and the Scope of Variables</h2>
+<p>Functions can accept arguments explicitly assigned to a variable name in the function call <code>functionName(variable = value)</code>, as well as arguments by order:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">input_1 &lt;-<span class="st"> </span><span class="dv">20</span>
+mySum &lt;-<span class="st"> </span>function(input_1, <span class="dt">input_2 =</span> <span class="dv">10</span>) {
+  output &lt;-<span class="st"> </span>input_1 +<span class="st"> </span>input_2
+  <span class="kw">return</span>(output)
+}</code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Given the above code was run, which value does <code>mySum(input_1 = 1, 3)</code> produce?
+<ol style="list-style-type: decimal">
+<li>4</li>
+<li>11</li>
+<li>23</li>
+<li>30</li>
+</ol></li>
+<li>If <code>mySum(3)</code> returns 13, why does <code>mySum(input_2 = 3)</code> return an error?</li>
+</ol>
+</div>
+<div id="testing-error-handling-and-documenting" class="section level2">
+<h2>Testing, Error Handling, and Documenting</h2>
+<p>Once we start putting things in functions so that we can re-use them, we need to start testing that those functions are working correctly. To see how to do this, let's write a function to center a dataset around a particular midpoint:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">center &lt;-<span class="st"> </span>function(data, midpoint) {
+  new_data &lt;-<span class="st"> </span>(data -<span class="st"> </span><span class="kw">mean</span>(data)) +<span class="st"> </span>midpoint
+  <span class="kw">return</span>(new_data)
+}</code></pre></div>
+<p>We could test this on our actual data, but since we don't know what the values ought to be, it will be hard to tell if the result was correct. Instead, let's create a vector of 0s and then center that around 3. This will make it simple to see if our function is working as expected:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)
+z</code></pre></div>
+<pre><code>## [1] 0 0 0 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">center</span>(z, <span class="dv">3</span>)</code></pre></div>
+<pre><code>## [1] 3 3 3 3</code></pre>
+<div id="dataset" class="section level3">
+<h3>Dataset</h3>
+<p>We are studying inflammation in patients who have been given a new treatment for arthritis, and need to analyze the first dozen data sets. The data sets are stored in <strong>comma-separated values</strong> (CSV) format. Each row holds the observations for just one patient. Each column holds the inflammation measured in a day, so we have a set of values in successive days.</p>
+<p>That looks right, so let's try center on our real data. We'll center the inflammation data from day 4 around 0: <a href="data/inflammation-01.csv">download this</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/inflammation-01.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)
+centered &lt;-<span class="st"> </span><span class="kw">center</span>(dat[, <span class="dv">4</span>], <span class="dv">0</span>)
+<span class="kw">head</span>(centered)</code></pre></div>
+<pre><code>## [1]  1.25 -0.75  1.25 -1.75  1.25  0.25</code></pre>
+<p>It's hard to tell from the default output whether the result is correct, but there are a few simple tests that will reassure us:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/inflammation-01.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)
+<span class="co"># original mean</span>
+<span class="kw">mean</span>(dat[, <span class="dv">4</span>])</code></pre></div>
+<pre><code>## [1] 1.75</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># centered mean</span>
+<span class="kw">mean</span>(centered)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>That seems right: the original mean was about 1.75 and the mean of the centered data is 0. We can even go further and check that the standard deviation hasn't changed:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># original standard deviation</span>
+<span class="kw">sd</span>(dat[, <span class="dv">4</span>])</code></pre></div>
+<pre><code>## [1] 1.067628</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># centered standard deviation</span>
+<span class="kw">sd</span>(centered)</code></pre></div>
+<pre><code>## [1] 1.067628</code></pre>
+<p>Those values look the same, but we probably wouldn't notice if they were different in the sixth decimal place. Let's do this instead:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># difference in standard deviations before and after</span>
+<span class="kw">sd</span>(dat[, <span class="dv">4</span>]) -<span class="st"> </span><span class="kw">sd</span>(centered)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>Sometimes, a very small difference can be detected due to rounding at very low decimal places. R has a useful function for comparing two objects allowing for rounding errors, <code>all.equal</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">sd</span>(dat[, <span class="dv">4</span>]), <span class="kw">sd</span>(centered))</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>It's still possible that our function is wrong, but it seems unlikely enough that we should probably get back to doing our analysis. However, there are two other important tasks to consider: 1) we should ensure our function can provide informative errors when needed, and 2) we should write some <strong>documentation</strong> for our function to remind ourselves later what it's for and how to use it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat[, <span class="dv">4</span>] &lt;-<span class="st"> </span>centered
+<span class="kw">write.table</span>(dat, <span class="dt">file =</span> <span class="st">&quot;inflammation-centered.csv&quot;</span>, <span class="dt">col.names =</span> <span class="ot">FALSE</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>, <span class="dt">quote =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>)</code></pre></div>
+<div id="documentation" class="section level4">
+<h4>Documentation</h4>
+<p>A common way to put documentation in software is to add <strong>comments</strong> like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">center &lt;-<span class="st"> </span>function(data, midpoint) {
+  <span class="co"># return a new vector containing the original data centered around the</span>
+  <span class="co"># midpoint.</span>
+  <span class="co"># Example: center(c(1, 2, 3), 0) =&gt; c(-1, 0, 1)</span>
+  new_data &lt;-<span class="st"> </span>(data -<span class="st"> </span><span class="kw">mean</span>(data)) +<span class="st"> </span>midpoint
+  <span class="kw">return</span>(new_data)
+}</code></pre></div>
+</div>
+</div>
+</div>
+<div id="writing-documentation" class="section level2">
+<h2>Writing Documentation</h2>
+<p>Formal documentation for R functions is written in separate <code>.Rd</code> using a markup language similar to <a href="https://www.latex-project.org/">LaTeX</a>. You see the result of this documentation when you look at the help file for a given function, e.g. <code>?read.csv</code>. The <a href="https://cran.r-project.org/package=roxygen2/vignettes/rd.html">roxygen2</a> package allows R coders to write documentation alongside the function code and then process it into the appropriate <code>.Rd</code> files. You will want to switch to this more formal method of writing documentation when you start writing more complicated R projects.</p>
+</div>
+<div id="exercise-functions-to-create-graphs" class="section level2">
+<h2>Exercise: Functions to Create Graphs</h2>
+<p>Write a function called <code>analyze</code> that takes a filename as an argument and displays the three graphs produced in the (average, min and max inflammation over time). <code>analyze(&quot;data/inflammation-01.csv&quot;)</code> should produce the graphs already shown, while <code>analyze(&quot;data/inflammation-02.csv&quot;)</code> should produce corresponding graphs for the second data set. Be sure to document your function with comments. <a href="data/inflammation-02.csv">download this</a></p>
+<div id="saving-plots-to-a-file" class="section level3">
+<h3>Saving Plots to a File</h3>
+<p>So far, we have built a function <code>analyze</code> to plot summary statistics of the inflammation data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">analyze &lt;-<span class="st"> </span>function(filename) {
+  <span class="co"># Plots the average, min, and max inflammation over time.</span>
+  <span class="co"># Input is character string of a csv file.</span>
+  dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> filename, <span class="dt">header =</span> <span class="ot">FALSE</span>)
+  avg_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, mean)
+  <span class="kw">plot</span>(avg_day_inflammation)
+  max_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, max)
+  <span class="kw">plot</span>(max_day_inflammation)
+  min_day_inflammation &lt;-<span class="st"> </span><span class="kw">apply</span>(dat, <span class="dv">2</span>, min)
+  <span class="kw">plot</span>(min_day_inflammation)
+}</code></pre></div>
+<p>And also built the function <code>analyze_all</code> to automate the processing of each data file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">analyze_all &lt;-<span class="st"> </span>function(<span class="dt">folder =</span> <span class="st">&quot;data&quot;</span>, pattern) {
+  <span class="co"># Runs the function analyze for each file in the given folder</span>
+  <span class="co"># that contains the given pattern.</span>
+  filenames &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> folder, <span class="dt">pattern =</span> pattern, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+  for (f in filenames) {
+    <span class="kw">analyze</span>(f)
+  }
+}</code></pre></div>
+<p>While these are useful in an interactive R session, what if we want to send our results to our collaborators? Since we currently have 12 data sets, running <code>analyze_all</code> creates 36 plots. Saving each of these individually would be tedious and error-prone. And in the likely situation that we want to change how the data is processed or the look of the plots, we would have to once again save all 36 before sharing the updated results with our collaborators.</p>
+<p>Here's how we can save all three plots of the first inflammation data set in a pdf file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf</span>(<span class="st">&quot;inflammation-01.pdf&quot;</span>)
+<span class="kw">analyze</span>(<span class="st">&quot;data/inflammation-01.csv&quot;</span>)
+<span class="kw">dev.off</span>()</code></pre></div>
+<p>The function <code>pdf</code> redirects all the plots generated by R into a pdf file, which in this case we have named &quot;inflammation-01.pdf&quot;. After we are done generating the plots to be saved in the pdf file, we stop R from redirecting plots with the function <code>dev.off</code>.</p>
+<blockquote>
+<h2 id="overwriting-plots">Overwriting Plots</h2>
+<p>If you run <code>pdf</code> multiple times without running <code>dev.off</code>, you will save plots to the most recently opened file. However, you won't be able to open the previous pdf files because the connections were not closed. In order to get out of this situation, you'll need to run <code>dev.off</code> until all the pdf connections are closed. You can check your current status using the function <code>dev.cur</code>. If it says &quot;pdf&quot;, all your plots are being saved in the last pdf specified. If it says &quot;null device&quot; or &quot;RStudioGD&quot;, the plots will be visualized normally. {: .callout}</p>
+</blockquote>
+<p>We can update the <code>analyze</code> function so that it always saves the plots in a pdf. But that would make it more difficult to interactively test out new changes. It would be ideal if <code>analyze</code> would either save or not save the plots based on its input.</p>
+</div>
+</div>
 
 <div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjdHVyZSAzOiBGdW5jdGlvbnMiCgpxdWVzdGlvbnM6Ci0gIkhvdyBkbyBJIG1ha2UgYSBmdW5jdGlvbj8iCi0gIkhvdyBjYW4gSSB0ZXN0IG15IGZ1bmN0aW9ucz8iCi0gIkhvdyBzaG91bGQgSSBkb2N1bWVudCBteSBjb2RlPyIKb2JqZWN0aXZlczoKLSAiRGVmaW5lIGEgZnVuY3Rpb24gdGhhdCB0YWtlcyBhcmd1bWVudHMuIgotICJSZXR1cm4gYSB2YWx1ZSBmcm9tIGEgZnVuY3Rpb24uIgotICJUZXN0IGEgZnVuY3Rpb24uIgotICJTZXQgZGVmYXVsdCB2YWx1ZXMgZm9yIGZ1bmN0aW9uIGFyZ3VtZW50cy4iCi0gIkV4cGxhaW4gd2h5IHdlIHNob3VsZCBkaXZpZGUgcHJvZ3JhbXMgaW50byBzbWFsbCwgc2luZ2xlLXB1cnBvc2UgZnVuY3Rpb25zLiIKa2V5cG9pbnRzOgotICJEZWZpbmUgYSBmdW5jdGlvbiB1c2luZyBgbmFtZSA8LSBmdW5jdGlvbiguLi5hcmdzLi4uKSB7Li4uYm9keS4uLn1gLiIKLSAiQ2FsbCBhIGZ1bmN0aW9uIHVzaW5nIGBuYW1lKC4uLnZhbHVlcy4uLilgLiIKLSAiUiBsb29rcyBmb3IgdmFyaWFibGVzIGluIHRoZSBjdXJyZW50IHN0YWNrIGZyYW1lIGJlZm9yZSBsb29raW5nIGZvciB0aGVtIGF0IHRoZSB0b3AgbGV2ZWwuIgotICJVc2UgYGhlbHAodGhpbmcpYCB0byB2aWV3IGhlbHAgZm9yIHNvbWV0aGluZy4iCi0gIlB1dCBjb21tZW50cyBhdCB0aGUgYmVnaW5uaW5nIG9mIGZ1bmN0aW9ucyB0byBwcm92aWRlIGhlbHAgZm9yIHRoYXQgZnVuY3Rpb24uIgotICJBbm5vdGF0ZSB5b3VyIGNvZGUhIgotICJTcGVjaWZ5IGRlZmF1bHQgdmFsdWVzIGZvciBhcmd1bWVudHMgd2hlbiBkZWZpbmluZyBhIGZ1bmN0aW9uIHVzaW5nIGBuYW1lID0gdmFsdWVgIGluIHRoZSBhcmd1bWVudCBsaXN0LiIKLSAiQXJndW1lbnRzIGNhbiBiZSBwYXNzZWQgYnkgbWF0Y2hpbmcgYmFzZWQgb24gbmFtZSwgYnkgcG9zaXRpb24sIG9yIGJ5IG9taXR0aW5nIHRoZW0gKGluIHdoaWNoIGNhc2UgdGhlIGRlZmF1bHQgdmFsdWUgaXMgdXNlZCkuIgpzb3VyY2U6IFJtZAotLS0KCjwhLS0gYGBge3IsIGluY2x1ZGUgPSBGQUxTRX0Kc291cmNlKCIuLi9iaW4vY2h1bmstb3B0aW9ucy5SIikKa25pdHJfZmlnX3BhdGgoIjAyLWZ1bmMtUi0iKQpgYGAgLS0+CgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0KbGlicmFyeShrbml0cikKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCklmIHdlIG9ubHkgaGFkIG9uZSBkYXRhIHNldCB0byBhbmFseXplLCBpdCB3b3VsZCBwcm9iYWJseSBiZSBmYXN0ZXIgdG8gbG9hZCB0aGUgZmlsZSBpbnRvIGEgc3ByZWFkc2hlZXQgYW5kIHVzZSB0aGF0IHRvIHBsb3Qgc29tZSBzaW1wbGUgc3RhdGlzdGljcy4KQnV0IHdlIGhhdmUgdHdlbHZlIGZpbGVzIHRvIGNoZWNrLCBhbmQgbWF5IGhhdmUgbW9yZSBpbiB0aGUgZnV0dXJlLgpJbiB0aGlzIGxlc3Nvbiwgd2UnbGwgbGVhcm4gaG93IHRvIHdyaXRlIGEgZnVuY3Rpb24gc28gdGhhdCB3ZSBjYW4gcmVwZWF0IHNldmVyYWwgb3BlcmF0aW9ucyB3aXRoIGEgc2luZ2xlIGNvbW1hbmQuCgojIyMgRGVmaW5pbmcgYSBGdW5jdGlvbgoKWW91IGNhbiB3cml0ZSB5b3VyIG93biBmdW5jdGlvbnMgaW4gb3JkZXIgdG8gbWFrZSByZXBldGl0aXZlIG9wZXJhdGlvbnMgdXNpbmcgYSBzaW5nbGUgY29tbWFuZC4gTGV0J3Mgc3RhcnQgYnkgZGVmaW5pbmcgeW91ciBmdW5jdGlvbiAibXlfZnVuY3Rpb24iIGFuZCB0aGUgaW5wdXQgcGFyYW1ldGVyKHMpIHRoYXQgdGhlIHVzZXIgd2lsbCBmZWVkIHRvIHRoZSBmdW5jdGlvbi4gQWZ0ZXJ3YXJkcyB5b3Ugd2lsbCBkZWZpbmUgdGhlIG9wZXJhdGlvbiB0aGF0IHlvdSBkZXNpcmUgdG8gcHJvZ3JhbSBpbiB0aGUgYm9keSBvZiB0aGUgZnVuY3Rpb24gd2l0aGluIGN1cmx5IGJyYWNlcyAoe30pLiBGaW5hbGx5LCB5b3UgbmVlZCB0byBhc3NpZ24gdGhlIHJlc3VsdCAob3Igb3V0cHV0KSBvZiB5b3VyIGZ1bmN0aW9uIGluIHRoZSByZXR1cm4gc3RhdGVtZW50LgoKYGBge3IsIGluY2x1ZGUgPSBGQUxTRX0KbXlfZnVuY3Rpb24gPC0gZnVuY3Rpb24oaW5wdXQpIHsKIyBwZXJmb3JtIGFjdGlvbiBhbmQgcHJvZHVjZSBvdXRwdXQKcmV0dXJuKG91dHB1dCkgIyByZXR1cm4gb3V0cHV0IHZhbHVlCn0KYGBgCgpOb3cgbGV0J3Mgc2VlIHRoaXMgcHJvY2VzcyB3aXRoIGFuIGV4YW1wbGUuIFdlIGFyZSBnb2luZyB0byBkZWZpbmUgYSBmdW5jdGlvbiBgZmFocmVuaGVpdF90b19jZWxzaXVzYCB0aGF0IGNvbnZlcnRzIHRlbXBlcmF0dXJlcyBmcm9tIFtGYWhyZW5oZWl0IHRvIENlbHNpdXNdKGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1RlbXBlcmF0dXJlX2NvbnZlcnNpb25fZm9ybXVsYXMjRmFocmVuaGVpdCk6CgpgYGB7cn0KZmFocmVuaGVpdF90b19jZWxzaXVzIDwtIGZ1bmN0aW9uKHRlbXBfRikgewogIHRlbXBfQyA8LSAodGVtcF9GIC0gMzIpICogNSAvIDkKICByZXR1cm4odGVtcF9DKQp9CmBgYAoKV2UgZGVmaW5lIGBmYWhyZW5oZWl0X3RvX2NlbHNpdXNgIGJ5IGFzc2lnbmluZyBpdCB0byB0aGUgb3V0cHV0IG9mIGBmdW5jdGlvbmAuClRoZSBsaXN0IG9mIGFyZ3VtZW50IG5hbWVzIGFyZSBjb250YWluZWQgd2l0aGluIHBhcmVudGhlc2VzLgpOZXh0LCB0aGUgKipib2R5Kiogb2YgdGhlIGZ1bmN0aW9uLS10aGUgc3RhdGVtZW50cyB0aGF0IGFyZSBleGVjdXRlZCB3aGVuIGl0IHJ1bnMtLWlzIGNvbnRhaW5lZCB3aXRoaW4gY3VybHkgYnJhY2VzIChge31gKS4KVGhlIHN0YXRlbWVudHMgaW4gdGhlIGJvZHkgYXJlIGluZGVudGVkIGJ5IHR3byBzcGFjZXMsIHdoaWNoIG1ha2VzIHRoZSBjb2RlIGVhc2llciB0byByZWFkIGJ1dCBkb2VzIG5vdCBhZmZlY3QgaG93IHRoZSBjb2RlIG9wZXJhdGVzLgoKV2hlbiB3ZSBjYWxsIHRoZSBmdW5jdGlvbiwgdGhlIHZhbHVlcyB3ZSBwYXNzIHRvIGl0IGFyZSBhc3NpZ25lZCB0byB0aG9zZSB2YXJpYWJsZXMgc28gdGhhdCB3ZSBjYW4gdXNlIHRoZW0gaW5zaWRlIHRoZSBmdW5jdGlvbi4KSW5zaWRlIHRoZSBmdW5jdGlvbiwgd2UgdXNlIGEgKipyZXR1cm4gc3RhdGVtZW50KiogdG8gc2VuZCBhIHJlc3VsdCBiYWNrIHRvIHdob2V2ZXIgYXNrZWQgZm9yIGl0LgoKIyMgQXV0b21hdGljIFJldHVybnMKCkluIFIsIGl0IGlzIG5vdCBuZWNlc3NhcnkgdG8gaW5jbHVkZSB0aGUgcmV0dXJuIHN0YXRlbWVudC4KUiBhdXRvbWF0aWNhbGx5IHJldHVybnMgd2hpY2hldmVyIHZhcmlhYmxlIGlzIG9uIHRoZSBsYXN0IGxpbmUgb2YgdGhlIGJvZHkKb2YgdGhlIGZ1bmN0aW9uLiBXaGlsZSBpbiB0aGUgbGVhcm5pbmcgcGhhc2UsIHdlIHdpbGwgZXhwbGljaXRseSBkZWZpbmUgdGhlCnJldHVybiBzdGF0ZW1lbnQuCgpMZXQncyB0cnkgcnVubmluZyBvdXIgZnVuY3Rpb24uCkNhbGxpbmcgb3VyIG93biBmdW5jdGlvbiBpcyBubyBkaWZmZXJlbnQgZnJvbSBjYWxsaW5nIGFueSBvdGhlciBmdW5jdGlvbjoKCmBgYHtyfQojIGZyZWV6aW5nIHBvaW50IG9mIHdhdGVyCmZhaHJlbmhlaXRfdG9fY2Vsc2l1cygzMikKIyBib2lsaW5nIHBvaW50IG9mIHdhdGVyCmZhaHJlbmhlaXRfdG9fY2Vsc2l1cygyMTIpCiMgcGl6emEgb3ZlbiB0ZW1wZXJhdHVyZQpmYWhyZW5oZWl0X3RvX2NlbHNpdXMoNzAwKQpgYGAKCldlJ3ZlIHN1Y2Nlc3NmdWxseSBjYWxsZWQgdGhlIGZ1bmN0aW9uIHRoYXQgd2UgZGVmaW5lZCwgYW5kIHdlIGhhdmUgYWNjZXNzIHRvIHRoZSB2YWx1ZSB0aGF0IHdlIHJldHVybmVkLgoKIyMjIEV4ZXJjaXNlOiBDb21wb3NpbmcgRnVuY3Rpb25zCgpOb3cgdGhhdCB3ZSd2ZSBzZWVuIGhvdyB0byB0dXJuIEZhaHJlbmhlaXQgaW50byBDZWxzaXVzLCBpdCdzIGVhc3kgdG8gdHVybiBDZWxzaXVzIGludG8gS2VsdmluOgpIaW50OiB0ZW1wX0MgKyAyNzMuMTUKQ2FsY3VsYXRlIGZyZWV6aW5nIHBvaW50IG9mIHdhdGVyIGluIEtlbHZpbgoKYGBge3IsIGVjaG8gPSBGQUxTRX0KY2Vsc2l1c190b19rZWx2aW4gPC0gZnVuY3Rpb24odGVtcF9DKSB7CiAgdGVtcF9LIDwtIHRlbXBfQyArIDI3My4xNQogIHJldHVybih0ZW1wX0spCn0KCiMgZnJlZXppbmcgcG9pbnQgb2Ygd2F0ZXIgaW4gS2VsdmluCmNlbHNpdXNfdG9fa2VsdmluKDApCmBgYAoKV2hhdCBhYm91dCBjb252ZXJ0aW5nIEZhaHJlbmhlaXQgdG8gS2VsdmluPwpXZSBjb3VsZCB3cml0ZSBvdXQgdGhlIGZvcm11bGEsIGJ1dCB3ZSBkb24ndCBuZWVkIHRvLgpJbnN0ZWFkLCB3ZSBjYW4gW2NvbXBvc2VdKHt7IHBhZ2Uucm9vdCB9fS9yZWZlcmVuY2UuaHRtbCNmdW5jdGlvbi1jb21wb3NpdGlvbikgdGhlIHR3byBmdW5jdGlvbnMgd2UgaGF2ZSBhbHJlYWR5IGNyZWF0ZWQ6CgpgYGB7cn0KZmFocmVuaGVpdF90b19rZWx2aW4gPC0gZnVuY3Rpb24odGVtcF9GKSB7CiAgdGVtcF9DIDwtIGZhaHJlbmhlaXRfdG9fY2Vsc2l1cyh0ZW1wX0YpCiAgdGVtcF9LIDwtIGNlbHNpdXNfdG9fa2VsdmluKHRlbXBfQykKICByZXR1cm4odGVtcF9LKQp9CgojIGZyZWV6aW5nIHBvaW50IG9mIHdhdGVyIGluIEtlbHZpbgpmYWhyZW5oZWl0X3RvX2tlbHZpbigzMi4wKQpgYGAKClRoaXMgaXMgb3VyIGZpcnN0IHRhc3RlIG9mIGhvdyBsYXJnZXIgcHJvZ3JhbXMgYXJlIGJ1aWx0OiB3ZSBkZWZpbmUgYmFzaWMKb3BlcmF0aW9ucywgdGhlbiBjb21iaW5lIHRoZW0gaW4gZXZlci1sYXJnZXIgY2h1bmtzIHRvIGdldCB0aGUgZWZmZWN0IHdlIHdhbnQuClJlYWwtbGlmZSBmdW5jdGlvbnMgd2lsbCB1c3VhbGx5IGJlIGxhcmdlciB0aGFuIHRoZSBvbmVzIHNob3duIGhlcmUtLXR5cGljYWxseSBoYWxmIGEgZG96ZW4gdG8gYSBmZXcgZG96ZW4gbGluZXMtLWJ1dCB0aGV5IHNob3VsZG4ndCBldmVyIGJlIG11Y2ggbG9uZ2VyIHRoYW4gdGhhdCwgb3IgdGhlIG5leHQgcGVyc29uIHdobyByZWFkcyBpdCB3b24ndCBiZSBhYmxlIHRvIHVuZGVyc3RhbmQgd2hhdCdzIGdvaW5nIG9uLgoKCiMjIEV4ZXJjaXNlOiBOYW1lZCBWYXJpYWJsZXMgYW5kIHRoZSBTY29wZSBvZiBWYXJpYWJsZXMKRnVuY3Rpb25zIGNhbiBhY2NlcHQgYXJndW1lbnRzIGV4cGxpY2l0bHkgYXNzaWduZWQgdG8gYSB2YXJpYWJsZSBuYW1lIGluCnRoZSBmdW5jdGlvbiBjYWxsIGBmdW5jdGlvbk5hbWUodmFyaWFibGUgPSB2YWx1ZSlgLCBhcyB3ZWxsIGFzIGFyZ3VtZW50cyBieQpvcmRlcjoKCmBgYHtyfQppbnB1dF8xIDwtIDIwCm15U3VtIDwtIGZ1bmN0aW9uKGlucHV0XzEsIGlucHV0XzIgPSAxMCkgewogIG91dHB1dCA8LSBpbnB1dF8xICsgaW5wdXRfMgogIHJldHVybihvdXRwdXQpCn0KYGBgCgoxLiAgR2l2ZW4gdGhlIGFib3ZlIGNvZGUgd2FzIHJ1biwgd2hpY2ggdmFsdWUgZG9lcyBgbXlTdW0oaW5wdXRfMSA9IDEsIDMpYCBwcm9kdWNlPwogICAgMS4gNAogICAgMi4gMTEKICAgIDMuIDIzCiAgICA0LiAzMAoyLiAgSWYgYG15U3VtKDMpYCByZXR1cm5zIDEzLCB3aHkgZG9lcyBgbXlTdW0oaW5wdXRfMiA9IDMpYCByZXR1cm4gYW4gZXJyb3I/CgoKCiMjIFRlc3RpbmcsIEVycm9yIEhhbmRsaW5nLCBhbmQgRG9jdW1lbnRpbmcKCk9uY2Ugd2Ugc3RhcnQgcHV0dGluZyB0aGluZ3MgaW4gZnVuY3Rpb25zIHNvIHRoYXQgd2UgY2FuIHJlLXVzZSB0aGVtLCB3ZSBuZWVkIHRvIHN0YXJ0IHRlc3RpbmcgdGhhdCB0aG9zZSBmdW5jdGlvbnMgYXJlIHdvcmtpbmcgY29ycmVjdGx5LgpUbyBzZWUgaG93IHRvIGRvIHRoaXMsIGxldCdzIHdyaXRlIGEgZnVuY3Rpb24gdG8gY2VudGVyIGEgZGF0YXNldCBhcm91bmQgYQpwYXJ0aWN1bGFyIG1pZHBvaW50OgoKYGBge3J9CmNlbnRlciA8LSBmdW5jdGlvbihkYXRhLCBtaWRwb2ludCkgewogIG5ld19kYXRhIDwtIChkYXRhIC0gbWVhbihkYXRhKSkgKyBtaWRwb2ludAogIHJldHVybihuZXdfZGF0YSkKfQpgYGAKCldlIGNvdWxkIHRlc3QgdGhpcyBvbiBvdXIgYWN0dWFsIGRhdGEsIGJ1dCBzaW5jZSB3ZSBkb24ndCBrbm93IHdoYXQgdGhlIHZhbHVlcyBvdWdodCB0byBiZSwgaXQgd2lsbCBiZSBoYXJkIHRvIHRlbGwgaWYgdGhlIHJlc3VsdCB3YXMgY29ycmVjdC4KSW5zdGVhZCwgbGV0J3MgY3JlYXRlIGEgdmVjdG9yIG9mIDBzIGFuZCB0aGVuIGNlbnRlciB0aGF0IGFyb3VuZCAzLgpUaGlzIHdpbGwgbWFrZSBpdCBzaW1wbGUgdG8gc2VlIGlmIG91ciBmdW5jdGlvbiBpcyB3b3JraW5nIGFzIGV4cGVjdGVkOgoKYGBge3IsIH0KeiA8LSBjKDAsIDAsIDAsIDApCnoKY2VudGVyKHosIDMpCmBgYAoKIyMjIERhdGFzZXQKV2UgYXJlIHN0dWR5aW5nIGluZmxhbW1hdGlvbiBpbiBwYXRpZW50cyB3aG8gaGF2ZSBiZWVuIGdpdmVuIGEgbmV3IHRyZWF0bWVudCBmb3IKYXJ0aHJpdGlzLCBhbmQgbmVlZCB0byBhbmFseXplIHRoZSBmaXJzdCBkb3plbiBkYXRhIHNldHMuClRoZSBkYXRhIHNldHMgYXJlIHN0b3JlZCBpbiAqKmNvbW1hLXNlcGFyYXRlZCB2YWx1ZXMqKgooQ1NWKSBmb3JtYXQuIEVhY2ggcm93IGhvbGRzIHRoZSBvYnNlcnZhdGlvbnMgZm9yIGp1c3Qgb25lIHBhdGllbnQuIEVhY2ggY29sdW1uCmhvbGRzIHRoZSBpbmZsYW1tYXRpb24gbWVhc3VyZWQgaW4gYSBkYXksIHNvIHdlIGhhdmUgYSBzZXQgb2YgdmFsdWVzIGluCnN1Y2Nlc3NpdmUgZGF5cy4KClRoYXQgbG9va3MgcmlnaHQsIHNvIGxldCdzIHRyeSBjZW50ZXIgb24gb3VyIHJlYWwgZGF0YS4gV2UnbGwgY2VudGVyIHRoZSBpbmZsYW1tYXRpb24gZGF0YSBmcm9tIGRheSA0IGFyb3VuZCAwOgpbZG93bmxvYWQgdGhpc10oZGF0YS9pbmZsYW1tYXRpb24tMDEuY3N2KQoKYGBge3J9CmRhdCA8LSByZWFkLmNzdihmaWxlID0gImRhdGEvaW5mbGFtbWF0aW9uLTAxLmNzdiIsIGhlYWRlciA9IEZBTFNFKQpjZW50ZXJlZCA8LSBjZW50ZXIoZGF0WywgNF0sIDApCmhlYWQoY2VudGVyZWQpCmBgYAoKSXQncyBoYXJkIHRvIHRlbGwgZnJvbSB0aGUgZGVmYXVsdCBvdXRwdXQgd2hldGhlciB0aGUgcmVzdWx0IGlzIGNvcnJlY3QsIGJ1dCB0aGVyZSBhcmUgYSBmZXcgc2ltcGxlIHRlc3RzIHRoYXQgd2lsbCByZWFzc3VyZSB1czoKCmBgYHtyfQpkYXQgPC0gcmVhZC5jc3YoZmlsZSA9ICJkYXRhL2luZmxhbW1hdGlvbi0wMS5jc3YiLCBoZWFkZXIgPSBGQUxTRSkKIyBvcmlnaW5hbCBtZWFuCm1lYW4oZGF0WywgNF0pCiMgY2VudGVyZWQgbWVhbgptZWFuKGNlbnRlcmVkKQpgYGAKClRoYXQgc2VlbXMgcmlnaHQ6IHRoZSBvcmlnaW5hbCBtZWFuIHdhcyBhYm91dCBgciByb3VuZChtZWFuKGRhdFssIDRdKSwgMilgIGFuZCB0aGUgbWVhbiBvZiB0aGUgY2VudGVyZWQgZGF0YSBpcyBgciBtZWFuKGNlbnRlcmVkKWAuCldlIGNhbiBldmVuIGdvIGZ1cnRoZXIgYW5kIGNoZWNrIHRoYXQgdGhlIHN0YW5kYXJkIGRldmlhdGlvbiBoYXNuJ3QgY2hhbmdlZDoKCmBgYHtyfQojIG9yaWdpbmFsIHN0YW5kYXJkIGRldmlhdGlvbgpzZChkYXRbLCA0XSkKIyBjZW50ZXJlZCBzdGFuZGFyZCBkZXZpYXRpb24Kc2QoY2VudGVyZWQpCmBgYAoKVGhvc2UgdmFsdWVzIGxvb2sgdGhlIHNhbWUsIGJ1dCB3ZSBwcm9iYWJseSB3b3VsZG4ndCBub3RpY2UgaWYgdGhleSB3ZXJlIGRpZmZlcmVudCBpbiB0aGUgc2l4dGggZGVjaW1hbCBwbGFjZS4KTGV0J3MgZG8gdGhpcyBpbnN0ZWFkOgoKYGBge3J9CiMgZGlmZmVyZW5jZSBpbiBzdGFuZGFyZCBkZXZpYXRpb25zIGJlZm9yZSBhbmQgYWZ0ZXIKc2QoZGF0WywgNF0pIC0gc2QoY2VudGVyZWQpCmBgYAoKU29tZXRpbWVzLCBhIHZlcnkgc21hbGwgZGlmZmVyZW5jZSBjYW4gYmUgZGV0ZWN0ZWQgZHVlIHRvIHJvdW5kaW5nIGF0IHZlcnkgbG93IGRlY2ltYWwgcGxhY2VzLgpSIGhhcyBhIHVzZWZ1bCBmdW5jdGlvbiBmb3IgY29tcGFyaW5nIHR3byBvYmplY3RzIGFsbG93aW5nIGZvciByb3VuZGluZyBlcnJvcnMsIGBhbGwuZXF1YWxgOgoKYGBge3J9CmFsbC5lcXVhbChzZChkYXRbLCA0XSksIHNkKGNlbnRlcmVkKSkKYGBgCgpJdCdzIHN0aWxsIHBvc3NpYmxlIHRoYXQgb3VyIGZ1bmN0aW9uIGlzIHdyb25nLCBidXQgaXQgc2VlbXMgdW5saWtlbHkgZW5vdWdoIHRoYXQgd2Ugc2hvdWxkIHByb2JhYmx5IGdldCBiYWNrIHRvIGRvaW5nIG91ciBhbmFseXNpcy4KSG93ZXZlciwgdGhlcmUgYXJlIHR3byBvdGhlciBpbXBvcnRhbnQgdGFza3MgdG8gY29uc2lkZXI6IDEpIHdlIHNob3VsZCBlbnN1cmUgb3VyIGZ1bmN0aW9uIGNhbiBwcm92aWRlIGluZm9ybWF0aXZlIGVycm9ycyB3aGVuIG5lZWRlZCwgYW5kIDIpIHdlIHNob3VsZCB3cml0ZSBzb21lICoqZG9jdW1lbnRhdGlvbioqIGZvciBvdXIgZnVuY3Rpb24gdG8gcmVtaW5kIG91cnNlbHZlcyBsYXRlciB3aGF0IGl0J3MgZm9yIGFuZCBob3cgdG8gdXNlIGl0LgoKYGBge3J9CmRhdFssIDRdIDwtIGNlbnRlcmVkCndyaXRlLnRhYmxlKGRhdCwgZmlsZSA9ICJpbmZsYW1tYXRpb24tY2VudGVyZWQuY3N2IiwgY29sLm5hbWVzID0gRkFMU0UsIHJvdy5uYW1lcyA9IEZBTFNFLCBxdW90ZSA9IEZBTFNFLCBzZXAgPSAiLCIpCmBgYAoKIyMjIyBEb2N1bWVudGF0aW9uCgpBIGNvbW1vbiB3YXkgdG8gcHV0IGRvY3VtZW50YXRpb24gaW4gc29mdHdhcmUgaXMgdG8gYWRkICoqY29tbWVudHMqKiBsaWtlIHRoaXM6CgpgYGB7cn0KY2VudGVyIDwtIGZ1bmN0aW9uKGRhdGEsIG1pZHBvaW50KSB7CiAgIyByZXR1cm4gYSBuZXcgdmVjdG9yIGNvbnRhaW5pbmcgdGhlIG9yaWdpbmFsIGRhdGEgY2VudGVyZWQgYXJvdW5kIHRoZQogICMgbWlkcG9pbnQuCiAgIyBFeGFtcGxlOiBjZW50ZXIoYygxLCAyLCAzKSwgMCkgPT4gYygtMSwgMCwgMSkKICBuZXdfZGF0YSA8LSAoZGF0YSAtIG1lYW4oZGF0YSkpICsgbWlkcG9pbnQKICByZXR1cm4obmV3X2RhdGEpCn0KYGBgCgojIyBXcml0aW5nIERvY3VtZW50YXRpb24KCkZvcm1hbCBkb2N1bWVudGF0aW9uIGZvciBSIGZ1bmN0aW9ucyBpcyB3cml0dGVuIGluIHNlcGFyYXRlIGAuUmRgIHVzaW5nIGEKbWFya3VwIGxhbmd1YWdlIHNpbWlsYXIgdG8gW0xhVGVYXVtdLiBZb3Ugc2VlIHRoZSByZXN1bHQgb2YgdGhpcyBkb2N1bWVudGF0aW9uCndoZW4geW91IGxvb2sgYXQgdGhlIGhlbHAgZmlsZSBmb3IgYSBnaXZlbiBmdW5jdGlvbiwgZS5nLiBgP3JlYWQuY3N2YC4KVGhlIFtyb3h5Z2VuMl1bXSBwYWNrYWdlIGFsbG93cyBSIGNvZGVycyB0byB3cml0ZSBkb2N1bWVudGF0aW9uIGFsb25nc2lkZQp0aGUgZnVuY3Rpb24gY29kZSBhbmQgdGhlbiBwcm9jZXNzIGl0IGludG8gdGhlIGFwcHJvcHJpYXRlIGAuUmRgIGZpbGVzLgpZb3Ugd2lsbCB3YW50IHRvIHN3aXRjaCB0byB0aGlzIG1vcmUgZm9ybWFsIG1ldGhvZCBvZiB3cml0aW5nIGRvY3VtZW50YXRpb24Kd2hlbiB5b3Ugc3RhcnQgd3JpdGluZyBtb3JlIGNvbXBsaWNhdGVkIFIgcHJvamVjdHMuCgoKW0xhVGVYXTogaHR0cHM6Ly93d3cubGF0ZXgtcHJvamVjdC5vcmcvCltyb3h5Z2VuMl06IGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3BhY2thZ2U9cm94eWdlbjIvdmlnbmV0dGVzL3JkLmh0bWwKCmBgYHtyIGNoYWxsZW5nZS1tb3JlLWFkdmFuY2VkLWZ1bmN0aW9uLWFuYWx5emUsIGV2YWw9RkFMU0UsIGluY2x1ZGU9RkFMU0V9CmFuYWx5emUgPC0gZnVuY3Rpb24oZmlsZW5hbWUpIHsKICAjIFBsb3RzIHRoZSBhdmVyYWdlLCBtaW4sIGFuZCBtYXggaW5mbGFtbWF0aW9uIG92ZXIgdGltZS4KICAjIElucHV0IGlzIGNoYXJhY3RlciBzdHJpbmcgb2YgYSBjc3YgZmlsZS4KICBkYXQgPC0gcmVhZC5jc3YoZmlsZSA9IGZpbGVuYW1lLCBoZWFkZXIgPSBGQUxTRSkKICBhdmdfZGF5X2luZmxhbW1hdGlvbiA8LSBhcHBseShkYXQsIDIsIG1lYW4pCiAgcGxvdChhdmdfZGF5X2luZmxhbW1hdGlvbikKICBtYXhfZGF5X2luZmxhbW1hdGlvbiA8LSBhcHBseShkYXQsIDIsIG1heCkKICBwbG90KG1heF9kYXlfaW5mbGFtbWF0aW9uKQogIG1pbl9kYXlfaW5mbGFtbWF0aW9uIDwtIGFwcGx5KGRhdCwgMiwgbWluKQogIHBsb3QobWluX2RheV9pbmZsYW1tYXRpb24pCn0KYGBgCgojIyBFeGVyY2lzZTogRnVuY3Rpb25zIHRvIENyZWF0ZSBHcmFwaHMKV3JpdGUgYSBmdW5jdGlvbiBjYWxsZWQgYGFuYWx5emVgIHRoYXQgdGFrZXMgYSBmaWxlbmFtZSBhcyBhbiBhcmd1bWVudAphbmQgZGlzcGxheXMgdGhlIHRocmVlIGdyYXBocyBwcm9kdWNlZCBpbiB0aGUgKGF2ZXJhZ2UsIG1pbiBhbmQgbWF4IGluZmxhbW1hdGlvbiBvdmVyIHRpbWUpLgpgYW5hbHl6ZSgiZGF0YS9pbmZsYW1tYXRpb24tMDEuY3N2IilgIHNob3VsZCBwcm9kdWNlIHRoZSBncmFwaHMgYWxyZWFkeSBzaG93biwKd2hpbGUgYGFuYWx5emUoImRhdGEvaW5mbGFtbWF0aW9uLTAyLmNzdiIpYCBzaG91bGQgcHJvZHVjZSBjb3JyZXNwb25kaW5nIGdyYXBocyBmb3IgdGhlIHNlY29uZCBkYXRhIHNldC4KQmUgc3VyZSB0byBkb2N1bWVudCB5b3VyIGZ1bmN0aW9uIHdpdGggY29tbWVudHMuCltkb3dubG9hZCB0aGlzXShkYXRhL2luZmxhbW1hdGlvbi0wMi5jc3YpCgojIyMgU2F2aW5nIFBsb3RzIHRvIGEgRmlsZQoKU28gZmFyLCB3ZSBoYXZlIGJ1aWx0IGEgZnVuY3Rpb24gYGFuYWx5emVgIHRvIHBsb3Qgc3VtbWFyeSBzdGF0aXN0aWNzIG9mIHRoZSBpbmZsYW1tYXRpb24gZGF0YToKCmBgYHtyIGFuYWx5emV9CmFuYWx5emUgPC0gZnVuY3Rpb24oZmlsZW5hbWUpIHsKICAjIFBsb3RzIHRoZSBhdmVyYWdlLCBtaW4sIGFuZCBtYXggaW5mbGFtbWF0aW9uIG92ZXIgdGltZS4KICAjIElucHV0IGlzIGNoYXJhY3RlciBzdHJpbmcgb2YgYSBjc3YgZmlsZS4KICBkYXQgPC0gcmVhZC5jc3YoZmlsZSA9IGZpbGVuYW1lLCBoZWFkZXIgPSBGQUxTRSkKICBhdmdfZGF5X2luZmxhbW1hdGlvbiA8LSBhcHBseShkYXQsIDIsIG1lYW4pCiAgcGxvdChhdmdfZGF5X2luZmxhbW1hdGlvbikKICBtYXhfZGF5X2luZmxhbW1hdGlvbiA8LSBhcHBseShkYXQsIDIsIG1heCkKICBwbG90KG1heF9kYXlfaW5mbGFtbWF0aW9uKQogIG1pbl9kYXlfaW5mbGFtbWF0aW9uIDwtIGFwcGx5KGRhdCwgMiwgbWluKQogIHBsb3QobWluX2RheV9pbmZsYW1tYXRpb24pCn0KYGBgCgpBbmQgYWxzbyBidWlsdCB0aGUgZnVuY3Rpb24gYGFuYWx5emVfYWxsYCB0byBhdXRvbWF0ZSB0aGUgcHJvY2Vzc2luZyBvZiBlYWNoIGRhdGEgZmlsZToKCmBgYHtyIGFuYWx5emVfYWxsfQphbmFseXplX2FsbCA8LSBmdW5jdGlvbihmb2xkZXIgPSAiZGF0YSIsIHBhdHRlcm4pIHsKICAjIFJ1bnMgdGhlIGZ1bmN0aW9uIGFuYWx5emUgZm9yIGVhY2ggZmlsZSBpbiB0aGUgZ2l2ZW4gZm9sZGVyCiAgIyB0aGF0IGNvbnRhaW5zIHRoZSBnaXZlbiBwYXR0ZXJuLgogIGZpbGVuYW1lcyA8LSBsaXN0LmZpbGVzKHBhdGggPSBmb2xkZXIsIHBhdHRlcm4gPSBwYXR0ZXJuLCBmdWxsLm5hbWVzID0gVFJVRSkKICBmb3IgKGYgaW4gZmlsZW5hbWVzKSB7CiAgICBhbmFseXplKGYpCiAgfQp9CmBgYAoKV2hpbGUgdGhlc2UgYXJlIHVzZWZ1bCBpbiBhbiBpbnRlcmFjdGl2ZSBSIHNlc3Npb24sIHdoYXQgaWYgd2Ugd2FudCB0byBzZW5kIG91ciByZXN1bHRzIHRvIG91ciBjb2xsYWJvcmF0b3JzPwpTaW5jZSB3ZSBjdXJyZW50bHkgaGF2ZSAxMiBkYXRhIHNldHMsIHJ1bm5pbmcgYGFuYWx5emVfYWxsYCBjcmVhdGVzIDM2IHBsb3RzLgpTYXZpbmcgZWFjaCBvZiB0aGVzZSBpbmRpdmlkdWFsbHkgd291bGQgYmUgdGVkaW91cyBhbmQgZXJyb3ItcHJvbmUuCkFuZCBpbiB0aGUgbGlrZWx5IHNpdHVhdGlvbiB0aGF0IHdlIHdhbnQgdG8gY2hhbmdlIGhvdyB0aGUgZGF0YSBpcyBwcm9jZXNzZWQgb3IgdGhlIGxvb2sgb2YgdGhlIHBsb3RzLCB3ZSB3b3VsZCBoYXZlIHRvIG9uY2UgYWdhaW4gc2F2ZSBhbGwgMzYgYmVmb3JlIHNoYXJpbmcgdGhlIHVwZGF0ZWQgcmVzdWx0cyB3aXRoIG91ciBjb2xsYWJvcmF0b3JzLgoKSGVyZSdzIGhvdyB3ZSBjYW4gc2F2ZSBhbGwgdGhyZWUgcGxvdHMgb2YgdGhlIGZpcnN0IGluZmxhbW1hdGlvbiBkYXRhIHNldCBpbiBhIHBkZiBmaWxlOgoKYGBge3IsIHJlc3VsdHM9J2hpZGUnfQpwZGYoImluZmxhbW1hdGlvbi0wMS5wZGYiKQphbmFseXplKCJkYXRhL2luZmxhbW1hdGlvbi0wMS5jc3YiKQpkZXYub2ZmKCkKYGBgCgpUaGUgZnVuY3Rpb24gYHBkZmAgcmVkaXJlY3RzIGFsbCB0aGUgcGxvdHMgZ2VuZXJhdGVkIGJ5IFIgaW50byBhIHBkZiBmaWxlLCB3aGljaCBpbiB0aGlzIGNhc2Ugd2UgaGF2ZSBuYW1lZCAiaW5mbGFtbWF0aW9uLTAxLnBkZiIuCkFmdGVyIHdlIGFyZSBkb25lIGdlbmVyYXRpbmcgdGhlIHBsb3RzIHRvIGJlIHNhdmVkIGluIHRoZSBwZGYgZmlsZSwgd2Ugc3RvcCBSIGZyb20gcmVkaXJlY3RpbmcgcGxvdHMgd2l0aCB0aGUgZnVuY3Rpb24gYGRldi5vZmZgLgoKPiAjIyBPdmVyd3JpdGluZyBQbG90cwo+Cj4gSWYgeW91IHJ1biBgcGRmYCBtdWx0aXBsZSB0aW1lcyB3aXRob3V0IHJ1bm5pbmcgYGRldi5vZmZgLCB5b3Ugd2lsbCBzYXZlIHBsb3RzIHRvIHRoZSBtb3N0IHJlY2VudGx5IG9wZW5lZCBmaWxlLgo+IEhvd2V2ZXIsIHlvdSB3b24ndCBiZSBhYmxlIHRvIG9wZW4gdGhlIHByZXZpb3VzIHBkZiBmaWxlcyBiZWNhdXNlIHRoZSBjb25uZWN0aW9ucyB3ZXJlIG5vdCBjbG9zZWQuCj4gSW4gb3JkZXIgdG8gZ2V0IG91dCBvZiB0aGlzIHNpdHVhdGlvbiwgeW91J2xsIG5lZWQgdG8gcnVuIGBkZXYub2ZmYCB1bnRpbCBhbGwgdGhlIHBkZiBjb25uZWN0aW9ucyBhcmUgY2xvc2VkLgo+IFlvdSBjYW4gY2hlY2sgeW91ciBjdXJyZW50IHN0YXR1cyB1c2luZyB0aGUgZnVuY3Rpb24gYGRldi5jdXJgLgo+IElmIGl0IHNheXMgInBkZiIsIGFsbCB5b3VyIHBsb3RzIGFyZSBiZWluZyBzYXZlZCBpbiB0aGUgbGFzdCBwZGYgc3BlY2lmaWVkLgo+IElmIGl0IHNheXMgIm51bGwgZGV2aWNlIiBvciAiUlN0dWRpb0dEIiwgdGhlIHBsb3RzIHdpbGwgYmUgdmlzdWFsaXplZCBub3JtYWxseS4KezogLmNhbGxvdXR9CgpXZSBjYW4gdXBkYXRlIHRoZSBgYW5hbHl6ZWAgZnVuY3Rpb24gc28gdGhhdCBpdCBhbHdheXMgc2F2ZXMgdGhlIHBsb3RzIGluIGEgcGRmLgpCdXQgdGhhdCB3b3VsZCBtYWtlIGl0IG1vcmUgZGlmZmljdWx0IHRvIGludGVyYWN0aXZlbHkgdGVzdCBvdXQgbmV3IGNoYW5nZXMuCkl0IHdvdWxkIGJlIGlkZWFsIGlmIGBhbmFseXplYCB3b3VsZCBlaXRoZXIgc2F2ZSBvciBub3Qgc2F2ZSB0aGUgcGxvdHMgYmFzZWQgb24gaXRzIGlucHV0LgoKYGBge3Iga25pdF9leGl0LCBpbmNsdWRlPUYsIGVjaG89Rn0Ka25pdF9leGl0KCkKYGBgCg==</div>
 
