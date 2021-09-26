@@ -7,7 +7,8 @@ title: "Lecture 3: ChemmineR"
 options(width=100, max.print=1000)
 knitr::opts_chunk$set(
     eval=as.logical(Sys.getenv("KNITR_EVAL", "TRUE")),
-    cache=as.logical(Sys.getenv("KNITR_CACHE", "TRUE")))
+    cache=as.logical(Sys.getenv("KNITR_CACHE", "TRUE"))
+    )
 ```
 
 ```{r setup, echo=FALSE, messages=FALSE, warnings=FALSE}
@@ -18,8 +19,6 @@ suppressPackageStartupMessages({
 	 #library(ChemmineOB)
 })
 ```
-
-Note: the most recent version of this tutorial can be found <a href="https://htmlpreview.github.io/?https://github.com/girke-lab/ChemmineR/blob/master/vignettes/ChemmineR.html">here</a> and a short overview slide show [here](http://faculty.ucr.edu/~tgirke/HTML_Presentations/Manuals/Workshop_Dec_5_8_2014/Rcheminfo/Cheminfo.pdf).
 
 
 `ChemmineR` is a cheminformatics package for analyzing

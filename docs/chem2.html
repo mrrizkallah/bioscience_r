@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>Lecture 3: ChemmineR</title>
 
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,6 +34,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -47,6 +48,100 @@
     </style>
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 <style type="text/css">
@@ -388,13 +483,407 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Lecture 3: ChemmineR</h1>
 
 </div>
 
 
+<p><code>ChemmineR</code> is a cheminformatics package for analyzing drug-like small molecule data in R. Its latest version contains functions for efficient processing of large numbers of small molecules, physicochemical/structural property predictions, structural similarity searching, classification and clustering of compound libraries with a wide spectrum of algorithms.</p>
+<div id="installation" class="section level2">
+<h2>## Installation</h2>
+<p>The R software for running ChemmineR can be downloaded from CRAN (<a href="http://cran.at.r-project.org/" class="uri">http://cran.at.r-project.org/</a>). The ChemmineR package can be installed from R with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a> <span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="dt">quietly=</span><span class="ot">TRUE</span>))</span>
+<span id="cb1-2"><a href="#cb1-2"></a>     <span class="kw">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;ChemmineR&quot;</span>)</span></code></pre></div>
+</div>
+<div id="loading-the-package-and-documentation" class="section level2">
+<h2>Loading the Package and Documentation</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a> <span class="kw">library</span>(<span class="st">&quot;ChemmineR&quot;</span>) <span class="co"># Loads the package</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a> <span class="kw">library</span>(<span class="dt">help=</span><span class="st">&quot;ChemmineR&quot;</span>) <span class="co"># Lists all functions and classes</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a> <span class="kw">vignette</span>(<span class="st">&quot;ChemmineR&quot;</span>) <span class="co"># Opens this PDF manual from R</span></span></code></pre></div>
+</div>
+<div id="five-minute-tutorial" class="section level2">
+<h2>## Five Minute Tutorial</h2>
+<p>The following code gives an overview of the most important functionalities provided by <code>ChemmineR</code>. Copy and paste of the commands into the R console will demonstrate their utilities.</p>
+<p>Create Instances of <code>SDFset</code> class:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a> <span class="kw">data</span>(sdfsample)</span>
+<span id="cb4-2"><a href="#cb4-2"></a> sdfset &lt;-<span class="st"> </span>sdfsample</span>
+<span id="cb4-3"><a href="#cb4-3"></a> sdfset <span class="co"># Returns summary of SDFset</span></span></code></pre></div>
+<pre><code>## An instance of &quot;SDFset&quot; with 100 molecules</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a> sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="co"># Subsetting of object</span></span></code></pre></div>
+<pre><code>## An instance of &quot;SDFset&quot; with 4 molecules</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a> sdfset[[<span class="dv">1</span>]] <span class="co"># Returns summarized content of one SDF</span></span></code></pre></div>
+<pre><code>## An instance of &quot;SDF&quot;
+## 
+## &lt;&lt;header&gt;&gt;
+##                             Molecule_Name                                    Source 
+##                                  &quot;650001&quot;                  &quot;  -OEChem-07071010512D&quot; 
+##                                   Comment                               Counts_Line 
+##                                        &quot;&quot; &quot; 61 64  0     0  0  0  0  0  0999 V2000&quot; 
+## 
+## &lt;&lt;atomblock&gt;&gt;
+##           C1      C2  C3  C5  C6  C7  C8  C9 C10 C11 C12 C13 C14 C15 C16
+## O_1   7.0468  0.0839   0   0   0   0   0   0   0   0   0   0   0   0   0
+## O_2  12.2708  1.0492   0   0   0   0   0   0   0   0   0   0   0   0   0
+## ...      ...     ... ... ... ... ... ... ... ... ... ... ... ... ... ...
+## H_60  1.8411 -1.5985   0   0   0   0   0   0   0   0   0   0   0   0   0
+## H_61  2.6597 -1.2843   0   0   0   0   0   0   0   0   0   0   0   0   0
+## 
+## &lt;&lt;bondblock&gt;&gt;
+##      C1  C2  C3  C4  C5  C6  C7
+## 1     1  16   2   0   0   0   0
+## 2     2  23   1   0   0   0   0
+## ... ... ... ... ... ... ... ...
+## 63   33  60   1   0   0   0   0
+## 64   33  61   1   0   0   0   0
+## 
+## &lt;&lt;datablock&gt;&gt; (33 data items)
+##           PUBCHEM_COMPOUND_CID PUBCHEM_COMPOUND_CANONICALIZED      PUBCHEM_CACTVS_COMPLEXITY 
+##                       &quot;650001&quot;                            &quot;1&quot;                          &quot;700&quot; 
+##  PUBCHEM_CACTVS_HBOND_ACCEPTOR                                
+##                            &quot;7&quot;                          &quot;...&quot;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a> <span class="kw">view</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># Returns summarized content of many SDFs, not printed here</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a> <span class="kw">as</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="st">&quot;list&quot;</span>) <span class="co"># Returns complete content of many SDFs, not printed here</span></span></code></pre></div>
+<p>An <code>SDFset</code> is created during the import of an SD file:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a> sdfset &lt;-<span class="st"> </span><span class="kw">read.SDFset</span>(<span class="st">&quot;http://faculty.ucr.edu/~tgirke/Documents/R_BioCond/Samples/sdfsample.sdf&quot;</span>)</span></code></pre></div>
+<p>Miscellaneous accessor methods for <code>SDFset</code> container:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a> <span class="kw">header</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># Not printed here</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a> <span class="kw">header</span>(sdfset[[<span class="dv">1</span>]])</span></code></pre></div>
+<pre><code>##                             Molecule_Name                                    Source 
+##                                  &quot;650001&quot;                  &quot;  -OEChem-07071010512D&quot; 
+##                                   Comment                               Counts_Line 
+##                                        &quot;&quot; &quot; 61 64  0     0  0  0  0  0  0999 V2000&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a> <span class="kw">atomblock</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># Not printed here</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">atomblock</span>(sdfset[[<span class="dv">1</span>]])[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,]</span></code></pre></div>
+<pre><code>##          C1     C2 C3 C5 C6 C7 C8 C9 C10 C11 C12 C13 C14 C15 C16
+## O_1  7.0468 0.0839  0  0  0  0  0  0   0   0   0   0   0   0   0
+## O_2 12.2708 1.0492  0  0  0  0  0  0   0   0   0   0   0   0   0
+## O_3 12.2708 3.1186  0  0  0  0  0  0   0   0   0   0   0   0   0
+## O_4  7.9128 2.5839  0  0  0  0  0  0   0   0   0   0   0   0   0</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">bondblock</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># Not printed here</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a> <span class="kw">bondblock</span>(sdfset[[<span class="dv">1</span>]])[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,]</span></code></pre></div>
+<pre><code>##   C1 C2 C3 C4 C5 C6 C7
+## 1  1 16  2  0  0  0  0
+## 2  2 23  1  0  0  0  0
+## 3  2 27  1  0  0  0  0
+## 4  3 25  1  0  0  0  0</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a> <span class="kw">datablock</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># Not printed here</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a> <span class="kw">datablock</span>(sdfset[[<span class="dv">1</span>]])[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>##           PUBCHEM_COMPOUND_CID PUBCHEM_COMPOUND_CANONICALIZED      PUBCHEM_CACTVS_COMPLEXITY 
+##                       &quot;650001&quot;                            &quot;1&quot;                          &quot;700&quot; 
+##  PUBCHEM_CACTVS_HBOND_ACCEPTOR 
+##                            &quot;7&quot;</code></pre>
+<p>Assigning compound IDs and keeping them unique:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a> <span class="kw">cid</span>(sdfset)[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="co"># Returns IDs from SDFset object</span></span></code></pre></div>
+<pre><code>## [1] &quot;CMP1&quot; &quot;CMP2&quot; &quot;CMP3&quot; &quot;CMP4&quot;</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a> <span class="kw">sdfid</span>(sdfset)[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="co"># Returns IDs from SD file header block</span></span></code></pre></div>
+<pre><code>## [1] &quot;650001&quot; &quot;650002&quot; &quot;650003&quot; &quot;650004&quot;</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a> unique_ids &lt;-<span class="st"> </span><span class="kw">makeUnique</span>(<span class="kw">sdfid</span>(sdfset))</span></code></pre></div>
+<pre><code>## [1] &quot;No duplicates detected!&quot;</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a> <span class="kw">cid</span>(sdfset) &lt;-<span class="st"> </span>unique_ids</span></code></pre></div>
+<p>Converting the data blocks in an <code>SDFset</code> to a matrix:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a> blockmatrix &lt;-<span class="st"> </span><span class="kw">datablock2ma</span>(<span class="dt">datablocklist=</span><span class="kw">datablock</span>(sdfset)) <span class="co"># Converts data block to matrix</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a> numchar &lt;-<span class="st"> </span><span class="kw">splitNumChar</span>(<span class="dt">blockmatrix=</span>blockmatrix) <span class="co"># Splits to numeric and character matrix</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a> numchar[[<span class="dv">1</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="co"># Slice of numeric matrix</span></span></code></pre></div>
+<pre><code>##        PUBCHEM_COMPOUND_CID PUBCHEM_COMPOUND_CANONICALIZED
+## 650001               650001                              1
+## 650002               650002                              1</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a> numchar[[<span class="dv">2</span>]][<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">10</span><span class="op">:</span><span class="dv">11</span>] <span class="co"># Slice of character matrix</span></span></code></pre></div>
+<pre><code>##        PUBCHEM_MOLECULAR_FORMULA PUBCHEM_OPENEYE_CAN_SMILES                                     
+## 650001 &quot;C23H28N4O6&quot;              &quot;CC1=CC(=NO1)NC(=O)CCC(=O)N(CC(=O)NC2CCCC2)C3=CC4=C(C=C3)OCCO4&quot;
+## 650002 &quot;C18H23N5O3&quot;              &quot;CN1C2=C(C(=O)NC1=O)N(C(=N2)NCCCO)CCCC3=CC=CC=C3&quot;</code></pre>
+<p>Compute atom frequency matrix, molecular weight and formula:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a> propma &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">MF=</span><span class="kw">MF</span>(sdfset), <span class="dt">MW=</span><span class="kw">MW</span>(sdfset), <span class="kw">atomcountMA</span>(sdfset))</span>
+<span id="cb35-2"><a href="#cb35-2"></a> propma[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, ]</span></code></pre></div>
+<pre><code>##                 MF       MW  C  H N O S F Cl
+## 650001  C23H28N4O6 456.4916 23 28 4 6 0 0  0
+## 650002  C18H23N5O3 357.4069 18 23 5 3 0 0  0
+## 650003 C18H18N4O3S 370.4255 18 18 4 3 1 0  0
+## 650004 C21H27N5O5S 461.5346 21 27 5 5 1 0  0</code></pre>
+<p>Assign matrix data to data block:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a> <span class="kw">datablock</span>(sdfset) &lt;-<span class="st"> </span>propma</span>
+<span id="cb37-2"><a href="#cb37-2"></a> <span class="kw">datablock</span>(sdfset[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## $`650001`
+##           MF           MW            C            H            N            O            S 
+## &quot;C23H28N4O6&quot;   &quot;456.4916&quot;         &quot;23&quot;         &quot;28&quot;          &quot;4&quot;          &quot;6&quot;          &quot;0&quot; 
+##            F           Cl 
+##          &quot;0&quot;          &quot;0&quot;</code></pre>
+<p>String searching in <code>SDFset</code>:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a> <span class="kw">grepSDFset</span>(<span class="st">&quot;650001&quot;</span>, sdfset, <span class="dt">field=</span><span class="st">&quot;datablock&quot;</span>, <span class="dt">mode=</span><span class="st">&quot;subset&quot;</span>) <span class="co"># Returns summary view of matches. Not printed here.</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a> <span class="kw">grepSDFset</span>(<span class="st">&quot;650001&quot;</span>, sdfset, <span class="dt">field=</span><span class="st">&quot;datablock&quot;</span>, <span class="dt">mode=</span><span class="st">&quot;index&quot;</span>)</span></code></pre></div>
+<pre><code>## 1 1 1 1 1 1 1 1 1 
+## 1 2 3 4 5 6 7 8 9</code></pre>
+<p>Export SDFset to SD file:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a> <span class="kw">write.SDF</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.sdf&quot;</span>, <span class="dt">sig=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p>Plot molecule structure of one or many SDFs:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a> <span class="kw">plot</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">print=</span><span class="ot">FALSE</span>) <span class="co"># Plots structures to R graphics device</span></span></code></pre></div>
+<p><img src="chem2_files/figure-html/plotstruct-1.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a> <span class="kw">sdf.visualize</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># Compound viewing in web browser</span></span></code></pre></div>
+<div class="figure">
+<img src="visualizescreenshot-small.png" alt="" />
+<p class="caption">Figure: Visualization webpage created by calling <code>sdf.visualize</code>.</p>
+</div>
+<p>Structure similarity searching and clustering:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a> apset &lt;-<span class="st"> </span><span class="kw">sdf2ap</span>(sdfset) <span class="co"># Generate atom pair descriptor database for searching</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a> <span class="kw">data</span>(apset) <span class="co"># Load sample apset data provided by library.</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a> <span class="kw">cmp.search</span>(apset, apset[<span class="dv">1</span>], <span class="dt">type=</span><span class="dv">3</span>, <span class="dt">cutoff =</span> <span class="fl">0.3</span>, <span class="dt">quiet=</span><span class="ot">TRUE</span>) <span class="co"># Search apset database with single compound.</span></span></code></pre></div>
+<pre><code>##   index    cid    scores
+## 1     1 650001 1.0000000
+## 2    96 650102 0.3516643
+## 3    67 650072 0.3117569
+## 4    88 650094 0.3094629
+## 5    15 650015 0.3010753</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a> <span class="kw">cmp.cluster</span>(<span class="dt">db=</span>apset, <span class="dt">cutoff =</span> <span class="kw">c</span>(<span class="fl">0.65</span>, <span class="fl">0.5</span>), <span class="dt">quiet=</span><span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,] <span class="co"># Binning clustering using variable similarity cutoffs.</span></span></code></pre></div>
+<pre><code>## 
+## sorting result...</code></pre>
+<pre><code>##       ids CLSZ_0.65 CLID_0.65 CLSZ_0.5 CLID_0.5
+## 48 650049         2        48        2       48
+## 49 650050         2        48        2       48
+## 54 650059         2        54        2       54
+## 55 650060         2        54        2       54</code></pre>
+</div>
+<div id="molecular-structure-data" class="section level2">
+<h2>### Molecular Structure Data</h2>
+<p>Classes</p>
+<ul>
+<li><p><code>SDFstr</code>: intermediate string class to facilitate SD file import; not important for end user</p></li>
+<li><p><code>SDF</code>: container for single molecule imported from an SD file</p></li>
+<li><p><code>SDFset</code>: container for many SDF objects; most important structure container for end user</p></li>
+<li><p><code>SMI</code>: container for a single SMILES string</p></li>
+<li><p><code>SMIset</code>: container for many SMILES strings</p></li>
+</ul>
+<p>Functions/Methods (mainly for <code>SDFset</code> container, <code>SMIset</code> should be coerced with <code>smiles2sd</code> to <code>SDFset</code>)</p>
+<ul>
+<li><p>Accessor methods for <code>SDF/SDFset</code></p>
+<ul>
+<li><p>Object slots: <code>cid</code>, <code>header</code>, <code>atomblock</code>, <code>bondblock</code>, <code>datablock</code> (<code>sdfid</code>, <code>datablocktag</code>)</p></li>
+<li><p>Summary of <code>SDFset</code>: <code>view</code></p></li>
+<li><p>Matrix conversion of data block: <code>datablock2ma</code>, <code>splitNumChar</code></p></li>
+<li><p>String search in SDFset: <code>grepSDFset</code></p></li>
+</ul></li>
+<li><p>Coerce one class to another</p>
+<ul>
+<li>Standard syntax <code>as(..., "...")</code> works in most cases. For details see R help with <code>?"SDFset-class"</code>.</li>
+</ul></li>
+<li><p>Utilities</p>
+<ul>
+<li><p>Atom frequencies: <code>atomcountMA</code>, <code>atomcount</code></p></li>
+<li><p>Molecular weight: <code>MW</code></p></li>
+<li><p>Molecular formula: <code>MF</code></p></li>
+<li><p>…</p></li>
+</ul></li>
+<li><p>Compound structure depictions</p>
+<ul>
+<li><p>R graphics device: <code>plot</code>, <code>plotStruc</code></p></li>
+<li><p>Online: <code>cmp.visualize</code></p></li>
+</ul></li>
+</ul>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+<div id="structure-descriptor-data" class="section level2">
+<h2>Structure Descriptor Data</h2>
+<p>Classes</p>
+<ul>
+<li><p><code>AP</code>: container for atom pair descriptors of a single molecule</p></li>
+<li><p><code>APset</code>: container for many AP objects; most important structure descriptor container for end user</p></li>
+<li><p><code>FP</code>: container for fingerprint of a single molecule</p></li>
+<li><p><code>FPset</code>: container for fingerprints of many molecules, most important structure descriptor container for end user</p></li>
+</ul>
+<p>Functions/Methods</p>
+<ul>
+<li><p>Create <code>AP/APset</code> instances</p>
+<ul>
+<li><p>From <code>SDFset</code>: <code>sdf2ap</code></p></li>
+<li><p>From SD file: <code>cmp.parse</code></p></li>
+<li><p>Summary of <code>AP/APset</code>: <code>view</code>, <code>db.explain</code></p></li>
+</ul></li>
+<li><p>Accessor methods for AP/APset</p>
+<ul>
+<li>Object slots: <code>ap</code>, <code>cid</code></li>
+</ul></li>
+<li><p>Coerce one class to another</p>
+<ul>
+<li>Standard syntax <code>as(..., "...")</code> works in most cases. For details see R help with <code>?"APset-class"</code>.</li>
+</ul></li>
+<li><p>Structure Similarity comparisons and Searching</p>
+<ul>
+<li><p>Compute pairwise similarities : <code>cmp.similarity</code>, <code>fpSim</code></p></li>
+<li><p>Search APset database: <code>cmp.search</code>, <code>fpSim</code></p></li>
+</ul></li>
+<li><p>AP-based Structure Similarity Clustering</p>
+<ul>
+<li><p>Single-linkage binning clustering: <code>cmp.cluster</code></p></li>
+<li><p>Visualize clustering result with MDS: <code>cluster.visualize</code></p></li>
+<li><p>Size distribution of clusters: <code>cluster.sizestat</code></p></li>
+</ul></li>
+<li><p>Folding</p>
+<ul>
+<li>Fold a descriptor with <code>fold</code></li>
+<li>Query the number of times a descriptor has been folded: <code>foldCount</code></li>
+<li>Query the number of bits in a descriptor: <code>numBits</code></li>
+</ul></li>
+</ul>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+<div id="import-of-compounds" class="section level1">
+<h1>Import of Compounds</h1>
+<div id="sdf-import" class="section level2">
+<h2>SDF Import</h2>
+<p>The following gives an overview of the most important import/export functionalities for small molecules provided by <code>ChemmineR</code>. The given example creates an instance of the <code>SDFset</code> class using as sample data set the first 100 compounds from this PubChem SD file (SDF): Compound_00650001_00675000.sdf.gz (<a href="ftp://ftp.ncbi.nih.gov/pubchem/Compound/CURRENT-Full/SDF/" class="uri">ftp://ftp.ncbi.nih.gov/pubchem/Compound/CURRENT-Full/SDF/</a>).</p>
+<p>SDFs can be imported with the <code>read.SDFset</code> function:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a> sdfset &lt;-<span class="st"> </span><span class="kw">read.SDFset</span>(<span class="st">&quot;http://faculty.ucr.edu/~tgirke/Documents/R_BioCond/Samples/sdfsample.sdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a> <span class="kw">data</span>(sdfsample) <span class="co"># Loads the same SDFset provided by the library</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a> sdfset &lt;-<span class="st"> </span>sdfsample</span>
+<span id="cb52-3"><a href="#cb52-3"></a> valid &lt;-<span class="st"> </span><span class="kw">validSDF</span>(sdfset) <span class="co"># Identifies invalid SDFs in SDFset objects</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a> sdfset &lt;-<span class="st"> </span>sdfset[valid] <span class="co"># Removes invalid SDFs, if there are any</span></span></code></pre></div>
+<p>Import SD file into <code>SDFstr</code> container:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a> sdfstr &lt;-<span class="st"> </span><span class="kw">read.SDFstr</span>(<span class="st">&quot;http://faculty.ucr.edu/~tgirke/Documents/R_BioCond/Samples/sdfsample.sdf&quot;</span>)</span></code></pre></div>
+<p>Create <code>SDFset</code> from <code>SDFstr</code> class:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a> sdfstr &lt;-<span class="st"> </span><span class="kw">as</span>(sdfset, <span class="st">&quot;SDFstr&quot;</span>)</span>
+<span id="cb54-2"><a href="#cb54-2"></a> sdfstr</span></code></pre></div>
+<pre><code>## An instance of &quot;SDFstr&quot; with 100 molecules</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a> <span class="kw">as</span>(sdfstr, <span class="st">&quot;SDFset&quot;</span>)</span></code></pre></div>
+<pre><code>## An instance of &quot;SDFset&quot; with 100 molecules</code></pre>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+<div id="smiles-import" class="section level2">
+<h2>SMILES Import</h2>
+<p>The <code>read.SMIset</code> function imports one or many molecules from a SMILES file and stores them in a <code>SMIset</code> container. The input file is expected to contain one SMILES string per row with tab-separated compound identifiers at the end of each line. The compound identifiers are optional.</p>
+<p>Create sample SMILES file and then import it:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a> <span class="kw">data</span>(smisample); smiset &lt;-<span class="st"> </span>smisample</span>
+<span id="cb58-2"><a href="#cb58-2"></a> <span class="kw">write.SMI</span>(smiset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.smi&quot;</span>)</span>
+<span id="cb58-3"><a href="#cb58-3"></a> smiset &lt;-<span class="st"> </span><span class="kw">read.SMIset</span>(<span class="st">&quot;sub.smi&quot;</span>)</span></code></pre></div>
+<p>Inspect content of <code>SMIset</code>:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a> <span class="kw">data</span>(smisample) <span class="co"># Loads the same SMIset provided by the library</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a> smiset &lt;-<span class="st"> </span>smisample</span>
+<span id="cb59-3"><a href="#cb59-3"></a> smiset</span></code></pre></div>
+<pre><code>## An instance of &quot;SMIset&quot; with 100 molecules</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a> <span class="kw">view</span>(smiset[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## $`650001`
+## An instance of &quot;SMI&quot;
+## [1] &quot;O=C(NC1CCCC1)CN(c1cc2OCCOc2cc1)C(=O)CCC(=O)Nc1noc(c1)C&quot;
+## 
+## $`650002`
+## An instance of &quot;SMI&quot;
+## [1] &quot;O=c1[nH]c(=O)n(c2nc(n(CCCc3ccccc3)c12)NCCCO)C&quot;</code></pre>
+<p>Accessor functions:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a> <span class="kw">cid</span>(smiset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;650001&quot; &quot;650002&quot; &quot;650003&quot; &quot;650004&quot;</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a> smi &lt;-<span class="st"> </span><span class="kw">as.character</span>(smiset[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</span></code></pre></div>
+<p>Create <code>SMIset</code> from named character vector:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a> <span class="kw">as</span>(smi, <span class="st">&quot;SMIset&quot;</span>)</span></code></pre></div>
+<pre><code>## An instance of &quot;SMIset&quot; with 2 molecules</code></pre>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+</div>
+<div id="export-of-compounds" class="section level1">
+<h1>Export of Compounds</h1>
+<div id="sdf-export" class="section level2">
+<h2>SDF Export</h2>
+<p>Write objects of classes <code>SDFset/SDFstr/SDF</code> to SD file:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a> <span class="kw">write.SDF</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.sdf&quot;</span>)</span></code></pre></div>
+<p>Writing customized <code>SDFset</code> to file containing <code>ChemmineR</code> signature, IDs from <code>SDFset</code> and no data block:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a> <span class="kw">write.SDF</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.sdf&quot;</span>, <span class="dt">sig=</span><span class="ot">TRUE</span>, <span class="dt">cid=</span><span class="ot">TRUE</span>, <span class="dt">db=</span><span class="ot">NULL</span>)</span></code></pre></div>
+<p>Example for injecting a custom matrix/data frame into the data block of an <code>SDFset</code> and then writing it to an SD file:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a> props &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">MF=</span><span class="kw">MF</span>(sdfset), <span class="dt">MW=</span><span class="kw">MW</span>(sdfset), <span class="kw">atomcountMA</span>(sdfset))</span>
+<span id="cb70-2"><a href="#cb70-2"></a> <span class="kw">datablock</span>(sdfset) &lt;-<span class="st"> </span>props</span>
+<span id="cb70-3"><a href="#cb70-3"></a> <span class="kw">write.SDF</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.sdf&quot;</span>, <span class="dt">sig=</span><span class="ot">TRUE</span>, <span class="dt">cid=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p>Indirect export via <code>SDFstr</code> object:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a> <span class="kw">sdf2str</span>(<span class="dt">sdf=</span>sdfset[[<span class="dv">1</span>]], <span class="dt">sig=</span><span class="ot">TRUE</span>, <span class="dt">cid=</span><span class="ot">TRUE</span>) <span class="co"># Uses default components</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a> <span class="kw">sdf2str</span>(<span class="dt">sdf=</span>sdfset[[<span class="dv">1</span>]], <span class="dt">head=</span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">db=</span><span class="ot">NULL</span>) <span class="co"># Uses custom components for header and data block</span></span></code></pre></div>
+<p>Write <code>SDF</code>, <code>SDFset</code> or <code>SDFstr</code> classes to file:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a> <span class="kw">write.SDF</span>(sdfset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.sdf&quot;</span>, <span class="dt">sig=</span><span class="ot">TRUE</span>, <span class="dt">cid=</span><span class="ot">TRUE</span>, <span class="dt">db=</span><span class="ot">NULL</span>)</span>
+<span id="cb72-2"><a href="#cb72-2"></a> <span class="kw">write.SDF</span>(sdfstr[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.sdf&quot;</span>)</span>
+<span id="cb72-3"><a href="#cb72-3"></a> <span class="kw">cat</span>(<span class="kw">unlist</span>(<span class="kw">as</span>(sdfstr[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="st">&quot;list&quot;</span>)), <span class="dt">file=</span><span class="st">&quot;sub.sdf&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+<div id="smiles-export" class="section level2">
+<h2>SMILES Export</h2>
+<p>Write objects of class <code>SMIset</code> to SMILES file with and without compound identifiers:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a> <span class="kw">data</span>(smisample); smiset &lt;-<span class="st"> </span>smisample <span class="co"># Sample data set</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a></span>
+<span id="cb73-3"><a href="#cb73-3"></a> <span class="kw">write.SMI</span>(smiset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.smi&quot;</span>, <span class="dt">cid=</span><span class="ot">TRUE</span>) <span class="kw">write.SMI</span>(smiset[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">file=</span><span class="st">&quot;sub.smi&quot;</span>, <span class="dt">cid=</span><span class="ot">FALSE</span>)</span></code></pre></div>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+</div>
+<div id="format-interconversions" class="section level1">
+<h1>Format Interconversions</h1>
+<p>The <code>sdf2smiles</code> and <code>smiles2sdf</code> functions provide format interconversion between SMILES strings (Simplified Molecular Input Line Entry Specification) and <code>SDFset</code> containers.</p>
+<p>Convert an <code>SDFset</code> container to a SMILES <code>character</code> string:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a> <span class="kw">data</span>(sdfsample);</span>
+<span id="cb74-2"><a href="#cb74-2"></a> sdfset &lt;-<span class="st"> </span>sdfsample[<span class="dv">1</span>]</span>
+<span id="cb74-3"><a href="#cb74-3"></a> smiles &lt;-<span class="st"> </span><span class="kw">sdf2smiles</span>(sdfset)</span>
+<span id="cb74-4"><a href="#cb74-4"></a> smiles</span></code></pre></div>
+<p>Convert a SMILES <code>character</code> string to an <code>SDFset</code> container:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a> sdf &lt;-<span class="st"> </span><span class="kw">smiles2sdf</span>(<span class="st">&quot;CC(=O)OC1=CC=CC=C1C(=O)O&quot;</span>)</span>
+<span id="cb75-2"><a href="#cb75-2"></a> <span class="kw">view</span>(sdf)</span></code></pre></div>
+<p>When the <code>ChemineOB</code> package is installed these conversions are performed with the OpenBabel Open Source Chemistry Toolbox. Otherwise the functions will fall back to using the ChemMine Tools web service for this operation. The latter will require internet connectivity and is limited to only the first compound given. <code>ChemmineOB</code> provides access to the compound format conversion functions of OpenBabel. Currently, over 160 formats are supported by OpenBabel. The functions <code>convertFormat</code> and <code>convertFormatFile</code> can be used to convert files or strings between any two formats supported by OpenBabel. For example, to convert a SMILES string to an SDF string, one can use the <code>convertFormat</code> function.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a> sdfStr &lt;-<span class="st"> </span><span class="kw">convertFormat</span>(<span class="st">&quot;SMI&quot;</span>,<span class="st">&quot;SDF&quot;</span>,<span class="st">&quot;CC(=O)OC1=CC=CC=C1C(=O)O_name&quot;</span>)</span></code></pre></div>
+<p>This will return the given compound as an SDF formatted string. 2D coordinates are also computed and included in the resulting SDF string.</p>
+<p>To convert a file with compounds encoded in one format to another format, the <code>convertFormatFile</code> function can be used instead.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a> <span class="kw">convertFormatFile</span>(<span class="st">&quot;SMI&quot;</span>,<span class="st">&quot;SDF&quot;</span>,<span class="st">&quot;test.smiles&quot;</span>,<span class="st">&quot;test.sdf&quot;</span>)</span></code></pre></div>
+<p>To see the whole list of file formats supported by OpenBabel, one can run from the command-line “obabel -L formats”.</p>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+<div id="splitting-sd-files" class="section level1">
+<h1>Splitting SD Files</h1>
+<p>The following <code>write.SDFsplit</code> function allows to split SD Files into any number of smaller SD Files. This can become important when working with very big SD Files. Users should note that this function can output many files, thus one should run it in a dedicated directory!</p>
+<p>Create sample SD File with 100 molecules:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a> <span class="kw">write.SDF</span>(sdfset, <span class="st">&quot;test.sdf&quot;</span>)</span></code></pre></div>
+<p>Read in sample SD File. Note: reading file into SDFstr is much faster than into SDFset:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a> sdfstr &lt;-<span class="st"> </span><span class="kw">read.SDFstr</span>(<span class="st">&quot;test.sdf&quot;</span>)</span></code></pre></div>
+<p>Run export on <code>SDFstr</code> object:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a> <span class="kw">write.SDFsplit</span>(<span class="dt">x=</span>sdfstr, <span class="dt">filetag=</span><span class="st">&quot;myfile&quot;</span>, <span class="dt">nmol=</span><span class="dv">10</span>) <span class="co"># &#39;nmol&#39; defines the number of molecules to write to each file</span></span></code></pre></div>
+<p>Run export on <code>SDFset</code> object:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a> <span class="kw">write.SDFsplit</span>(<span class="dt">x=</span>sdfset, <span class="dt">filetag=</span><span class="st">&quot;myfile&quot;</span>, <span class="dt">nmol=</span><span class="dv">10</span>)</span></code></pre></div>
+</div>
+<div id="searching-pubchem" class="section level1">
+<h1>Searching PubChem</h1>
+<div id="get-compounds-from-pubchem-by-id" class="section level2">
+<h2>Get Compounds from PubChem by Id</h2>
+<p>The function <code>getIds</code> accepts one or more numeric PubChem compound ids and downloads the corresponding compounds from PubChem Power User Gateway (PUG) returning results in an <code>SDFset</code> container. The ChemMine Tools web service is used as an intermediate, to translate queries from plain HTTP POST to a PUG SOAP query.</p>
+<p>Fetch 2 compounds from PubChem:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a> compounds &lt;-<span class="st"> </span><span class="kw">getIds</span>(<span class="kw">c</span>(<span class="dv">111</span>,<span class="dv">123</span>))</span>
+<span id="cb82-2"><a href="#cb82-2"></a> compounds</span></code></pre></div>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+<div id="search-a-smiles-query-in-pubchem" class="section level2">
+<h2>Search a SMILES Query in PubChem</h2>
+<p>The function <code>searchString</code> accepts one SMILES string (Simplified Molecular Input Line Entry Specification) and performs a &gt;0.95 similarity PubChem fingerprint search, returning the hits in an <code>SDFset</code> container. The ChemMine Tools web service is used as an intermediate, to translate queries from plain HTTP POST to a PubChem Power User Gateway (PUG) query.</p>
+<p>Search a SMILES string on PubChem:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a> compounds &lt;-<span class="st"> </span><span class="kw">searchString</span>(<span class="st">&quot;CC(=O)OC1=CC=CC=C1C(=O)O&quot;</span>) compounds</span></code></pre></div>
+<div align="right">
+<a href="">Back to Table of Contents</a>
+</div>
+</div>
+<div id="search-an-sdf-query-in-pubchem" class="section level2">
+<h2>Search an SDF Query in PubChem</h2>
+<p>The function <code>searchSim</code> performs a PubChem similarity search just like <code>searchString</code>, but accepts a query in an <code>SDFset</code> container. If the query contains more than one compound, only the first is searched.</p>
+<p>Search an <code>SDFset</code> container on PubChem:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a> <span class="kw">data</span>(sdfsample);</span>
+<span id="cb84-2"><a href="#cb84-2"></a> sdfset &lt;-<span class="st"> </span>sdfsample[<span class="dv">1</span>]</span>
+<span id="cb84-3"><a href="#cb84-3"></a> compounds &lt;-<span class="st"> </span><span class="kw">searchSim</span>(sdfset)</span>
+<span id="cb84-4"><a href="#cb84-4"></a> compounds</span></code></pre></div>
+</div>
+</div>
 
-
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjdHVyZSAzOiBDaGVtbWluZVIiCi0tLQoKCmBgYHtyIHN0eWxlLCBlY2hvID0gRkFMU0UsIHJlc3VsdHMgPSAnYXNpcyd9Cm9wdGlvbnMod2lkdGg9MTAwLCBtYXgucHJpbnQ9MTAwMCkKa25pdHI6Om9wdHNfY2h1bmskc2V0KAogICAgZXZhbD1hcy5sb2dpY2FsKFN5cy5nZXRlbnYoIktOSVRSX0VWQUwiLCAiVFJVRSIpKSwKICAgIGNhY2hlPWFzLmxvZ2ljYWwoU3lzLmdldGVudigiS05JVFJfQ0FDSEUiLCAiVFJVRSIpKSkKYGBgCgpgYGB7ciBzZXR1cCwgZWNobz1GQUxTRSwgbWVzc2FnZXM9RkFMU0UsIHdhcm5pbmdzPUZBTFNFfQpzdXBwcmVzc1BhY2thZ2VTdGFydHVwTWVzc2FnZXMoewogICAgbGlicmFyeShDaGVtbWluZVIpCiAgICBsaWJyYXJ5KGZtY3NSKQogICAgbGlicmFyeShnZ3Bsb3QyKQoJICNsaWJyYXJ5KENoZW1taW5lT0IpCn0pCmBgYAoKTm90ZTogdGhlIG1vc3QgcmVjZW50IHZlcnNpb24gb2YgdGhpcyB0dXRvcmlhbCBjYW4gYmUgZm91bmQgPGEgaHJlZj0iaHR0cHM6Ly9odG1scHJldmlldy5naXRodWIuaW8vP2h0dHBzOi8vZ2l0aHViLmNvbS9naXJrZS1sYWIvQ2hlbW1pbmVSL2Jsb2IvbWFzdGVyL3ZpZ25ldHRlcy9DaGVtbWluZVIuaHRtbCI+aGVyZTwvYT4gYW5kIGEgc2hvcnQgb3ZlcnZpZXcgc2xpZGUgc2hvdyBbaGVyZV0oaHR0cDovL2ZhY3VsdHkudWNyLmVkdS9+dGdpcmtlL0hUTUxfUHJlc2VudGF0aW9ucy9NYW51YWxzL1dvcmtzaG9wX0RlY181XzhfMjAxNC9SY2hlbWluZm8vQ2hlbWluZm8ucGRmKS4KCgpgQ2hlbW1pbmVSYCBpcyBhIGNoZW1pbmZvcm1hdGljcyBwYWNrYWdlIGZvciBhbmFseXppbmcKZHJ1Zy1saWtlIHNtYWxsIG1vbGVjdWxlIGRhdGEgaW4gUi4gSXRzIGxhdGVzdCB2ZXJzaW9uIGNvbnRhaW5zCmZ1bmN0aW9ucyBmb3IgZWZmaWNpZW50IHByb2Nlc3Npbmcgb2YgbGFyZ2UgbnVtYmVycyBvZiBzbWFsbCBtb2xlY3VsZXMsCnBoeXNpY29jaGVtaWNhbC9zdHJ1Y3R1cmFsIHByb3BlcnR5IHByZWRpY3Rpb25zLCBzdHJ1Y3R1cmFsIHNpbWlsYXJpdHkKc2VhcmNoaW5nLCBjbGFzc2lmaWNhdGlvbiBhbmQgY2x1c3RlcmluZyBvZiBjb21wb3VuZCBsaWJyYXJpZXMgd2l0aCBhCndpZGUgc3BlY3RydW0gb2YgYWxnb3JpdGhtcy4KCgojIyBJbnN0YWxsYXRpb24KLS0tLS0tLS0tLS0tCgpUaGUgUiBzb2Z0d2FyZSBmb3IgcnVubmluZyBDaGVtbWluZVIgY2FuIGJlIGRvd25sb2FkZWQgZnJvbSBDUkFOCig8aHR0cDovL2NyYW4uYXQuci1wcm9qZWN0Lm9yZy8+KS4gVGhlIENoZW1taW5lUiBwYWNrYWdlIGNhbiBiZQppbnN0YWxsZWQgZnJvbSBSIHdpdGg6CgpgYGB7ciBldmFsPUZBTFNFfQogaWYgKCFyZXF1aXJlTmFtZXNwYWNlKCJCaW9jTWFuYWdlciIsIHF1aWV0bHk9VFJVRSkpCiAgICAgaW5zdGFsbC5wYWNrYWdlcygiQmlvY01hbmFnZXIiKQogQmlvY01hbmFnZXI6Omluc3RhbGwoIkNoZW1taW5lUiIpCmBgYAoKTG9hZGluZyB0aGUgUGFja2FnZSBhbmQgRG9jdW1lbnRhdGlvbgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogbGlicmFyeSgiQ2hlbW1pbmVSIikgIyBMb2FkcyB0aGUgcGFja2FnZQpgYGAKCmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBsaWJyYXJ5KGhlbHA9IkNoZW1taW5lUiIpICMgTGlzdHMgYWxsIGZ1bmN0aW9ucyBhbmQgY2xhc3NlcwogdmlnbmV0dGUoIkNoZW1taW5lUiIpICMgT3BlbnMgdGhpcyBQREYgbWFudWFsIGZyb20gUgpgYGAKCgojIyBGaXZlIE1pbnV0ZSBUdXRvcmlhbAotLS0tLS0tLS0tLS0tLS0tLS0tLQoKVGhlIGZvbGxvd2luZyBjb2RlIGdpdmVzIGFuIG92ZXJ2aWV3IG9mIHRoZSBtb3N0IGltcG9ydGFudApmdW5jdGlvbmFsaXRpZXMgcHJvdmlkZWQgYnkgYENoZW1taW5lUmAuIENvcHkgYW5kIHBhc3RlCm9mIHRoZSBjb21tYW5kcyBpbnRvIHRoZSBSIGNvbnNvbGUgd2lsbCBkZW1vbnN0cmF0ZSB0aGVpciB1dGlsaXRpZXMuCgpDcmVhdGUgSW5zdGFuY2VzIG9mIGBTREZzZXRgIGNsYXNzOgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBkYXRhKHNkZnNhbXBsZSkKIHNkZnNldCA8LSBzZGZzYW1wbGUKIHNkZnNldCAjIFJldHVybnMgc3VtbWFyeSBvZiBTREZzZXQKIHNkZnNldFsxOjRdICMgU3Vic2V0dGluZyBvZiBvYmplY3QKCiBzZGZzZXRbWzFdXSAjIFJldHVybnMgc3VtbWFyaXplZCBjb250ZW50IG9mIG9uZSBTREYKCgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogdmlldyhzZGZzZXRbMTo0XSkgIyBSZXR1cm5zIHN1bW1hcml6ZWQgY29udGVudCBvZiBtYW55IFNERnMsIG5vdCBwcmludGVkIGhlcmUKIGFzKHNkZnNldFsxOjRdLCAibGlzdCIpICMgUmV0dXJucyBjb21wbGV0ZSBjb250ZW50IG9mIG1hbnkgU0RGcywgbm90IHByaW50ZWQgaGVyZQoKYGBgCgoKQW4gYFNERnNldGAgaXMgY3JlYXRlZCBkdXJpbmcgdGhlIGltcG9ydCBvZiBhbiBTRCBmaWxlOgoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHNkZnNldCA8LSByZWFkLlNERnNldCgiaHR0cDovL2ZhY3VsdHkudWNyLmVkdS9+dGdpcmtlL0RvY3VtZW50cy9SX0Jpb0NvbmQvU2FtcGxlcy9zZGZzYW1wbGUuc2RmIikKYGBgCgoKTWlzY2VsbGFuZW91cyBhY2Nlc3NvciBtZXRob2RzIGZvciBgU0RGc2V0YCBjb250YWluZXI6CgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogaGVhZGVyKHNkZnNldFsxOjRdKSAjIE5vdCBwcmludGVkIGhlcmUKYGBgCgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBoZWFkZXIoc2Rmc2V0W1sxXV0pCmBgYAoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGF0b21ibG9jayhzZGZzZXRbMTo0XSkgIyBOb3QgcHJpbnRlZCBoZXJlCmBgYAoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQphdG9tYmxvY2soc2Rmc2V0W1sxXV0pWzE6NCxdCmBgYAoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KYm9uZGJsb2NrKHNkZnNldFsxOjRdKSAjIE5vdCBwcmludGVkIGhlcmUKYGBgCgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBib25kYmxvY2soc2Rmc2V0W1sxXV0pWzE6NCxdCmBgYApgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogZGF0YWJsb2NrKHNkZnNldFsxOjRdKSAjIE5vdCBwcmludGVkIGhlcmUKYGBgCgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBkYXRhYmxvY2soc2Rmc2V0W1sxXV0pWzE6NF0KYGBgCgoKQXNzaWduaW5nIGNvbXBvdW5kIElEcyBhbmQga2VlcGluZyB0aGVtIHVuaXF1ZToKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogY2lkKHNkZnNldClbMTo0XSAjIFJldHVybnMgSURzIGZyb20gU0RGc2V0IG9iamVjdAogc2RmaWQoc2Rmc2V0KVsxOjRdICMgUmV0dXJucyBJRHMgZnJvbSBTRCBmaWxlIGhlYWRlciBibG9jawogdW5pcXVlX2lkcyA8LSBtYWtlVW5pcXVlKHNkZmlkKHNkZnNldCkpCiBjaWQoc2Rmc2V0KSA8LSB1bmlxdWVfaWRzCmBgYAoKCkNvbnZlcnRpbmcgdGhlIGRhdGEgYmxvY2tzIGluIGFuIGBTREZzZXRgIHRvIGEgbWF0cml4OgoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogYmxvY2ttYXRyaXggPC0gZGF0YWJsb2NrMm1hKGRhdGFibG9ja2xpc3Q9ZGF0YWJsb2NrKHNkZnNldCkpICMgQ29udmVydHMgZGF0YSBibG9jayB0byBtYXRyaXgKIG51bWNoYXIgPC0gc3BsaXROdW1DaGFyKGJsb2NrbWF0cml4PWJsb2NrbWF0cml4KSAjIFNwbGl0cyB0byBudW1lcmljIGFuZCBjaGFyYWN0ZXIgbWF0cml4CiBudW1jaGFyW1sxXV1bMToyLDE6Ml0gIyBTbGljZSBvZiBudW1lcmljIG1hdHJpeAogbnVtY2hhcltbMl1dWzE6MiwxMDoxMV0gIyBTbGljZSBvZiBjaGFyYWN0ZXIgbWF0cml4CmBgYAoKCkNvbXB1dGUgYXRvbSBmcmVxdWVuY3kgbWF0cml4LCBtb2xlY3VsYXIgd2VpZ2h0IGFuZCBmb3JtdWxhOgoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogcHJvcG1hIDwtIGRhdGEuZnJhbWUoTUY9TUYoc2Rmc2V0KSwgTVc9TVcoc2Rmc2V0KSwgYXRvbWNvdW50TUEoc2Rmc2V0KSkKIHByb3BtYVsxOjQsIF0KYGBgCgoKQXNzaWduIG1hdHJpeCBkYXRhIHRvIGRhdGEgYmxvY2s6CmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KIGRhdGFibG9jayhzZGZzZXQpIDwtIHByb3BtYQogZGF0YWJsb2NrKHNkZnNldFsxXSkKYGBgCgoKU3RyaW5nIHNlYXJjaGluZyBpbiBgU0RGc2V0YDoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGdyZXBTREZzZXQoIjY1MDAwMSIsIHNkZnNldCwgZmllbGQ9ImRhdGFibG9jayIsIG1vZGU9InN1YnNldCIpICMgUmV0dXJucyBzdW1tYXJ5IHZpZXcgb2YgbWF0Y2hlcy4gTm90IHByaW50ZWQgaGVyZS4KYGBgCgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBncmVwU0RGc2V0KCI2NTAwMDEiLCBzZGZzZXQsIGZpZWxkPSJkYXRhYmxvY2siLCBtb2RlPSJpbmRleCIpCmBgYAoKCkV4cG9ydCBTREZzZXQgdG8gU0QgZmlsZToKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHdyaXRlLlNERihzZGZzZXRbMTo0XSwgZmlsZT0ic3ViLnNkZiIsIHNpZz1UUlVFKQpgYGAKCgpQbG90IG1vbGVjdWxlIHN0cnVjdHVyZSBvZiBvbmUgb3IgbWFueSBTREZzOgpgYGB7ciBwbG90c3RydWN0LCBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBwbG90KHNkZnNldFsxOjRdLCBwcmludD1GQUxTRSkgIyBQbG90cyBzdHJ1Y3R1cmVzIHRvIFIgZ3JhcGhpY3MgZGV2aWNlCmBgYAoKCgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogc2RmLnZpc3VhbGl6ZShzZGZzZXRbMTo0XSkgIyBDb21wb3VuZCB2aWV3aW5nIGluIHdlYiBicm93c2VyCmBgYAoKIVtGaWd1cmU6IFZpc3VhbGl6YXRpb24gd2VicGFnZSBjcmVhdGVkIGJ5IGNhbGxpbmcKYHNkZi52aXN1YWxpemVgLl0odmlzdWFsaXplc2NyZWVuc2hvdC1zbWFsbC5wbmcgKQoKU3RydWN0dXJlIHNpbWlsYXJpdHkgc2VhcmNoaW5nIGFuZCBjbHVzdGVyaW5nOgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogYXBzZXQgPC0gc2RmMmFwKHNkZnNldCkgIyBHZW5lcmF0ZSBhdG9tIHBhaXIgZGVzY3JpcHRvciBkYXRhYmFzZSBmb3Igc2VhcmNoaW5nCmBgYAoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogZGF0YShhcHNldCkgIyBMb2FkIHNhbXBsZSBhcHNldCBkYXRhIHByb3ZpZGVkIGJ5IGxpYnJhcnkuCiBjbXAuc2VhcmNoKGFwc2V0LCBhcHNldFsxXSwgdHlwZT0zLCBjdXRvZmYgPSAwLjMsIHF1aWV0PVRSVUUpICMgU2VhcmNoIGFwc2V0IGRhdGFiYXNlIHdpdGggc2luZ2xlIGNvbXBvdW5kLgoKIGNtcC5jbHVzdGVyKGRiPWFwc2V0LCBjdXRvZmYgPSBjKDAuNjUsIDAuNSksIHF1aWV0PVRSVUUpWzE6NCxdICMgQmlubmluZyBjbHVzdGVyaW5nIHVzaW5nIHZhcmlhYmxlIHNpbWlsYXJpdHkgY3V0b2Zmcy4KYGBgCgoKIyMjIE1vbGVjdWxhciBTdHJ1Y3R1cmUgRGF0YQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCkNsYXNzZXMKCi0gICBgU0RGc3RyYDogaW50ZXJtZWRpYXRlIHN0cmluZyBjbGFzcyB0byBmYWNpbGl0YXRlIFNECiAgICBmaWxlIGltcG9ydDsgbm90IGltcG9ydGFudCBmb3IgZW5kIHVzZXIKCi0gICBgU0RGYDogY29udGFpbmVyIGZvciBzaW5nbGUgbW9sZWN1bGUgaW1wb3J0ZWQgZnJvbSBhbgogICAgU0QgZmlsZQoKLSAgIGBTREZzZXRgOiBjb250YWluZXIgZm9yIG1hbnkgU0RGIG9iamVjdHM7IG1vc3QKICAgIGltcG9ydGFudCBzdHJ1Y3R1cmUgY29udGFpbmVyIGZvciBlbmQgdXNlcgoKLSAgIGBTTUlgOiBjb250YWluZXIgZm9yIGEgc2luZ2xlIFNNSUxFUyBzdHJpbmcKCi0gICBgU01Jc2V0YDogY29udGFpbmVyIGZvciBtYW55IFNNSUxFUyBzdHJpbmdzCgpGdW5jdGlvbnMvTWV0aG9kcyAobWFpbmx5IGZvciBgU0RGc2V0YCBjb250YWluZXIsCmBTTUlzZXRgIHNob3VsZCBiZSBjb2VyY2VkIHdpdGgKYHNtaWxlczJzZGAgdG8gYFNERnNldGApCgotICAgQWNjZXNzb3IgbWV0aG9kcyBmb3IgYFNERi9TREZzZXRgCgogICAgLSAgIE9iamVjdCBzbG90czogYGNpZGAsIGBoZWFkZXJgLCBgYXRvbWJsb2NrYCwgYGJvbmRibG9ja2AsCiAgICAgICAgYGRhdGFibG9ja2AgKGBzZGZpZGAsIGBkYXRhYmxvY2t0YWdgKQoKICAgIC0gICBTdW1tYXJ5IG9mIGBTREZzZXRgOiBgdmlld2AKCiAgICAtICAgTWF0cml4IGNvbnZlcnNpb24gb2YgZGF0YSBibG9jazogYGRhdGFibG9jazJtYWAsCiAgICAgICAgYHNwbGl0TnVtQ2hhcmAKCiAgICAtICAgU3RyaW5nIHNlYXJjaCBpbiBTREZzZXQ6IGBncmVwU0RGc2V0YAoKLSAgIENvZXJjZSBvbmUgY2xhc3MgdG8gYW5vdGhlcgoKICAgIC0gICBTdGFuZGFyZCBzeW50YXggYGFzKC4uLiwgIi4uLiIpYCB3b3JrcyBpbiBtb3N0CiAgICAgICAgY2FzZXMuIEZvciBkZXRhaWxzIHNlZSBSIGhlbHAgd2l0aAogICAgICAgYD8iU0RGc2V0LWNsYXNzImAuCgotICAgVXRpbGl0aWVzCgogICAgLSAgIEF0b20gZnJlcXVlbmNpZXM6IGBhdG9tY291bnRNQWAsIGBhdG9tY291bnRgCgogICAgLSAgIE1vbGVjdWxhciB3ZWlnaHQ6IGBNV2AKCiAgICAtICAgTW9sZWN1bGFyIGZvcm11bGE6IGBNRmAKCiAgICAtICAgLi4uCgotICAgQ29tcG91bmQgc3RydWN0dXJlIGRlcGljdGlvbnMKCiAgICAtICAgUiBncmFwaGljcyBkZXZpY2U6IGBwbG90YCwgYHBsb3RTdHJ1Y2AKCiAgICAtICAgT25saW5lOiBgY21wLnZpc3VhbGl6ZWAKCjxkaXYgYWxpZ249InJpZ2h0Ij5bQmFjayB0byBUYWJsZSBvZiBDb250ZW50c10oKTwvZGl2PgoKU3RydWN0dXJlIERlc2NyaXB0b3IgRGF0YQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgpDbGFzc2VzCgotICAgYEFQYDogY29udGFpbmVyIGZvciBhdG9tIHBhaXIgZGVzY3JpcHRvcnMgb2YgYSBzaW5nbGUKICAgIG1vbGVjdWxlCgotICAgYEFQc2V0YDogY29udGFpbmVyIGZvciBtYW55IEFQIG9iamVjdHM7IG1vc3QKICAgIGltcG9ydGFudCBzdHJ1Y3R1cmUgZGVzY3JpcHRvciBjb250YWluZXIgZm9yIGVuZCB1c2VyCgotICAgYEZQYDogY29udGFpbmVyIGZvciBmaW5nZXJwcmludCBvZiBhIHNpbmdsZSBtb2xlY3VsZQoKLSAgIGBGUHNldGA6IGNvbnRhaW5lciBmb3IgZmluZ2VycHJpbnRzIG9mIG1hbnkKICAgIG1vbGVjdWxlcywgbW9zdCBpbXBvcnRhbnQgc3RydWN0dXJlIGRlc2NyaXB0b3IgY29udGFpbmVyIGZvciBlbmQKICAgIHVzZXIKCkZ1bmN0aW9ucy9NZXRob2RzCgotICAgQ3JlYXRlIGBBUC9BUHNldGAgaW5zdGFuY2VzCgogICAgLSAgIEZyb20gYFNERnNldGA6IGBzZGYyYXBgCgogICAgLSAgIEZyb20gU0QgZmlsZTogYGNtcC5wYXJzZWAKCiAgICAtICAgU3VtbWFyeSBvZiBgQVAvQVBzZXRgOiBgdmlld2AsCiAgICAgICAgYGRiLmV4cGxhaW5gCgotICAgQWNjZXNzb3IgbWV0aG9kcyBmb3IgQVAvQVBzZXQKCiAgICAtICAgT2JqZWN0IHNsb3RzOiBgYXBgLCBgY2lkYAoKLSAgIENvZXJjZSBvbmUgY2xhc3MgdG8gYW5vdGhlcgoKICAgIC0gICBTdGFuZGFyZCBzeW50YXggYGFzKC4uLiwgIi4uLiIpYCB3b3JrcyBpbiBtb3N0CiAgICAgICAgY2FzZXMuIEZvciBkZXRhaWxzIHNlZSBSIGhlbHAgd2l0aAogICAgICAgIGA/IkFQc2V0LWNsYXNzImAuCgotICAgU3RydWN0dXJlIFNpbWlsYXJpdHkgY29tcGFyaXNvbnMgYW5kIFNlYXJjaGluZwoKICAgIC0gICBDb21wdXRlIHBhaXJ3aXNlIHNpbWlsYXJpdGllcyA6IGBjbXAuc2ltaWxhcml0eWAsCiAgICAgICAgYGZwU2ltYAoKICAgIC0gICBTZWFyY2ggQVBzZXQgZGF0YWJhc2U6IGBjbXAuc2VhcmNoYCwgYGZwU2ltYAoKLSAgIEFQLWJhc2VkIFN0cnVjdHVyZSBTaW1pbGFyaXR5IENsdXN0ZXJpbmcKCiAgICAtICAgU2luZ2xlLWxpbmthZ2UgYmlubmluZyBjbHVzdGVyaW5nOiBgY21wLmNsdXN0ZXJgCgogICAgLSAgIFZpc3VhbGl6ZSBjbHVzdGVyaW5nIHJlc3VsdCB3aXRoIE1EUzoKICAgICAgICBgY2x1c3Rlci52aXN1YWxpemVgCgogICAgLSAgIFNpemUgZGlzdHJpYnV0aW9uIG9mIGNsdXN0ZXJzOiBgY2x1c3Rlci5zaXplc3RhdGAKLSAgIEZvbGRpbmcKICAgIC0gRm9sZCBhIGRlc2NyaXB0b3Igd2l0aCBgZm9sZGAKCSAtIFF1ZXJ5IHRoZSBudW1iZXIgb2YgdGltZXMgYSBkZXNjcmlwdG9yIGhhcyBiZWVuIGZvbGRlZDoKCQlgZm9sZENvdW50YAoJIC0gUXVlcnkgdGhlIG51bWJlciBvZiBiaXRzIGluIGEgZGVzY3JpcHRvcjogYG51bUJpdHNgCgo8ZGl2IGFsaWduPSJyaWdodCI+W0JhY2sgdG8gVGFibGUgb2YgQ29udGVudHNdKCk8L2Rpdj4KCkltcG9ydCBvZiBDb21wb3VuZHMKPT09PT09PT09PT09PT09PT09PQoKU0RGIEltcG9ydAotLS0tLS0tLS0tCgpUaGUgZm9sbG93aW5nIGdpdmVzIGFuIG92ZXJ2aWV3IG9mIHRoZSBtb3N0IGltcG9ydGFudCBpbXBvcnQvZXhwb3J0CmZ1bmN0aW9uYWxpdGllcyBmb3Igc21hbGwgbW9sZWN1bGVzIHByb3ZpZGVkIGJ5CmBDaGVtbWluZVJgLiBUaGUgZ2l2ZW4gZXhhbXBsZSBjcmVhdGVzIGFuIGluc3RhbmNlIG9mIHRoZQpgU0RGc2V0YCBjbGFzcyB1c2luZyBhcyBzYW1wbGUgZGF0YSBzZXQgdGhlIGZpcnN0IDEwMApjb21wb3VuZHMgZnJvbSB0aGlzIFB1YkNoZW0gU0QgZmlsZSAoU0RGKToKQ29tcG91bmRcXzAwNjUwMDAxXF8wMDY3NTAwMC5zZGYuZ3oKKDxmdHA6Ly9mdHAubmNiaS5uaWguZ292L3B1YmNoZW0vQ29tcG91bmQvQ1VSUkVOVC1GdWxsL1NERi8+KS4KClNERnMgY2FuIGJlIGltcG9ydGVkIHdpdGggdGhlIGByZWFkLlNERnNldGAgZnVuY3Rpb246CgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogc2Rmc2V0IDwtIHJlYWQuU0RGc2V0KCJodHRwOi8vZmFjdWx0eS51Y3IuZWR1L350Z2lya2UvRG9jdW1lbnRzL1JfQmlvQ29uZC9TYW1wbGVzL3NkZnNhbXBsZS5zZGYiKQpgYGAKCmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KIGRhdGEoc2Rmc2FtcGxlKSAjIExvYWRzIHRoZSBzYW1lIFNERnNldCBwcm92aWRlZCBieSB0aGUgbGlicmFyeQogc2Rmc2V0IDwtIHNkZnNhbXBsZQogdmFsaWQgPC0gdmFsaWRTREYoc2Rmc2V0KSAjIElkZW50aWZpZXMgaW52YWxpZCBTREZzIGluIFNERnNldCBvYmplY3RzCiBzZGZzZXQgPC0gc2Rmc2V0W3ZhbGlkXSAjIFJlbW92ZXMgaW52YWxpZCBTREZzLCBpZiB0aGVyZSBhcmUgYW55CmBgYAoKCkltcG9ydCBTRCBmaWxlIGludG8gYFNERnN0cmAgY29udGFpbmVyOgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogc2Rmc3RyIDwtIHJlYWQuU0RGc3RyKCJodHRwOi8vZmFjdWx0eS51Y3IuZWR1L350Z2lya2UvRG9jdW1lbnRzL1JfQmlvQ29uZC9TYW1wbGVzL3NkZnNhbXBsZS5zZGYiKQpgYGAKQ3JlYXRlCmBTREZzZXRgIGZyb20gYFNERnN0cmAgY2xhc3M6CgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBzZGZzdHIgPC0gYXMoc2Rmc2V0LCAiU0RGc3RyIikKIHNkZnN0cgogYXMoc2Rmc3RyLCAiU0RGc2V0IikKYGBgCgo8ZGl2IGFsaWduPSJyaWdodCI+W0JhY2sgdG8gVGFibGUgb2YgQ29udGVudHNdKCk8L2Rpdj4KClNNSUxFUyBJbXBvcnQKLS0tLS0tLS0tLS0tLQoKVGhlIGByZWFkLlNNSXNldGAgZnVuY3Rpb24gaW1wb3J0cyBvbmUgb3IgbWFueSBtb2xlY3VsZXMKZnJvbSBhIFNNSUxFUyBmaWxlIGFuZCBzdG9yZXMgdGhlbSBpbiBhIGBTTUlzZXRgCmNvbnRhaW5lci4gVGhlIGlucHV0IGZpbGUgaXMgZXhwZWN0ZWQgdG8gY29udGFpbiBvbmUgU01JTEVTIHN0cmluZyBwZXIKcm93IHdpdGggdGFiLXNlcGFyYXRlZCBjb21wb3VuZCBpZGVudGlmaWVycyBhdCB0aGUgZW5kIG9mIGVhY2ggbGluZS4gVGhlCmNvbXBvdW5kIGlkZW50aWZpZXJzIGFyZSBvcHRpb25hbC4KCkNyZWF0ZSBzYW1wbGUgU01JTEVTIGZpbGUgYW5kIHRoZW4gaW1wb3J0IGl0OgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogZGF0YShzbWlzYW1wbGUpOyBzbWlzZXQgPC0gc21pc2FtcGxlCiB3cml0ZS5TTUkoc21pc2V0WzE6NF0sIGZpbGU9InN1Yi5zbWkiKQogc21pc2V0IDwtIHJlYWQuU01Jc2V0KCJzdWIuc21pIikKYGBgCgoKSW5zcGVjdCBjb250ZW50IG9mIGBTTUlzZXRgOgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBkYXRhKHNtaXNhbXBsZSkgIyBMb2FkcyB0aGUgc2FtZSBTTUlzZXQgcHJvdmlkZWQgYnkgdGhlIGxpYnJhcnkKIHNtaXNldCA8LSBzbWlzYW1wbGUKIHNtaXNldAogdmlldyhzbWlzZXRbMToyXSkKYGBgCgoKQWNjZXNzb3IgZnVuY3Rpb25zOgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBjaWQoc21pc2V0WzE6NF0pCiBzbWkgPC0gYXMuY2hhcmFjdGVyKHNtaXNldFsxOjJdKQpgYGAKCgpDcmVhdGUgYFNNSXNldGAgZnJvbSBuYW1lZCBjaGFyYWN0ZXIgdmVjdG9yOgoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogYXMoc21pLCAiU01Jc2V0IikKYGBgCgo8ZGl2IGFsaWduPSJyaWdodCI+W0JhY2sgdG8gVGFibGUgb2YgQ29udGVudHNdKCk8L2Rpdj4KCkV4cG9ydCBvZiBDb21wb3VuZHMKPT09PT09PT09PT09PT09PT09PQoKU0RGIEV4cG9ydAotLS0tLS0tLS0tCgpXcml0ZSBvYmplY3RzIG9mIGNsYXNzZXMgYFNERnNldC9TREZzdHIvU0RGYCB0byBTRCBmaWxlOgoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHdyaXRlLlNERihzZGZzZXRbMTo0XSwgZmlsZT0ic3ViLnNkZiIpCmBgYAoKCldyaXRpbmcgY3VzdG9taXplZCBgU0RGc2V0YCB0byBmaWxlIGNvbnRhaW5pbmcKYENoZW1taW5lUmAgc2lnbmF0dXJlLCBJRHMgZnJvbSBgU0RGc2V0YAphbmQgbm8gZGF0YSBibG9jazoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHdyaXRlLlNERihzZGZzZXRbMTo0XSwgZmlsZT0ic3ViLnNkZiIsIHNpZz1UUlVFLCBjaWQ9VFJVRSwgZGI9TlVMTCkKYGBgCgoKRXhhbXBsZSBmb3IgaW5qZWN0aW5nIGEgY3VzdG9tIG1hdHJpeC9kYXRhIGZyYW1lIGludG8gdGhlIGRhdGEgYmxvY2sgb2YKYW4gYFNERnNldGAgYW5kIHRoZW4gd3JpdGluZyBpdCB0byBhbiBTRCBmaWxlOgoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHByb3BzIDwtIGRhdGEuZnJhbWUoTUY9TUYoc2Rmc2V0KSwgTVc9TVcoc2Rmc2V0KSwgYXRvbWNvdW50TUEoc2Rmc2V0KSkKIGRhdGFibG9jayhzZGZzZXQpIDwtIHByb3BzCiB3cml0ZS5TREYoc2Rmc2V0WzE6NF0sIGZpbGU9InN1Yi5zZGYiLCBzaWc9VFJVRSwgY2lkPVRSVUUpCmBgYAoKCkluZGlyZWN0IGV4cG9ydCB2aWEgYFNERnN0cmAgb2JqZWN0OgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogc2RmMnN0cihzZGY9c2Rmc2V0W1sxXV0sIHNpZz1UUlVFLCBjaWQ9VFJVRSkgIyBVc2VzIGRlZmF1bHQgY29tcG9uZW50cwogc2RmMnN0cihzZGY9c2Rmc2V0W1sxXV0sIGhlYWQ9bGV0dGVyc1sxOjRdLCBkYj1OVUxMKSAjIFVzZXMgY3VzdG9tIGNvbXBvbmVudHMgZm9yIGhlYWRlciBhbmQgZGF0YSBibG9jawpgYGAKCgpXcml0ZSBgU0RGYCwgYFNERnNldGAgb3IKYFNERnN0cmAgY2xhc3NlcyB0byBmaWxlOgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogd3JpdGUuU0RGKHNkZnNldFsxOjRdLCBmaWxlPSJzdWIuc2RmIiwgc2lnPVRSVUUsIGNpZD1UUlVFLCBkYj1OVUxMKQogd3JpdGUuU0RGKHNkZnN0clsxOjRdLCBmaWxlPSJzdWIuc2RmIikKIGNhdCh1bmxpc3QoYXMoc2Rmc3RyWzE6NF0sICJsaXN0IikpLCBmaWxlPSJzdWIuc2RmIiwgc2VwPSIiKQpgYGAKCjxkaXYgYWxpZ249InJpZ2h0Ij5bQmFjayB0byBUYWJsZSBvZiBDb250ZW50c10oKTwvZGl2PgoKU01JTEVTIEV4cG9ydAotLS0tLS0tLS0tLS0tCgpXcml0ZSBvYmplY3RzIG9mIGNsYXNzIGBTTUlzZXRgIHRvIFNNSUxFUyBmaWxlIHdpdGggYW5kCndpdGhvdXQgY29tcG91bmQgaWRlbnRpZmllcnM6CmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBkYXRhKHNtaXNhbXBsZSk7IHNtaXNldCA8LSBzbWlzYW1wbGUgIyBTYW1wbGUgZGF0YSBzZXQKCiB3cml0ZS5TTUkoc21pc2V0WzE6NF0sIGZpbGU9InN1Yi5zbWkiLCBjaWQ9VFJVRSkgd3JpdGUuU01JKHNtaXNldFsxOjRdLCBmaWxlPSJzdWIuc21pIiwgY2lkPUZBTFNFKQpgYGAKCjxkaXYgYWxpZ249InJpZ2h0Ij5bQmFjayB0byBUYWJsZSBvZiBDb250ZW50c10oKTwvZGl2PgoKRm9ybWF0IEludGVyY29udmVyc2lvbnMKPT09PT09PT09PT09PT09PT09PT09PT0KClRoZSBgc2RmMnNtaWxlc2AgYW5kIGBzbWlsZXMyc2RmYApmdW5jdGlvbnMgcHJvdmlkZSBmb3JtYXQgaW50ZXJjb252ZXJzaW9uIGJldHdlZW4gU01JTEVTIHN0cmluZ3MKKFNpbXBsaWZpZWQgTW9sZWN1bGFyIElucHV0IExpbmUgRW50cnkgU3BlY2lmaWNhdGlvbikgYW5kCmBTREZzZXRgIGNvbnRhaW5lcnMuCgpDb252ZXJ0IGFuIGBTREZzZXRgIGNvbnRhaW5lciB0byBhIFNNSUxFUwpgY2hhcmFjdGVyYCBzdHJpbmc6CgoKYGBge3Igc2RmMnNtaWxlcywgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGRhdGEoc2Rmc2FtcGxlKTsKIHNkZnNldCA8LSBzZGZzYW1wbGVbMV0KIHNtaWxlcyA8LSBzZGYyc21pbGVzKHNkZnNldCkKIHNtaWxlcwpgYGAKCgpDb252ZXJ0IGEgU01JTEVTIGBjaGFyYWN0ZXJgIHN0cmluZyB0byBhbgpgU0RGc2V0YCBjb250YWluZXI6CgoKYGBge3Igc21pbGVzMnNkZiwgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHNkZiA8LSBzbWlsZXMyc2RmKCJDQyg9TylPQzE9Q0M9Q0M9QzFDKD1PKU8iKQogdmlldyhzZGYpCmBgYAoKCldoZW4gdGhlIGBDaGVtaW5lT0JgIHBhY2thZ2UgaXMgaW5zdGFsbGVkIHRoZXNlCmNvbnZlcnNpb25zIGFyZSBwZXJmb3JtZWQgd2l0aCB0aGUgT3BlbkJhYmVsIE9wZW4gU291cmNlIENoZW1pc3RyeQpUb29sYm94LiBPdGhlcndpc2UgdGhlIGZ1bmN0aW9ucyB3aWxsIGZhbGwgYmFjayB0byB1c2luZyB0aGUgQ2hlbU1pbmUKVG9vbHMgd2ViIHNlcnZpY2UgZm9yIHRoaXMgb3BlcmF0aW9uLiBUaGUgbGF0dGVyIHdpbGwgcmVxdWlyZSBpbnRlcm5ldApjb25uZWN0aXZpdHkgYW5kIGlzIGxpbWl0ZWQgdG8gb25seSB0aGUgZmlyc3QgY29tcG91bmQgZ2l2ZW4uCmBDaGVtbWluZU9CYCBwcm92aWRlcyBhY2Nlc3MgdG8gdGhlIGNvbXBvdW5kIGZvcm1hdApjb252ZXJzaW9uIGZ1bmN0aW9ucyBvZiBPcGVuQmFiZWwuIEN1cnJlbnRseSwgb3ZlciAxNjAgZm9ybWF0cyBhcmUKc3VwcG9ydGVkIGJ5IE9wZW5CYWJlbC4gVGhlIGZ1bmN0aW9ucyBgY29udmVydEZvcm1hdGAgYW5kCmBjb252ZXJ0Rm9ybWF0RmlsZWAgY2FuIGJlIHVzZWQgdG8gY29udmVydCBmaWxlcyBvcgpzdHJpbmdzIGJldHdlZW4gYW55IHR3byBmb3JtYXRzIHN1cHBvcnRlZCBieSBPcGVuQmFiZWwuIEZvciBleGFtcGxlLCB0bwpjb252ZXJ0IGEgU01JTEVTIHN0cmluZyB0byBhbiBTREYgc3RyaW5nLCBvbmUgY2FuIHVzZSB0aGUKYGNvbnZlcnRGb3JtYXRgIGZ1bmN0aW9uLgoKCmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBzZGZTdHIgPC0gY29udmVydEZvcm1hdCgiU01JIiwiU0RGIiwiQ0MoPU8pT0MxPUNDPUNDPUMxQyg9TylPX25hbWUiKQpgYGAKCgpUaGlzIHdpbGwgcmV0dXJuIHRoZSBnaXZlbiBjb21wb3VuZCBhcyBhbiBTREYgZm9ybWF0dGVkIHN0cmluZy4gMkQKY29vcmRpbmF0ZXMgYXJlIGFsc28gY29tcHV0ZWQgYW5kIGluY2x1ZGVkIGluIHRoZSByZXN1bHRpbmcgU0RGIHN0cmluZy4KClRvIGNvbnZlcnQgYSBmaWxlIHdpdGggY29tcG91bmRzIGVuY29kZWQgaW4gb25lIGZvcm1hdCB0byBhbm90aGVyCmZvcm1hdCwgdGhlIGBjb252ZXJ0Rm9ybWF0RmlsZWAgZnVuY3Rpb24gY2FuIGJlIHVzZWQKaW5zdGVhZC4KYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGNvbnZlcnRGb3JtYXRGaWxlKCJTTUkiLCJTREYiLCJ0ZXN0LnNtaWxlcyIsInRlc3Quc2RmIikKYGBgCgoKVG8gc2VlIHRoZSB3aG9sZSBsaXN0IG9mIGZpbGUgZm9ybWF0cyBzdXBwb3J0ZWQgYnkgT3BlbkJhYmVsLCBvbmUgY2FuCnJ1biBmcm9tIHRoZSBjb21tYW5kLWxpbmUgIm9iYWJlbCAtTCBmb3JtYXRzIi4KCjxkaXYgYWxpZ249InJpZ2h0Ij5bQmFjayB0byBUYWJsZSBvZiBDb250ZW50c10oKTwvZGl2PgoKU3BsaXR0aW5nIFNEIEZpbGVzCj09PT09PT09PT09PT09PT09PQoKVGhlIGZvbGxvd2luZyBgd3JpdGUuU0RGc3BsaXRgIGZ1bmN0aW9uIGFsbG93cyB0byBzcGxpdApTRCBGaWxlcyBpbnRvIGFueSBudW1iZXIgb2Ygc21hbGxlciBTRCBGaWxlcy4gVGhpcyBjYW4gYmVjb21lIGltcG9ydGFudAp3aGVuIHdvcmtpbmcgd2l0aCB2ZXJ5IGJpZyBTRCBGaWxlcy4gVXNlcnMgc2hvdWxkIG5vdGUgdGhhdCB0aGlzCmZ1bmN0aW9uIGNhbiBvdXRwdXQgbWFueSBmaWxlcywgdGh1cyBvbmUgc2hvdWxkIHJ1biBpdCBpbiBhIGRlZGljYXRlZApkaXJlY3RvcnkhCgpDcmVhdGUgc2FtcGxlIFNEIEZpbGUgd2l0aCAxMDAgbW9sZWN1bGVzOgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogd3JpdGUuU0RGKHNkZnNldCwgInRlc3Quc2RmIikKYGBgCgoKUmVhZCBpbiBzYW1wbGUgU0QgRmlsZS4gTm90ZTogcmVhZGluZyBmaWxlIGludG8gU0RGc3RyIGlzIG11Y2ggZmFzdGVyCnRoYW4gaW50byBTREZzZXQ6CmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBzZGZzdHIgPC0gcmVhZC5TREZzdHIoInRlc3Quc2RmIikKYGBgCgoKUnVuIGV4cG9ydCBvbiBgU0RGc3RyYCBvYmplY3Q6CmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiB3cml0ZS5TREZzcGxpdCh4PXNkZnN0ciwgZmlsZXRhZz0ibXlmaWxlIiwgbm1vbD0xMCkgIyAnbm1vbCcgZGVmaW5lcyB0aGUgbnVtYmVyIG9mIG1vbGVjdWxlcyB0byB3cml0ZSB0byBlYWNoIGZpbGUKYGBgCgoKUnVuIGV4cG9ydCBvbiBgU0RGc2V0YCBvYmplY3Q6CmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiB3cml0ZS5TREZzcGxpdCh4PXNkZnNldCwgZmlsZXRhZz0ibXlmaWxlIiwgbm1vbD0xMCkKYGBgCgoKU2VhcmNoaW5nIFB1YkNoZW0KPT09PT09PT09PT09PT09PT0KCkdldCBDb21wb3VuZHMgZnJvbSBQdWJDaGVtIGJ5IElkCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgpUaGUgZnVuY3Rpb24gYGdldElkc2AgYWNjZXB0cyBvbmUgb3IgbW9yZSBudW1lcmljIFB1YkNoZW0KY29tcG91bmQgaWRzIGFuZCBkb3dubG9hZHMgdGhlIGNvcnJlc3BvbmRpbmcgY29tcG91bmRzIGZyb20gUHViQ2hlbQpQb3dlciBVc2VyIEdhdGV3YXkgKFBVRykgcmV0dXJuaW5nIHJlc3VsdHMgaW4gYW4gYFNERnNldGAKY29udGFpbmVyLiBUaGUgQ2hlbU1pbmUgVG9vbHMgd2ViIHNlcnZpY2UgaXMgdXNlZCBhcyBhbiBpbnRlcm1lZGlhdGUsIHRvCnRyYW5zbGF0ZSBxdWVyaWVzIGZyb20gcGxhaW4gSFRUUCBQT1NUIHRvIGEgUFVHIFNPQVAgcXVlcnkuCgpGZXRjaCAyIGNvbXBvdW5kcyBmcm9tIFB1YkNoZW06CgoKYGBge3IgZ2V0SWRzLCBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogY29tcG91bmRzIDwtIGdldElkcyhjKDExMSwxMjMpKQogY29tcG91bmRzCmBgYAoKPGRpdiBhbGlnbj0icmlnaHQiPltCYWNrIHRvIFRhYmxlIG9mIENvbnRlbnRzXSgpPC9kaXY+CgpTZWFyY2ggYSBTTUlMRVMgUXVlcnkgaW4gUHViQ2hlbQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKVGhlIGZ1bmN0aW9uIGBzZWFyY2hTdHJpbmdgIGFjY2VwdHMgb25lIFNNSUxFUyBzdHJpbmcKKFNpbXBsaWZpZWQgTW9sZWN1bGFyIElucHV0IExpbmUgRW50cnkgU3BlY2lmaWNhdGlvbikgYW5kIHBlcmZvcm1zIGEKXD4wLjk1IHNpbWlsYXJpdHkgUHViQ2hlbSBmaW5nZXJwcmludCBzZWFyY2gsIHJldHVybmluZyB0aGUgaGl0cyBpbiBhbgpgU0RGc2V0YCBjb250YWluZXIuIFRoZSBDaGVtTWluZSBUb29scyB3ZWIgc2VydmljZSBpcwp1c2VkIGFzIGFuIGludGVybWVkaWF0ZSwgdG8gdHJhbnNsYXRlIHF1ZXJpZXMgZnJvbSBwbGFpbiBIVFRQIFBPU1QgdG8gYQpQdWJDaGVtIFBvd2VyIFVzZXIgR2F0ZXdheSAoUFVHKSBxdWVyeS4KClNlYXJjaCBhIFNNSUxFUyBzdHJpbmcgb24gUHViQ2hlbToKCgpgYGB7ciBzZWFyY2hTdHJpbmcsIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBjb21wb3VuZHMgPC0gc2VhcmNoU3RyaW5nKCJDQyg9TylPQzE9Q0M9Q0M9QzFDKD1PKU8iKSBjb21wb3VuZHMKYGBgCgo8ZGl2IGFsaWduPSJyaWdodCI+W0JhY2sgdG8gVGFibGUgb2YgQ29udGVudHNdKCk8L2Rpdj4KClNlYXJjaCBhbiBTREYgUXVlcnkgaW4gUHViQ2hlbQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KClRoZSBmdW5jdGlvbiBgc2VhcmNoU2ltYCBwZXJmb3JtcyBhIFB1YkNoZW0gc2ltaWxhcml0eQpzZWFyY2gganVzdCBsaWtlIGBzZWFyY2hTdHJpbmdgLCBidXQgYWNjZXB0cyBhIHF1ZXJ5IGluCmFuIGBTREZzZXRgIGNvbnRhaW5lci4gSWYgdGhlIHF1ZXJ5IGNvbnRhaW5zIG1vcmUgdGhhbgpvbmUgY29tcG91bmQsIG9ubHkgdGhlIGZpcnN0IGlzIHNlYXJjaGVkLgoKU2VhcmNoIGFuIGBTREZzZXRgIGNvbnRhaW5lciBvbiBQdWJDaGVtOgoKCmBgYHtyIHNlYXJjaFNpbSwgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGRhdGEoc2Rmc2FtcGxlKTsKIHNkZnNldCA8LSBzZGZzYW1wbGVbMV0KIGNvbXBvdW5kcyA8LSBzZWFyY2hTaW0oc2Rmc2V0KQogY29tcG91bmRzCmBgYAoKYGBge3Iga25pdF9leGl0LCBpbmNsdWRlPUYsIGVjaG89Rn0Ka25pdF9leGl0KCkKYGBgCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjdHVyZSAzOiBDaGVtbWluZVIiCi0tLQoKCmBgYHtyIHN0eWxlLCBlY2hvID0gRkFMU0UsIHJlc3VsdHMgPSAnYXNpcyd9Cm9wdGlvbnMod2lkdGg9MTAwLCBtYXgucHJpbnQ9MTAwMCkKa25pdHI6Om9wdHNfY2h1bmskc2V0KAogICAgZXZhbD1hcy5sb2dpY2FsKFN5cy5nZXRlbnYoIktOSVRSX0VWQUwiLCAiVFJVRSIpKSwKICAgIGNhY2hlPWFzLmxvZ2ljYWwoU3lzLmdldGVudigiS05JVFJfQ0FDSEUiLCAiVFJVRSIpKQogICAgKQpgYGAKCmBgYHtyIHNldHVwLCBlY2hvPUZBTFNFLCBtZXNzYWdlcz1GQUxTRSwgd2FybmluZ3M9RkFMU0V9CnN1cHByZXNzUGFja2FnZVN0YXJ0dXBNZXNzYWdlcyh7CiAgICBsaWJyYXJ5KENoZW1taW5lUikKICAgIGxpYnJhcnkoZm1jc1IpCiAgICBsaWJyYXJ5KGdncGxvdDIpCgkgI2xpYnJhcnkoQ2hlbW1pbmVPQikKfSkKYGBgCgoKYENoZW1taW5lUmAgaXMgYSBjaGVtaW5mb3JtYXRpY3MgcGFja2FnZSBmb3IgYW5hbHl6aW5nCmRydWctbGlrZSBzbWFsbCBtb2xlY3VsZSBkYXRhIGluIFIuIEl0cyBsYXRlc3QgdmVyc2lvbiBjb250YWlucwpmdW5jdGlvbnMgZm9yIGVmZmljaWVudCBwcm9jZXNzaW5nIG9mIGxhcmdlIG51bWJlcnMgb2Ygc21hbGwgbW9sZWN1bGVzLApwaHlzaWNvY2hlbWljYWwvc3RydWN0dXJhbCBwcm9wZXJ0eSBwcmVkaWN0aW9ucywgc3RydWN0dXJhbCBzaW1pbGFyaXR5CnNlYXJjaGluZywgY2xhc3NpZmljYXRpb24gYW5kIGNsdXN0ZXJpbmcgb2YgY29tcG91bmQgbGlicmFyaWVzIHdpdGggYQp3aWRlIHNwZWN0cnVtIG9mIGFsZ29yaXRobXMuCgoKIyMgSW5zdGFsbGF0aW9uCi0tLS0tLS0tLS0tLQoKVGhlIFIgc29mdHdhcmUgZm9yIHJ1bm5pbmcgQ2hlbW1pbmVSIGNhbiBiZSBkb3dubG9hZGVkIGZyb20gQ1JBTgooPGh0dHA6Ly9jcmFuLmF0LnItcHJvamVjdC5vcmcvPikuIFRoZSBDaGVtbWluZVIgcGFja2FnZSBjYW4gYmUKaW5zdGFsbGVkIGZyb20gUiB3aXRoOgoKYGBge3IgZXZhbD1GQUxTRX0KIGlmICghcmVxdWlyZU5hbWVzcGFjZSgiQmlvY01hbmFnZXIiLCBxdWlldGx5PVRSVUUpKQogICAgIGluc3RhbGwucGFja2FnZXMoIkJpb2NNYW5hZ2VyIikKIEJpb2NNYW5hZ2VyOjppbnN0YWxsKCJDaGVtbWluZVIiKQpgYGAKCkxvYWRpbmcgdGhlIFBhY2thZ2UgYW5kIERvY3VtZW50YXRpb24KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKCmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KIGxpYnJhcnkoIkNoZW1taW5lUiIpICMgTG9hZHMgdGhlIHBhY2thZ2UKYGBgCgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogbGlicmFyeShoZWxwPSJDaGVtbWluZVIiKSAjIExpc3RzIGFsbCBmdW5jdGlvbnMgYW5kIGNsYXNzZXMKIHZpZ25ldHRlKCJDaGVtbWluZVIiKSAjIE9wZW5zIHRoaXMgUERGIG1hbnVhbCBmcm9tIFIKYGBgCgoKIyMgRml2ZSBNaW51dGUgVHV0b3JpYWwKLS0tLS0tLS0tLS0tLS0tLS0tLS0KClRoZSBmb2xsb3dpbmcgY29kZSBnaXZlcyBhbiBvdmVydmlldyBvZiB0aGUgbW9zdCBpbXBvcnRhbnQKZnVuY3Rpb25hbGl0aWVzIHByb3ZpZGVkIGJ5IGBDaGVtbWluZVJgLiBDb3B5IGFuZCBwYXN0ZQpvZiB0aGUgY29tbWFuZHMgaW50byB0aGUgUiBjb25zb2xlIHdpbGwgZGVtb25zdHJhdGUgdGhlaXIgdXRpbGl0aWVzLgoKQ3JlYXRlIEluc3RhbmNlcyBvZiBgU0RGc2V0YCBjbGFzczoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogZGF0YShzZGZzYW1wbGUpCiBzZGZzZXQgPC0gc2Rmc2FtcGxlCiBzZGZzZXQgIyBSZXR1cm5zIHN1bW1hcnkgb2YgU0RGc2V0CiBzZGZzZXRbMTo0XSAjIFN1YnNldHRpbmcgb2Ygb2JqZWN0Cgogc2Rmc2V0W1sxXV0gIyBSZXR1cm5zIHN1bW1hcml6ZWQgY29udGVudCBvZiBvbmUgU0RGCgoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHZpZXcoc2Rmc2V0WzE6NF0pICMgUmV0dXJucyBzdW1tYXJpemVkIGNvbnRlbnQgb2YgbWFueSBTREZzLCBub3QgcHJpbnRlZCBoZXJlCiBhcyhzZGZzZXRbMTo0XSwgImxpc3QiKSAjIFJldHVybnMgY29tcGxldGUgY29udGVudCBvZiBtYW55IFNERnMsIG5vdCBwcmludGVkIGhlcmUKCmBgYAoKCkFuIGBTREZzZXRgIGlzIGNyZWF0ZWQgZHVyaW5nIHRoZSBpbXBvcnQgb2YgYW4gU0QgZmlsZToKCmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBzZGZzZXQgPC0gcmVhZC5TREZzZXQoImh0dHA6Ly9mYWN1bHR5LnVjci5lZHUvfnRnaXJrZS9Eb2N1bWVudHMvUl9CaW9Db25kL1NhbXBsZXMvc2Rmc2FtcGxlLnNkZiIpCmBgYAoKCk1pc2NlbGxhbmVvdXMgYWNjZXNzb3IgbWV0aG9kcyBmb3IgYFNERnNldGAgY29udGFpbmVyOgoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGhlYWRlcihzZGZzZXRbMTo0XSkgIyBOb3QgcHJpbnRlZCBoZXJlCmBgYAoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogaGVhZGVyKHNkZnNldFtbMV1dKQpgYGAKCmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBhdG9tYmxvY2soc2Rmc2V0WzE6NF0pICMgTm90IHByaW50ZWQgaGVyZQpgYGAKCmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KYXRvbWJsb2NrKHNkZnNldFtbMV1dKVsxOjQsXQpgYGAKCmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CmJvbmRibG9jayhzZGZzZXRbMTo0XSkgIyBOb3QgcHJpbnRlZCBoZXJlCmBgYAoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogYm9uZGJsb2NrKHNkZnNldFtbMV1dKVsxOjQsXQpgYGAKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGRhdGFibG9jayhzZGZzZXRbMTo0XSkgIyBOb3QgcHJpbnRlZCBoZXJlCmBgYAoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogZGF0YWJsb2NrKHNkZnNldFtbMV1dKVsxOjRdCmBgYAoKCkFzc2lnbmluZyBjb21wb3VuZCBJRHMgYW5kIGtlZXBpbmcgdGhlbSB1bmlxdWU6CmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KIGNpZChzZGZzZXQpWzE6NF0gIyBSZXR1cm5zIElEcyBmcm9tIFNERnNldCBvYmplY3QKIHNkZmlkKHNkZnNldClbMTo0XSAjIFJldHVybnMgSURzIGZyb20gU0QgZmlsZSBoZWFkZXIgYmxvY2sKIHVuaXF1ZV9pZHMgPC0gbWFrZVVuaXF1ZShzZGZpZChzZGZzZXQpKQogY2lkKHNkZnNldCkgPC0gdW5pcXVlX2lkcwpgYGAKCgpDb252ZXJ0aW5nIHRoZSBkYXRhIGJsb2NrcyBpbiBhbiBgU0RGc2V0YCB0byBhIG1hdHJpeDoKCmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KIGJsb2NrbWF0cml4IDwtIGRhdGFibG9jazJtYShkYXRhYmxvY2tsaXN0PWRhdGFibG9jayhzZGZzZXQpKSAjIENvbnZlcnRzIGRhdGEgYmxvY2sgdG8gbWF0cml4CiBudW1jaGFyIDwtIHNwbGl0TnVtQ2hhcihibG9ja21hdHJpeD1ibG9ja21hdHJpeCkgIyBTcGxpdHMgdG8gbnVtZXJpYyBhbmQgY2hhcmFjdGVyIG1hdHJpeAogbnVtY2hhcltbMV1dWzE6MiwxOjJdICMgU2xpY2Ugb2YgbnVtZXJpYyBtYXRyaXgKIG51bWNoYXJbWzJdXVsxOjIsMTA6MTFdICMgU2xpY2Ugb2YgY2hhcmFjdGVyIG1hdHJpeApgYGAKCgpDb21wdXRlIGF0b20gZnJlcXVlbmN5IG1hdHJpeCwgbW9sZWN1bGFyIHdlaWdodCBhbmQgZm9ybXVsYToKCmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KIHByb3BtYSA8LSBkYXRhLmZyYW1lKE1GPU1GKHNkZnNldCksIE1XPU1XKHNkZnNldCksIGF0b21jb3VudE1BKHNkZnNldCkpCiBwcm9wbWFbMTo0LCBdCmBgYAoKCkFzc2lnbiBtYXRyaXggZGF0YSB0byBkYXRhIGJsb2NrOgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBkYXRhYmxvY2soc2Rmc2V0KSA8LSBwcm9wbWEKIGRhdGFibG9jayhzZGZzZXRbMV0pCmBgYAoKClN0cmluZyBzZWFyY2hpbmcgaW4gYFNERnNldGA6CmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBncmVwU0RGc2V0KCI2NTAwMDEiLCBzZGZzZXQsIGZpZWxkPSJkYXRhYmxvY2siLCBtb2RlPSJzdWJzZXQiKSAjIFJldHVybnMgc3VtbWFyeSB2aWV3IG9mIG1hdGNoZXMuIE5vdCBwcmludGVkIGhlcmUuCmBgYAoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogZ3JlcFNERnNldCgiNjUwMDAxIiwgc2Rmc2V0LCBmaWVsZD0iZGF0YWJsb2NrIiwgbW9kZT0iaW5kZXgiKQpgYGAKCgpFeHBvcnQgU0RGc2V0IHRvIFNEIGZpbGU6CmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiB3cml0ZS5TREYoc2Rmc2V0WzE6NF0sIGZpbGU9InN1Yi5zZGYiLCBzaWc9VFJVRSkKYGBgCgoKUGxvdCBtb2xlY3VsZSBzdHJ1Y3R1cmUgb2Ygb25lIG9yIG1hbnkgU0RGczoKYGBge3IgcGxvdHN0cnVjdCwgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogcGxvdChzZGZzZXRbMTo0XSwgcHJpbnQ9RkFMU0UpICMgUGxvdHMgc3RydWN0dXJlcyB0byBSIGdyYXBoaWNzIGRldmljZQpgYGAKCgoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHNkZi52aXN1YWxpemUoc2Rmc2V0WzE6NF0pICMgQ29tcG91bmQgdmlld2luZyBpbiB3ZWIgYnJvd3NlcgpgYGAKCiFbRmlndXJlOiBWaXN1YWxpemF0aW9uIHdlYnBhZ2UgY3JlYXRlZCBieSBjYWxsaW5nCmBzZGYudmlzdWFsaXplYC5dKHZpc3VhbGl6ZXNjcmVlbnNob3Qtc21hbGwucG5nICkKClN0cnVjdHVyZSBzaW1pbGFyaXR5IHNlYXJjaGluZyBhbmQgY2x1c3RlcmluZzoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGFwc2V0IDwtIHNkZjJhcChzZGZzZXQpICMgR2VuZXJhdGUgYXRvbSBwYWlyIGRlc2NyaXB0b3IgZGF0YWJhc2UgZm9yIHNlYXJjaGluZwpgYGAKCmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KIGRhdGEoYXBzZXQpICMgTG9hZCBzYW1wbGUgYXBzZXQgZGF0YSBwcm92aWRlZCBieSBsaWJyYXJ5LgogY21wLnNlYXJjaChhcHNldCwgYXBzZXRbMV0sIHR5cGU9MywgY3V0b2ZmID0gMC4zLCBxdWlldD1UUlVFKSAjIFNlYXJjaCBhcHNldCBkYXRhYmFzZSB3aXRoIHNpbmdsZSBjb21wb3VuZC4KCiBjbXAuY2x1c3RlcihkYj1hcHNldCwgY3V0b2ZmID0gYygwLjY1LCAwLjUpLCBxdWlldD1UUlVFKVsxOjQsXSAjIEJpbm5pbmcgY2x1c3RlcmluZyB1c2luZyB2YXJpYWJsZSBzaW1pbGFyaXR5IGN1dG9mZnMuCmBgYAoKCiMjIyBNb2xlY3VsYXIgU3RydWN0dXJlIERhdGEKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgpDbGFzc2VzCgotICAgYFNERnN0cmA6IGludGVybWVkaWF0ZSBzdHJpbmcgY2xhc3MgdG8gZmFjaWxpdGF0ZSBTRAogICAgZmlsZSBpbXBvcnQ7IG5vdCBpbXBvcnRhbnQgZm9yIGVuZCB1c2VyCgotICAgYFNERmA6IGNvbnRhaW5lciBmb3Igc2luZ2xlIG1vbGVjdWxlIGltcG9ydGVkIGZyb20gYW4KICAgIFNEIGZpbGUKCi0gICBgU0RGc2V0YDogY29udGFpbmVyIGZvciBtYW55IFNERiBvYmplY3RzOyBtb3N0CiAgICBpbXBvcnRhbnQgc3RydWN0dXJlIGNvbnRhaW5lciBmb3IgZW5kIHVzZXIKCi0gICBgU01JYDogY29udGFpbmVyIGZvciBhIHNpbmdsZSBTTUlMRVMgc3RyaW5nCgotICAgYFNNSXNldGA6IGNvbnRhaW5lciBmb3IgbWFueSBTTUlMRVMgc3RyaW5ncwoKRnVuY3Rpb25zL01ldGhvZHMgKG1haW5seSBmb3IgYFNERnNldGAgY29udGFpbmVyLApgU01Jc2V0YCBzaG91bGQgYmUgY29lcmNlZCB3aXRoCmBzbWlsZXMyc2RgIHRvIGBTREZzZXRgKQoKLSAgIEFjY2Vzc29yIG1ldGhvZHMgZm9yIGBTREYvU0RGc2V0YAoKICAgIC0gICBPYmplY3Qgc2xvdHM6IGBjaWRgLCBgaGVhZGVyYCwgYGF0b21ibG9ja2AsIGBib25kYmxvY2tgLAogICAgICAgIGBkYXRhYmxvY2tgIChgc2RmaWRgLCBgZGF0YWJsb2NrdGFnYCkKCiAgICAtICAgU3VtbWFyeSBvZiBgU0RGc2V0YDogYHZpZXdgCgogICAgLSAgIE1hdHJpeCBjb252ZXJzaW9uIG9mIGRhdGEgYmxvY2s6IGBkYXRhYmxvY2sybWFgLAogICAgICAgIGBzcGxpdE51bUNoYXJgCgogICAgLSAgIFN0cmluZyBzZWFyY2ggaW4gU0RGc2V0OiBgZ3JlcFNERnNldGAKCi0gICBDb2VyY2Ugb25lIGNsYXNzIHRvIGFub3RoZXIKCiAgICAtICAgU3RhbmRhcmQgc3ludGF4IGBhcyguLi4sICIuLi4iKWAgd29ya3MgaW4gbW9zdAogICAgICAgIGNhc2VzLiBGb3IgZGV0YWlscyBzZWUgUiBoZWxwIHdpdGgKICAgICAgIGA/IlNERnNldC1jbGFzcyJgLgoKLSAgIFV0aWxpdGllcwoKICAgIC0gICBBdG9tIGZyZXF1ZW5jaWVzOiBgYXRvbWNvdW50TUFgLCBgYXRvbWNvdW50YAoKICAgIC0gICBNb2xlY3VsYXIgd2VpZ2h0OiBgTVdgCgogICAgLSAgIE1vbGVjdWxhciBmb3JtdWxhOiBgTUZgCgogICAgLSAgIC4uLgoKLSAgIENvbXBvdW5kIHN0cnVjdHVyZSBkZXBpY3Rpb25zCgogICAgLSAgIFIgZ3JhcGhpY3MgZGV2aWNlOiBgcGxvdGAsIGBwbG90U3RydWNgCgogICAgLSAgIE9ubGluZTogYGNtcC52aXN1YWxpemVgCgo8ZGl2IGFsaWduPSJyaWdodCI+W0JhY2sgdG8gVGFibGUgb2YgQ29udGVudHNdKCk8L2Rpdj4KClN0cnVjdHVyZSBEZXNjcmlwdG9yIERhdGEKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKQ2xhc3NlcwoKLSAgIGBBUGA6IGNvbnRhaW5lciBmb3IgYXRvbSBwYWlyIGRlc2NyaXB0b3JzIG9mIGEgc2luZ2xlCiAgICBtb2xlY3VsZQoKLSAgIGBBUHNldGA6IGNvbnRhaW5lciBmb3IgbWFueSBBUCBvYmplY3RzOyBtb3N0CiAgICBpbXBvcnRhbnQgc3RydWN0dXJlIGRlc2NyaXB0b3IgY29udGFpbmVyIGZvciBlbmQgdXNlcgoKLSAgIGBGUGA6IGNvbnRhaW5lciBmb3IgZmluZ2VycHJpbnQgb2YgYSBzaW5nbGUgbW9sZWN1bGUKCi0gICBgRlBzZXRgOiBjb250YWluZXIgZm9yIGZpbmdlcnByaW50cyBvZiBtYW55CiAgICBtb2xlY3VsZXMsIG1vc3QgaW1wb3J0YW50IHN0cnVjdHVyZSBkZXNjcmlwdG9yIGNvbnRhaW5lciBmb3IgZW5kCiAgICB1c2VyCgpGdW5jdGlvbnMvTWV0aG9kcwoKLSAgIENyZWF0ZSBgQVAvQVBzZXRgIGluc3RhbmNlcwoKICAgIC0gICBGcm9tIGBTREZzZXRgOiBgc2RmMmFwYAoKICAgIC0gICBGcm9tIFNEIGZpbGU6IGBjbXAucGFyc2VgCgogICAgLSAgIFN1bW1hcnkgb2YgYEFQL0FQc2V0YDogYHZpZXdgLAogICAgICAgIGBkYi5leHBsYWluYAoKLSAgIEFjY2Vzc29yIG1ldGhvZHMgZm9yIEFQL0FQc2V0CgogICAgLSAgIE9iamVjdCBzbG90czogYGFwYCwgYGNpZGAKCi0gICBDb2VyY2Ugb25lIGNsYXNzIHRvIGFub3RoZXIKCiAgICAtICAgU3RhbmRhcmQgc3ludGF4IGBhcyguLi4sICIuLi4iKWAgd29ya3MgaW4gbW9zdAogICAgICAgIGNhc2VzLiBGb3IgZGV0YWlscyBzZWUgUiBoZWxwIHdpdGgKICAgICAgICBgPyJBUHNldC1jbGFzcyJgLgoKLSAgIFN0cnVjdHVyZSBTaW1pbGFyaXR5IGNvbXBhcmlzb25zIGFuZCBTZWFyY2hpbmcKCiAgICAtICAgQ29tcHV0ZSBwYWlyd2lzZSBzaW1pbGFyaXRpZXMgOiBgY21wLnNpbWlsYXJpdHlgLAogICAgICAgIGBmcFNpbWAKCiAgICAtICAgU2VhcmNoIEFQc2V0IGRhdGFiYXNlOiBgY21wLnNlYXJjaGAsIGBmcFNpbWAKCi0gICBBUC1iYXNlZCBTdHJ1Y3R1cmUgU2ltaWxhcml0eSBDbHVzdGVyaW5nCgogICAgLSAgIFNpbmdsZS1saW5rYWdlIGJpbm5pbmcgY2x1c3RlcmluZzogYGNtcC5jbHVzdGVyYAoKICAgIC0gICBWaXN1YWxpemUgY2x1c3RlcmluZyByZXN1bHQgd2l0aCBNRFM6CiAgICAgICAgYGNsdXN0ZXIudmlzdWFsaXplYAoKICAgIC0gICBTaXplIGRpc3RyaWJ1dGlvbiBvZiBjbHVzdGVyczogYGNsdXN0ZXIuc2l6ZXN0YXRgCi0gICBGb2xkaW5nCiAgICAtIEZvbGQgYSBkZXNjcmlwdG9yIHdpdGggYGZvbGRgCgkgLSBRdWVyeSB0aGUgbnVtYmVyIG9mIHRpbWVzIGEgZGVzY3JpcHRvciBoYXMgYmVlbiBmb2xkZWQ6CgkJYGZvbGRDb3VudGAKCSAtIFF1ZXJ5IHRoZSBudW1iZXIgb2YgYml0cyBpbiBhIGRlc2NyaXB0b3I6IGBudW1CaXRzYAoKPGRpdiBhbGlnbj0icmlnaHQiPltCYWNrIHRvIFRhYmxlIG9mIENvbnRlbnRzXSgpPC9kaXY+CgpJbXBvcnQgb2YgQ29tcG91bmRzCj09PT09PT09PT09PT09PT09PT0KClNERiBJbXBvcnQKLS0tLS0tLS0tLQoKVGhlIGZvbGxvd2luZyBnaXZlcyBhbiBvdmVydmlldyBvZiB0aGUgbW9zdCBpbXBvcnRhbnQgaW1wb3J0L2V4cG9ydApmdW5jdGlvbmFsaXRpZXMgZm9yIHNtYWxsIG1vbGVjdWxlcyBwcm92aWRlZCBieQpgQ2hlbW1pbmVSYC4gVGhlIGdpdmVuIGV4YW1wbGUgY3JlYXRlcyBhbiBpbnN0YW5jZSBvZiB0aGUKYFNERnNldGAgY2xhc3MgdXNpbmcgYXMgc2FtcGxlIGRhdGEgc2V0IHRoZSBmaXJzdCAxMDAKY29tcG91bmRzIGZyb20gdGhpcyBQdWJDaGVtIFNEIGZpbGUgKFNERik6CkNvbXBvdW5kXF8wMDY1MDAwMVxfMDA2NzUwMDAuc2RmLmd6Cig8ZnRwOi8vZnRwLm5jYmkubmloLmdvdi9wdWJjaGVtL0NvbXBvdW5kL0NVUlJFTlQtRnVsbC9TREYvPikuCgpTREZzIGNhbiBiZSBpbXBvcnRlZCB3aXRoIHRoZSBgcmVhZC5TREZzZXRgIGZ1bmN0aW9uOgoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHNkZnNldCA8LSByZWFkLlNERnNldCgiaHR0cDovL2ZhY3VsdHkudWNyLmVkdS9+dGdpcmtlL0RvY3VtZW50cy9SX0Jpb0NvbmQvU2FtcGxlcy9zZGZzYW1wbGUuc2RmIikKYGBgCgpgYGB7ciBldmFsPVRSVUUsIHRpZHk9RkFMU0V9CiBkYXRhKHNkZnNhbXBsZSkgIyBMb2FkcyB0aGUgc2FtZSBTREZzZXQgcHJvdmlkZWQgYnkgdGhlIGxpYnJhcnkKIHNkZnNldCA8LSBzZGZzYW1wbGUKIHZhbGlkIDwtIHZhbGlkU0RGKHNkZnNldCkgIyBJZGVudGlmaWVzIGludmFsaWQgU0RGcyBpbiBTREZzZXQgb2JqZWN0cwogc2Rmc2V0IDwtIHNkZnNldFt2YWxpZF0gIyBSZW1vdmVzIGludmFsaWQgU0RGcywgaWYgdGhlcmUgYXJlIGFueQpgYGAKCgpJbXBvcnQgU0QgZmlsZSBpbnRvIGBTREZzdHJgIGNvbnRhaW5lcjoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHNkZnN0ciA8LSByZWFkLlNERnN0cigiaHR0cDovL2ZhY3VsdHkudWNyLmVkdS9+dGdpcmtlL0RvY3VtZW50cy9SX0Jpb0NvbmQvU2FtcGxlcy9zZGZzYW1wbGUuc2RmIikKYGBgCkNyZWF0ZQpgU0RGc2V0YCBmcm9tIGBTREZzdHJgIGNsYXNzOgoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogc2Rmc3RyIDwtIGFzKHNkZnNldCwgIlNERnN0ciIpCiBzZGZzdHIKIGFzKHNkZnN0ciwgIlNERnNldCIpCmBgYAoKPGRpdiBhbGlnbj0icmlnaHQiPltCYWNrIHRvIFRhYmxlIG9mIENvbnRlbnRzXSgpPC9kaXY+CgpTTUlMRVMgSW1wb3J0Ci0tLS0tLS0tLS0tLS0KClRoZSBgcmVhZC5TTUlzZXRgIGZ1bmN0aW9uIGltcG9ydHMgb25lIG9yIG1hbnkgbW9sZWN1bGVzCmZyb20gYSBTTUlMRVMgZmlsZSBhbmQgc3RvcmVzIHRoZW0gaW4gYSBgU01Jc2V0YApjb250YWluZXIuIFRoZSBpbnB1dCBmaWxlIGlzIGV4cGVjdGVkIHRvIGNvbnRhaW4gb25lIFNNSUxFUyBzdHJpbmcgcGVyCnJvdyB3aXRoIHRhYi1zZXBhcmF0ZWQgY29tcG91bmQgaWRlbnRpZmllcnMgYXQgdGhlIGVuZCBvZiBlYWNoIGxpbmUuIFRoZQpjb21wb3VuZCBpZGVudGlmaWVycyBhcmUgb3B0aW9uYWwuCgpDcmVhdGUgc2FtcGxlIFNNSUxFUyBmaWxlIGFuZCB0aGVuIGltcG9ydCBpdDoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGRhdGEoc21pc2FtcGxlKTsgc21pc2V0IDwtIHNtaXNhbXBsZQogd3JpdGUuU01JKHNtaXNldFsxOjRdLCBmaWxlPSJzdWIuc21pIikKIHNtaXNldCA8LSByZWFkLlNNSXNldCgic3ViLnNtaSIpCmBgYAoKCkluc3BlY3QgY29udGVudCBvZiBgU01Jc2V0YDoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogZGF0YShzbWlzYW1wbGUpICMgTG9hZHMgdGhlIHNhbWUgU01Jc2V0IHByb3ZpZGVkIGJ5IHRoZSBsaWJyYXJ5CiBzbWlzZXQgPC0gc21pc2FtcGxlCiBzbWlzZXQKIHZpZXcoc21pc2V0WzE6Ml0pCmBgYAoKCkFjY2Vzc29yIGZ1bmN0aW9uczoKYGBge3IgZXZhbD1UUlVFLCB0aWR5PUZBTFNFfQogY2lkKHNtaXNldFsxOjRdKQogc21pIDwtIGFzLmNoYXJhY3RlcihzbWlzZXRbMToyXSkKYGBgCgoKQ3JlYXRlIGBTTUlzZXRgIGZyb20gbmFtZWQgY2hhcmFjdGVyIHZlY3RvcjoKCmBgYHtyIGV2YWw9VFJVRSwgdGlkeT1GQUxTRX0KIGFzKHNtaSwgIlNNSXNldCIpCmBgYAoKPGRpdiBhbGlnbj0icmlnaHQiPltCYWNrIHRvIFRhYmxlIG9mIENvbnRlbnRzXSgpPC9kaXY+CgpFeHBvcnQgb2YgQ29tcG91bmRzCj09PT09PT09PT09PT09PT09PT0KClNERiBFeHBvcnQKLS0tLS0tLS0tLQoKV3JpdGUgb2JqZWN0cyBvZiBjbGFzc2VzIGBTREZzZXQvU0RGc3RyL1NERmAgdG8gU0QgZmlsZToKCmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiB3cml0ZS5TREYoc2Rmc2V0WzE6NF0sIGZpbGU9InN1Yi5zZGYiKQpgYGAKCgpXcml0aW5nIGN1c3RvbWl6ZWQgYFNERnNldGAgdG8gZmlsZSBjb250YWluaW5nCmBDaGVtbWluZVJgIHNpZ25hdHVyZSwgSURzIGZyb20gYFNERnNldGAKYW5kIG5vIGRhdGEgYmxvY2s6CmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiB3cml0ZS5TREYoc2Rmc2V0WzE6NF0sIGZpbGU9InN1Yi5zZGYiLCBzaWc9VFJVRSwgY2lkPVRSVUUsIGRiPU5VTEwpCmBgYAoKCkV4YW1wbGUgZm9yIGluamVjdGluZyBhIGN1c3RvbSBtYXRyaXgvZGF0YSBmcmFtZSBpbnRvIHRoZSBkYXRhIGJsb2NrIG9mCmFuIGBTREZzZXRgIGFuZCB0aGVuIHdyaXRpbmcgaXQgdG8gYW4gU0QgZmlsZToKCmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBwcm9wcyA8LSBkYXRhLmZyYW1lKE1GPU1GKHNkZnNldCksIE1XPU1XKHNkZnNldCksIGF0b21jb3VudE1BKHNkZnNldCkpCiBkYXRhYmxvY2soc2Rmc2V0KSA8LSBwcm9wcwogd3JpdGUuU0RGKHNkZnNldFsxOjRdLCBmaWxlPSJzdWIuc2RmIiwgc2lnPVRSVUUsIGNpZD1UUlVFKQpgYGAKCgpJbmRpcmVjdCBleHBvcnQgdmlhIGBTREZzdHJgIG9iamVjdDoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHNkZjJzdHIoc2RmPXNkZnNldFtbMV1dLCBzaWc9VFJVRSwgY2lkPVRSVUUpICMgVXNlcyBkZWZhdWx0IGNvbXBvbmVudHMKIHNkZjJzdHIoc2RmPXNkZnNldFtbMV1dLCBoZWFkPWxldHRlcnNbMTo0XSwgZGI9TlVMTCkgIyBVc2VzIGN1c3RvbSBjb21wb25lbnRzIGZvciBoZWFkZXIgYW5kIGRhdGEgYmxvY2sKYGBgCgoKV3JpdGUgYFNERmAsIGBTREZzZXRgIG9yCmBTREZzdHJgIGNsYXNzZXMgdG8gZmlsZToKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHdyaXRlLlNERihzZGZzZXRbMTo0XSwgZmlsZT0ic3ViLnNkZiIsIHNpZz1UUlVFLCBjaWQ9VFJVRSwgZGI9TlVMTCkKIHdyaXRlLlNERihzZGZzdHJbMTo0XSwgZmlsZT0ic3ViLnNkZiIpCiBjYXQodW5saXN0KGFzKHNkZnN0clsxOjRdLCAibGlzdCIpKSwgZmlsZT0ic3ViLnNkZiIsIHNlcD0iIikKYGBgCgo8ZGl2IGFsaWduPSJyaWdodCI+W0JhY2sgdG8gVGFibGUgb2YgQ29udGVudHNdKCk8L2Rpdj4KClNNSUxFUyBFeHBvcnQKLS0tLS0tLS0tLS0tLQoKV3JpdGUgb2JqZWN0cyBvZiBjbGFzcyBgU01Jc2V0YCB0byBTTUlMRVMgZmlsZSB3aXRoIGFuZAp3aXRob3V0IGNvbXBvdW5kIGlkZW50aWZpZXJzOgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogZGF0YShzbWlzYW1wbGUpOyBzbWlzZXQgPC0gc21pc2FtcGxlICMgU2FtcGxlIGRhdGEgc2V0Cgogd3JpdGUuU01JKHNtaXNldFsxOjRdLCBmaWxlPSJzdWIuc21pIiwgY2lkPVRSVUUpIHdyaXRlLlNNSShzbWlzZXRbMTo0XSwgZmlsZT0ic3ViLnNtaSIsIGNpZD1GQUxTRSkKYGBgCgo8ZGl2IGFsaWduPSJyaWdodCI+W0JhY2sgdG8gVGFibGUgb2YgQ29udGVudHNdKCk8L2Rpdj4KCkZvcm1hdCBJbnRlcmNvbnZlcnNpb25zCj09PT09PT09PT09PT09PT09PT09PT09CgpUaGUgYHNkZjJzbWlsZXNgIGFuZCBgc21pbGVzMnNkZmAKZnVuY3Rpb25zIHByb3ZpZGUgZm9ybWF0IGludGVyY29udmVyc2lvbiBiZXR3ZWVuIFNNSUxFUyBzdHJpbmdzCihTaW1wbGlmaWVkIE1vbGVjdWxhciBJbnB1dCBMaW5lIEVudHJ5IFNwZWNpZmljYXRpb24pIGFuZApgU0RGc2V0YCBjb250YWluZXJzLgoKQ29udmVydCBhbiBgU0RGc2V0YCBjb250YWluZXIgdG8gYSBTTUlMRVMKYGNoYXJhY3RlcmAgc3RyaW5nOgoKCmBgYHtyIHNkZjJzbWlsZXMsIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBkYXRhKHNkZnNhbXBsZSk7CiBzZGZzZXQgPC0gc2Rmc2FtcGxlWzFdCiBzbWlsZXMgPC0gc2RmMnNtaWxlcyhzZGZzZXQpCiBzbWlsZXMKYGBgCgoKQ29udmVydCBhIFNNSUxFUyBgY2hhcmFjdGVyYCBzdHJpbmcgdG8gYW4KYFNERnNldGAgY29udGFpbmVyOgoKCmBgYHtyIHNtaWxlczJzZGYsIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBzZGYgPC0gc21pbGVzMnNkZigiQ0MoPU8pT0MxPUNDPUNDPUMxQyg9TylPIikKIHZpZXcoc2RmKQpgYGAKCgpXaGVuIHRoZSBgQ2hlbWluZU9CYCBwYWNrYWdlIGlzIGluc3RhbGxlZCB0aGVzZQpjb252ZXJzaW9ucyBhcmUgcGVyZm9ybWVkIHdpdGggdGhlIE9wZW5CYWJlbCBPcGVuIFNvdXJjZSBDaGVtaXN0cnkKVG9vbGJveC4gT3RoZXJ3aXNlIHRoZSBmdW5jdGlvbnMgd2lsbCBmYWxsIGJhY2sgdG8gdXNpbmcgdGhlIENoZW1NaW5lClRvb2xzIHdlYiBzZXJ2aWNlIGZvciB0aGlzIG9wZXJhdGlvbi4gVGhlIGxhdHRlciB3aWxsIHJlcXVpcmUgaW50ZXJuZXQKY29ubmVjdGl2aXR5IGFuZCBpcyBsaW1pdGVkIHRvIG9ubHkgdGhlIGZpcnN0IGNvbXBvdW5kIGdpdmVuLgpgQ2hlbW1pbmVPQmAgcHJvdmlkZXMgYWNjZXNzIHRvIHRoZSBjb21wb3VuZCBmb3JtYXQKY29udmVyc2lvbiBmdW5jdGlvbnMgb2YgT3BlbkJhYmVsLiBDdXJyZW50bHksIG92ZXIgMTYwIGZvcm1hdHMgYXJlCnN1cHBvcnRlZCBieSBPcGVuQmFiZWwuIFRoZSBmdW5jdGlvbnMgYGNvbnZlcnRGb3JtYXRgIGFuZApgY29udmVydEZvcm1hdEZpbGVgIGNhbiBiZSB1c2VkIHRvIGNvbnZlcnQgZmlsZXMgb3IKc3RyaW5ncyBiZXR3ZWVuIGFueSB0d28gZm9ybWF0cyBzdXBwb3J0ZWQgYnkgT3BlbkJhYmVsLiBGb3IgZXhhbXBsZSwgdG8KY29udmVydCBhIFNNSUxFUyBzdHJpbmcgdG8gYW4gU0RGIHN0cmluZywgb25lIGNhbiB1c2UgdGhlCmBjb252ZXJ0Rm9ybWF0YCBmdW5jdGlvbi4KCgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogc2RmU3RyIDwtIGNvbnZlcnRGb3JtYXQoIlNNSSIsIlNERiIsIkNDKD1PKU9DMT1DQz1DQz1DMUMoPU8pT19uYW1lIikKYGBgCgoKVGhpcyB3aWxsIHJldHVybiB0aGUgZ2l2ZW4gY29tcG91bmQgYXMgYW4gU0RGIGZvcm1hdHRlZCBzdHJpbmcuIDJECmNvb3JkaW5hdGVzIGFyZSBhbHNvIGNvbXB1dGVkIGFuZCBpbmNsdWRlZCBpbiB0aGUgcmVzdWx0aW5nIFNERiBzdHJpbmcuCgpUbyBjb252ZXJ0IGEgZmlsZSB3aXRoIGNvbXBvdW5kcyBlbmNvZGVkIGluIG9uZSBmb3JtYXQgdG8gYW5vdGhlcgpmb3JtYXQsIHRoZSBgY29udmVydEZvcm1hdEZpbGVgIGZ1bmN0aW9uIGNhbiBiZSB1c2VkCmluc3RlYWQuCmBgYHtyIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBjb252ZXJ0Rm9ybWF0RmlsZSgiU01JIiwiU0RGIiwidGVzdC5zbWlsZXMiLCJ0ZXN0LnNkZiIpCmBgYAoKClRvIHNlZSB0aGUgd2hvbGUgbGlzdCBvZiBmaWxlIGZvcm1hdHMgc3VwcG9ydGVkIGJ5IE9wZW5CYWJlbCwgb25lIGNhbgpydW4gZnJvbSB0aGUgY29tbWFuZC1saW5lICJvYmFiZWwgLUwgZm9ybWF0cyIuCgo8ZGl2IGFsaWduPSJyaWdodCI+W0JhY2sgdG8gVGFibGUgb2YgQ29udGVudHNdKCk8L2Rpdj4KClNwbGl0dGluZyBTRCBGaWxlcwo9PT09PT09PT09PT09PT09PT0KClRoZSBmb2xsb3dpbmcgYHdyaXRlLlNERnNwbGl0YCBmdW5jdGlvbiBhbGxvd3MgdG8gc3BsaXQKU0QgRmlsZXMgaW50byBhbnkgbnVtYmVyIG9mIHNtYWxsZXIgU0QgRmlsZXMuIFRoaXMgY2FuIGJlY29tZSBpbXBvcnRhbnQKd2hlbiB3b3JraW5nIHdpdGggdmVyeSBiaWcgU0QgRmlsZXMuIFVzZXJzIHNob3VsZCBub3RlIHRoYXQgdGhpcwpmdW5jdGlvbiBjYW4gb3V0cHV0IG1hbnkgZmlsZXMsIHRodXMgb25lIHNob3VsZCBydW4gaXQgaW4gYSBkZWRpY2F0ZWQKZGlyZWN0b3J5IQoKQ3JlYXRlIHNhbXBsZSBTRCBGaWxlIHdpdGggMTAwIG1vbGVjdWxlczoKYGBge3IgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIHdyaXRlLlNERihzZGZzZXQsICJ0ZXN0LnNkZiIpCmBgYAoKClJlYWQgaW4gc2FtcGxlIFNEIEZpbGUuIE5vdGU6IHJlYWRpbmcgZmlsZSBpbnRvIFNERnN0ciBpcyBtdWNoIGZhc3Rlcgp0aGFuIGludG8gU0RGc2V0OgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogc2Rmc3RyIDwtIHJlYWQuU0RGc3RyKCJ0ZXN0LnNkZiIpCmBgYAoKClJ1biBleHBvcnQgb24gYFNERnN0cmAgb2JqZWN0OgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogd3JpdGUuU0RGc3BsaXQoeD1zZGZzdHIsIGZpbGV0YWc9Im15ZmlsZSIsIG5tb2w9MTApICMgJ25tb2wnIGRlZmluZXMgdGhlIG51bWJlciBvZiBtb2xlY3VsZXMgdG8gd3JpdGUgdG8gZWFjaCBmaWxlCmBgYAoKClJ1biBleHBvcnQgb24gYFNERnNldGAgb2JqZWN0OgpgYGB7ciBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogd3JpdGUuU0RGc3BsaXQoeD1zZGZzZXQsIGZpbGV0YWc9Im15ZmlsZSIsIG5tb2w9MTApCmBgYAoKClNlYXJjaGluZyBQdWJDaGVtCj09PT09PT09PT09PT09PT09CgpHZXQgQ29tcG91bmRzIGZyb20gUHViQ2hlbSBieSBJZAotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKVGhlIGZ1bmN0aW9uIGBnZXRJZHNgIGFjY2VwdHMgb25lIG9yIG1vcmUgbnVtZXJpYyBQdWJDaGVtCmNvbXBvdW5kIGlkcyBhbmQgZG93bmxvYWRzIHRoZSBjb3JyZXNwb25kaW5nIGNvbXBvdW5kcyBmcm9tIFB1YkNoZW0KUG93ZXIgVXNlciBHYXRld2F5IChQVUcpIHJldHVybmluZyByZXN1bHRzIGluIGFuIGBTREZzZXRgCmNvbnRhaW5lci4gVGhlIENoZW1NaW5lIFRvb2xzIHdlYiBzZXJ2aWNlIGlzIHVzZWQgYXMgYW4gaW50ZXJtZWRpYXRlLCB0bwp0cmFuc2xhdGUgcXVlcmllcyBmcm9tIHBsYWluIEhUVFAgUE9TVCB0byBhIFBVRyBTT0FQIHF1ZXJ5LgoKRmV0Y2ggMiBjb21wb3VuZHMgZnJvbSBQdWJDaGVtOgoKCmBgYHtyIGdldElkcywgZXZhbD1GQUxTRSwgdGlkeT1GQUxTRX0KIGNvbXBvdW5kcyA8LSBnZXRJZHMoYygxMTEsMTIzKSkKIGNvbXBvdW5kcwpgYGAKCjxkaXYgYWxpZ249InJpZ2h0Ij5bQmFjayB0byBUYWJsZSBvZiBDb250ZW50c10oKTwvZGl2PgoKU2VhcmNoIGEgU01JTEVTIFF1ZXJ5IGluIFB1YkNoZW0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KClRoZSBmdW5jdGlvbiBgc2VhcmNoU3RyaW5nYCBhY2NlcHRzIG9uZSBTTUlMRVMgc3RyaW5nCihTaW1wbGlmaWVkIE1vbGVjdWxhciBJbnB1dCBMaW5lIEVudHJ5IFNwZWNpZmljYXRpb24pIGFuZCBwZXJmb3JtcyBhClw+MC45NSBzaW1pbGFyaXR5IFB1YkNoZW0gZmluZ2VycHJpbnQgc2VhcmNoLCByZXR1cm5pbmcgdGhlIGhpdHMgaW4gYW4KYFNERnNldGAgY29udGFpbmVyLiBUaGUgQ2hlbU1pbmUgVG9vbHMgd2ViIHNlcnZpY2UgaXMKdXNlZCBhcyBhbiBpbnRlcm1lZGlhdGUsIHRvIHRyYW5zbGF0ZSBxdWVyaWVzIGZyb20gcGxhaW4gSFRUUCBQT1NUIHRvIGEKUHViQ2hlbSBQb3dlciBVc2VyIEdhdGV3YXkgKFBVRykgcXVlcnkuCgpTZWFyY2ggYSBTTUlMRVMgc3RyaW5nIG9uIFB1YkNoZW06CgoKYGBge3Igc2VhcmNoU3RyaW5nLCBldmFsPUZBTFNFLCB0aWR5PUZBTFNFfQogY29tcG91bmRzIDwtIHNlYXJjaFN0cmluZygiQ0MoPU8pT0MxPUNDPUNDPUMxQyg9TylPIikgY29tcG91bmRzCmBgYAoKPGRpdiBhbGlnbj0icmlnaHQiPltCYWNrIHRvIFRhYmxlIG9mIENvbnRlbnRzXSgpPC9kaXY+CgpTZWFyY2ggYW4gU0RGIFF1ZXJ5IGluIFB1YkNoZW0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgpUaGUgZnVuY3Rpb24gYHNlYXJjaFNpbWAgcGVyZm9ybXMgYSBQdWJDaGVtIHNpbWlsYXJpdHkKc2VhcmNoIGp1c3QgbGlrZSBgc2VhcmNoU3RyaW5nYCwgYnV0IGFjY2VwdHMgYSBxdWVyeSBpbgphbiBgU0RGc2V0YCBjb250YWluZXIuIElmIHRoZSBxdWVyeSBjb250YWlucyBtb3JlIHRoYW4Kb25lIGNvbXBvdW5kLCBvbmx5IHRoZSBmaXJzdCBpcyBzZWFyY2hlZC4KClNlYXJjaCBhbiBgU0RGc2V0YCBjb250YWluZXIgb24gUHViQ2hlbToKCgpgYGB7ciBzZWFyY2hTaW0sIGV2YWw9RkFMU0UsIHRpZHk9RkFMU0V9CiBkYXRhKHNkZnNhbXBsZSk7CiBzZGZzZXQgPC0gc2Rmc2FtcGxlWzFdCiBjb21wb3VuZHMgPC0gc2VhcmNoU2ltKHNkZnNldCkKIGNvbXBvdW5kcwpgYGAKCmBgYHtyIGtuaXRfZXhpdCwgaW5jbHVkZT1GLCBlY2hvPUZ9CmtuaXRfZXhpdCgpCmBgYAo=</div>
 
 
 </div>
