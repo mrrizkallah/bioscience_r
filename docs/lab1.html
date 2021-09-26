@@ -11,7 +11,7 @@
 
 
 
-<title>Lab 2: DNA exercise</title>
+<title></title>
 
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,74 +47,6 @@
     </style>
 
 
-<style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
-</style>
-<style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
-td.sourceCode { padding-left: 5px; }
-pre, code { color: #cccccc; background-color: #303030; }
-code > span.kw { color: #f0dfaf; } /* Keyword */
-code > span.dt { color: #dfdfbf; } /* DataType */
-code > span.dv { color: #dcdccc; } /* DecVal */
-code > span.bn { color: #dca3a3; } /* BaseN */
-code > span.fl { color: #c0bed1; } /* Float */
-code > span.ch { color: #dca3a3; } /* Char */
-code > span.st { color: #cc9393; } /* String */
-code > span.co { color: #7f9f7f; } /* Comment */
-code > span.ot { color: #efef8f; } /* Other */
-code > span.al { color: #ffcfaf; } /* Alert */
-code > span.fu { color: #efef8f; } /* Function */
-code > span.er { color: #c3bf9f; } /* Error */
-code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code > span.sc { color: #dca3a3; } /* SpecialChar */
-code > span.vs { color: #cc9393; } /* VerbatimString */
-code > span.ss { color: #cc9393; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #f0dfaf; } /* ControlFlow */
-code > span.op { color: #f0efd0; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #7f9f7f; } /* Documentation */
-code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
-
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
-</script>
 
 
 <style type="text/css">
@@ -456,70 +388,11 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab 2: DNA exercise</h1>
 
 </div>
 
 
-<div id="dna-exercise" class="section level2">
-<h2>DNA exercise</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># vector ... etc.</span>
-my_dna &lt;-<span class="st"> &quot;AACGAATGAGTAAATGAGTAAATGAAGGAATGATTATTCCTTGCTTTAGAACTTCTGGAATTAGAGGACAATATTAATAATACCATCGCACAGTGTTTCTTTGTTGTTAATGCTACAACATACAAAGAGGAAGCATGCAG&quot;</span>
-my_dna</code></pre></div>
-<pre><code>## [1] &quot;AACGAATGAGTAAATGAGTAAATGAAGGAATGATTATTCCTTGCTTTAGAACTTCTGGAATTAGAGGACAATATTAATAATACCATCGCACAGTGTTTCTTTGTTGTTAATGCTACAACATACAAAGAGGAAGCATGCAG&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(my_dna)</code></pre></div>
-<pre><code>## [1] 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(my_dna)</code></pre></div>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(my_dna)</code></pre></div>
-<pre><code>##  chr &quot;AACGAATGAGTAAATGAGTAAATGAAGGAATGATTATTCCTTGCTTTAGAACTTCTGGAATTAGAGGACAATATTAATAATACCATCGCACAGTGTTTCTTTGTTGTTAAT&quot;| __truncated__</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nchar</span>(my_dna)</code></pre></div>
-<pre><code>## [1] 140</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_dna_list &lt;-<span class="st"> </span><span class="kw">strsplit</span>(<span class="dt">x =</span> my_dna, <span class="dt">split =</span> <span class="st">&quot;&quot;</span>, <span class="dt">fixed =</span> <span class="ot">TRUE</span>)
-<span class="kw">length</span>(my_dna_list)</code></pre></div>
-<pre><code>## [1] 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(my_dna_list)</code></pre></div>
-<pre><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_dna_vector &lt;-<span class="st"> </span><span class="kw">unlist</span>(my_dna_list)
-<span class="kw">length</span>(my_dna_list[[<span class="dv">1</span>]])</code></pre></div>
-<pre><code>## [1] 140</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(my_dna_vector)</code></pre></div>
-<pre><code>##  chr [1:140] &quot;A&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(my_dna_vector)</code></pre></div>
-<pre><code>## [1] 140</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># unique characters</span>
-<span class="kw">unique</span>(my_dna_vector)</code></pre></div>
-<pre><code>## [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># number of As</span>
-(my_dna_vector ==<span class="st"> &quot;A&quot;</span>)</code></pre></div>
-<pre><code>##   [1]  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE
-##  [13]  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE
-##  [25]  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE
-##  [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
-##  [49] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
-##  [61] FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE
-##  [73]  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE
-##  [85]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
-##  [97] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [109]  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE
-## [121] FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE
-## [133] FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(my_dna_vector[my_dna_vector ==<span class="st"> &quot;A&quot;</span>])</code></pre></div>
-<pre><code>## [1] 52</code></pre>
-</div>
-<div id="frequency-distribution" class="section level2">
-<h2>Frequency distribution</h2>
-<p>A gene consists of a sequence of nucleotides {A, C, G, T}.The number of each nucleotide can be displayed in a frequency table. This will be illustrated by the Zyxin gene which plays an important role in cell adhesion (Golub et al., 1999). The accession number (X94991.1) of oneof its variants can be found via an NCBI UniGene search. The code below illustrates how to install the package ape, to load it, to read gene ”X94991.1”of the species homo sapiens from GenBank, and to make a frequency table of the four nucleotides</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(c(&quot;ape&quot;), repo=&quot;http://cran.r-project.org&quot;, dep=TRUE)</span>
-<span class="kw">library</span>(ape)
-gene &lt;-<span class="st"> </span><span class="kw">read.GenBank</span>(<span class="kw">c</span>(<span class="st">&quot;X94991.1&quot;</span>),  <span class="dt">as.character=</span><span class="ot">TRUE</span>)
-<span class="kw">table</span>(gene)</code></pre></div>
-<pre><code>## gene
-##   a   c   g   t 
-## 410 789 573 394</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pie</span>(<span class="kw">table</span>(gene))</code></pre></div>
-<p><img src="lab1_files/figure-html/freq1-1.png" width="672" /></p>
-</div>
+
 
 <div id="rmd-source-code">LS0tCnRpdGxlOiAiTGFiIDI6IEROQSBleGVyY2lzZSIKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0KbGlicmFyeShrbml0cikKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCiMjIEROQSBleGVyY2lzZQpgYGB7ciBkbmFfZXgyLCBpbmNsdWRlID0gVCwgZWNobz1ULCBldmFsPVR9CiMgdmVjdG9yIC4uLiBldGMuCm15X2RuYSA8LSAiQUFDR0FBVEdBR1RBQUFUR0FHVEFBQVRHQUFHR0FBVEdBVFRBVFRDQ1RUR0NUVFRBR0FBQ1RUQ1RHR0FBVFRBR0FHR0FDQUFUQVRUQUFUQUFUQUNDQVRDR0NBQ0FHVEdUVFRDVFRUR1RUR1RUQUFUR0NUQUNBQUNBVEFDQUFBR0FHR0FBR0NBVEdDQUciCm15X2RuYQpsZW5ndGgobXlfZG5hKQpjbGFzcyhteV9kbmEpCnN0cihteV9kbmEpCm5jaGFyKG15X2RuYSkKYGBgCgpgYGB7ciBkbmFfZXgzLCBpbmNsdWRlID0gVCwgZWNobz1ULCBldmFsPVR9Cm15X2RuYV9saXN0IDwtIHN0cnNwbGl0KHggPSBteV9kbmEsIHNwbGl0ID0gIiIsIGZpeGVkID0gVFJVRSkKbGVuZ3RoKG15X2RuYV9saXN0KQpjbGFzcyhteV9kbmFfbGlzdCkKbXlfZG5hX3ZlY3RvciA8LSB1bmxpc3QobXlfZG5hX2xpc3QpCmxlbmd0aChteV9kbmFfbGlzdFtbMV1dKQpzdHIobXlfZG5hX3ZlY3RvcikKbGVuZ3RoKG15X2RuYV92ZWN0b3IpCgojIHVuaXF1ZSBjaGFyYWN0ZXJzCnVuaXF1ZShteV9kbmFfdmVjdG9yKQoKIyBudW1iZXIgb2YgQXMKKG15X2RuYV92ZWN0b3IgPT0gIkEiKQpsZW5ndGgobXlfZG5hX3ZlY3RvcltteV9kbmFfdmVjdG9yID09ICJBIl0pCgpgYGAKCgojIyBGcmVxdWVuY3kgZGlzdHJpYnV0aW9uCkEgZ2VuZSBjb25zaXN0cyBvZiBhIHNlcXVlbmNlIG9mIG51Y2xlb3RpZGVzIHtBLCBDLCBHLCBUfS5UaGUgbnVtYmVyIG9mIGVhY2ggbnVjbGVvdGlkZSBjYW4gYmUgZGlzcGxheWVkIGluIGEgZnJlcXVlbmN5IHRhYmxlLiBUaGlzIHdpbGwgYmUgaWxsdXN0cmF0ZWQgYnkgdGhlIFp5eGluIGdlbmUgd2hpY2ggcGxheXMgYW4gaW1wb3J0YW50IHJvbGUgaW4gY2VsbCBhZGhlc2lvbiAoR29sdWIgZXQgYWwuLCAxOTk5KS4gIFRoZSBhY2Nlc3Npb24gbnVtYmVyIChYOTQ5OTEuMSkgb2Ygb25lb2YgaXRzIHZhcmlhbnRzIGNhbiBiZSBmb3VuZCB2aWEgYW4gTkNCSSBVbmlHZW5lIHNlYXJjaC4gVGhlIGNvZGUgYmVsb3cgaWxsdXN0cmF0ZXMgaG93IHRvIGluc3RhbGwgdGhlIHBhY2thZ2UgYXBlLCB0byBsb2FkIGl0LCB0byByZWFkIGdlbmUg4oCdWDk0OTkxLjHigJ1vZiB0aGUgc3BlY2llcyBob21vIHNhcGllbnMgZnJvbSBHZW5CYW5rLCBhbmQgdG8gbWFrZSBhIGZyZXF1ZW5jeSB0YWJsZSBvZiB0aGUgZm91ciBudWNsZW90aWRlcwoKYGBge3IgZnJlcTEsIGluY2x1ZGUgPSBULCBlY2hvPVQsIGV2YWw9VH0KIyBpbnN0YWxsLnBhY2thZ2VzKGMoImFwZSIpLCByZXBvPSJodHRwOi8vY3Jhbi5yLXByb2plY3Qub3JnIiwgZGVwPVRSVUUpCmxpYnJhcnkoYXBlKQpnZW5lIDwtIHJlYWQuR2VuQmFuayhjKCJYOTQ5OTEuMSIpLCAgYXMuY2hhcmFjdGVyPVRSVUUpCnRhYmxlKGdlbmUpCnBpZSh0YWJsZShnZW5lKSkKYGBgCgpgYGB7ciBrbml0X2V4aXQsIGluY2x1ZGU9RiwgZWNobz1GfQprbml0X2V4aXQoKQpgYGAK</div>
 
