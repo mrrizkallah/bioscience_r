@@ -34,7 +34,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -57,68 +56,42 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  { color: #cccccc; background-color: #303030; }
-@media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ffcfaf; } /* Alert */
-code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bn { color: #dca3a3; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #f0dfaf; } /* ControlFlow */
-code span.ch { color: #dca3a3; } /* Char */
-code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code span.co { color: #7f9f7f; } /* Comment */
-code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code span.do { color: #7f9f7f; } /* Documentation */
-code span.dt { color: #dfdfbf; } /* DataType */
-code span.dv { color: #dcdccc; } /* DecVal */
-code span.er { color: #c3bf9f; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #c0bed1; } /* Float */
-code span.fu { color: #efef8f; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
-code span.kw { color: #f0dfaf; } /* Keyword */
-code span.op { color: #f0efd0; } /* Operator */
-code span.ot { color: #efef8f; } /* Other */
-code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code span.sc { color: #dca3a3; } /* SpecialChar */
-code span.ss { color: #cc9393; } /* SpecialString */
-code span.st { color: #cc9393; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #cc9393; } /* VerbatimString */
-code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
 
 </style>
 <script>
@@ -436,12 +409,6 @@ div.tocify {
     <li>
       <a href="cond.html">Lecture 3: Conditioning</a>
     </li>
-    <li>
-      <a href="chem2.html">Lecture 3: Chemical informatics I</a>
-    </li>
-    <li>
-      <a href="chem.html">Lecture 3: Chemical informatics II</a>
-    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -492,36 +459,36 @@ div.tocify {
 <h1>R operations</h1>
 <div id="r-as-a-calculator-i" class="section level2">
 <h2>R as a calculator (I)</h2>
-
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2+2</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">2-2</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2-2</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="dv">2</span><span class="op">*</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>*<span class="dv">2</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="dv">2</span><span class="op">/</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>/<span class="dv">2</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-
+<p></p>
 </div>
 <div id="r-as-a-calculator-ii" class="section level2">
 <h2>R as a calculator (II)</h2>
-
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">log</span>(<span class="dv">1</span>)</span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="dv">1</span>)</code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">exp</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="dv">1</span>)</code></pre></div>
 <pre><code>## [1] 2.718282</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">log</span>(<span class="kw">exp</span>(<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="kw">exp</span>(<span class="dv">1</span>))</code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">sqrt</span>(<span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="dv">25</span>)</code></pre></div>
 <pre><code>## [1] 5</code></pre>
-
+<p></p>
 </div>
 <div id="the-help" class="section level2">
 <h2>The help</h2>
-
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>?log</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">help</span>(log)</span></code></pre></div>
-
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?log
+<span class="kw">help</span>(log)</code></pre></div>
+<p></p>
 <p>Otherwise:</p>
 <ul>
 <li><p>Google your error message</p></li>
@@ -533,7 +500,7 @@ div.tocify {
 <p>R comes with a number of built-in functions and datasets, but one of the main strengths of R as an open-source project is its package system.</p>
 <p>Packages gives you access to additional functions and datasets.</p>
 <p>If you want to do something which is not doable with the R basic functions, there is a good chance that there exist a package that will fulfill your needs.</p>
-<p>You can install packages using the command <code>install.packages("")</code></p>
+<p>You can install packages using the command <code>install.packages(&quot;&quot;)</code></p>
 <p>You can load packages using the command <code>library()</code></p>
 <p>You can check for installed packages using the command <code>installed.packages()</code></p>
 <p>You can check R version <code>R.version</code></p>
@@ -543,33 +510,32 @@ div.tocify {
 <h1>Exercise break (in Console: CMD -&gt; R.exe)</h1>
 <div id="environment-and-math" class="section level2">
 <h2>Environment and math</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">installed.packages</span>()</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">getwd</span>()</span>
-<span id="cb18-3"><a href="#cb18-3"></a>R.version</span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">4</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="dv">4</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a>(<span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span>) <span class="op">*</span><span class="st"> </span><span class="dv">4</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a>(<span class="dv">4</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a><span class="dv">3</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb18-10"><a href="#cb18-10"></a><span class="kw">exp</span>(<span class="dv">1</span>)</span>
-<span id="cb18-11"><a href="#cb18-11"></a>pi</span>
-<span id="cb18-12"><a href="#cb18-12"></a><span class="dv">2</span><span class="op">*</span>pi<span class="op">*</span><span class="dv">6378</span> <span class="co"># Circumference of earth at the equator (in km)</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">installed.packages</span>()
+<span class="kw">getwd</span>()
+R.version
+<span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span>
+<span class="dv">2</span> +<span class="st"> </span><span class="dv">3</span> *<span class="st"> </span><span class="dv">4</span>
+<span class="dv">4</span> *<span class="st"> </span><span class="dv">3</span> +<span class="st"> </span><span class="dv">2</span>
+(<span class="dv">2</span> +<span class="st"> </span><span class="dv">3</span>) *<span class="st"> </span><span class="dv">4</span>
+(<span class="dv">4</span> *<span class="st"> </span><span class="dv">3</span>) +<span class="st"> </span><span class="dv">2</span>
+<span class="dv">3</span> ^<span class="st"> </span><span class="dv">2</span>
+<span class="kw">exp</span>(<span class="dv">1</span>)
+pi
+<span class="dv">2</span>*pi*<span class="dv">6378</span> <span class="co"># Circumference of earth at the equator (in km)</span></code></pre></div>
 </div>
 <div id="variables" class="section level2">
 <h2>Variables</h2>
-<p>Variables are assigned a value either using “=” or “&lt;-” Re-write this calculation so that it doesn’t use variables:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>a &lt;-<span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span><span class="dv">20</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>b &lt;-<span class="st"> </span><span class="dv">7</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>a <span class="op">+</span><span class="st"> </span>b</span></code></pre></div>
+<p>Variables are assigned a value either using &quot;=&quot; or &quot;&lt;-&quot; Re-write this calculation so that it doesn’t use variables:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">4</span> *<span class="st"> </span><span class="dv">20</span>
+b &lt;-<span class="st"> </span><span class="dv">7</span>
+a +<span class="st"> </span>b</code></pre></div>
 <pre><code>## [1] 87</code></pre>
-
 <p>Re-write this calcuation over multiple lines, using a variable:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> +<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span><span class="dv">2</span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>a &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>b &lt;-<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>a <span class="op">*</span><span class="st"> </span>b</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">2</span>
+b &lt;-<span class="st"> </span><span class="dv">3</span>
+a *<span class="st"> </span>b</code></pre></div>
 <pre><code>## [1] 6</code></pre>
 </div>
 </div>
@@ -578,281 +544,266 @@ div.tocify {
 <div id="data-types" class="section level2">
 <h2>Data types</h2>
 <ul>
-<li><p>Numeric/Double (e.g. 2.5, 1/5, 1.0, )</p></li>
-<li><p>Integer (e.g. 1, 2, 3, )</p></li>
-<li><p>Complex (e.g. 1 + 2i, )</p></li>
-<li><p>Logical (e.g. TRUE, FALSE or NA)</p></li>
-<li><p>Character (e.g. “a”, “paper”, “2 plus 2 = 5”, “TRUE”, )</p></li>
-<li><p>Factor/Categorical (“male”, “female”, )</p></li>
+<li><p>Numeric/Double (e.g. 2.5, 1/5, 1.0, )</p></li>
+<li><p>Integer (e.g. 1, 2, 3, )</p></li>
+<li><p>Complex (e.g. 1 + 2i, )</p></li>
+<li><p>Logical (e.g. TRUE, FALSE or NA)</p></li>
+<li><p>Character (e.g. &quot;a&quot;, &quot;paper&quot;, &quot;2 plus 2 = 5&quot;, &quot;TRUE&quot;, )</p></li>
+<li><p>Factor/Categorical (&quot;male&quot;, &quot;female&quot;, )</p></li>
 </ul>
 </div>
 <div id="data-structures-1" class="section level2">
 <h2>Data structures</h2>
 <div class="figure">
-<img src="figures/r_data_structures.png" alt="" />
+<img src="figures/r_data_structures.png" alt="Visualization of data structures" />
 <p class="caption">Visualization of data structures</p>
 </div>
 </div>
 <div id="vectors-i" class="section level2">
 <h2>Vectors (I)</h2>
 <p>You can create a vector using the command <code>c()</code> </p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
-<span id="cb25-2"><a href="#cb25-2"></a>x</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>)
+x</code></pre></div>
 <pre><code>## [1]  1  3  5 10</code></pre>
-
+<p></p>
 <p>Vectors must contain elements of the same data type. </p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="st">&quot;intro&quot;</span>, <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="st">&quot;intro&quot;</span>, <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## [1] &quot;1&quot;     &quot;intro&quot; &quot;TRUE&quot;</code></pre>
-
+<p></p>
 <p>You can measure the length of a vector using the command <code>length()</code> </p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">length</span>(x)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(x)</code></pre></div>
 <pre><code>## [1] 4</code></pre>
-
+<p></p>
 </div>
 <div id="vectors-ii" class="section level2">
 <h2>Vectors (II)</h2>
 <p>It is also possible to easily create sequences </p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>:<span class="dv">10</span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">2</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">2</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</code></pre></div>
 <pre><code>##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dt">times =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="dt">times =</span> <span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot;</code></pre>
-
+<p></p>
 </div>
 <div id="vectors-iii" class="section level2">
 <h2>Vectors (III)</h2>
 <p>You can combine different vectors </p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span> <span class="co"># from 1 to 3</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>) <span class="co"># 10 and 15</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a>z &lt;-<span class="st"> </span><span class="kw">c</span>(x,y) <span class="co"># x first and then y</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a>z</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3</span> <span class="co"># from 1 to 3</span>
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>) <span class="co"># 10 and 15</span>
+z &lt;-<span class="st"> </span><span class="kw">c</span>(x,y) <span class="co"># x first and then y</span>
+z</code></pre></div>
 <pre><code>## [1]  1  2  3 10 15</code></pre>
-
+<p></p>
 <p>And you can repeat vectors (or its elements) </p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>z &lt;-<span class="st"> </span><span class="kw">rep</span>(y, <span class="dt">each=</span><span class="dv">3</span>) <span class="co"># repeat each element 3 times</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>z</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">rep</span>(y, <span class="dt">each=</span><span class="dv">3</span>) <span class="co"># repeat each element 3 times</span>
+z</code></pre></div>
 <pre><code>## [1] 10 10 10 15 15 15</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>z &lt;-<span class="st"> </span><span class="kw">rep</span>(y, <span class="dt">times=</span><span class="dv">3</span>) <span class="co"># repeat the whole vector 3 times</span></span>
-<span id="cb41-2"><a href="#cb41-2"></a>z</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">rep</span>(y, <span class="dt">times=</span><span class="dv">3</span>) <span class="co"># repeat the whole vector 3 times</span>
+z</code></pre></div>
 <pre><code>## [1] 10 15 10 15 10 15</code></pre>
-
+<p></p>
 </div>
 <div id="subsetting-vectors" class="section level2">
 <h2>Subsetting Vectors</h2>
-
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">7</span>)</span>
-<span id="cb43-2"><a href="#cb43-2"></a>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">6</span> <span class="co"># is the element lower than 6?</span></span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">7</span>)
+x &lt;<span class="st"> </span><span class="dv">6</span> <span class="co"># is the element lower than 6?</span></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>x <span class="op">==</span><span class="st"> </span><span class="dv">10</span> <span class="co"># is the element equal to 10?</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x ==<span class="st"> </span><span class="dv">10</span> <span class="co"># is the element equal to 10?</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>x[<span class="dv">2</span>] <span class="co"># which element is in the second position?</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">2</span>] <span class="co"># which element is in the second position?</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>x[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="co"># which elements are in the first 2 positions?</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span>:<span class="dv">2</span>] <span class="co"># which elements are in the first 2 positions?</span></code></pre></div>
 <pre><code>## [1] 1 5</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>x[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co"># which elements are in positions 1, 3 and 4?</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co"># which elements are in positions 1, 3 and 4?</span></code></pre></div>
 <pre><code>## [1]  1 10  7</code></pre>
 </div>
 <div id="subsetting-vectors-1" class="section level2">
 <h2>Subsetting Vectors</h2>
-
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>) <span class="co"># creates a vector, stores it in n</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a><span class="kw">length</span>(n) <span class="co"># number of elements</span></span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>) <span class="co"># creates a vector, stores it in n</span>
+<span class="kw">length</span>(n) <span class="co"># number of elements</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>n[<span class="dv">3</span>] <span class="co"># extract 3 rd element in n</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="dv">3</span>] <span class="co"># extract 3 rd element in n</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>n[<span class="op">-</span><span class="dv">2</span>] <span class="co"># extract all of n but 2nd element</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[-<span class="dv">2</span>] <span class="co"># extract all of n but 2nd element</span></code></pre></div>
 <pre><code>## [1] 1 5 6 7 2 3 4 5 6</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>n[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co"># extract first, third, and fourth element of n</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co"># extract first, third, and fourth element of n</span></code></pre></div>
 <pre><code>## [1] 1 5 6</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>n[n <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>] <span class="co">#extract all elements in n smaller than 4</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[n &lt;<span class="st"> </span><span class="dv">4</span>] <span class="co">#extract all elements in n smaller than 4</span></code></pre></div>
 <pre><code>## [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>n[n <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&amp;</span><span class="st"> </span>n <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>] <span class="co"># extract element smaller than 4 AND different from 1</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[n &lt;<span class="st"> </span><span class="dv">4</span> &amp;<span class="st"> </span>n !=<span class="st"> </span><span class="dv">1</span>] <span class="co"># extract element smaller than 4 AND different from 1</span></code></pre></div>
 <pre><code>## [1] 2 3</code></pre>
-
+<p></p>
 </div>
 <div id="exercise-break" class="section level2">
 <h2>Exercise break</h2>
-
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>) <span class="co"># creates a vector, stores it in n</span></span></code></pre></div>
-
-<ul>
-<li>number of elements</li>
-<li>extract first three elements of n</li>
-<li>extract all of n but 3nd element</li>
-<li>extract first, third, and fourth element of n</li>
-<li>extract element smaller than 4 OR equal to 5</li>
-</ul>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>) <span class="co"># creates a vector, stores it in n</span></code></pre></div>
+<p> number of elements * extract first three elements of n * extract all of n but 3nd element * extract first, third, and fourth element of n * extract element smaller than 4 OR equal to 5</p>
 </div>
 <div id="exercise-break-1" class="section level2">
 <h2>Exercise break</h2>
 <p>We can create and index character vectors as well. A cafe is using R to create their menu. </p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>items &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;eggs&quot;</span>, <span class="st">&quot;tomatoes&quot;</span>, <span class="st">&quot;bananas&quot;</span>)</span></code></pre></div>
-
-<ul>
-<li>What does items[-3] produce?</li>
-<li>Based on what you find, use indexing to create a version of items without “bananas”.</li>
-<li>Use indexing to create a vector containing apples, eggs, tomatoes, bananas, and bananas.</li>
-<li>Add a new item, “lemons”, to items.</li>
-<li>Make items[3] “berries”.</li>
-</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">items &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;eggs&quot;</span>, <span class="st">&quot;tomatoes&quot;</span>, <span class="st">&quot;bananas&quot;</span>)</code></pre></div>
+<p> What does items[-3] produce? * Based on what you find, use indexing to create a version of items without &quot;bananas&quot;. * Use indexing to create a vector containing apples, eggs, tomatoes, bananas, and bananas. * Add a new item, &quot;lemons&quot;, to items. * Make items[3] &quot;berries&quot;.</p>
 </div>
 <div id="vectors-operations" class="section level2">
-<h2>Vectors’ Operations</h2>
-
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">7</span>)</span>
-<span id="cb67-2"><a href="#cb67-2"></a>x<span class="op">+</span><span class="dv">2</span> <span class="co"># adds a scalar to all elements</span></span></code></pre></div>
+<h2>Vectors' Operations</h2>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">7</span>)
+x<span class="dv">+2</span> <span class="co"># adds a scalar to all elements</span></code></pre></div>
 <pre><code>## [1]  3  7 12  9</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>x<span class="op">^</span><span class="dv">2</span> <span class="co"># what&#39;s the square of all elements?</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x^<span class="dv">2</span> <span class="co"># what&#39;s the square of all elements?</span></code></pre></div>
 <pre><code>## [1]   1  25 100  49</code></pre>
-
+<p></p>
 </div>
 <div id="matrices-i" class="section level2">
 <h2>Matrices (I)</h2>
 <p>You can create a matrix using the command <code>matrix()</code> </p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb71-2"><a href="#cb71-2"></a>X</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+X</code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    4    7
 ## [2,]    2    5    8
 ## [3,]    3    6    9</code></pre>
-
+<p></p>
 </div>
 <div id="matrices-ii" class="section level2">
 <h2>Matrices (II)</h2>
 <p>R automatically inserts elements by columns, but we can ask to include by rows </p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb73-2"><a href="#cb73-2"></a>X</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+X</code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    2    3
 ## [2,]    4    5    6
 ## [3,]    7    8    9</code></pre>
-
-<p>You don’t even have to specify the options names </p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">4</span>, T)</span>
-<span id="cb75-2"><a href="#cb75-2"></a>X</span></code></pre></div>
+<p></p>
+<p>You don't even have to specify the options names </p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">4</span>, T)
+X</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    2    3    4
 ## [2,]    5    6    7    8</code></pre>
-
+<p></p>
 </div>
 <div id="matrices-iii" class="section level2">
 <h2>Matrices (III)</h2>
 <p>Matrices can also be created by combining vectors </p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>X &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># binds them as columns</span></span>
-<span id="cb77-2"><a href="#cb77-2"></a>X</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dv">6</span>:<span class="dv">9</span>) <span class="co"># binds them as columns</span>
+X</code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    6
 ## [2,]    2    7
 ## [3,]    3    8
 ## [4,]    4    9</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>X &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># binds them as rows</span></span>
-<span id="cb79-2"><a href="#cb79-2"></a>X</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dv">6</span>:<span class="dv">9</span>) <span class="co"># binds them as rows</span>
+X</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    2    3    4
 ## [2,]    6    7    8    9</code></pre>
-
+<p></p>
 </div>
 <div id="subsetting-matrices" class="section level2">
 <h2>Subsetting Matrices</h2>
-
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>X<span class="op">&gt;</span><span class="dv">5</span> <span class="co"># elements larger than 5</span></span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X&gt;<span class="dv">5</span> <span class="co"># elements larger than 5</span></code></pre></div>
 <pre><code>##       [,1]  [,2]  [,3]  [,4]
 ## [1,] FALSE FALSE FALSE FALSE
 ## [2,]  TRUE  TRUE  TRUE  TRUE</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a>X[<span class="dv">1</span>,<span class="dv">4</span>] <span class="co"># element of first row, fourth column?</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X[<span class="dv">1</span>,<span class="dv">4</span>] <span class="co"># element of first row, fourth column?</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a>X[<span class="dv">1</span>,] <span class="co"># element in the first row?</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X[<span class="dv">1</span>,] <span class="co"># element in the first row?</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a>X[,<span class="dv">2</span>] <span class="co"># elements in the second columns?</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X[,<span class="dv">2</span>] <span class="co"># elements in the second columns?</span></code></pre></div>
 <pre><code>## [1] 2 7</code></pre>
-
+<p></p>
 </div>
 <div id="lists" class="section level2">
 <h2>Lists</h2>
 <p>A list is a one-dimensional heterogeneous data structure.</p>
 <p>It is indexed like a vector with a single integer value (or a name), but each element can contain an element of any data type. </p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span></span>
-<span id="cb89-2"><a href="#cb89-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
-<span id="cb89-3"><a href="#cb89-3"></a>L &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">numbers =</span> x, <span class="dt">letters =</span> y)</span>
-<span id="cb89-4"><a href="#cb89-4"></a>L</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">4</span>
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)
+L &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">numbers =</span> x, <span class="dt">letters =</span> y)
+L</code></pre></div>
 <pre><code>## $numbers
 ## [1] 1 2 3 4
 ## 
 ## $letters
 ## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
-
+<p></p>
 </div>
 <div id="subsetting-lists" class="section level2">
 <h2>Subsetting Lists</h2>
-
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a>L[[<span class="dv">1</span>]] <span class="co"># extract the first element</span></span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L[[<span class="dv">1</span>]] <span class="co"># extract the first element</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1"></a>L<span class="op">$</span>numbers <span class="co"># extract the element called numbers</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L$numbers <span class="co"># extract the element called numbers</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a>L<span class="op">$</span>letters <span class="co"># extract the element called letters</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L$letters <span class="co"># extract the element called letters</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
-
-<p>You can even “work” with the subsetted element: </p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a>L<span class="op">$</span>numbers[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span></span></code></pre></div>
+<p></p>
+<p>You can even &quot;work&quot; with the subsetted element: </p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L$numbers[<span class="dv">1</span>:<span class="dv">3</span>] &gt;<span class="st"> </span><span class="dv">2</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE</code></pre>
-
+<p></p>
 </div>
 <div id="exercise-break-2" class="section level2">
 <h2>Exercise break</h2>
-
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a>letters</span>
-<span id="cb99-2"><a href="#cb99-2"></a>LETTERS</span>
-<span id="cb99-3"><a href="#cb99-3"></a>my_letters &lt;-<span class="st"> </span><span class="kw">cbind</span>(LETTERS, letters)</span>
-<span id="cb99-4"><a href="#cb99-4"></a><span class="kw">class</span>(my_letters)</span>
-<span id="cb99-5"><a href="#cb99-5"></a><span class="kw">dim</span>(my_letters)</span>
-<span id="cb99-6"><a href="#cb99-6"></a>my_letters &lt;-<span class="st"> </span><span class="kw">cbind</span>(my_letters, <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(letters)))</span></code></pre></div>
-
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">letters
+LETTERS
+my_letters &lt;-<span class="st"> </span><span class="kw">cbind</span>(LETTERS, letters)
+<span class="kw">class</span>(my_letters)
+<span class="kw">dim</span>(my_letters)
+my_letters &lt;-<span class="st"> </span><span class="kw">cbind</span>(my_letters, <span class="kw">seq</span>(<span class="dv">1</span>:<span class="kw">length</span>(letters)))</code></pre></div>
 <p>What number is the letter F in the English alphabet?</p>
 </div>
 <div id="exercise" class="section level2">
 <h2>Exercise</h2>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="co"># vector ... etc.</span></span>
-<span id="cb100-2"><a href="#cb100-2"></a>my_dna &lt;-<span class="st"> &quot;AACGAATGAGTAAATGAGTAAATGAAGGAATGATTATTCCTTGCTTTAGAACTTCTGGAATTAGAGGACA</span></span>
-<span id="cb100-3"><a href="#cb100-3"></a><span class="st">ATATTAATAATACCATCGCACAGTGTTTCTTTGTTGTTAATGCTACAACATACAAAGAGGAAGCATGCAG&quot;</span></span>
-<span id="cb100-4"><a href="#cb100-4"></a>my_dna</span>
-<span id="cb100-5"><a href="#cb100-5"></a><span class="kw">length</span>(my_dna)</span>
-<span id="cb100-6"><a href="#cb100-6"></a><span class="kw">class</span>(my_dna)</span>
-<span id="cb100-7"><a href="#cb100-7"></a><span class="kw">str</span>(my_dna)</span>
-<span id="cb100-8"><a href="#cb100-8"></a><span class="kw">nchar</span>(my_dna)</span>
-<span id="cb100-9"><a href="#cb100-9"></a></span>
-<span id="cb100-10"><a href="#cb100-10"></a><span class="co"># appr1</span></span>
-<span id="cb100-11"><a href="#cb100-11"></a>my_dna_comma &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">strsplit</span>(</span>
-<span id="cb100-12"><a href="#cb100-12"></a>  <span class="dt">x =</span> my_dna, <span class="dt">split =</span> <span class="st">&quot;&quot;</span>, <span class="dt">fixed =</span> <span class="ot">TRUE</span>),</span>
-<span id="cb100-13"><a href="#cb100-13"></a>       <span class="cf">function</span>(x) <span class="kw">paste</span>(x, <span class="dt">collapse =</span> <span class="st">&quot;_&quot;</span>))</span>
-<span id="cb100-14"><a href="#cb100-14"></a><span class="kw">length</span>(my_dna_comma)</span>
-<span id="cb100-15"><a href="#cb100-15"></a><span class="kw">str</span>(my_dna_comma)</span>
-<span id="cb100-16"><a href="#cb100-16"></a></span>
-<span id="cb100-17"><a href="#cb100-17"></a>my_dna_list &lt;-<span class="st"> </span><span class="kw">strsplit</span>(<span class="dt">x =</span> my_dna, <span class="dt">split =</span> <span class="st">&quot;&quot;</span>, <span class="dt">fixed =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb100-18"><a href="#cb100-18"></a><span class="kw">length</span>(my_dna_list)</span>
-<span id="cb100-19"><a href="#cb100-19"></a><span class="kw">class</span>(my_dna_list)</span>
-<span id="cb100-20"><a href="#cb100-20"></a>my_dna_vector &lt;-<span class="st"> </span><span class="kw">unlist</span>(my_dna_list)</span>
-<span id="cb100-21"><a href="#cb100-21"></a><span class="kw">length</span>(my_dna_list[[<span class="dv">1</span>]])</span>
-<span id="cb100-22"><a href="#cb100-22"></a><span class="kw">str</span>(my_dna_vector)</span>
-<span id="cb100-23"><a href="#cb100-23"></a><span class="kw">length</span>(my_dna_vector)</span>
-<span id="cb100-24"><a href="#cb100-24"></a></span>
-<span id="cb100-25"><a href="#cb100-25"></a><span class="co"># first nucleotide</span></span>
-<span id="cb100-26"><a href="#cb100-26"></a>my_dna_vector[<span class="dv">1</span>]</span>
-<span id="cb100-27"><a href="#cb100-27"></a><span class="co"># indexing 1:nchar(my_dna)</span></span>
-<span id="cb100-28"><a href="#cb100-28"></a>my_dna_vector[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>]</span>
-<span id="cb100-29"><a href="#cb100-29"></a><span class="co"># unique characters</span></span>
-<span id="cb100-30"><a href="#cb100-30"></a><span class="kw">unique</span>(my_dna_vector)</span>
-<span id="cb100-31"><a href="#cb100-31"></a></span>
-<span id="cb100-32"><a href="#cb100-32"></a><span class="co"># number of As</span></span>
-<span id="cb100-33"><a href="#cb100-33"></a>(my_dna_vector <span class="op">==</span><span class="st"> &quot;A&quot;</span>)</span>
-<span id="cb100-34"><a href="#cb100-34"></a><span class="kw">length</span>(my_dna_vector[my_dna_vector <span class="op">==</span><span class="st"> &quot;A&quot;</span>])</span>
-<span id="cb100-35"><a href="#cb100-35"></a></span>
-<span id="cb100-36"><a href="#cb100-36"></a><span class="co"># remove \n</span></span>
-<span id="cb100-37"><a href="#cb100-37"></a>remove_nuc &lt;-<span class="st"> </span><span class="kw">match</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, my_dna_vector)</span>
-<span id="cb100-38"><a href="#cb100-38"></a><span class="kw">which</span>(my_dna_vector <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;X&quot;</span>))</span>
-<span id="cb100-39"><a href="#cb100-39"></a>my_dna_vector[remove_nuc] &lt;-<span class="st"> &quot;A&quot;</span></span>
-<span id="cb100-40"><a href="#cb100-40"></a>my_dna_vector_<span class="dv">2</span> &lt;-<span class="st"> </span>my_dna_vector[<span class="op">-</span><span class="dv">71</span>]</span>
-<span id="cb100-41"><a href="#cb100-41"></a><span class="kw">unique</span>(my_dna_vector_<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># vector ... etc.</span>
+my_dna &lt;-<span class="st"> &quot;AACGAATGAGTAAATGAGTAAATGAAGGAATGATTATTCCTTGCTTTAGAACTTCTGGAATTAGAGGACA</span>
+<span class="st">ATATTAATAATACCATCGCACAGTGTTTCTTTGTTGTTAATGCTACAACATACAAAGAGGAAGCATGCAG&quot;</span>
+my_dna
+<span class="kw">length</span>(my_dna)
+<span class="kw">class</span>(my_dna)
+<span class="kw">str</span>(my_dna)
+<span class="kw">nchar</span>(my_dna)
+
+<span class="co"># appr1</span>
+my_dna_comma &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">strsplit</span>(
+  <span class="dt">x =</span> my_dna, <span class="dt">split =</span> <span class="st">&quot;&quot;</span>, <span class="dt">fixed =</span> <span class="ot">TRUE</span>),
+       function(x) <span class="kw">paste</span>(x, <span class="dt">collapse =</span> <span class="st">&quot;_&quot;</span>))
+<span class="kw">length</span>(my_dna_comma)
+<span class="kw">str</span>(my_dna_comma)
+
+my_dna_list &lt;-<span class="st"> </span><span class="kw">strsplit</span>(<span class="dt">x =</span> my_dna, <span class="dt">split =</span> <span class="st">&quot;&quot;</span>, <span class="dt">fixed =</span> <span class="ot">TRUE</span>)
+<span class="kw">length</span>(my_dna_list)
+<span class="kw">class</span>(my_dna_list)
+my_dna_vector &lt;-<span class="st"> </span><span class="kw">unlist</span>(my_dna_list)
+<span class="kw">length</span>(my_dna_list[[<span class="dv">1</span>]])
+<span class="kw">str</span>(my_dna_vector)
+<span class="kw">length</span>(my_dna_vector)
+
+<span class="co"># first nucleotide</span>
+my_dna_vector[<span class="dv">1</span>]
+<span class="co"># indexing 1:nchar(my_dna)</span>
+my_dna_vector[<span class="dv">1</span>:<span class="dv">50</span>]
+<span class="co"># unique characters</span>
+<span class="kw">unique</span>(my_dna_vector)
+
+<span class="co"># number of As</span>
+(my_dna_vector ==<span class="st"> &quot;A&quot;</span>)
+<span class="kw">length</span>(my_dna_vector[my_dna_vector ==<span class="st"> &quot;A&quot;</span>])
+
+<span class="co"># remove \n</span>
+remove_nuc &lt;-<span class="st"> </span><span class="kw">match</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, my_dna_vector)
+<span class="kw">which</span>(my_dna_vector %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;X&quot;</span>))
+my_dna_vector[remove_nuc] &lt;-<span class="st"> &quot;A&quot;</span>
+my_dna_vector_2 &lt;-<span class="st"> </span>my_dna_vector[-<span class="dv">71</span>]
+<span class="kw">unique</span>(my_dna_vector_2)</code></pre></div>
 </div>
 <div id="data-frames-i" class="section level2">
 <h2>Data Frames (I)</h2>
@@ -872,60 +823,60 @@ div.tocify {
 </div>
 <div id="data-frames-iii" class="section level2">
 <h2>Data Frames (III)</h2>
-
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb101-2"><a href="#cb101-2"></a>df &lt;-<span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
-<span id="cb101-3"><a href="#cb101-3"></a>  <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Diego&quot;</span>, <span class="st">&quot;Samuel&quot;</span>, <span class="st">&quot;Marco&quot;</span>, <span class="st">&quot;Javier&quot;</span>, <span class="st">&quot;Leonardo&quot;</span>),</span>
-<span id="cb101-4"><a href="#cb101-4"></a>  <span class="dt">surname =</span> <span class="kw">c</span>(<span class="st">&quot;Milito&quot;</span>, <span class="st">&quot;Eto&#39;o&quot;</span>, <span class="st">&quot;Materazzi&quot;</span>, <span class="st">&quot;Zanetti&quot;</span>, <span class="st">&quot;Bonucci&quot;</span>),</span>
-<span id="cb101-5"><a href="#cb101-5"></a>  <span class="dt">wage =</span> <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">10</span><span class="op">^</span><span class="dv">5</span>, <span class="dt">sd =</span> <span class="dv">10</span><span class="op">^</span><span class="dv">3</span>), <span class="co"># normal random sample</span></span>
-<span id="cb101-6"><a href="#cb101-6"></a>  <span class="dt">origin =</span> <span class="kw">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Cameroon&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Italy&quot;</span>),</span>
-<span id="cb101-7"><a href="#cb101-7"></a>  <span class="dt">treble_winner =</span> <span class="kw">c</span>(T, T, T, T, F)</span>
-<span id="cb101-8"><a href="#cb101-8"></a>  )</span>
-<span id="cb101-9"><a href="#cb101-9"></a>df</span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
+df &lt;-<span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span>:<span class="dv">5</span>,
+  <span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Diego&quot;</span>, <span class="st">&quot;Samuel&quot;</span>, <span class="st">&quot;Marco&quot;</span>, <span class="st">&quot;Javier&quot;</span>, <span class="st">&quot;Leonardo&quot;</span>),
+  <span class="dt">surname =</span> <span class="kw">c</span>(<span class="st">&quot;Milito&quot;</span>, <span class="st">&quot;Eto&#39;o&quot;</span>, <span class="st">&quot;Materazzi&quot;</span>, <span class="st">&quot;Zanetti&quot;</span>, <span class="st">&quot;Bonucci&quot;</span>),
+  <span class="dt">wage =</span> <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">5</span>, <span class="dt">mean =</span> <span class="dv">10</span>^<span class="dv">5</span>, <span class="dt">sd =</span> <span class="dv">10</span>^<span class="dv">3</span>), <span class="co"># normal random sample</span>
+  <span class="dt">origin =</span> <span class="kw">c</span>(<span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Cameroon&quot;</span>, <span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Argentina&quot;</span>, <span class="st">&quot;Italy&quot;</span>),
+  <span class="dt">treble_winner =</span> <span class="kw">c</span>(T, T, T, T, F)
+  )
+df</code></pre></div>
 <pre><code>##   id     name   surname      wage    origin treble_winner
 ## 1  1    Diego    Milito  99373.55 Argentina          TRUE
 ## 2  2   Samuel     Eto&#39;o 100183.64  Cameroon          TRUE
 ## 3  3    Marco Materazzi  99164.37     Italy          TRUE
 ## 4  4   Javier   Zanetti 101595.28 Argentina          TRUE
 ## 5  5 Leonardo   Bonucci 100329.51     Italy         FALSE</code></pre>
-
+<p></p>
 <p>You can verify the size of the <code>data.frame</code> using the command <code>dim()</code></p>
 <p>You can get the <code>data type</code> info using the command <code>str()</code></p>
 </div>
 <div id="subsetting-data-frames-i" class="section level2">
 <h2>Subsetting Data Frames (I)</h2>
-
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a>df<span class="op">$</span>name <span class="co"># subset a column</span></span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df$name <span class="co"># subset a column</span></code></pre></div>
 <pre><code>## [1] &quot;Diego&quot;    &quot;Samuel&quot;   &quot;Marco&quot;    &quot;Javier&quot;   &quot;Leonardo&quot;</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a>df[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>)] <span class="co"># can also subset like a matrix</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>)] <span class="co"># can also subset like a matrix</span></code></pre></div>
 <pre><code>##       name    origin
 ## 1    Diego Argentina
 ## 2   Samuel  Cameroon
 ## 3    Marco     Italy
 ## 4   Javier Argentina
 ## 5 Leonardo     Italy</code></pre>
-
+<p></p>
 </div>
 <div id="subsetting-data-frames-ii" class="section level2">
 <h2>Subsetting Data Frames (II)</h2>
-
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="kw">head</span>(df, <span class="dt">n=</span><span class="dv">3</span>) <span class="co"># first n observations</span></span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(df, <span class="dt">n=</span><span class="dv">3</span>) <span class="co"># first n observations</span></code></pre></div>
 <pre><code>##   id   name   surname      wage    origin treble_winner
 ## 1  1  Diego    Milito  99373.55 Argentina          TRUE
 ## 2  2 Samuel     Eto&#39;o 100183.64  Cameroon          TRUE
 ## 3  3  Marco Materazzi  99164.37     Italy          TRUE</code></pre>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a><span class="kw">tail</span>(df, <span class="dt">n=</span><span class="dv">3</span>) <span class="co"># last n observations</span></span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(df, <span class="dt">n=</span><span class="dv">3</span>) <span class="co"># last n observations</span></code></pre></div>
 <pre><code>##   id     name   surname      wage    origin treble_winner
 ## 3  3    Marco Materazzi  99164.37     Italy          TRUE
 ## 4  4   Javier   Zanetti 101595.28 Argentina          TRUE
 ## 5  5 Leonardo   Bonucci 100329.51     Italy         FALSE</code></pre>
-
+<p></p>
 </div>
 <div id="inspecting-data-frames-i" class="section level2">
 <h2>Inspecting data frames (I)</h2>
 <p>R comes with many data bases included. These can be used for learning R.</p>
 <p>One of the most famous is the one called <code>mtcars</code>. </p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1"></a><span class="kw">head</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mtcars)</code></pre></div>
 <pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 ## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
 ## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
@@ -933,7 +884,7 @@ div.tocify {
 ## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1"></a><span class="kw">tail</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(mtcars)</code></pre></div>
 <pre><code>##                 mpg cyl  disp  hp drat    wt qsec vs am gear carb
 ## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.7  0  1    5    2
 ## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.9  1  1    5    2
@@ -941,14 +892,14 @@ div.tocify {
 ## Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.5  0  1    5    6
 ## Maserati Bora  15.0   8 301.0 335 3.54 3.570 14.6  0  1    5    8
 ## Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.6  1  1    4    2</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="kw">dim</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(mtcars)</code></pre></div>
 <pre><code>## [1] 32 11</code></pre>
-
+<p></p>
 </div>
 <div id="inspecting-data-frames-ii" class="section level2">
 <h2>Inspecting data frames (II)</h2>
-
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a><span class="kw">str</span>(mtcars)</span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mtcars)</code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
 ##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
 ##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
@@ -961,91 +912,91 @@ div.tocify {
 ##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
 ##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
 ##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a><span class="kw">names</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(mtcars)</code></pre></div>
 <pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot; &quot;carb&quot;</code></pre>
-
+<p></p>
 </div>
 <div id="subsetting-data-frames-iii" class="section level2">
 <h2>Subsetting data frames (III)</h2>
 <p>We are interesting in the cylinders and the weights of inefficient cars (lower than 15 miles per gallon). </p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1"></a>poll_cars &lt;-<span class="st"> </span>mtcars[mtcars<span class="op">$</span>mpg<span class="op">&lt;</span><span class="dv">15</span>, <span class="kw">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;wt&quot;</span>)]</span>
-<span id="cb121-2"><a href="#cb121-2"></a>poll_cars</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">poll_cars &lt;-<span class="st"> </span>mtcars[mtcars$mpg&lt;<span class="dv">15</span>, <span class="kw">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;wt&quot;</span>)]
+poll_cars</code></pre></div>
 <pre><code>##                     cyl    wt
 ## Duster 360            8 3.570
 ## Cadillac Fleetwood    8 5.250
 ## Lincoln Continental   8 5.424
 ## Chrysler Imperial     8 5.345
 ## Camaro Z28            8 3.840</code></pre>
-
+<p></p>
 </div>
 <div id="subsetting-data-frames-iv" class="section level2">
 <h2>Subsetting data frames (IV)</h2>
 <p>Alternatively: </p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1"></a>poll_cars &lt;-<span class="st"> </span><span class="kw">subset</span>(mtcars, <span class="dt">subset =</span> mpg<span class="op">&lt;</span><span class="dv">15</span>, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;wt&quot;</span>))</span>
-<span id="cb123-2"><a href="#cb123-2"></a>poll_cars</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">poll_cars &lt;-<span class="st"> </span><span class="kw">subset</span>(mtcars, <span class="dt">subset =</span> mpg&lt;<span class="dv">15</span>, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;wt&quot;</span>))
+poll_cars</code></pre></div>
 <pre><code>##                     cyl    wt
 ## Duster 360            8 3.570
 ## Cadillac Fleetwood    8 5.250
 ## Lincoln Continental   8 5.424
 ## Chrysler Imperial     8 5.345
 ## Camaro Z28            8 3.840</code></pre>
-
+<p></p>
 </div>
 <div id="importing-downloaded-data-frames-.csv" class="section level2">
 <h2>Importing downloaded data frames (.csv)</h2>
 <p>You can import csv data that you have downloaded from any external source using: </p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1"></a><span class="kw">setwd</span>(<span class="st">&quot;data&quot;</span>)</span>
-<span id="cb125-2"><a href="#cb125-2"></a>nyc_ab &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;AB_NYC_2020.csv&quot;</span>)</span></code></pre></div>
-
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;data&quot;</span>)
+nyc_ab &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;AB_NYC_2020.csv&quot;</span>)</code></pre></div>
+<p></p>
 <p>where:</p>
 <ul>
 <li><p><code>setwd()</code> sets the working directory to the place where the data is saved;</p></li>
 <li><p><code>read.csv()</code> loads the csv file with the specified name.</p></li>
 </ul>
-<p>You can similarly import almost any kind of data file stored in other formats (.xls, .txt, .csv, .dta, .Rdata, .mat, …)</p>
+<p>You can similarly import almost any kind of data file stored in other formats (.xls, .txt, .csv, .dta, .Rdata, .mat, ...)</p>
 </div>
 <div id="importing-downloaded-data-frames-.txt" class="section level2">
 <h2>Importing downloaded data frames (.txt)</h2>
 <p>Interferon regulatory factor 6 mouse </p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1"></a><span class="kw">setwd</span>(<span class="st">&quot;data&quot;</span>)</span>
-<span id="cb126-2"><a href="#cb126-2"></a>irf6 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;irf6.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb126-3"><a href="#cb126-3"></a></span>
-<span id="cb126-4"><a href="#cb126-4"></a><span class="co"># explore</span></span>
-<span id="cb126-5"><a href="#cb126-5"></a><span class="kw">head</span>(irf6)</span>
-<span id="cb126-6"><a href="#cb126-6"></a><span class="kw">ncol</span>(irf6); <span class="kw">nrow</span>(irf6)</span>
-<span id="cb126-7"><a href="#cb126-7"></a><span class="kw">dim</span>(irf6)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;data&quot;</span>)
+irf6 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;irf6.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)
+
+<span class="co"># explore</span>
+<span class="kw">head</span>(irf6)
+<span class="kw">ncol</span>(irf6); <span class="kw">nrow</span>(irf6)
+<span class="kw">dim</span>(irf6)</code></pre></div>
 </div>
 <div id="importing-downloaded-data-frames-.txt-1" class="section level2">
 <h2>Importing downloaded data frames (.txt)</h2>
-
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1"></a>irf6 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/irf6.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb127-2"><a href="#cb127-2"></a><span class="kw">class</span>(irf6)</span>
-<span id="cb127-3"><a href="#cb127-3"></a><span class="kw">str</span>(irf6)</span>
-<span id="cb127-4"><a href="#cb127-4"></a><span class="kw">colnames</span>(irf6)</span>
-<span id="cb127-5"><a href="#cb127-5"></a><span class="kw">head</span>(<span class="kw">rownames</span>(irf6))</span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">irf6 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/irf6.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)
+<span class="kw">class</span>(irf6)
+<span class="kw">str</span>(irf6)
+<span class="kw">colnames</span>(irf6)
+<span class="kw">head</span>(<span class="kw">rownames</span>(irf6))</code></pre></div>
 </div>
 <div id="importing-downloaded-data-frames-.txt-2" class="section level2">
 <h2>Importing downloaded data frames (.txt)</h2>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">irf6 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/irf6.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)
 
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1"></a>irf6 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/irf6.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb128-2"><a href="#cb128-2"></a></span>
-<span id="cb128-3"><a href="#cb128-3"></a><span class="kw">head</span>(irf6[<span class="st">&#39;E17.5KO1&#39;</span>]) <span class="co"># Retrieve only E17.5KO1 data</span></span>
-<span id="cb128-4"><a href="#cb128-4"></a><span class="kw">head</span>(irf6[, <span class="dv">1</span>]) <span class="co"># as well</span></span>
-<span id="cb128-5"><a href="#cb128-5"></a><span class="kw">head</span>(irf6<span class="op">$</span>E17<span class="fl">.5</span>KO1) <span class="co"># as well</span></span>
-<span id="cb128-6"><a href="#cb128-6"></a><span class="kw">dim</span>(irf6[, <span class="dv">-1</span>]); <span class="kw">colnames</span>(irf6[, <span class="dv">-1</span>])  <span class="co"># Exclude E17.5KO1 data</span></span></code></pre></div>
+<span class="kw">head</span>(irf6[<span class="st">&#39;E17.5KO1&#39;</span>]) <span class="co"># Retrieve only E17.5KO1 data</span>
+<span class="kw">head</span>(irf6[, <span class="dv">1</span>]) <span class="co"># as well</span>
+<span class="kw">head</span>(irf6$E17.5KO1) <span class="co"># as well</span>
+<span class="kw">dim</span>(irf6[, -<span class="dv">1</span>]); <span class="kw">colnames</span>(irf6[, -<span class="dv">1</span>])  <span class="co"># Exclude E17.5KO1 data</span></code></pre></div>
 </div>
 </div>
 <div id="exercise-break-3" class="section level1">
 <h1>Exercise break</h1>
 <div id="total-lung-capacity" class="section level2">
 <h2>Total lung capacity</h2>
-
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1"></a>  tlc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/tlc.csv&quot;</span>)</span>
-<span id="cb129-2"><a href="#cb129-2"></a>  <span class="kw">str</span>(tlc)</span>
-<span id="cb129-3"><a href="#cb129-3"></a>  <span class="kw">summary</span>(tlc)</span>
-<span id="cb129-4"><a href="#cb129-4"></a>  <span class="kw">subset</span>(tlc, sex <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb129-5"><a href="#cb129-5"></a>  <span class="kw">subset</span>(tlc, age <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>, tlc)</span>
-<span id="cb129-6"><a href="#cb129-6"></a>  <span class="kw">mean</span>(<span class="kw">subset</span>(tlc, sex <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">select =</span> tlc, <span class="dt">drop =</span> T))</span></code></pre></div>
+<p></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  tlc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/tlc.csv&quot;</span>)
+  <span class="kw">str</span>(tlc)
+  <span class="kw">summary</span>(tlc)
+  <span class="kw">subset</span>(tlc, sex ==<span class="st"> </span><span class="dv">1</span>)
+  <span class="kw">subset</span>(tlc, age &lt;<span class="st"> </span><span class="dv">20</span>, tlc)
+  <span class="kw">mean</span>(<span class="kw">subset</span>(tlc, sex ==<span class="st"> </span><span class="dv">1</span>, <span class="dt">select =</span> tlc, <span class="dt">drop =</span> T))</code></pre></div>
 </div>
 </div>
 <div id="apply" class="section level1">
@@ -1053,20 +1004,18 @@ div.tocify {
 <div id="vectorization" class="section level2">
 <h2>Vectorization</h2>
 <ul>
-<li><p>Returns a vector or array or list</p></li>
-<li><p>obtained by applying a function to margins of a matrix</p></li>
-<li><p>apply(X, MARGIN, FUN, …)</p></li>
-<li><p>X : data</p></li>
-<li><p>MARGIN : 1 for rows, 2 for columns</p></li>
-<li><p>FUN: function </p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1"></a>x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">x1 =</span> <span class="dv">3</span>, <span class="dt">x2 =</span> <span class="kw">c</span>(<span class="dv">4</span><span class="op">:</span><span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>))</span>
-<span id="cb130-2"><a href="#cb130-2"></a>col.sums &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">2</span>, sum)</span>
-<span id="cb130-3"><a href="#cb130-3"></a>row.sums &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv">1</span>, sum)</span></code></pre></div></li>
+<li>Returns a vector or array or list</li>
+<li>obtained by applying a function to margins of a matrix</li>
+<li>apply(X, MARGIN, FUN, ...)</li>
+<li>X : data</li>
+<li>MARGIN : 1 for rows, 2 for columns</li>
+<li>FUN: function </li>
 </ul>
+<p><code>r   x &lt;- cbind(x1 = 3, x2 = c(4:1, 2:5))   col.sums &lt;- apply(x, 2, sum)   row.sums &lt;- apply(x, 1, sum)</code></p>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAgICAgICAgIkxlY3R1cmUgMTogUiBwcm9ncmFtbWluZyIKIyBzdWJ0aXRsZTogICAiQmFzZWQgb246IGh0dHBzOi8vZ2l0aHViLmNvbS9tYXR0aWFndWVyaW5pL3NsaWRlcy1pbnRyby10by1SIgojIGF1dGhvcjogICAgICJNYXJpYW0gUi4gUml6a2FsbGFoIgojIGRhdGU6ICAgICAgICIyMDIxIgojIG91dHB1dDogICAgIGJlYW1lcl9wcmVzZW50YXRpb24KIyB0aGVtZTogICAgICBib3hlcwojIGNvbG9ydGhlbWU6IGRvbHBoaW4KIyBmb250dGhlbWU6ICBzZXJpZgojIHRvYzogICAgICAgIFRSVUUKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0KbGlicmFyeShrbml0cikKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCiMgUiBvcGVyYXRpb25zCgojIyBSIGFzIGEgY2FsY3VsYXRvciAoSSkKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBjYWxjdWxhdG9yMSwgaW5jbHVkZT1ULCBlY2hvPVR9CjIrMgoyLTIKMioyCjIvMgpgYGAKXG5vcm1hbHNpemUKCiMjIFIgYXMgYSBjYWxjdWxhdG9yIChJSSkKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBjYWxjdWxhdG9yMiwgaW5jbHVkZT1ULCBlY2hvPVR9CmxvZygxKQpleHAoMSkKbG9nKGV4cCgxKSkKc3FydCgyNSkKYGBgClxub3JtYWxzaXplCgojIyBUaGUgaGVscApcZm9vdG5vdGVzaXplCmBgYHtyIGhlbHAsIGluY2x1ZGU9VCwgZWNobz1UfQo/bG9nCmhlbHAobG9nKQpgYGAKXG5vcm1hbHNpemUKCk90aGVyd2lzZToKCi0gR29vZ2xlIHlvdXIgZXJyb3IgbWVzc2FnZQoKLSBBc2sgZm9yIGhlbHAgaW4gU3RhY2sgT3ZlcmZsb3cKCiMjIFBhY2thZ2VzClIgY29tZXMgd2l0aCBhIG51bWJlciBvZiBidWlsdC1pbiBmdW5jdGlvbnMgYW5kIGRhdGFzZXRzLCBidXQgb25lIG9mIHRoZSBtYWluIHN0cmVuZ3RocyBvZiBSIGFzIGFuIG9wZW4tc291cmNlIHByb2plY3QgaXMgaXRzIHBhY2thZ2Ugc3lzdGVtLgoKUGFja2FnZXMgZ2l2ZXMgeW91IGFjY2VzcyB0byBhZGRpdGlvbmFsIGZ1bmN0aW9ucyBhbmQgZGF0YXNldHMuCgpJZiB5b3Ugd2FudCB0byBkbyBzb21ldGhpbmcgd2hpY2ggaXMgbm90IGRvYWJsZSB3aXRoIHRoZSBSIGJhc2ljIGZ1bmN0aW9ucywgdGhlcmUgaXMgYSBnb29kIGNoYW5jZSB0aGF0IHRoZXJlIGV4aXN0IGEgcGFja2FnZSB0aGF0IHdpbGwgZnVsZmlsbCB5b3VyIG5lZWRzLgoKWW91IGNhbiBpbnN0YWxsIHBhY2thZ2VzIHVzaW5nIHRoZSBjb21tYW5kIGBpbnN0YWxsLnBhY2thZ2VzKCIiKWAKCllvdSBjYW4gbG9hZCBwYWNrYWdlcyB1c2luZyB0aGUgY29tbWFuZCBgbGlicmFyeSgpYAoKWW91IGNhbiBjaGVjayBmb3IgaW5zdGFsbGVkIHBhY2thZ2VzIHVzaW5nIHRoZSBjb21tYW5kIGBpbnN0YWxsZWQucGFja2FnZXMoKWAKCllvdSBjYW4gY2hlY2sgUiB2ZXJzaW9uIGBSLnZlcnNpb25gCgojIEV4ZXJjaXNlIGJyZWFrIChpbiBDb25zb2xlOiBDTUQgLT4gUi5leGUpCgojIyBFbnZpcm9ubWVudCBhbmQgbWF0aApgYGB7ciBlbnZpcm9ubWVudF9tYXRoLCBlY2hvPVQsIGluY2x1ZGU9VCwgZXZhbD1GfQppbnN0YWxsZWQucGFja2FnZXMoKQpnZXR3ZCgpClIudmVyc2lvbgoxICsgMQoyICsgMyAqIDQKNCAqIDMgKyAyCigyICsgMykgKiA0Cig0ICogMykgKyAyCjMgXiAyCmV4cCgxKQpwaQoyKnBpKjYzNzggIyBDaXJjdW1mZXJlbmNlIG9mIGVhcnRoIGF0IHRoZSBlcXVhdG9yIChpbiBrbSkKYGBgCgojIyBWYXJpYWJsZXMKVmFyaWFibGVzIGFyZSBhc3NpZ25lZCBhIHZhbHVlIGVpdGhlciB1c2luZyAiPSIgb3IgIjwtIgpSZS13cml0ZSB0aGlzIGNhbGN1bGF0aW9uIHNvIHRoYXQgaXQgZG9lc27igJl0IHVzZSB2YXJpYWJsZXM6CmBgYHtyIGRlZmluZV92YXJpYWJsZTEsIGVjaG89VCwgaW5jbHVkZT1ULCBldmFsPVR9CmEgPC0gNCAqIDIwCmIgPC0gNwphICsgYgpgYGAKXG5vcm1hbHNpemUKUmUtd3JpdGUgdGhpcyBjYWxjdWF0aW9uIG92ZXIgbXVsdGlwbGUgbGluZXMsIHVzaW5nIGEgdmFyaWFibGU6CmBgYHtyIGRlZmluZV92YXJpYWJsZTIsIGVjaG89VCwgaW5jbHVkZT1UfQoyICsgMiArIDIKYSA8LSAyCmIgPC0gMwphICogYgpgYGAKIyBEYXRhIHN0cnVjdHVyZXMKCiMjIERhdGEgdHlwZXMKCi0gTnVtZXJpYy9Eb3VibGUgKGUuZy4gMi41LCAxLzUsIDEuMCwgXGRvdHMpCgotIEludGVnZXIgKGUuZy4gMSwgMiwgMywgXGRvdHMpCgotIENvbXBsZXggKGUuZy4gMSArIDJpLCBcZG90cykKCi0gTG9naWNhbCAoZS5nLiBUUlVFLCBGQUxTRSBvciBOQSkKCi0gQ2hhcmFjdGVyIChlLmcuICJhIiwgInBhcGVyIiwgIjIgcGx1cyAyID0gNSIsICJUUlVFIiwgXGRvdHMpCgotIEZhY3Rvci9DYXRlZ29yaWNhbCAoIm1hbGUiLCAiZmVtYWxlIiwgXGRvdHMpCgojIyBEYXRhIHN0cnVjdHVyZXMKIVtWaXN1YWxpemF0aW9uIG9mIGRhdGEgc3RydWN0dXJlc10oZmlndXJlcy9yX2RhdGFfc3RydWN0dXJlcy5wbmcpCgojIyBWZWN0b3JzIChJKQoKWW91IGNhbiBjcmVhdGUgYSB2ZWN0b3IgdXNpbmcgdGhlIGNvbW1hbmQgYGMoKWAKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX2Jhc2UsIGluY2x1ZGU9VCwgZWNobz1UfQp4IDwtIGMoMSwgMywgNSwgMTApCngKYGBgClxub3JtYWxzaXplCgpWZWN0b3JzIG11c3QgY29udGFpbiBlbGVtZW50cyBvZiB0aGUgc2FtZSBkYXRhIHR5cGUuClxmb290bm90ZXNpemUKYGBge3IgdmVjdG9yc190eXBlLCBpbmNsdWRlPVQsIGVjaG89VH0KYygxLCAiaW50cm8iLCBUUlVFKQpgYGAKXG5vcm1hbHNpemUKCllvdSBjYW4gbWVhc3VyZSB0aGUgbGVuZ3RoIG9mIGEgdmVjdG9yIHVzaW5nIHRoZSBjb21tYW5kIGBsZW5ndGgoKWAKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX2xlbmd0aCwgaW5jbHVkZT1ULCBlY2hvPVR9Cmxlbmd0aCh4KQpgYGAKXG5vcm1hbHNpemUKCiMjIFZlY3RvcnMgKElJKQpJdCBpcyBhbHNvIHBvc3NpYmxlIHRvIGVhc2lseSBjcmVhdGUgc2VxdWVuY2VzClxmb290bm90ZXNpemUKYGBge3IgdmVjdG9yc19zZXF1ZW5jZXMsIGluY2x1ZGU9VCwgZWNobz1UfQoxOjEwCnNlcShmcm9tID0gMSwgdG8gPSAyLCBieSA9IDAuMSkKcmVwKCJBIiwgdGltZXMgPSA1KQpgYGAKXG5vcm1hbHNpemUKCiMjIFZlY3RvcnMgKElJSSkKWW91IGNhbiBjb21iaW5lIGRpZmZlcmVudCB2ZWN0b3JzClxmb290bm90ZXNpemUKYGBge3IgdmVjdG9yc19tdWx0aXBsZSwgaW5jbHVkZT1ULCBlY2hvPVR9CnggPC0gMTozICMgZnJvbSAxIHRvIDMKeSA8LSBjKDEwLCAxNSkgIyAxMCBhbmQgMTUKeiA8LSBjKHgseSkgIyB4IGZpcnN0IGFuZCB0aGVuIHkKegpgYGAKXG5vcm1hbHNpemUKCkFuZCB5b3UgY2FuIHJlcGVhdCB2ZWN0b3JzIChvciBpdHMgZWxlbWVudHMpClxmb290bm90ZXNpemUKYGBge3IgdmVjdG9yc19yZXBlYXQsIGluY2x1ZGU9VCwgZWNobz1UfQp6IDwtIHJlcCh5LCBlYWNoPTMpICMgcmVwZWF0IGVhY2ggZWxlbWVudCAzIHRpbWVzCnoKeiA8LSByZXAoeSwgdGltZXM9MykgIyByZXBlYXQgdGhlIHdob2xlIHZlY3RvciAzIHRpbWVzCnoKYGBgClxub3JtYWxzaXplCgojIyBTdWJzZXR0aW5nIFZlY3RvcnMKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX3N1YnNldCwgaW5jbHVkZT1ULCBlY2hvPVR9CnggPC0gYygxLCA1LCAxMCwgNykKeCA8IDYgIyBpcyB0aGUgZWxlbWVudCBsb3dlciB0aGFuIDY/CnggPT0gMTAgIyBpcyB0aGUgZWxlbWVudCBlcXVhbCB0byAxMD8KeFsyXSAjIHdoaWNoIGVsZW1lbnQgaXMgaW4gdGhlIHNlY29uZCBwb3NpdGlvbj8KeFsxOjJdICMgd2hpY2ggZWxlbWVudHMgYXJlIGluIHRoZSBmaXJzdCAyIHBvc2l0aW9ucz8KeFtjKDEsMyw0KV0gIyB3aGljaCBlbGVtZW50cyBhcmUgaW4gcG9zaXRpb25zIDEsIDMgYW5kIDQ/CmBgYAojIyBTdWJzZXR0aW5nIFZlY3RvcnMKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX3N1YnNldDIsIGluY2x1ZGU9VCwgZWNobz1UfQpuIDwtIGMoMSwgNCwgNSwgNiwgNywgMiwgMywgNCwgNSwgNikgIyBjcmVhdGVzIGEgdmVjdG9yLCBzdG9yZXMgaXQgaW4gbgpsZW5ndGgobikgIyBudW1iZXIgb2YgZWxlbWVudHMKblszXSAjIGV4dHJhY3QgMyByZCBlbGVtZW50IGluIG4KblstMl0gIyBleHRyYWN0IGFsbCBvZiBuIGJ1dCAybmQgZWxlbWVudApuW2MoMSwzLDQpXSAjIGV4dHJhY3QgZmlyc3QsIHRoaXJkLCBhbmQgZm91cnRoIGVsZW1lbnQgb2YgbgpuW24gPCA0XSAjZXh0cmFjdCBhbGwgZWxlbWVudHMgaW4gbiBzbWFsbGVyIHRoYW4gNApuW24gPCA0ICYgbiAhPSAxXSAjIGV4dHJhY3QgZWxlbWVudCBzbWFsbGVyIHRoYW4gNCBBTkQgZGlmZmVyZW50IGZyb20gMQpgYGAKXG5vcm1hbHNpemUKCiMjIEV4ZXJjaXNlIGJyZWFrClxmb290bm90ZXNpemUKYGBge3IgdmVjdG9yc19zdWJzZXQ0LCBpbmNsdWRlPVQsIGVjaG89VH0KbiA8LSBjKDEsIDQsIDUsIDYsIDcsIDIsIDMsIDQsIDUsIDYpICMgY3JlYXRlcyBhIHZlY3Rvciwgc3RvcmVzIGl0IGluIG4KYGBgClxub3JtYWxzaXplCiogbnVtYmVyIG9mIGVsZW1lbnRzCiogZXh0cmFjdCBmaXJzdCB0aHJlZSBlbGVtZW50cyBvZiBuCiogZXh0cmFjdCBhbGwgb2YgbiBidXQgM25kIGVsZW1lbnQKKiBleHRyYWN0IGZpcnN0LCB0aGlyZCwgYW5kIGZvdXJ0aCBlbGVtZW50IG9mIG4KKiBleHRyYWN0IGVsZW1lbnQgc21hbGxlciB0aGFuIDQgT1IgZXF1YWwgdG8gNQoKCiMjIEV4ZXJjaXNlIGJyZWFrCldlIGNhbiBjcmVhdGUgYW5kIGluZGV4IGNoYXJhY3RlciB2ZWN0b3JzIGFzIHdlbGwuIEEgY2FmZSBpcyB1c2luZyBSIHRvIGNyZWF0ZSB0aGVpciBtZW51LgpcZm9vdG5vdGVzaXplCmBgYHtyIHZlY3RvcnNfc3Vic2V0NSwgaW5jbHVkZT1ULCBlY2hvPVR9Cml0ZW1zIDwtIGMoImFwcGxlcyIsICJvcmFuZ2VzIiwgImVnZ3MiLCAidG9tYXRvZXMiLCAiYmFuYW5hcyIpCmBgYApcbm9ybWFsc2l6ZQoqIFdoYXQgZG9lcyBpdGVtc1stM10gcHJvZHVjZT8KKiBCYXNlZCBvbiB3aGF0IHlvdSBmaW5kLCB1c2UgaW5kZXhpbmcgdG8gY3JlYXRlIGEgdmVyc2lvbiBvZiBpdGVtcyB3aXRob3V0ICJiYW5hbmFzIi4KKiBVc2UgaW5kZXhpbmcgdG8gY3JlYXRlIGEgdmVjdG9yIGNvbnRhaW5pbmcgYXBwbGVzLCBlZ2dzLCB0b21hdG9lcywgYmFuYW5hcywgYW5kIGJhbmFuYXMuCiogQWRkIGEgbmV3IGl0ZW0sICJsZW1vbnMiLCB0byBpdGVtcy4KKiBNYWtlIGl0ZW1zWzNdICJiZXJyaWVzIi4KCgojIyBWZWN0b3JzJyBPcGVyYXRpb25zClxmb290bm90ZXNpemUKYGBge3IgdmVjdG9yc19vcGVyYXRpb25zLCBpbmNsdWRlPVQsIGVjaG89VH0KeCA8LSBjKDEsNSwxMCw3KQp4KzIgIyBhZGRzIGEgc2NhbGFyIHRvIGFsbCBlbGVtZW50cwp4XjIgIyB3aGF0J3MgdGhlIHNxdWFyZSBvZiBhbGwgZWxlbWVudHM/CmBgYApcbm9ybWFsc2l6ZQoKIyMgTWF0cmljZXMgKEkpCllvdSBjYW4gY3JlYXRlIGEgbWF0cml4IHVzaW5nIHRoZSBjb21tYW5kIGBtYXRyaXgoKWAKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBtYXRyaXgsIGluY2x1ZGU9VCwgZWNobz1UfQpYIDwtIG1hdHJpeCgxOjksIG5yb3cgPSAzLCBuY29sID0gMykKWApgYGAKXG5vcm1hbHNpemUKCiMjIE1hdHJpY2VzIChJSSkKUiBhdXRvbWF0aWNhbGx5IGluc2VydHMgZWxlbWVudHMgYnkgY29sdW1ucywgYnV0IHdlIGNhbiBhc2sgdG8gaW5jbHVkZSBieSByb3dzClxmb290bm90ZXNpemUKYGBge3IgbWF0cml4X2J5cm93LCBpbmNsdWRlPVQsIGVjaG89VH0KWCA8LSBtYXRyaXgoMTo5LCBucm93ID0gMywgbmNvbCA9IDMsIGJ5cm93ID0gVFJVRSkKWApgYGAKXG5vcm1hbHNpemUKCllvdSBkb24ndCBldmVuIGhhdmUgdG8gc3BlY2lmeSB0aGUgb3B0aW9ucyBuYW1lcwpcZm9vdG5vdGVzaXplCmBgYHtyIG1hdHJpeF9zaWxlbnQsIGluY2x1ZGU9VCwgZWNobz1UfQpYIDwtIG1hdHJpeCgxOjgsIDIsIDQsIFQpClgKYGBgClxub3JtYWxzaXplCgojIyBNYXRyaWNlcyAoSUlJKQpNYXRyaWNlcyBjYW4gYWxzbyBiZSBjcmVhdGVkIGJ5IGNvbWJpbmluZyB2ZWN0b3JzClxmb290bm90ZXNpemUKYGBge3IgbWF0cml4X2Zyb212ZWN0b3JzLCBpbmNsdWRlPVQsIGVjaG89VH0KWCA8LSBjYmluZCgxOjQsIDY6OSkgIyBiaW5kcyB0aGVtIGFzIGNvbHVtbnMKWApYIDwtIHJiaW5kKDE6NCwgNjo5KSAjIGJpbmRzIHRoZW0gYXMgcm93cwpYCmBgYApcbm9ybWFsc2l6ZQoKIyMgU3Vic2V0dGluZyBNYXRyaWNlcwpcZm9vdG5vdGVzaXplCmBgYHtyIG1hdHJpeF9zdWJzZXQsIGluY2x1ZGU9VCwgZWNobz1UfQpYPjUgIyBlbGVtZW50cyBsYXJnZXIgdGhhbiA1ClhbMSw0XSAjIGVsZW1lbnQgb2YgZmlyc3Qgcm93LCBmb3VydGggY29sdW1uPwpYWzEsXSAjIGVsZW1lbnQgaW4gdGhlIGZpcnN0IHJvdz8KWFssMl0gIyBlbGVtZW50cyBpbiB0aGUgc2Vjb25kIGNvbHVtbnM/CmBgYApcbm9ybWFsc2l6ZQoKIyMgTGlzdHMKQSBsaXN0IGlzIGEgb25lLWRpbWVuc2lvbmFsIGhldGVyb2dlbmVvdXMgZGF0YSBzdHJ1Y3R1cmUuCgpJdCBpcyBpbmRleGVkIGxpa2UgYSB2ZWN0b3Igd2l0aCBhIHNpbmdsZSBpbnRlZ2VyIHZhbHVlIChvciBhIG5hbWUpLCBidXQgZWFjaCBlbGVtZW50IGNhbiBjb250YWluIGFuIGVsZW1lbnQgb2YgYW55IGRhdGEgdHlwZS4KXGZvb3Rub3Rlc2l6ZQpgYGB7ciBsaXN0LCBpbmNsdWRlPVQsIGVjaG89VH0KeCA8LSAxOjQKeSA8LSBjKCJhIiwgImIiLCAiYyIpCkwgPC0gbGlzdChudW1iZXJzID0geCwgbGV0dGVycyA9IHkpCkwKYGBgClxub3JtYWxzaXplCgojIyBTdWJzZXR0aW5nIExpc3RzClxmb290bm90ZXNpemUKYGBge3IgbGlzdF9zdWJzZXR0aW5nLCBpbmNsdWRlPVQsIGVjaG89VH0KTFtbMV1dICMgZXh0cmFjdCB0aGUgZmlyc3QgZWxlbWVudApMJG51bWJlcnMgIyBleHRyYWN0IHRoZSBlbGVtZW50IGNhbGxlZCBudW1iZXJzCkwkbGV0dGVycyAjIGV4dHJhY3QgdGhlIGVsZW1lbnQgY2FsbGVkIGxldHRlcnMKYGBgClxub3JtYWxzaXplCgpZb3UgY2FuIGV2ZW4gIndvcmsiIHdpdGggdGhlIHN1YnNldHRlZCBlbGVtZW50OgpcZm9vdG5vdGVzaXplCmBgYHtyIGxpc3Rfc3Vic2V0dGluZzIsIGluY2x1ZGU9VCwgZWNobz1UfQpMJG51bWJlcnNbMTozXSA+IDIKYGBgClxub3JtYWxzaXplCgojIyBFeGVyY2lzZSBicmVhawpcZm9vdG5vdGVzaXplCmBgYHtyIGxldHRlcnMsIGluY2x1ZGU9VCwgZWNobz1ULCBldmFsPUZ9CmxldHRlcnMKTEVUVEVSUwpteV9sZXR0ZXJzIDwtIGNiaW5kKExFVFRFUlMsIGxldHRlcnMpCmNsYXNzKG15X2xldHRlcnMpCmRpbShteV9sZXR0ZXJzKQpteV9sZXR0ZXJzIDwtIGNiaW5kKG15X2xldHRlcnMsIHNlcSgxOmxlbmd0aChsZXR0ZXJzKSkpCmBgYApcbm9ybWFsc2l6ZQpXaGF0IG51bWJlciBpcyB0aGUgbGV0dGVyIEYgaW4gdGhlIEVuZ2xpc2ggYWxwaGFiZXQ/CgoKIyMgRXhlcmNpc2UKYGBge3IgZG5hX2V4MSwgaW5jbHVkZSA9IFQsIGVjaG89VCwgZXZhbD1GfQojIHZlY3RvciAuLi4gZXRjLgpteV9kbmEgPC0gIkFBQ0dBQVRHQUdUQUFBVEdBR1RBQUFUR0FBR0dBQVRHQVRUQVRUQ0NUVEdDVFRUQUdBQUNUVENUR0dBQVRUQUdBR0dBQ0EKQVRBVFRBQVRBQVRBQ0NBVENHQ0FDQUdUR1RUVENUVFRHVFRHVFRBQVRHQ1RBQ0FBQ0FUQUNBQUFHQUdHQUFHQ0FUR0NBRyIKbXlfZG5hCmxlbmd0aChteV9kbmEpCmNsYXNzKG15X2RuYSkKc3RyKG15X2RuYSkKbmNoYXIobXlfZG5hKQoKIyBhcHByMQpteV9kbmFfY29tbWEgPC0gc2FwcGx5KHN0cnNwbGl0KAogIHggPSBteV9kbmEsIHNwbGl0ID0gIiIsIGZpeGVkID0gVFJVRSksCiAgICAgICBmdW5jdGlvbih4KSBwYXN0ZSh4LCBjb2xsYXBzZSA9ICJfIikpCmxlbmd0aChteV9kbmFfY29tbWEpCnN0cihteV9kbmFfY29tbWEpCgpteV9kbmFfbGlzdCA8LSBzdHJzcGxpdCh4ID0gbXlfZG5hLCBzcGxpdCA9ICIiLCBmaXhlZCA9IFRSVUUpCmxlbmd0aChteV9kbmFfbGlzdCkKY2xhc3MobXlfZG5hX2xpc3QpCm15X2RuYV92ZWN0b3IgPC0gdW5saXN0KG15X2RuYV9saXN0KQpsZW5ndGgobXlfZG5hX2xpc3RbWzFdXSkKc3RyKG15X2RuYV92ZWN0b3IpCmxlbmd0aChteV9kbmFfdmVjdG9yKQoKIyBmaXJzdCBudWNsZW90aWRlCm15X2RuYV92ZWN0b3JbMV0KIyBpbmRleGluZyAxOm5jaGFyKG15X2RuYSkKbXlfZG5hX3ZlY3RvclsxOjUwXQojIHVuaXF1ZSBjaGFyYWN0ZXJzCnVuaXF1ZShteV9kbmFfdmVjdG9yKQoKIyBudW1iZXIgb2YgQXMKKG15X2RuYV92ZWN0b3IgPT0gIkEiKQpsZW5ndGgobXlfZG5hX3ZlY3RvcltteV9kbmFfdmVjdG9yID09ICJBIl0pCgojIHJlbW92ZSBcbgpyZW1vdmVfbnVjIDwtIG1hdGNoKCJcbiIsIG15X2RuYV92ZWN0b3IpCndoaWNoKG15X2RuYV92ZWN0b3IgJWluJSBjKCJcbiIsICJYIikpCm15X2RuYV92ZWN0b3JbcmVtb3ZlX251Y10gPC0gIkEiCm15X2RuYV92ZWN0b3JfMiA8LSBteV9kbmFfdmVjdG9yWy03MV0KdW5pcXVlKG15X2RuYV92ZWN0b3JfMikKYGBgCgojIyBEYXRhIEZyYW1lcyAoSSkKQSBgZGF0YS5mcmFtZWAgaXMgc2ltaWxhciB0byBhIHR5cGljYWwgYHNwcmVhZHNoZWV0YCBpbiBleGNlbC4KClRoZXJlIGFyZSByb3dzLCBhbmQgdGhlcmUgYXJlIGNvbHVtbnMuCgpBIHJvdyBpcyB0eXBpY2FsbHkgdGhvdWdodCBvZiBhcyBhbiBcZW1waHtvYnNlcnZhdGlvbn0uCgpBIGNvbHVtbiBpcyBhIGNlcnRhaW4gXGVtcGh7dmFyaWFibGV9LCBjaGFyYWN0ZXJpc3RpYyBvciBmZWF0dXJlIG9mIHRoYXQgb2JzZXJ2YXRpb24uCgojIyBEYXRhIEZyYW1lcyAoSUkpCkEgZGF0YSBmcmFtZSBpcyBhIGxpc3Qgb2YgY29sdW1uIHZlY3RvcnMgd2hlcmU6CgotIGVhY2ggY29sdW1uIGhhcyBhIG5hbWUKCi0gZWFjaCBjb2x1bW4gbXVzdCBjb250YWluIHRoZSBzYW1lIGRhdGEgdHlwZSwgYnV0IHRoZSBkaWZmZXJlbnQgY29sdW1ucyBjYW4gc3RvcmUgZGlmZmVyZW50IGRhdGEgdHlwZXMuCgotIGVhY2ggY29sdW1uIG11c3QgYmUgb2Ygc2FtZSBsZW5ndGgKCiMjIERhdGEgRnJhbWVzIChJSUkpClxzY3JpcHRzaXplCmBgYHtyIGRhdGFmcmFtZSwgaW5jbHVkZT1ULCBlY2hvPVR9CnNldC5zZWVkKDEpCmRmIDwtICBkYXRhLmZyYW1lKGlkID0gMTo1LAogIG5hbWUgPSBjKCJEaWVnbyIsICJTYW11ZWwiLCAiTWFyY28iLCAiSmF2aWVyIiwgIkxlb25hcmRvIiksCiAgc3VybmFtZSA9IGMoIk1pbGl0byIsICJFdG8nbyIsICJNYXRlcmF6emkiLCAiWmFuZXR0aSIsICJCb251Y2NpIiksCiAgd2FnZSA9IHJub3JtKG49NSwgbWVhbiA9IDEwXjUsIHNkID0gMTBeMyksICMgbm9ybWFsIHJhbmRvbSBzYW1wbGUKICBvcmlnaW4gPSBjKCJBcmdlbnRpbmEiLCAiQ2FtZXJvb24iLCAiSXRhbHkiLCAiQXJnZW50aW5hIiwgIkl0YWx5IiksCiAgdHJlYmxlX3dpbm5lciA9IGMoVCwgVCwgVCwgVCwgRikKICApCmRmCmBgYApcbm9ybWFsc2l6ZQoKWW91IGNhbiB2ZXJpZnkgdGhlIHNpemUgb2YgdGhlIGBkYXRhLmZyYW1lYCB1c2luZyB0aGUgY29tbWFuZCBgZGltKClgCgpZb3UgY2FuIGdldCB0aGUgYGRhdGEgdHlwZWAgaW5mbyB1c2luZyB0aGUgY29tbWFuZCBgc3RyKClgCgojIyBTdWJzZXR0aW5nIERhdGEgRnJhbWVzIChJKQpcZm9vdG5vdGVzaXplCmBgYHtyIGRhdGFmcmFtZV9zdWJzZXQsIGluY2x1ZGU9VCwgZWNobz1UfQpkZiRuYW1lICMgc3Vic2V0IGEgY29sdW1uCmRmWyxjKDIsNSldICMgY2FuIGFsc28gc3Vic2V0IGxpa2UgYSBtYXRyaXgKYGBgClxub3JtYWxzaXplCgojIyBTdWJzZXR0aW5nIERhdGEgRnJhbWVzIChJSSkKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBkYXRhZnJhbWVfc3Vic2V0MiwgaW5jbHVkZT1ULCBlY2hvPVR9CmhlYWQoZGYsIG49MykgIyBmaXJzdCBuIG9ic2VydmF0aW9ucwp0YWlsKGRmLCBuPTMpICMgbGFzdCBuIG9ic2VydmF0aW9ucwpgYGAKXG5vcm1hbHNpemUKCiMjIEluc3BlY3RpbmcgZGF0YSBmcmFtZXMgKEkpClIgY29tZXMgd2l0aCBtYW55IGRhdGEgYmFzZXMgaW5jbHVkZWQuIFRoZXNlIGNhbiBiZSB1c2VkIGZvciBsZWFybmluZyBSLgoKT25lIG9mIHRoZSBtb3N0IGZhbW91cyBpcyB0aGUgb25lIGNhbGxlZCBgbXRjYXJzYC4KXHNjcmlwdHNpemUKYGBge3IgZGF0YWZyYW1lX210Y2FycywgaW5jbHVkZT1ULCBlY2hvPVR9CmhlYWQobXRjYXJzKQp0YWlsKG10Y2FycykKZGltKG10Y2FycykKYGBgClxub3JtYWxzaXplCgojIyBJbnNwZWN0aW5nIGRhdGEgZnJhbWVzIChJSSkKXHNjcmlwdHNpemUKYGBge3IgZGF0YWZyYW1lX210Y2FyczIsIGluY2x1ZGU9VCwgZWNobz1UfQpzdHIobXRjYXJzKQpuYW1lcyhtdGNhcnMpCmBgYApcbm9ybWFsc2l6ZQoKIyMgU3Vic2V0dGluZyBkYXRhIGZyYW1lcyAoSUlJKQpXZSBhcmUgaW50ZXJlc3RpbmcgaW4gdGhlIGN5bGluZGVycyBhbmQgdGhlIHdlaWdodHMgb2YgaW5lZmZpY2llbnQgY2FycyAobG93ZXIgdGhhbiAxNSBtaWxlcyBwZXIgZ2FsbG9uKS4KXHNjcmlwdHNpemUKYGBge3IgZGF0YWZyYW1lX3N1YnNldF9tdGNhcnMsIGluY2x1ZGU9VCwgZWNobz1UfQpwb2xsX2NhcnMgPC0gbXRjYXJzW210Y2FycyRtcGc8MTUsIGMoImN5bCIsICJ3dCIpXQpwb2xsX2NhcnMKYGBgClxub3JtYWxzaXplCgojIyBTdWJzZXR0aW5nIGRhdGEgZnJhbWVzIChJVikKQWx0ZXJuYXRpdmVseToKXHNjcmlwdHNpemUKYGBge3IgZGF0YWZyYW1lX3N1YnNldF9tdGNhcnMyLCBpbmNsdWRlPVQsIGVjaG89VH0KcG9sbF9jYXJzIDwtIHN1YnNldChtdGNhcnMsIHN1YnNldCA9IG1wZzwxNSwgc2VsZWN0ID0gYygiY3lsIiwgInd0IikpCnBvbGxfY2FycwpgYGAKXG5vcm1hbHNpemUKCiMjIEltcG9ydGluZyBkb3dubG9hZGVkIGRhdGEgZnJhbWVzICguY3N2KQpZb3UgY2FuIGltcG9ydCBjc3YgZGF0YSB0aGF0IHlvdSBoYXZlIGRvd25sb2FkZWQgZnJvbSBhbnkgZXh0ZXJuYWwgc291cmNlIHVzaW5nOgpcc2NyaXB0c2l6ZQpgYGB7ciBpbXBvcnRfZGF0YTIsIGluY2x1ZGU9VCwgZWNobz1ULCBldmFsPUZ9CnNldHdkKCJkYXRhIikKbnljX2FiIDwtIHJlYWQuY3N2KCJBQl9OWUNfMjAyMC5jc3YiKQpgYGAKXG5vcm1hbHNpemUKCndoZXJlOgoKLSBgc2V0d2QoKWAgc2V0cyB0aGUgd29ya2luZyBkaXJlY3RvcnkgdG8gdGhlIHBsYWNlIHdoZXJlIHRoZSBkYXRhIGlzIHNhdmVkOwoKLSBgcmVhZC5jc3YoKWAgbG9hZHMgdGhlIGNzdiBmaWxlIHdpdGggdGhlIHNwZWNpZmllZCBuYW1lLgoKWW91IGNhbiBzaW1pbGFybHkgaW1wb3J0IGFsbW9zdCBhbnkga2luZCBvZiBkYXRhIGZpbGUgc3RvcmVkIGluIG90aGVyIGZvcm1hdHMgKC54bHMsIC50eHQsIC5jc3YsIC5kdGEsIC5SZGF0YSwgLm1hdCwgLi4uKQoKIyMgSW1wb3J0aW5nIGRvd25sb2FkZWQgZGF0YSBmcmFtZXMgKC50eHQpCkludGVyZmVyb24gcmVndWxhdG9yeSBmYWN0b3IgNiBtb3VzZQpcc2NyaXB0c2l6ZQpgYGB7ciBpbXBvcnRfZGF0YTMsIGluY2x1ZGU9VCwgZWNobz1ULCBldmFsPUZ9CnNldHdkKCJkYXRhIikKaXJmNiA8LSByZWFkLnRhYmxlKCJpcmY2LnR4dCIsIGhlYWRlciA9IFRSVUUsIHJvdy5uYW1lcyA9IDEpCgojIGV4cGxvcmUKaGVhZChpcmY2KQpuY29sKGlyZjYpOyBucm93KGlyZjYpCmRpbShpcmY2KQpgYGAKIyMgSW1wb3J0aW5nIGRvd25sb2FkZWQgZGF0YSBmcmFtZXMgKC50eHQpClxzY3JpcHRzaXplCmBgYHtyIGltcG9ydF9kYXRhNCwgaW5jbHVkZT1ULCBlY2hvPVQsIGV2YWw9Rn0KaXJmNiA8LSByZWFkLnRhYmxlKCJkYXRhL2lyZjYudHh0IiwgaGVhZGVyID0gVFJVRSwgcm93Lm5hbWVzID0gMSkKY2xhc3MoaXJmNikKc3RyKGlyZjYpCmNvbG5hbWVzKGlyZjYpCmhlYWQocm93bmFtZXMoaXJmNikpCgpgYGAKIyMgSW1wb3J0aW5nIGRvd25sb2FkZWQgZGF0YSBmcmFtZXMgKC50eHQpClxzY3JpcHRzaXplCmBgYHtyIGltcG9ydF9kYXRhNSwgaW5jbHVkZT1ULCBlY2hvPVQsIGV2YWw9Rn0KaXJmNiA8LSByZWFkLnRhYmxlKCJkYXRhL2lyZjYudHh0IiwgaGVhZGVyID0gVFJVRSwgcm93Lm5hbWVzID0gMSkKCmhlYWQoaXJmNlsnRTE3LjVLTzEnXSkgIyBSZXRyaWV2ZSBvbmx5IEUxNy41S08xIGRhdGEKaGVhZChpcmY2WywgMV0pICMgYXMgd2VsbApoZWFkKGlyZjYkRTE3LjVLTzEpICMgYXMgd2VsbApkaW0oaXJmNlssIC0xXSk7IGNvbG5hbWVzKGlyZjZbLCAtMV0pICAjIEV4Y2x1ZGUgRTE3LjVLTzEgZGF0YQpgYGAKCiMgRXhlcmNpc2UgYnJlYWsKCiMjIFRvdGFsIGx1bmcgY2FwYWNpdHkKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB0bGMsIGluY2x1ZGU9VCwgZWNobz1ULCBldmFsPUZ9CiAgdGxjIDwtIHJlYWQuY3N2KCJkYXRhL3RsYy5jc3YiKQogIHN0cih0bGMpCiAgc3VtbWFyeSh0bGMpCiAgc3Vic2V0KHRsYywgc2V4ID09IDEpCiAgc3Vic2V0KHRsYywgYWdlIDwgMjAsIHRsYykKICBtZWFuKHN1YnNldCh0bGMsIHNleCA9PSAxLCBzZWxlY3QgPSB0bGMsIGRyb3AgPSBUKSkKYGBgCgojIEFwcGx5CiMjIFZlY3Rvcml6YXRpb24KKiBSZXR1cm5zCWEJdmVjdG9yIG9yIGFycmF5IG9yIGxpc3QKKiBvYnRhaW5lZCBieSBhcHBseWluZyBhIGZ1bmN0aW9uIHRvIG1hcmdpbnMgb2YgYSBtYXRyaXgKKiBhcHBseShYLCBNQVJHSU4sIEZVTiwgLi4uKQoqIFggOglkYXRhCiogTUFSR0lOIDoJMSBmb3Igcm93cywgMiBmb3IgY29sdW1ucwoqIEZVTjogZnVuY3Rpb24KICBcc2NyaXB0c2l6ZQogIGBgYHtyIGFwcGx5LCBpbmNsdWRlPVQsIGVjaG89VH0KeCA8LSBjYmluZCh4MSA9IDMsIHgyID0gYyg0OjEsIDI6NSkpCmNvbC5zdW1zIDwtIGFwcGx5KHgsIDIsIHN1bSkKcm93LnN1bXMgPC0gYXBwbHkoeCwgMSwgc3VtKQpgYGAKCmBgYHtyIGtuaXRfZXhpdCwgaW5jbHVkZT1GLCBlY2hvPUZ9CmtuaXRfZXhpdCgpCmBgYAo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAgICAgICAgIkxlY3R1cmUgMTogUiBwcm9ncmFtbWluZyIKIyBzdWJ0aXRsZTogICAiQmFzZWQgb246IGh0dHBzOi8vZ2l0aHViLmNvbS9tYXR0aWFndWVyaW5pL3NsaWRlcy1pbnRyby10by1SIgojIGF1dGhvcjogICAgICJNYXJpYW0gUi4gUml6a2FsbGFoIgojIGRhdGU6ICAgICAgICIyMDIxIgojIG91dHB1dDogICAgIGJlYW1lcl9wcmVzZW50YXRpb24KIyB0aGVtZTogICAgICBib3hlcwojIGNvbG9ydGhlbWU6IGRvbHBoaW4KIyBmb250dGhlbWU6ICBzZXJpZgojIHRvYzogICAgICAgIFRSVUUKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0KbGlicmFyeShrbml0cikKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCiMgUiBvcGVyYXRpb25zCgojIyBSIGFzIGEgY2FsY3VsYXRvciAoSSkKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBjYWxjdWxhdG9yMSwgaW5jbHVkZT1ULCBlY2hvPVR9CjIrMgoyLTIKMioyCjIvMgpgYGAKXG5vcm1hbHNpemUKCiMjIFIgYXMgYSBjYWxjdWxhdG9yIChJSSkKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBjYWxjdWxhdG9yMiwgaW5jbHVkZT1ULCBlY2hvPVR9CmxvZygxKQpleHAoMSkKbG9nKGV4cCgxKSkKc3FydCgyNSkKYGBgClxub3JtYWxzaXplCgojIyBUaGUgaGVscApcZm9vdG5vdGVzaXplCmBgYHtyIGhlbHAsIGluY2x1ZGU9VCwgZWNobz1ULCBldmFsID0gRkFMU0V9Cj9sb2cKaGVscChsb2cpCmBgYApcbm9ybWFsc2l6ZQoKT3RoZXJ3aXNlOgoKLSBHb29nbGUgeW91ciBlcnJvciBtZXNzYWdlCgotIEFzayBmb3IgaGVscCBpbiBTdGFjayBPdmVyZmxvdwoKIyMgUGFja2FnZXMKUiBjb21lcyB3aXRoIGEgbnVtYmVyIG9mIGJ1aWx0LWluIGZ1bmN0aW9ucyBhbmQgZGF0YXNldHMsIGJ1dCBvbmUgb2YgdGhlIG1haW4gc3RyZW5ndGhzIG9mIFIgYXMgYW4gb3Blbi1zb3VyY2UgcHJvamVjdCBpcyBpdHMgcGFja2FnZSBzeXN0ZW0uCgpQYWNrYWdlcyBnaXZlcyB5b3UgYWNjZXNzIHRvIGFkZGl0aW9uYWwgZnVuY3Rpb25zIGFuZCBkYXRhc2V0cy4KCklmIHlvdSB3YW50IHRvIGRvIHNvbWV0aGluZyB3aGljaCBpcyBub3QgZG9hYmxlIHdpdGggdGhlIFIgYmFzaWMgZnVuY3Rpb25zLCB0aGVyZSBpcyBhIGdvb2QgY2hhbmNlIHRoYXQgdGhlcmUgZXhpc3QgYSBwYWNrYWdlIHRoYXQgd2lsbCBmdWxmaWxsIHlvdXIgbmVlZHMuCgpZb3UgY2FuIGluc3RhbGwgcGFja2FnZXMgdXNpbmcgdGhlIGNvbW1hbmQgYGluc3RhbGwucGFja2FnZXMoIiIpYAoKWW91IGNhbiBsb2FkIHBhY2thZ2VzIHVzaW5nIHRoZSBjb21tYW5kIGBsaWJyYXJ5KClgCgpZb3UgY2FuIGNoZWNrIGZvciBpbnN0YWxsZWQgcGFja2FnZXMgdXNpbmcgdGhlIGNvbW1hbmQgYGluc3RhbGxlZC5wYWNrYWdlcygpYAoKWW91IGNhbiBjaGVjayBSIHZlcnNpb24gYFIudmVyc2lvbmAKCiMgRXhlcmNpc2UgYnJlYWsgKGluIENvbnNvbGU6IENNRCAtPiBSLmV4ZSkKCiMjIEVudmlyb25tZW50IGFuZCBtYXRoCmBgYHtyIGVudmlyb25tZW50X21hdGgsIGVjaG89VCwgaW5jbHVkZT1ULCBldmFsPUZ9Cmluc3RhbGxlZC5wYWNrYWdlcygpCmdldHdkKCkKUi52ZXJzaW9uCjEgKyAxCjIgKyAzICogNAo0ICogMyArIDIKKDIgKyAzKSAqIDQKKDQgKiAzKSArIDIKMyBeIDIKZXhwKDEpCnBpCjIqcGkqNjM3OCAjIENpcmN1bWZlcmVuY2Ugb2YgZWFydGggYXQgdGhlIGVxdWF0b3IgKGluIGttKQpgYGAKCiMjIFZhcmlhYmxlcwpWYXJpYWJsZXMgYXJlIGFzc2lnbmVkIGEgdmFsdWUgZWl0aGVyIHVzaW5nICI9IiBvciAiPC0iClJlLXdyaXRlIHRoaXMgY2FsY3VsYXRpb24gc28gdGhhdCBpdCBkb2VzbuKAmXQgdXNlIHZhcmlhYmxlczoKYGBge3IgZGVmaW5lX3ZhcmlhYmxlMSwgZWNobz1ULCBpbmNsdWRlPVQsIGV2YWw9VH0KYSA8LSA0ICogMjAKYiA8LSA3CmEgKyBiCmBgYApcbm9ybWFsc2l6ZQpSZS13cml0ZSB0aGlzIGNhbGN1YXRpb24gb3ZlciBtdWx0aXBsZSBsaW5lcywgdXNpbmcgYSB2YXJpYWJsZToKYGBge3IgZGVmaW5lX3ZhcmlhYmxlMiwgZWNobz1ULCBpbmNsdWRlPVR9CjIgKyAyICsgMgphIDwtIDIKYiA8LSAzCmEgKiBiCmBgYAojIERhdGEgc3RydWN0dXJlcwoKIyMgRGF0YSB0eXBlcwoKLSBOdW1lcmljL0RvdWJsZSAoZS5nLiAyLjUsIDEvNSwgMS4wLCBcZG90cykKCi0gSW50ZWdlciAoZS5nLiAxLCAyLCAzLCBcZG90cykKCi0gQ29tcGxleCAoZS5nLiAxICsgMmksIFxkb3RzKQoKLSBMb2dpY2FsIChlLmcuIFRSVUUsIEZBTFNFIG9yIE5BKQoKLSBDaGFyYWN0ZXIgKGUuZy4gImEiLCAicGFwZXIiLCAiMiBwbHVzIDIgPSA1IiwgIlRSVUUiLCBcZG90cykKCi0gRmFjdG9yL0NhdGVnb3JpY2FsICgibWFsZSIsICJmZW1hbGUiLCBcZG90cykKCiMjIERhdGEgc3RydWN0dXJlcwohW1Zpc3VhbGl6YXRpb24gb2YgZGF0YSBzdHJ1Y3R1cmVzXShmaWd1cmVzL3JfZGF0YV9zdHJ1Y3R1cmVzLnBuZykKCiMjIFZlY3RvcnMgKEkpCgpZb3UgY2FuIGNyZWF0ZSBhIHZlY3RvciB1c2luZyB0aGUgY29tbWFuZCBgYygpYApcZm9vdG5vdGVzaXplCmBgYHtyIHZlY3RvcnNfYmFzZSwgaW5jbHVkZT1ULCBlY2hvPVR9CnggPC0gYygxLCAzLCA1LCAxMCkKeApgYGAKXG5vcm1hbHNpemUKClZlY3RvcnMgbXVzdCBjb250YWluIGVsZW1lbnRzIG9mIHRoZSBzYW1lIGRhdGEgdHlwZS4KXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX3R5cGUsIGluY2x1ZGU9VCwgZWNobz1UfQpjKDEsICJpbnRybyIsIFRSVUUpCmBgYApcbm9ybWFsc2l6ZQoKWW91IGNhbiBtZWFzdXJlIHRoZSBsZW5ndGggb2YgYSB2ZWN0b3IgdXNpbmcgdGhlIGNvbW1hbmQgYGxlbmd0aCgpYApcZm9vdG5vdGVzaXplCmBgYHtyIHZlY3RvcnNfbGVuZ3RoLCBpbmNsdWRlPVQsIGVjaG89VH0KbGVuZ3RoKHgpCmBgYApcbm9ybWFsc2l6ZQoKIyMgVmVjdG9ycyAoSUkpCkl0IGlzIGFsc28gcG9zc2libGUgdG8gZWFzaWx5IGNyZWF0ZSBzZXF1ZW5jZXMKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX3NlcXVlbmNlcywgaW5jbHVkZT1ULCBlY2hvPVR9CjE6MTAKc2VxKGZyb20gPSAxLCB0byA9IDIsIGJ5ID0gMC4xKQpyZXAoIkEiLCB0aW1lcyA9IDUpCmBgYApcbm9ybWFsc2l6ZQoKIyMgVmVjdG9ycyAoSUlJKQpZb3UgY2FuIGNvbWJpbmUgZGlmZmVyZW50IHZlY3RvcnMKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX211bHRpcGxlLCBpbmNsdWRlPVQsIGVjaG89VH0KeCA8LSAxOjMgIyBmcm9tIDEgdG8gMwp5IDwtIGMoMTAsIDE1KSAjIDEwIGFuZCAxNQp6IDwtIGMoeCx5KSAjIHggZmlyc3QgYW5kIHRoZW4geQp6CmBgYApcbm9ybWFsc2l6ZQoKQW5kIHlvdSBjYW4gcmVwZWF0IHZlY3RvcnMgKG9yIGl0cyBlbGVtZW50cykKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX3JlcGVhdCwgaW5jbHVkZT1ULCBlY2hvPVR9CnogPC0gcmVwKHksIGVhY2g9MykgIyByZXBlYXQgZWFjaCBlbGVtZW50IDMgdGltZXMKegp6IDwtIHJlcCh5LCB0aW1lcz0zKSAjIHJlcGVhdCB0aGUgd2hvbGUgdmVjdG9yIDMgdGltZXMKegpgYGAKXG5vcm1hbHNpemUKCiMjIFN1YnNldHRpbmcgVmVjdG9ycwpcZm9vdG5vdGVzaXplCmBgYHtyIHZlY3RvcnNfc3Vic2V0LCBpbmNsdWRlPVQsIGVjaG89VH0KeCA8LSBjKDEsIDUsIDEwLCA3KQp4IDwgNiAjIGlzIHRoZSBlbGVtZW50IGxvd2VyIHRoYW4gNj8KeCA9PSAxMCAjIGlzIHRoZSBlbGVtZW50IGVxdWFsIHRvIDEwPwp4WzJdICMgd2hpY2ggZWxlbWVudCBpcyBpbiB0aGUgc2Vjb25kIHBvc2l0aW9uPwp4WzE6Ml0gIyB3aGljaCBlbGVtZW50cyBhcmUgaW4gdGhlIGZpcnN0IDIgcG9zaXRpb25zPwp4W2MoMSwzLDQpXSAjIHdoaWNoIGVsZW1lbnRzIGFyZSBpbiBwb3NpdGlvbnMgMSwgMyBhbmQgND8KYGBgCiMjIFN1YnNldHRpbmcgVmVjdG9ycwpcZm9vdG5vdGVzaXplCmBgYHtyIHZlY3RvcnNfc3Vic2V0MiwgaW5jbHVkZT1ULCBlY2hvPVR9Cm4gPC0gYygxLCA0LCA1LCA2LCA3LCAyLCAzLCA0LCA1LCA2KSAjIGNyZWF0ZXMgYSB2ZWN0b3IsIHN0b3JlcyBpdCBpbiBuCmxlbmd0aChuKSAjIG51bWJlciBvZiBlbGVtZW50cwpuWzNdICMgZXh0cmFjdCAzIHJkIGVsZW1lbnQgaW4gbgpuWy0yXSAjIGV4dHJhY3QgYWxsIG9mIG4gYnV0IDJuZCBlbGVtZW50Cm5bYygxLDMsNCldICMgZXh0cmFjdCBmaXJzdCwgdGhpcmQsIGFuZCBmb3VydGggZWxlbWVudCBvZiBuCm5bbiA8IDRdICNleHRyYWN0IGFsbCBlbGVtZW50cyBpbiBuIHNtYWxsZXIgdGhhbiA0Cm5bbiA8IDQgJiBuICE9IDFdICMgZXh0cmFjdCBlbGVtZW50IHNtYWxsZXIgdGhhbiA0IEFORCBkaWZmZXJlbnQgZnJvbSAxCmBgYApcbm9ybWFsc2l6ZQoKIyMgRXhlcmNpc2UgYnJlYWsKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX3N1YnNldDQsIGluY2x1ZGU9VCwgZWNobz1UfQpuIDwtIGMoMSwgNCwgNSwgNiwgNywgMiwgMywgNCwgNSwgNikgIyBjcmVhdGVzIGEgdmVjdG9yLCBzdG9yZXMgaXQgaW4gbgpgYGAKXG5vcm1hbHNpemUKKiBudW1iZXIgb2YgZWxlbWVudHMKKiBleHRyYWN0IGZpcnN0IHRocmVlIGVsZW1lbnRzIG9mIG4KKiBleHRyYWN0IGFsbCBvZiBuIGJ1dCAzbmQgZWxlbWVudAoqIGV4dHJhY3QgZmlyc3QsIHRoaXJkLCBhbmQgZm91cnRoIGVsZW1lbnQgb2YgbgoqIGV4dHJhY3QgZWxlbWVudCBzbWFsbGVyIHRoYW4gNCBPUiBlcXVhbCB0byA1CgoKIyMgRXhlcmNpc2UgYnJlYWsKV2UgY2FuIGNyZWF0ZSBhbmQgaW5kZXggY2hhcmFjdGVyIHZlY3RvcnMgYXMgd2VsbC4gQSBjYWZlIGlzIHVzaW5nIFIgdG8gY3JlYXRlIHRoZWlyIG1lbnUuClxmb290bm90ZXNpemUKYGBge3IgdmVjdG9yc19zdWJzZXQ1LCBpbmNsdWRlPVQsIGVjaG89VH0KaXRlbXMgPC0gYygiYXBwbGVzIiwgIm9yYW5nZXMiLCAiZWdncyIsICJ0b21hdG9lcyIsICJiYW5hbmFzIikKYGBgClxub3JtYWxzaXplCiogV2hhdCBkb2VzIGl0ZW1zWy0zXSBwcm9kdWNlPwoqIEJhc2VkIG9uIHdoYXQgeW91IGZpbmQsIHVzZSBpbmRleGluZyB0byBjcmVhdGUgYSB2ZXJzaW9uIG9mIGl0ZW1zIHdpdGhvdXQgImJhbmFuYXMiLgoqIFVzZSBpbmRleGluZyB0byBjcmVhdGUgYSB2ZWN0b3IgY29udGFpbmluZyBhcHBsZXMsIGVnZ3MsIHRvbWF0b2VzLCBiYW5hbmFzLCBhbmQgYmFuYW5hcy4KKiBBZGQgYSBuZXcgaXRlbSwgImxlbW9ucyIsIHRvIGl0ZW1zLgoqIE1ha2UgaXRlbXNbM10gImJlcnJpZXMiLgoKCiMjIFZlY3RvcnMnIE9wZXJhdGlvbnMKXGZvb3Rub3Rlc2l6ZQpgYGB7ciB2ZWN0b3JzX29wZXJhdGlvbnMsIGluY2x1ZGU9VCwgZWNobz1UfQp4IDwtIGMoMSw1LDEwLDcpCngrMiAjIGFkZHMgYSBzY2FsYXIgdG8gYWxsIGVsZW1lbnRzCnheMiAjIHdoYXQncyB0aGUgc3F1YXJlIG9mIGFsbCBlbGVtZW50cz8KYGBgClxub3JtYWxzaXplCgojIyBNYXRyaWNlcyAoSSkKWW91IGNhbiBjcmVhdGUgYSBtYXRyaXggdXNpbmcgdGhlIGNvbW1hbmQgYG1hdHJpeCgpYApcZm9vdG5vdGVzaXplCmBgYHtyIG1hdHJpeCwgaW5jbHVkZT1ULCBlY2hvPVR9ClggPC0gbWF0cml4KDE6OSwgbnJvdyA9IDMsIG5jb2wgPSAzKQpYCmBgYApcbm9ybWFsc2l6ZQoKIyMgTWF0cmljZXMgKElJKQpSIGF1dG9tYXRpY2FsbHkgaW5zZXJ0cyBlbGVtZW50cyBieSBjb2x1bW5zLCBidXQgd2UgY2FuIGFzayB0byBpbmNsdWRlIGJ5IHJvd3MKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBtYXRyaXhfYnlyb3csIGluY2x1ZGU9VCwgZWNobz1UfQpYIDwtIG1hdHJpeCgxOjksIG5yb3cgPSAzLCBuY29sID0gMywgYnlyb3cgPSBUUlVFKQpYCmBgYApcbm9ybWFsc2l6ZQoKWW91IGRvbid0IGV2ZW4gaGF2ZSB0byBzcGVjaWZ5IHRoZSBvcHRpb25zIG5hbWVzClxmb290bm90ZXNpemUKYGBge3IgbWF0cml4X3NpbGVudCwgaW5jbHVkZT1ULCBlY2hvPVR9ClggPC0gbWF0cml4KDE6OCwgMiwgNCwgVCkKWApgYGAKXG5vcm1hbHNpemUKCiMjIE1hdHJpY2VzIChJSUkpCk1hdHJpY2VzIGNhbiBhbHNvIGJlIGNyZWF0ZWQgYnkgY29tYmluaW5nIHZlY3RvcnMKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBtYXRyaXhfZnJvbXZlY3RvcnMsIGluY2x1ZGU9VCwgZWNobz1UfQpYIDwtIGNiaW5kKDE6NCwgNjo5KSAjIGJpbmRzIHRoZW0gYXMgY29sdW1ucwpYClggPC0gcmJpbmQoMTo0LCA2OjkpICMgYmluZHMgdGhlbSBhcyByb3dzClgKYGBgClxub3JtYWxzaXplCgojIyBTdWJzZXR0aW5nIE1hdHJpY2VzClxmb290bm90ZXNpemUKYGBge3IgbWF0cml4X3N1YnNldCwgaW5jbHVkZT1ULCBlY2hvPVR9Clg+NSAjIGVsZW1lbnRzIGxhcmdlciB0aGFuIDUKWFsxLDRdICMgZWxlbWVudCBvZiBmaXJzdCByb3csIGZvdXJ0aCBjb2x1bW4/ClhbMSxdICMgZWxlbWVudCBpbiB0aGUgZmlyc3Qgcm93PwpYWywyXSAjIGVsZW1lbnRzIGluIHRoZSBzZWNvbmQgY29sdW1ucz8KYGBgClxub3JtYWxzaXplCgojIyBMaXN0cwpBIGxpc3QgaXMgYSBvbmUtZGltZW5zaW9uYWwgaGV0ZXJvZ2VuZW91cyBkYXRhIHN0cnVjdHVyZS4KCkl0IGlzIGluZGV4ZWQgbGlrZSBhIHZlY3RvciB3aXRoIGEgc2luZ2xlIGludGVnZXIgdmFsdWUgKG9yIGEgbmFtZSksIGJ1dCBlYWNoIGVsZW1lbnQgY2FuIGNvbnRhaW4gYW4gZWxlbWVudCBvZiBhbnkgZGF0YSB0eXBlLgpcZm9vdG5vdGVzaXplCmBgYHtyIGxpc3QsIGluY2x1ZGU9VCwgZWNobz1UfQp4IDwtIDE6NAp5IDwtIGMoImEiLCAiYiIsICJjIikKTCA8LSBsaXN0KG51bWJlcnMgPSB4LCBsZXR0ZXJzID0geSkKTApgYGAKXG5vcm1hbHNpemUKCiMjIFN1YnNldHRpbmcgTGlzdHMKXGZvb3Rub3Rlc2l6ZQpgYGB7ciBsaXN0X3N1YnNldHRpbmcsIGluY2x1ZGU9VCwgZWNobz1UfQpMW1sxXV0gIyBleHRyYWN0IHRoZSBmaXJzdCBlbGVtZW50CkwkbnVtYmVycyAjIGV4dHJhY3QgdGhlIGVsZW1lbnQgY2FsbGVkIG51bWJlcnMKTCRsZXR0ZXJzICMgZXh0cmFjdCB0aGUgZWxlbWVudCBjYWxsZWQgbGV0dGVycwpgYGAKXG5vcm1hbHNpemUKCllvdSBjYW4gZXZlbiAid29yayIgd2l0aCB0aGUgc3Vic2V0dGVkIGVsZW1lbnQ6Clxmb290bm90ZXNpemUKYGBge3IgbGlzdF9zdWJzZXR0aW5nMiwgaW5jbHVkZT1ULCBlY2hvPVR9CkwkbnVtYmVyc1sxOjNdID4gMgpgYGAKXG5vcm1hbHNpemUKCiMjIEV4ZXJjaXNlIGJyZWFrClxmb290bm90ZXNpemUKYGBge3IgbGV0dGVycywgaW5jbHVkZT1ULCBlY2hvPVQsIGV2YWw9Rn0KbGV0dGVycwpMRVRURVJTCm15X2xldHRlcnMgPC0gY2JpbmQoTEVUVEVSUywgbGV0dGVycykKY2xhc3MobXlfbGV0dGVycykKZGltKG15X2xldHRlcnMpCm15X2xldHRlcnMgPC0gY2JpbmQobXlfbGV0dGVycywgc2VxKDE6bGVuZ3RoKGxldHRlcnMpKSkKYGBgClxub3JtYWxzaXplCldoYXQgbnVtYmVyIGlzIHRoZSBsZXR0ZXIgRiBpbiB0aGUgRW5nbGlzaCBhbHBoYWJldD8KCgojIyBFeGVyY2lzZQpgYGB7ciBkbmFfZXgxLCBpbmNsdWRlID0gVCwgZWNobz1ULCBldmFsPUZ9CiMgdmVjdG9yIC4uLiBldGMuCm15X2RuYSA8LSAiQUFDR0FBVEdBR1RBQUFUR0FHVEFBQVRHQUFHR0FBVEdBVFRBVFRDQ1RUR0NUVFRBR0FBQ1RUQ1RHR0FBVFRBR0FHR0FDQQpBVEFUVEFBVEFBVEFDQ0FUQ0dDQUNBR1RHVFRUQ1RUVEdUVEdUVEFBVEdDVEFDQUFDQVRBQ0FBQUdBR0dBQUdDQVRHQ0FHIgpteV9kbmEKbGVuZ3RoKG15X2RuYSkKY2xhc3MobXlfZG5hKQpzdHIobXlfZG5hKQpuY2hhcihteV9kbmEpCgojIGFwcHIxCm15X2RuYV9jb21tYSA8LSBzYXBwbHkoc3Ryc3BsaXQoCiAgeCA9IG15X2RuYSwgc3BsaXQgPSAiIiwgZml4ZWQgPSBUUlVFKSwKICAgICAgIGZ1bmN0aW9uKHgpIHBhc3RlKHgsIGNvbGxhcHNlID0gIl8iKSkKbGVuZ3RoKG15X2RuYV9jb21tYSkKc3RyKG15X2RuYV9jb21tYSkKCm15X2RuYV9saXN0IDwtIHN0cnNwbGl0KHggPSBteV9kbmEsIHNwbGl0ID0gIiIsIGZpeGVkID0gVFJVRSkKbGVuZ3RoKG15X2RuYV9saXN0KQpjbGFzcyhteV9kbmFfbGlzdCkKbXlfZG5hX3ZlY3RvciA8LSB1bmxpc3QobXlfZG5hX2xpc3QpCmxlbmd0aChteV9kbmFfbGlzdFtbMV1dKQpzdHIobXlfZG5hX3ZlY3RvcikKbGVuZ3RoKG15X2RuYV92ZWN0b3IpCgojIGZpcnN0IG51Y2xlb3RpZGUKbXlfZG5hX3ZlY3RvclsxXQojIGluZGV4aW5nIDE6bmNoYXIobXlfZG5hKQpteV9kbmFfdmVjdG9yWzE6NTBdCiMgdW5pcXVlIGNoYXJhY3RlcnMKdW5pcXVlKG15X2RuYV92ZWN0b3IpCgojIG51bWJlciBvZiBBcwoobXlfZG5hX3ZlY3RvciA9PSAiQSIpCmxlbmd0aChteV9kbmFfdmVjdG9yW215X2RuYV92ZWN0b3IgPT0gIkEiXSkKCiMgcmVtb3ZlIFxuCnJlbW92ZV9udWMgPC0gbWF0Y2goIlxuIiwgbXlfZG5hX3ZlY3RvcikKd2hpY2gobXlfZG5hX3ZlY3RvciAlaW4lIGMoIlxuIiwgIlgiKSkKbXlfZG5hX3ZlY3RvcltyZW1vdmVfbnVjXSA8LSAiQSIKbXlfZG5hX3ZlY3Rvcl8yIDwtIG15X2RuYV92ZWN0b3JbLTcxXQp1bmlxdWUobXlfZG5hX3ZlY3Rvcl8yKQpgYGAKCiMjIERhdGEgRnJhbWVzIChJKQpBIGBkYXRhLmZyYW1lYCBpcyBzaW1pbGFyIHRvIGEgdHlwaWNhbCBgc3ByZWFkc2hlZXRgIGluIGV4Y2VsLgoKVGhlcmUgYXJlIHJvd3MsIGFuZCB0aGVyZSBhcmUgY29sdW1ucy4KCkEgcm93IGlzIHR5cGljYWxseSB0aG91Z2h0IG9mIGFzIGFuIFxlbXBoe29ic2VydmF0aW9ufS4KCkEgY29sdW1uIGlzIGEgY2VydGFpbiBcZW1waHt2YXJpYWJsZX0sIGNoYXJhY3RlcmlzdGljIG9yIGZlYXR1cmUgb2YgdGhhdCBvYnNlcnZhdGlvbi4KCiMjIERhdGEgRnJhbWVzIChJSSkKQSBkYXRhIGZyYW1lIGlzIGEgbGlzdCBvZiBjb2x1bW4gdmVjdG9ycyB3aGVyZToKCi0gZWFjaCBjb2x1bW4gaGFzIGEgbmFtZQoKLSBlYWNoIGNvbHVtbiBtdXN0IGNvbnRhaW4gdGhlIHNhbWUgZGF0YSB0eXBlLCBidXQgdGhlIGRpZmZlcmVudCBjb2x1bW5zIGNhbiBzdG9yZSBkaWZmZXJlbnQgZGF0YSB0eXBlcy4KCi0gZWFjaCBjb2x1bW4gbXVzdCBiZSBvZiBzYW1lIGxlbmd0aAoKIyMgRGF0YSBGcmFtZXMgKElJSSkKXHNjcmlwdHNpemUKYGBge3IgZGF0YWZyYW1lLCBpbmNsdWRlPVQsIGVjaG89VH0Kc2V0LnNlZWQoMSkKZGYgPC0gIGRhdGEuZnJhbWUoaWQgPSAxOjUsCiAgbmFtZSA9IGMoIkRpZWdvIiwgIlNhbXVlbCIsICJNYXJjbyIsICJKYXZpZXIiLCAiTGVvbmFyZG8iKSwKICBzdXJuYW1lID0gYygiTWlsaXRvIiwgIkV0bydvIiwgIk1hdGVyYXp6aSIsICJaYW5ldHRpIiwgIkJvbnVjY2kiKSwKICB3YWdlID0gcm5vcm0obj01LCBtZWFuID0gMTBeNSwgc2QgPSAxMF4zKSwgIyBub3JtYWwgcmFuZG9tIHNhbXBsZQogIG9yaWdpbiA9IGMoIkFyZ2VudGluYSIsICJDYW1lcm9vbiIsICJJdGFseSIsICJBcmdlbnRpbmEiLCAiSXRhbHkiKSwKICB0cmVibGVfd2lubmVyID0gYyhULCBULCBULCBULCBGKQogICkKZGYKYGBgClxub3JtYWxzaXplCgpZb3UgY2FuIHZlcmlmeSB0aGUgc2l6ZSBvZiB0aGUgYGRhdGEuZnJhbWVgIHVzaW5nIHRoZSBjb21tYW5kIGBkaW0oKWAKCllvdSBjYW4gZ2V0IHRoZSBgZGF0YSB0eXBlYCBpbmZvIHVzaW5nIHRoZSBjb21tYW5kIGBzdHIoKWAKCiMjIFN1YnNldHRpbmcgRGF0YSBGcmFtZXMgKEkpClxmb290bm90ZXNpemUKYGBge3IgZGF0YWZyYW1lX3N1YnNldCwgaW5jbHVkZT1ULCBlY2hvPVR9CmRmJG5hbWUgIyBzdWJzZXQgYSBjb2x1bW4KZGZbLGMoMiw1KV0gIyBjYW4gYWxzbyBzdWJzZXQgbGlrZSBhIG1hdHJpeApgYGAKXG5vcm1hbHNpemUKCiMjIFN1YnNldHRpbmcgRGF0YSBGcmFtZXMgKElJKQpcZm9vdG5vdGVzaXplCmBgYHtyIGRhdGFmcmFtZV9zdWJzZXQyLCBpbmNsdWRlPVQsIGVjaG89VH0KaGVhZChkZiwgbj0zKSAjIGZpcnN0IG4gb2JzZXJ2YXRpb25zCnRhaWwoZGYsIG49MykgIyBsYXN0IG4gb2JzZXJ2YXRpb25zCmBgYApcbm9ybWFsc2l6ZQoKIyMgSW5zcGVjdGluZyBkYXRhIGZyYW1lcyAoSSkKUiBjb21lcyB3aXRoIG1hbnkgZGF0YSBiYXNlcyBpbmNsdWRlZC4gVGhlc2UgY2FuIGJlIHVzZWQgZm9yIGxlYXJuaW5nIFIuCgpPbmUgb2YgdGhlIG1vc3QgZmFtb3VzIGlzIHRoZSBvbmUgY2FsbGVkIGBtdGNhcnNgLgpcc2NyaXB0c2l6ZQpgYGB7ciBkYXRhZnJhbWVfbXRjYXJzLCBpbmNsdWRlPVQsIGVjaG89VH0KaGVhZChtdGNhcnMpCnRhaWwobXRjYXJzKQpkaW0obXRjYXJzKQpgYGAKXG5vcm1hbHNpemUKCiMjIEluc3BlY3RpbmcgZGF0YSBmcmFtZXMgKElJKQpcc2NyaXB0c2l6ZQpgYGB7ciBkYXRhZnJhbWVfbXRjYXJzMiwgaW5jbHVkZT1ULCBlY2hvPVR9CnN0cihtdGNhcnMpCm5hbWVzKG10Y2FycykKYGBgClxub3JtYWxzaXplCgojIyBTdWJzZXR0aW5nIGRhdGEgZnJhbWVzIChJSUkpCldlIGFyZSBpbnRlcmVzdGluZyBpbiB0aGUgY3lsaW5kZXJzIGFuZCB0aGUgd2VpZ2h0cyBvZiBpbmVmZmljaWVudCBjYXJzIChsb3dlciB0aGFuIDE1IG1pbGVzIHBlciBnYWxsb24pLgpcc2NyaXB0c2l6ZQpgYGB7ciBkYXRhZnJhbWVfc3Vic2V0X210Y2FycywgaW5jbHVkZT1ULCBlY2hvPVR9CnBvbGxfY2FycyA8LSBtdGNhcnNbbXRjYXJzJG1wZzwxNSwgYygiY3lsIiwgInd0IildCnBvbGxfY2FycwpgYGAKXG5vcm1hbHNpemUKCiMjIFN1YnNldHRpbmcgZGF0YSBmcmFtZXMgKElWKQpBbHRlcm5hdGl2ZWx5Ogpcc2NyaXB0c2l6ZQpgYGB7ciBkYXRhZnJhbWVfc3Vic2V0X210Y2FyczIsIGluY2x1ZGU9VCwgZWNobz1UfQpwb2xsX2NhcnMgPC0gc3Vic2V0KG10Y2Fycywgc3Vic2V0ID0gbXBnPDE1LCBzZWxlY3QgPSBjKCJjeWwiLCAid3QiKSkKcG9sbF9jYXJzCmBgYApcbm9ybWFsc2l6ZQoKIyMgSW1wb3J0aW5nIGRvd25sb2FkZWQgZGF0YSBmcmFtZXMgKC5jc3YpCllvdSBjYW4gaW1wb3J0IGNzdiBkYXRhIHRoYXQgeW91IGhhdmUgZG93bmxvYWRlZCBmcm9tIGFueSBleHRlcm5hbCBzb3VyY2UgdXNpbmc6ClxzY3JpcHRzaXplCmBgYHtyIGltcG9ydF9kYXRhMiwgaW5jbHVkZT1ULCBlY2hvPVQsIGV2YWw9Rn0Kc2V0d2QoImRhdGEiKQpueWNfYWIgPC0gcmVhZC5jc3YoIkFCX05ZQ18yMDIwLmNzdiIpCmBgYApcbm9ybWFsc2l6ZQoKd2hlcmU6CgotIGBzZXR3ZCgpYCBzZXRzIHRoZSB3b3JraW5nIGRpcmVjdG9yeSB0byB0aGUgcGxhY2Ugd2hlcmUgdGhlIGRhdGEgaXMgc2F2ZWQ7CgotIGByZWFkLmNzdigpYCBsb2FkcyB0aGUgY3N2IGZpbGUgd2l0aCB0aGUgc3BlY2lmaWVkIG5hbWUuCgpZb3UgY2FuIHNpbWlsYXJseSBpbXBvcnQgYWxtb3N0IGFueSBraW5kIG9mIGRhdGEgZmlsZSBzdG9yZWQgaW4gb3RoZXIgZm9ybWF0cyAoLnhscywgLnR4dCwgLmNzdiwgLmR0YSwgLlJkYXRhLCAubWF0LCAuLi4pCgojIyBJbXBvcnRpbmcgZG93bmxvYWRlZCBkYXRhIGZyYW1lcyAoLnR4dCkKSW50ZXJmZXJvbiByZWd1bGF0b3J5IGZhY3RvciA2IG1vdXNlClxzY3JpcHRzaXplCmBgYHtyIGltcG9ydF9kYXRhMywgaW5jbHVkZT1ULCBlY2hvPVQsIGV2YWw9Rn0Kc2V0d2QoImRhdGEiKQppcmY2IDwtIHJlYWQudGFibGUoImlyZjYudHh0IiwgaGVhZGVyID0gVFJVRSwgcm93Lm5hbWVzID0gMSkKCiMgZXhwbG9yZQpoZWFkKGlyZjYpCm5jb2woaXJmNik7IG5yb3coaXJmNikKZGltKGlyZjYpCmBgYAojIyBJbXBvcnRpbmcgZG93bmxvYWRlZCBkYXRhIGZyYW1lcyAoLnR4dCkKXHNjcmlwdHNpemUKYGBge3IgaW1wb3J0X2RhdGE0LCBpbmNsdWRlPVQsIGVjaG89VCwgZXZhbD1GfQppcmY2IDwtIHJlYWQudGFibGUoImRhdGEvaXJmNi50eHQiLCBoZWFkZXIgPSBUUlVFLCByb3cubmFtZXMgPSAxKQpjbGFzcyhpcmY2KQpzdHIoaXJmNikKY29sbmFtZXMoaXJmNikKaGVhZChyb3duYW1lcyhpcmY2KSkKCmBgYAojIyBJbXBvcnRpbmcgZG93bmxvYWRlZCBkYXRhIGZyYW1lcyAoLnR4dCkKXHNjcmlwdHNpemUKYGBge3IgaW1wb3J0X2RhdGE1LCBpbmNsdWRlPVQsIGVjaG89VCwgZXZhbD1GfQppcmY2IDwtIHJlYWQudGFibGUoImRhdGEvaXJmNi50eHQiLCBoZWFkZXIgPSBUUlVFLCByb3cubmFtZXMgPSAxKQoKaGVhZChpcmY2WydFMTcuNUtPMSddKSAjIFJldHJpZXZlIG9ubHkgRTE3LjVLTzEgZGF0YQpoZWFkKGlyZjZbLCAxXSkgIyBhcyB3ZWxsCmhlYWQoaXJmNiRFMTcuNUtPMSkgIyBhcyB3ZWxsCmRpbShpcmY2WywgLTFdKTsgY29sbmFtZXMoaXJmNlssIC0xXSkgICMgRXhjbHVkZSBFMTcuNUtPMSBkYXRhCmBgYAoKIyBFeGVyY2lzZSBicmVhawoKIyMgVG90YWwgbHVuZyBjYXBhY2l0eQpcZm9vdG5vdGVzaXplCmBgYHtyIHRsYywgaW5jbHVkZT1ULCBlY2hvPVQsIGV2YWw9Rn0KICB0bGMgPC0gcmVhZC5jc3YoImRhdGEvdGxjLmNzdiIpCiAgc3RyKHRsYykKICBzdW1tYXJ5KHRsYykKICBzdWJzZXQodGxjLCBzZXggPT0gMSkKICBzdWJzZXQodGxjLCBhZ2UgPCAyMCwgdGxjKQogIG1lYW4oc3Vic2V0KHRsYywgc2V4ID09IDEsIHNlbGVjdCA9IHRsYywgZHJvcCA9IFQpKQpgYGAKCiMgQXBwbHkKIyMgVmVjdG9yaXphdGlvbgoqIFJldHVybnMJYQl2ZWN0b3Igb3IgYXJyYXkgb3IgbGlzdAoqIG9idGFpbmVkIGJ5IGFwcGx5aW5nIGEgZnVuY3Rpb24gdG8gbWFyZ2lucyBvZiBhIG1hdHJpeAoqIGFwcGx5KFgsIE1BUkdJTiwgRlVOLCAuLi4pCiogWCA6CWRhdGEKKiBNQVJHSU4gOgkxIGZvciByb3dzLCAyIGZvciBjb2x1bW5zCiogRlVOOiBmdW5jdGlvbgogIFxzY3JpcHRzaXplCiAgYGBge3IgYXBwbHksIGluY2x1ZGU9VCwgZWNobz1UfQp4IDwtIGNiaW5kKHgxID0gMywgeDIgPSBjKDQ6MSwgMjo1KSkKY29sLnN1bXMgPC0gYXBwbHkoeCwgMiwgc3VtKQpyb3cuc3VtcyA8LSBhcHBseSh4LCAxLCBzdW0pCmBgYAoKYGBge3Iga25pdF9leGl0LCBpbmNsdWRlPUYsIGVjaG89Rn0Ka25pdF9leGl0KCkKYGBgCg==</div>
 
 
 </div>

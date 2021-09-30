@@ -621,5 +621,5 @@ Search an `SDFset` container on PubChem:
 ```
 
 ```{r knit_exit, include=F, echo=F}
-knit_exit()
+knitr::knit_exit()
 ```

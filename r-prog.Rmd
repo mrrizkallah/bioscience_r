@@ -39,7 +39,7 @@ sqrt(25)
 
 ## The help
 \footnotesize
-```{r help, include=T, echo=T}
+```{r help, include=T, echo=T, eval = FALSE}
 ?log
 help(log)
 ```
