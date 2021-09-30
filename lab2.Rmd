@@ -1,5 +1,5 @@
 ---
-title: "Lab 2: Air quality"
+title: "Lab: Air quality"
 ---
 
 ```{r setup, include=FALSE}

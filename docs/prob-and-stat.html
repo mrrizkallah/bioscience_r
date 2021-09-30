@@ -28,12 +28,10 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -56,42 +54,68 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
-td.sourceCode { padding-left: 5px; }
-pre, code { color: #cccccc; background-color: #303030; }
-code > span.kw { color: #f0dfaf; } /* Keyword */
-code > span.dt { color: #dfdfbf; } /* DataType */
-code > span.dv { color: #dcdccc; } /* DecVal */
-code > span.bn { color: #dca3a3; } /* BaseN */
-code > span.fl { color: #c0bed1; } /* Float */
-code > span.ch { color: #dca3a3; } /* Char */
-code > span.st { color: #cc9393; } /* String */
-code > span.co { color: #7f9f7f; } /* Comment */
-code > span.ot { color: #efef8f; } /* Other */
-code > span.al { color: #ffcfaf; } /* Alert */
-code > span.fu { color: #efef8f; } /* Function */
-code > span.er { color: #c3bf9f; } /* Error */
-code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code > span.sc { color: #dca3a3; } /* SpecialChar */
-code > span.vs { color: #cc9393; } /* VerbatimString */
-code > span.ss { color: #cc9393; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #f0dfaf; } /* ControlFlow */
-code > span.op { color: #f0efd0; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #7f9f7f; } /* Documentation */
-code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 
 </style>
 <script>
@@ -288,69 +312,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -358,16 +319,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -419,10 +370,10 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="lab1.html">Lab 1: DNA exercise</a>
+      <a href="lab1.html">Lab: DNA exercise</a>
     </li>
     <li>
-      <a href="lab2.html">Lab 2: Air quality</a>
+      <a href="lab2.html">Lab: Air quality</a>
     </li>
   </ul>
 </li>
@@ -480,51 +431,51 @@ div.tocify {
 <p>Note that <code>norm</code> represents the name of the given distribution.</p>
 <p>For example, consider a random variable <span class="math inline">\(X\)</span> which is <span class="math inline">\(N(\mu = 2, \sigma^2 = 25)\)</span>. (Note, we are parameterizing using the variance <span class="math inline">\(\sigma^2\)</span>. <code>R</code> however uses the standard deviation.)</p>
 <p>To calculate the value of the pdf at <code>x &lt;- 3</code>, that is, the height of the curve at <code>x &lt;- 3</code>, use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dnorm</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">dnorm</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.07820854</code></pre>
 <p>To calculate the value of the cdf at <code>x &lt;- 3</code>, that is, <span class="math inline">\(P(X \leq 3)\)</span>, the probability that <span class="math inline">\(X\)</span> is less than or equal to <code>3</code>, use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">pnorm</span>(<span class="dt">q =</span> <span class="dv">3</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5792597</code></pre>
 <p>Or, to calculate the quantile for probability 0.975, use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.975</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 11.79982</code></pre>
 <p>Lastly, to generate a random sample of size <code>n &lt;- 10</code>, use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##  [1] -2.1023419  4.4371453  5.6916235  4.8789068  0.4730581  9.5589058  3.9492162 -1.1062029
 ##  [9] -9.0734994  7.6246546</code></pre>
 <p>These functions exist for many other distributions, including but not limited to:</p>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Command</th>
-<th align="left">Distribution</th>
+<th>Command</th>
+<th>Distribution</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>*binom</code></td>
-<td align="left">Binomial</td>
+<td><code>*binom</code></td>
+<td>Binomial</td>
 </tr>
 <tr class="even">
-<td align="left"><code>*t</code></td>
-<td align="left">t</td>
+<td><code>*t</code></td>
+<td>t</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>*pois</code></td>
-<td align="left">Poisson</td>
+<td><code>*pois</code></td>
+<td>Poisson</td>
 </tr>
 <tr class="even">
-<td align="left"><code>*f</code></td>
-<td align="left">F</td>
+<td><code>*f</code></td>
+<td>F</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>*chisq</code></td>
-<td align="left">Chi-Squared</td>
+<td><code>*chisq</code></td>
+<td>Chi-Squared</td>
 </tr>
 </tbody>
 </table>
 <p>Where <code>*</code> can be <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code>. Each distribution will have its own set of parameters which need to be passed to the functions as arguments. For example, <code>dbinom()</code> would not have arguments for <code>mean</code> and <code>sd</code>, since those are not parameters of the distribution. Instead a binomial distribution is usually parameterized by <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, however <code>R</code> chooses to call them something else. To find the names that <code>R</code> uses we would use <code>?dbinom</code> and see that <code>R</code> instead calls the arguments <code>size</code> and <code>prob</code>. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbinom</span>(<span class="dt">x =</span> <span class="dv">6</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.75</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">dbinom</span>(<span class="dt">x =</span> <span class="dv">6</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.75</span>)</span></code></pre></div>
 <pre><code>## [1] 0.145998</code></pre>
 <p>Also note that, when using the <code>dnorm</code> functions with discrete distributions, they are the pmf of the distribution. For example, the above command is <span class="math inline">\(P(Y = 6)\)</span> if <span class="math inline">\(Y \sim b(n = 10, p = 0.75)\)</span>. (The probability of flipping an unfair coin <code>10</code> times and seeing <code>6</code> heads, if the probability of heads is <code>0.75</code>.)</p>
 </div>
@@ -544,35 +495,35 @@ div.tocify {
 <li>Reject the null hypothesis.</li>
 </ul></li>
 </ul>
-<p>We'll do some quick review of two of the most common tests to show how they are performed using <code>R</code>.</p>
+<p>We’ll do some quick review of two of the most common tests to show how they are performed using <code>R</code>.</p>
 <div id="one-sample-t-test-example" class="section level3">
 <h3>One Sample t-Test: Example</h3>
-<p>Suppose a grocery store sells &quot;16 ounce&quot; boxes of <em>Captain Crisp</em> cereal. A random sample of 9 boxes was taken and weighed. The weight in ounces are stored in the data frame <code>capt_crisp</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">capt_crisp =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="fl">15.5</span>, <span class="fl">16.2</span>, <span class="fl">16.1</span>, <span class="fl">15.8</span>, <span class="fl">15.6</span>, <span class="fl">16.0</span>, <span class="fl">15.8</span>, <span class="fl">15.9</span>, <span class="fl">16.2</span>))</code></pre></div>
-<p>The company that makes <em>Captain Crisp</em> cereal claims that the average weight of a box is at least 16 ounces. We will assume the weight of cereal in a box is normally distributed and use a 0.05 level of significance to test the company's claim.</p>
+<p>Suppose a grocery store sells “16 ounce” boxes of <em>Captain Crisp</em> cereal. A random sample of 9 boxes was taken and weighed. The weight in ounces are stored in the data frame <code>capt_crisp</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>capt_crisp =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="fl">15.5</span>, <span class="fl">16.2</span>, <span class="fl">16.1</span>, <span class="fl">15.8</span>, <span class="fl">15.6</span>, <span class="fl">16.0</span>, <span class="fl">15.8</span>, <span class="fl">15.9</span>, <span class="fl">16.2</span>))</span></code></pre></div>
+<p>The company that makes <em>Captain Crisp</em> cereal claims that the average weight of a box is at least 16 ounces. We will assume the weight of cereal in a box is normally distributed and use a 0.05 level of significance to test the company’s claim.</p>
 <p>To test <span class="math inline">\(H_{0}: \mu \geq 16\)</span> versus <span class="math inline">\(H_{1}: \mu &lt; 16\)</span>, the test statistic is</p>
 <p><span class="math display">\[
 t = \frac{\bar{x} - \mu_{0}}{s / \sqrt{n}}
 \]</span></p>
 <p>The sample mean <span class="math inline">\(\bar{x}\)</span> and the sample standard deviation <span class="math inline">\(s\)</span> can be easily computed using <code>R</code>. We also create variables which store the hypothesized mean and the sample size.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x_bar &lt;-<span class="st"> </span><span class="kw">mean</span>(capt_crisp$weight)
-s     &lt;-<span class="st"> </span><span class="kw">sd</span>(capt_crisp$weight)
-mu_0  &lt;-<span class="st"> </span><span class="dv">16</span>
-n     &lt;-<span class="st"> </span><span class="dv">9</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>x_bar &lt;-<span class="st"> </span><span class="kw">mean</span>(capt_crisp<span class="op">$</span>weight)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>s     &lt;-<span class="st"> </span><span class="kw">sd</span>(capt_crisp<span class="op">$</span>weight)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>mu_<span class="dv">0</span>  &lt;-<span class="st"> </span><span class="dv">16</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>n     &lt;-<span class="st"> </span><span class="dv">9</span></span></code></pre></div>
 <p>We can then easily compute the test statistic.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t =<span class="st"> </span>(x_bar -<span class="st"> </span>mu_0) /<span class="st"> </span>(s /<span class="st"> </span><span class="kw">sqrt</span>(n))
-t</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>t =<span class="st"> </span>(x_bar <span class="op">-</span><span class="st"> </span>mu_<span class="dv">0</span>) <span class="op">/</span><span class="st"> </span>(s <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n))</span>
+<span id="cb13-2"><a href="#cb13-2"></a>t</span></code></pre></div>
 <pre><code>## [1] -1.2</code></pre>
 <p>Under the null hypothesis, the test statistic has a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n - 1\)</span> degrees of freedom, in this case 8.</p>
 <p>To complete the test, we need to obtain the p-value of the test. Since this is a one-sided test with a less-than alternative, we need the area to the left of -1.2 for a <span class="math inline">\(t\)</span> distribution with 8 degrees of freedom. That is,</p>
 <p><span class="math display">\[
 P(t_{8} &lt; -1.2)
 \]</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pt</span>(t, <span class="dt">df =</span> n -<span class="st"> </span><span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">pt</span>(t, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1322336</code></pre>
 <p>We now have the p-value of our test, which is greater than our significance level (0.05), so we fail to reject the null hypothesis.</p>
 <p>Alternatively, this entire process could have been completed using one line of <code>R</code> code.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(<span class="dt">x =</span> capt_crisp$weight, <span class="dt">mu =</span> <span class="dv">16</span>, <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">&quot;less&quot;</span>), <span class="dt">conf.level =</span> <span class="fl">0.95</span>)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">t.test</span>(<span class="dt">x =</span> capt_crisp<span class="op">$</span>weight, <span class="dt">mu =</span> <span class="dv">16</span>, <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">&quot;less&quot;</span>), <span class="dt">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
@@ -593,62 +544,62 @@ P(t_{8} &lt; -1.2)
 <li>An estimate of <span class="math inline">\(\mu\)</span>.</li>
 </ul>
 <p>Since the test was one-sided, <code>R</code> returned a one-sided confidence interval. If instead we wanted a two-sided interval for the mean weight of boxes of <em>Captain Crisp</em> cereal we could modify our code.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">capt_test_results =<span class="st"> </span><span class="kw">t.test</span>(capt_crisp$weight, <span class="dt">mu =</span> <span class="dv">16</span>,
-                           <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">&quot;two.sided&quot;</span>), <span class="dt">conf.level =</span> <span class="fl">0.95</span>)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>capt_test_results =<span class="st"> </span><span class="kw">t.test</span>(capt_crisp<span class="op">$</span>weight, <span class="dt">mu =</span> <span class="dv">16</span>,</span>
+<span id="cb19-2"><a href="#cb19-2"></a>                           <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">&quot;two.sided&quot;</span>), <span class="dt">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div>
 <p>This time we have stored the results. By doing so, we can directly access portions of the output from <code>t.test()</code>. To see what information is available we use the <code>names()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(capt_test_results)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">names</span>(capt_test_results)</span></code></pre></div>
 <pre><code>##  [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;conf.int&quot;    &quot;estimate&quot;    &quot;null.value&quot; 
 ##  [7] &quot;stderr&quot;      &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;</code></pre>
 <p>We are interested in the confidence interval which is stored in <code>conf.int</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">capt_test_results$conf.int</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>capt_test_results<span class="op">$</span>conf.int</span></code></pre></div>
 <pre><code>## [1] 15.70783 16.09217
 ## attr(,&quot;conf.level&quot;)
 ## [1] 0.95</code></pre>
-<p>Let's check this interval &quot;by hand.&quot; The one piece of information we are missing is the critical value, <span class="math inline">\(t_{n-1}(\alpha/2) = t_{8}(0.025)\)</span>, which can be calculated in <code>R</code> using the <code>qt()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qt</span>(<span class="fl">0.975</span>, <span class="dt">df =</span> <span class="dv">8</span>)</code></pre></div>
+<p>Let’s check this interval “by hand.” The one piece of information we are missing is the critical value, <span class="math inline">\(t_{n-1}(\alpha/2) = t_{8}(0.025)\)</span>, which can be calculated in <code>R</code> using the <code>qt()</code> function.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">qt</span>(<span class="fl">0.975</span>, <span class="dt">df =</span> <span class="dv">8</span>)</span></code></pre></div>
 <pre><code>## [1] 2.306004</code></pre>
 <p>So, the 95% CI for the mean weight of a cereal box is calculated by plugging into the formula,</p>
 <p><span class="math display">\[
 \bar{x} \pm t_{n-1}(\alpha/2) \frac{s}{\sqrt{n}}
 \]</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="kw">mean</span>(capt_crisp$weight) -<span class="st"> </span><span class="kw">qt</span>(<span class="fl">0.975</span>, <span class="dt">df =</span> <span class="dv">8</span>) *<span class="st"> </span><span class="kw">sd</span>(capt_crisp$weight) /<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">9</span>),
-  <span class="kw">mean</span>(capt_crisp$weight) +<span class="st"> </span><span class="kw">qt</span>(<span class="fl">0.975</span>, <span class="dt">df =</span> <span class="dv">8</span>) *<span class="st"> </span><span class="kw">sd</span>(capt_crisp$weight) /<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">9</span>))</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">c</span>(<span class="kw">mean</span>(capt_crisp<span class="op">$</span>weight) <span class="op">-</span><span class="st"> </span><span class="kw">qt</span>(<span class="fl">0.975</span>, <span class="dt">df =</span> <span class="dv">8</span>) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(capt_crisp<span class="op">$</span>weight) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">9</span>),</span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="kw">mean</span>(capt_crisp<span class="op">$</span>weight) <span class="op">+</span><span class="st"> </span><span class="kw">qt</span>(<span class="fl">0.975</span>, <span class="dt">df =</span> <span class="dv">8</span>) <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(capt_crisp<span class="op">$</span>weight) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">9</span>))</span></code></pre></div>
 <pre><code>## [1] 15.70783 16.09217</code></pre>
 </div>
 <div id="two-sample-t-test-example" class="section level3">
 <h3>Two Sample t-Test: Example</h3>
 <p>Assume that the distributions of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <span class="math inline">\(\mathrm{N}(\mu_{1},\sigma^{2})\)</span> and <span class="math inline">\(\mathrm{N}(\mu_{2},\sigma^{2})\)</span>, respectively. Given the <span class="math inline">\(n = 6\)</span> observations of <span class="math inline">\(X\)</span>,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">82</span>, <span class="dv">78</span>, <span class="dv">74</span>, <span class="dv">94</span>, <span class="dv">82</span>)
-n =<span class="st"> </span><span class="kw">length</span>(x)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">82</span>, <span class="dv">78</span>, <span class="dv">74</span>, <span class="dv">94</span>, <span class="dv">82</span>)</span>
+<span id="cb28-2"><a href="#cb28-2"></a>n =<span class="st"> </span><span class="kw">length</span>(x)</span></code></pre></div>
 <p>and the <span class="math inline">\(m = 8\)</span> observations of <span class="math inline">\(Y\)</span>,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y =<span class="st"> </span><span class="kw">c</span>(<span class="dv">64</span>, <span class="dv">72</span>, <span class="dv">60</span>, <span class="dv">76</span>, <span class="dv">72</span>, <span class="dv">80</span>, <span class="dv">84</span>, <span class="dv">68</span>)
-m =<span class="st"> </span><span class="kw">length</span>(y)</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>y =<span class="st"> </span><span class="kw">c</span>(<span class="dv">64</span>, <span class="dv">72</span>, <span class="dv">60</span>, <span class="dv">76</span>, <span class="dv">72</span>, <span class="dv">80</span>, <span class="dv">84</span>, <span class="dv">68</span>)</span>
+<span id="cb29-2"><a href="#cb29-2"></a>m =<span class="st"> </span><span class="kw">length</span>(y)</span></code></pre></div>
 <p>we will test <span class="math inline">\(H_{0}: \mu_{1} = \mu_{2}\)</span> versus <span class="math inline">\(H_{1}: \mu_{1} &gt; \mu_{2}\)</span>.</p>
 <p>First, note that we can calculate the sample means and standard deviations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x_bar =<span class="st"> </span><span class="kw">mean</span>(x)
-s_x   =<span class="st"> </span><span class="kw">sd</span>(x)
-y_bar =<span class="st"> </span><span class="kw">mean</span>(y)
-s_y   =<span class="st"> </span><span class="kw">sd</span>(y)</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>x_bar =<span class="st"> </span><span class="kw">mean</span>(x)</span>
+<span id="cb30-2"><a href="#cb30-2"></a>s_x   =<span class="st"> </span><span class="kw">sd</span>(x)</span>
+<span id="cb30-3"><a href="#cb30-3"></a>y_bar =<span class="st"> </span><span class="kw">mean</span>(y)</span>
+<span id="cb30-4"><a href="#cb30-4"></a>s_y   =<span class="st"> </span><span class="kw">sd</span>(y)</span></code></pre></div>
 <p>We can then calculate the pooled standard deviation.</p>
 <p><span class="math display">\[
 s_{p} = \sqrt{\frac{(n-1)s_{x}^{2}+(m-1)s_{y}^{2}}{n+m-2}}
 \]</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s_p =<span class="st"> </span><span class="kw">sqrt</span>(((n -<span class="st"> </span><span class="dv">1</span>) *<span class="st"> </span>s_x ^<span class="st"> </span><span class="dv">2</span> +<span class="st"> </span>(m -<span class="st"> </span><span class="dv">1</span>) *<span class="st"> </span>s_y ^<span class="st"> </span><span class="dv">2</span>) /<span class="st"> </span>(n +<span class="st"> </span>m -<span class="st"> </span><span class="dv">2</span>))</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>s_p =<span class="st"> </span><span class="kw">sqrt</span>(((n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>s_x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(m <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>s_y <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(n <span class="op">+</span><span class="st"> </span>m <span class="op">-</span><span class="st"> </span><span class="dv">2</span>))</span></code></pre></div>
 <p>Thus, the relevant <span class="math inline">\(t\)</span> test statistic is given by</p>
 <p><span class="math display">\[
 t = \frac{(\bar{x}-\bar{y})-\mu_{0}}{s_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}.
 \]</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t =<span class="st"> </span>((x_bar -<span class="st"> </span>y_bar) -<span class="st"> </span><span class="dv">0</span>) /<span class="st"> </span>(s_p *<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span> /<span class="st"> </span>n +<span class="st"> </span><span class="dv">1</span> /<span class="st"> </span>m))
-t</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>t =<span class="st"> </span>((x_bar <span class="op">-</span><span class="st"> </span>y_bar) <span class="op">-</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span>(s_p <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>m))</span>
+<span id="cb32-2"><a href="#cb32-2"></a>t</span></code></pre></div>
 <pre><code>## [1] 1.823369</code></pre>
 <p>Note that <span class="math inline">\(t \sim t_{n + m - 2} = t_{12}\)</span>, so we can calculate the p-value, which is</p>
 <p><span class="math display">\[
 P(t_{12} &gt; 1.8233692).
 \]</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> -<span class="st"> </span><span class="kw">pt</span>(t, <span class="dt">df =</span> n +<span class="st"> </span>m -<span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pt</span>(t, <span class="dt">df =</span> n <span class="op">+</span><span class="st"> </span>m <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.04661961</code></pre>
 <p>But, then again, we could have simply performed this test in one line of <code>R</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(x, y, <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">&quot;greater&quot;</span>), <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">t.test</span>(x, y, <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">&quot;greater&quot;</span>), <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -662,10 +613,10 @@ P(t_{12} &gt; 1.8233692).
 ##        80        72</code></pre>
 <p>Recall that a two-sample <span class="math inline">\(t\)</span>-test can be done with or without an equal variance assumption. Here <code>var.equal = TRUE</code> tells <code>R</code> we would like to perform the test under the equal variance assumption.</p>
 <p>Above we carried out the analysis using two vectors <code>x</code> and <code>y</code>. In general, we will have a preference for using data frames.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test_data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">values =</span> <span class="kw">c</span>(x, y),
-                         <span class="dt">group  =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="kw">length</span>(x)), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="kw">length</span>(y))))</code></pre></div>
-<p>We now have the data stored in a single variables (<code>values</code>) and have created a second variable (<code>group</code>) which indicates which &quot;sample&quot; the value belongs to.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_test_data</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>t_test_data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">values =</span> <span class="kw">c</span>(x, y),</span>
+<span id="cb38-2"><a href="#cb38-2"></a>                         <span class="dt">group  =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;A&quot;</span>, <span class="kw">length</span>(x)), <span class="kw">rep</span>(<span class="st">&quot;B&quot;</span>, <span class="kw">length</span>(y))))</span></code></pre></div>
+<p>We now have the data stored in a single variables (<code>values</code>) and have created a second variable (<code>group</code>) which indicates which “sample” the value belongs to.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>t_test_data</span></code></pre></div>
 <pre><code>##    values group
 ## 1      70     A
 ## 2      82     A
@@ -682,8 +633,8 @@ P(t_{12} &gt; 1.8233692).
 ## 13     84     B
 ## 14     68     B</code></pre>
 <p>Now to perform the test, we still use the <code>t.test()</code> function but with the <code>~</code> syntax and a <code>data</code> argument.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(values ~<span class="st"> </span>group, <span class="dt">data =</span> t_test_data,
-       <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">&quot;greater&quot;</span>), <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">t.test</span>(values <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> t_test_data,</span>
+<span id="cb41-2"><a href="#cb41-2"></a>       <span class="dt">alternative =</span> <span class="kw">c</span>(<span class="st">&quot;greater&quot;</span>), <span class="dt">var.equal =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -708,14 +659,14 @@ P(t_{12} &gt; 1.8233692).
 <p>The main thing is, we reject the null hypothesis if the p-value that comes out in the result is less than a predetermined significance level, which is 0.05 usually, then we reject the null hypothesis.</p>
 <p>H0: The two variables are independent. H1: The two variables relate to each other.</p>
 <p>In the case of a null hypothesis, a chi-square test is to test the two variables that are independent.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_frame &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://goo.gl/j6lRXD&quot;</span>)  <span class="co">#Reading CSV</span>
-<span class="kw">table</span>(data_frame$treatment, data_frame$improvement)</code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>data_frame &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://goo.gl/j6lRXD&quot;</span>)  <span class="co">#Reading CSV</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="kw">table</span>(data_frame<span class="op">$</span>treatment, data_frame<span class="op">$</span>improvement)</span></code></pre></div>
 <pre><code>##              
 ##               improved not-improved
 ##   not-treated       26           29
 ##   treated           35           15</code></pre>
 <p>Let’s do the chi-squared test using the chisq.test() function. It takes the two vectors as the input. We also set <code>correct=FALSE</code> to turn off Yates’ continuity correction.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(data_frame$treatment, data_frame$improvement, <span class="dt">correct=</span><span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">chisq.test</span>(data_frame<span class="op">$</span>treatment, data_frame<span class="op">$</span>improvement, <span class="dt">correct=</span><span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -728,8 +679,6 @@ P(t_{12} &gt; 1.8233692).
 <div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjdHVyZSAyOiBQcm9iYWJpbGl0eSBhbmQgc3RhdGlzdGljcyIKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBldmFsID0gVFJVRSkKYGBgCgojIFByb2JhYmlsaXR5IGFuZCBTdGF0aXN0aWNzIGluIGBSYAoKIyMgUHJvYmFiaWxpdHkgaW4gYFJgCgojIyMgRGlzdHJpYnV0aW9ucwoKV2hlbiB3b3JraW5nIHdpdGggZGlmZmVyZW50IHN0YXRpc3RpY2FsIGRpc3RyaWJ1dGlvbnMsIHdlIG9mdGVuIHdhbnQgdG8gbWFrZSBwcm9iYWJpbGlzdGljIHN0YXRlbWVudHMgYmFzZWQgb24gdGhlIGRpc3RyaWJ1dGlvbi4KCldlIHR5cGljYWxseSB3YW50IHRvIGtub3cgb25lIG9mIGZvdXIgdGhpbmdzOgoKKiBUaGUgZGVuc2l0eSAocGRmKSBhdCBhIHBhcnRpY3VsYXIgdmFsdWUuCiogVGhlIGRpc3RyaWJ1dGlvbiAoY2RmKSBhdCBhIHBhcnRpY3VsYXIgdmFsdWUuCiogVGhlIHF1YW50aWxlIHZhbHVlIGNvcnJlc3BvbmRpbmcgdG8gYSBwYXJ0aWN1bGFyIHByb2JhYmlsaXR5LgoqIEEgcmFuZG9tIGRyYXcgb2YgdmFsdWVzIGZyb20gYSBwYXJ0aWN1bGFyIGRpc3RyaWJ1dGlvbi4KClRoaXMgdXNlZCB0byBiZSBkb25lIHdpdGggc3RhdGlzdGljYWwgdGFibGVzIHByaW50ZWQgaW4gdGhlIGJhY2sgb2YgdGV4dGJvb2tzLiBOb3csIGBSYCBoYXMgZnVuY3Rpb25zIGZvciBvYnRhaW5pbmcgZGVuc2l0eSwgZGlzdHJpYnV0aW9uLCBxdWFudGlsZSBhbmQgcmFuZG9tIHZhbHVlcy4KClRoZSBnZW5lcmFsIG5hbWluZyBzdHJ1Y3R1cmUgb2YgdGhlIHJlbGV2YW50IGBSYCBmdW5jdGlvbnMgaXM6CgoqIGBkbm9ybWAgY2FsY3VsYXRlcyBkZW5zaXR5IChwZGYpIGF0IGlucHV0IGB4YC4KKiBgcG5vcm1gIGNhbGN1bGF0ZXMgZGlzdHJpYnV0aW9uIChjZGYpIGF0IGlucHV0IGB4YC4KKiBgcW5vcm1gIGNhbGN1bGF0ZXMgdGhlIHF1YW50aWxlIGF0IGFuIGlucHV0IHByb2JhYmlsaXR5LgoqIGBybm9ybWAgZ2VuZXJhdGVzIGEgcmFuZG9tIGRyYXcgZnJvbSBhIHBhcnRpY3VsYXIgZGlzdHJpYnV0aW9uLgoKTm90ZSB0aGF0IGBub3JtYCByZXByZXNlbnRzIHRoZSBuYW1lIG9mIHRoZSBnaXZlbiBkaXN0cmlidXRpb24uCgpGb3IgZXhhbXBsZSwgY29uc2lkZXIgYSByYW5kb20gdmFyaWFibGUgJFgkIHdoaWNoIGlzICROKFxtdSA9IDIsIFxzaWdtYV4yID0gMjUpJC4gKE5vdGUsIHdlIGFyZSBwYXJhbWV0ZXJpemluZyB1c2luZyB0aGUgdmFyaWFuY2UgJFxzaWdtYV4yJC4gYFJgIGhvd2V2ZXIgdXNlcyB0aGUgc3RhbmRhcmQgZGV2aWF0aW9uLikKClRvIGNhbGN1bGF0ZSB0aGUgdmFsdWUgb2YgdGhlIHBkZiBhdCBgeCA8LSAzYCwgdGhhdCBpcywgdGhlIGhlaWdodCBvZiB0aGUgY3VydmUgYXQgYHggPC0gM2AsIHVzZToKCmBgYHtyfQpkbm9ybSh4ID0gMywgbWVhbiA9IDIsIHNkID0gNSkKYGBgCgpUbyBjYWxjdWxhdGUgdGhlIHZhbHVlIG9mIHRoZSBjZGYgYXQgYHggPC0gM2AsIHRoYXQgaXMsICRQKFggXGxlcSAzKSQsIHRoZSBwcm9iYWJpbGl0eSB0aGF0ICRYJCBpcyBsZXNzIHRoYW4gb3IgZXF1YWwgdG8gYDNgLCB1c2U6CgpgYGB7cn0KcG5vcm0ocSA9IDMsIG1lYW4gPSAyLCBzZCA9IDUpCmBgYAoKT3IsIHRvIGNhbGN1bGF0ZSB0aGUgcXVhbnRpbGUgZm9yIHByb2JhYmlsaXR5IDAuOTc1LCB1c2U6CgpgYGB7cn0KcW5vcm0ocCA9IDAuOTc1LCBtZWFuID0gMiwgc2QgPSA1KQpgYGAKCkxhc3RseSwgdG8gZ2VuZXJhdGUgYSByYW5kb20gc2FtcGxlIG9mIHNpemUgYG4gPC0gMTBgLCB1c2U6CgpgYGB7cn0Kcm5vcm0obiA9IDEwLCBtZWFuID0gMiwgc2QgPSA1KQpgYGAKClRoZXNlIGZ1bmN0aW9ucyBleGlzdCBmb3IgbWFueSBvdGhlciBkaXN0cmlidXRpb25zLCBpbmNsdWRpbmcgYnV0IG5vdCBsaW1pdGVkIHRvOgoKfCBDb21tYW5kICB8IERpc3RyaWJ1dGlvbiB8CnwtLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tfAp8IGAqYmlub21gIHwgQmlub21pYWwgICAgIHwKfCBgKnRgICAgICB8IHQgICAgICAgICAgICB8CnwgYCpwb2lzYCAgfCBQb2lzc29uICAgICAgfAp8IGAqZmAgICAgIHwgRiAgICAgICAgICAgIHwKfCBgKmNoaXNxYCB8IENoaS1TcXVhcmVkICB8CgpXaGVyZSBgKmAgY2FuIGJlIGBkYCwgYHBgLCBgcWAsIGFuZCBgcmAuIEVhY2ggZGlzdHJpYnV0aW9uIHdpbGwgaGF2ZSBpdHMgb3duIHNldCBvZiBwYXJhbWV0ZXJzIHdoaWNoIG5lZWQgdG8gYmUgcGFzc2VkIHRvIHRoZSBmdW5jdGlvbnMgYXMgYXJndW1lbnRzLiBGb3IgZXhhbXBsZSwgYGRiaW5vbSgpYCB3b3VsZCBub3QgaGF2ZSBhcmd1bWVudHMgZm9yIGBtZWFuYCBhbmQgYHNkYCwgc2luY2UgdGhvc2UgYXJlIG5vdCBwYXJhbWV0ZXJzIG9mIHRoZSBkaXN0cmlidXRpb24uIEluc3RlYWQgYSBiaW5vbWlhbCBkaXN0cmlidXRpb24gaXMgdXN1YWxseSBwYXJhbWV0ZXJpemVkIGJ5ICRuJCBhbmQgJHAkLCBob3dldmVyIGBSYCBjaG9vc2VzIHRvIGNhbGwgdGhlbSBzb21ldGhpbmcgZWxzZS4gVG8gZmluZCB0aGUgbmFtZXMgdGhhdCBgUmAgdXNlcyB3ZSB3b3VsZCB1c2UgYD9kYmlub21gIGFuZCBzZWUgdGhhdCBgUmAgaW5zdGVhZCBjYWxscyB0aGUgYXJndW1lbnRzIGBzaXplYCBhbmQgYHByb2JgLiBGb3IgZXhhbXBsZToKCmBgYHtyfQpkYmlub20oeCA9IDYsIHNpemUgPSAxMCwgcHJvYiA9IDAuNzUpCmBgYAoKQWxzbyBub3RlIHRoYXQsIHdoZW4gdXNpbmcgdGhlIGBkbm9ybWAgZnVuY3Rpb25zIHdpdGggZGlzY3JldGUgZGlzdHJpYnV0aW9ucywgdGhleSBhcmUgdGhlIHBtZiBvZiB0aGUgZGlzdHJpYnV0aW9uLiBGb3IgZXhhbXBsZSwgdGhlIGFib3ZlIGNvbW1hbmQgaXMgJFAoWSA9IDYpJCBpZiAkWSBcc2ltIGIobiA9IDEwLCBwID0gMC43NSkkLiAoVGhlIHByb2JhYmlsaXR5IG9mIGZsaXBwaW5nIGFuIHVuZmFpciBjb2luIGAxMGAgdGltZXMgYW5kIHNlZWluZyBgNmAgaGVhZHMsIGlmIHRoZSBwcm9iYWJpbGl0eSBvZiBoZWFkcyBpcyBgMC43NWAuKQoKIyMgSHlwb3RoZXNpcyBUZXN0cyBpbiBgUmAKCkEgcHJlcmVxdWlzaXRlIGZvciBTVEFUIDQyMCBpcyBhbiB1bmRlcnN0YW5kaW5nIG9mIHRoZSBiYXNpY3Mgb2YgaHlwb3RoZXNpcyB0ZXN0aW5nLiBSZWNhbGwgdGhlIGJhc2ljIHN0cnVjdHVyZSBvZiBoeXBvdGhlc2lzIHRlc3RzOgoKLSBBbiBvdmVyYWxsIG1vZGVsIGFuZCByZWxhdGVkIGFzc3VtcHRpb25zIGFyZSBtYWRlLiAoVGhlIG1vc3QgY29tbW9uIGJlaW5nIG9ic2VydmF0aW9ucyBmb2xsb3dpbmcgYSBub3JtYWwgZGlzdHJpYnV0aW9uLikKLSBUaGUgKipudWxsKiogKCRIX3swfSQpIGFuZCAqKmFsdGVybmF0aXZlKiogKCRIX3sxfSQgb3IgJEhfe0F9JCkgaHlwb3RoZXNpcyBhcmUgc3BlY2lmaWVkLiBVc3VhbGx5IHRoZSBudWxsIHNwZWNpZmllcyBhIHBhcnRpY3VsYXIgdmFsdWUgb2YgYSBwYXJhbWV0ZXIuCi0gV2l0aCBnaXZlbiBkYXRhLCB0aGUgKip2YWx1ZSoqIG9mIHRoZSAqdGVzdCBzdGF0aXN0aWMqIGlzIGNhbGN1bGF0ZWQuCi0gVW5kZXIgdGhlIGdlbmVyYWwgYXNzdW1wdGlvbnMsIGFzIHdlbGwgYXMgYXNzdW1pbmcgdGhlIG51bGwgaHlwb3RoZXNpcyBpcyB0cnVlLCB0aGUgKipkaXN0cmlidXRpb24qKiBvZiB0aGUgKnRlc3Qgc3RhdGlzdGljKiBpcyBrbm93bi4KLSBHaXZlbiB0aGUgZGlzdHJpYnV0aW9uIGFuZCB2YWx1ZSBvZiB0aGUgdGVzdCBzdGF0aXN0aWMsIGFzIHdlbGwgYXMgdGhlIGZvcm0gb2YgdGhlIGFsdGVybmF0aXZlIGh5cG90aGVzaXMsIHdlIGNhbiBjYWxjdWxhdGUgYSAqKnAtdmFsdWUqKiBvZiB0aGUgdGVzdC4KLSBCYXNlZCBvbiB0aGUgKipwLXZhbHVlKiogYW5kIHByZS1zcGVjaWZpZWQgbGV2ZWwgb2Ygc2lnbmlmaWNhbmNlLCB3ZSBtYWtlIGEgZGVjaXNpb24uIE9uZSBvZjoKICAgIC0gRmFpbCB0byByZWplY3QgdGhlIG51bGwgaHlwb3RoZXNpcy4KICAgIC0gUmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMuCgpXZSdsbCBkbyBzb21lIHF1aWNrIHJldmlldyBvZiB0d28gb2YgdGhlIG1vc3QgY29tbW9uIHRlc3RzIHRvIHNob3cgaG93IHRoZXkgYXJlIHBlcmZvcm1lZCB1c2luZyBgUmAuCgoKIyMjIE9uZSBTYW1wbGUgdC1UZXN0OiBFeGFtcGxlCgpTdXBwb3NlIGEgZ3JvY2VyeSBzdG9yZSBzZWxscyAiMTYgb3VuY2UiIGJveGVzIG9mICpDYXB0YWluIENyaXNwKiBjZXJlYWwuIEEgcmFuZG9tIHNhbXBsZSBvZiA5IGJveGVzIHdhcyB0YWtlbiBhbmQgd2VpZ2hlZC4gVGhlIHdlaWdodCBpbiBvdW5jZXMgYXJlIHN0b3JlZCBpbiB0aGUgZGF0YSBmcmFtZSBgY2FwdF9jcmlzcGAuCgpgYGB7cn0KY2FwdF9jcmlzcCA9IGRhdGEuZnJhbWUod2VpZ2h0ID0gYygxNS41LCAxNi4yLCAxNi4xLCAxNS44LCAxNS42LCAxNi4wLCAxNS44LCAxNS45LCAxNi4yKSkKYGBgCgpUaGUgY29tcGFueSB0aGF0IG1ha2VzICpDYXB0YWluIENyaXNwKiBjZXJlYWwgY2xhaW1zIHRoYXQgdGhlIGF2ZXJhZ2Ugd2VpZ2h0IG9mIGEgYm94IGlzIGF0IGxlYXN0IDE2IG91bmNlcy4gV2Ugd2lsbCBhc3N1bWUgdGhlIHdlaWdodCBvZiBjZXJlYWwgaW4gYSBib3ggaXMgbm9ybWFsbHkgZGlzdHJpYnV0ZWQgYW5kIHVzZSBhIDAuMDUgbGV2ZWwgb2Ygc2lnbmlmaWNhbmNlIHRvIHRlc3QgdGhlIGNvbXBhbnkncyBjbGFpbS4KClRvIHRlc3QgJEhfezB9OiBcbXUgXGdlcSAxNiQgdmVyc3VzICRIX3sxfTogXG11IDwgMTYkLCB0aGUgdGVzdCBzdGF0aXN0aWMgaXMKClxbCnQgPSBcZnJhY3tcYmFye3h9IC0gXG11X3swfX17cyAvIFxzcXJ0e259fQpcXQoKVGhlIHNhbXBsZSBtZWFuICRcYmFye3h9JCBhbmQgdGhlIHNhbXBsZSBzdGFuZGFyZCBkZXZpYXRpb24gJHMkIGNhbiBiZSBlYXNpbHkgY29tcHV0ZWQgdXNpbmcgYFJgLiBXZSBhbHNvIGNyZWF0ZSB2YXJpYWJsZXMgd2hpY2ggc3RvcmUgdGhlIGh5cG90aGVzaXplZCBtZWFuIGFuZCB0aGUgc2FtcGxlIHNpemUuCgpgYGB7cn0KeF9iYXIgPC0gbWVhbihjYXB0X2NyaXNwJHdlaWdodCkKcyAgICAgPC0gc2QoY2FwdF9jcmlzcCR3ZWlnaHQpCm11XzAgIDwtIDE2Cm4gICAgIDwtIDkKYGBgCgpXZSBjYW4gdGhlbiBlYXNpbHkgY29tcHV0ZSB0aGUgdGVzdCBzdGF0aXN0aWMuCgpgYGB7cn0KdCA9ICh4X2JhciAtIG11XzApIC8gKHMgLyBzcXJ0KG4pKQp0CmBgYAoKVW5kZXIgdGhlIG51bGwgaHlwb3RoZXNpcywgdGhlIHRlc3Qgc3RhdGlzdGljIGhhcyBhICR0JCBkaXN0cmlidXRpb24gd2l0aCAkbiAtIDEkIGRlZ3JlZXMgb2YgZnJlZWRvbSwgaW4gdGhpcyBjYXNlIGByIG4gLSAxYC4KClRvIGNvbXBsZXRlIHRoZSB0ZXN0LCB3ZSBuZWVkIHRvIG9idGFpbiB0aGUgcC12YWx1ZSBvZiB0aGUgdGVzdC4gU2luY2UgdGhpcyBpcyBhIG9uZS1zaWRlZCB0ZXN0IHdpdGggYSBsZXNzLXRoYW4gYWx0ZXJuYXRpdmUsIHdlIG5lZWQgdGhlIGFyZWEgdG8gdGhlIGxlZnQgb2YgYHIgdGAgZm9yIGEgJHQkIGRpc3RyaWJ1dGlvbiB3aXRoIGByIG4gLSAxYCBkZWdyZWVzIG9mIGZyZWVkb20uIFRoYXQgaXMsCgpcWwpQKHRfe2ByIG4gLSAxYH0gPCBgciB0YCkKXF0KCmBgYHtyfQpwdCh0LCBkZiA9IG4gLSAxKQpgYGAKCldlIG5vdyBoYXZlIHRoZSBwLXZhbHVlIG9mIG91ciB0ZXN0LCB3aGljaCBpcyBncmVhdGVyIHRoYW4gb3VyIHNpZ25pZmljYW5jZSBsZXZlbCAoMC4wNSksIHNvIHdlIGZhaWwgdG8gcmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMuCgpBbHRlcm5hdGl2ZWx5LCB0aGlzIGVudGlyZSBwcm9jZXNzIGNvdWxkIGhhdmUgYmVlbiBjb21wbGV0ZWQgdXNpbmcgb25lIGxpbmUgb2YgYFJgIGNvZGUuCgpgYGB7cn0KdC50ZXN0KHggPSBjYXB0X2NyaXNwJHdlaWdodCwgbXUgPSAxNiwgYWx0ZXJuYXRpdmUgPSBjKCJsZXNzIiksIGNvbmYubGV2ZWwgPSAwLjk1KQpgYGAKCldlIHN1cHBseSBgUmAgd2l0aCB0aGUgZGF0YSwgdGhlIGh5cG90aGVzaXplZCB2YWx1ZSBvZiAkXG11JCwgdGhlIGFsdGVybmF0aXZlLCBhbmQgdGhlIGNvbmZpZGVuY2UgbGV2ZWwuIGBSYCB0aGVuIHJldHVybnMgYSB3ZWFsdGggb2YgaW5mb3JtYXRpb24gaW5jbHVkaW5nOgoKLSBUaGUgdmFsdWUgb2YgdGhlIHRlc3Qgc3RhdGlzdGljLgotIFRoZSBkZWdyZWVzIG9mIGZyZWVkb20gb2YgdGhlIGRpc3RyaWJ1dGlvbiB1bmRlciB0aGUgbnVsbCBoeXBvdGhlc2lzLgotIFRoZSBwLXZhbHVlIG9mIHRoZSB0ZXN0LgotIFRoZSBjb25maWRlbmNlIGludGVydmFsIHdoaWNoIGNvcnJlc3BvbmRzIHRvIHRoZSB0ZXN0LgotIEFuIGVzdGltYXRlIG9mICRcbXUkLgoKU2luY2UgdGhlIHRlc3Qgd2FzIG9uZS1zaWRlZCwgYFJgIHJldHVybmVkIGEgb25lLXNpZGVkIGNvbmZpZGVuY2UgaW50ZXJ2YWwuIElmIGluc3RlYWQgd2Ugd2FudGVkIGEgdHdvLXNpZGVkIGludGVydmFsIGZvciB0aGUgbWVhbiB3ZWlnaHQgb2YgYm94ZXMgb2YgKkNhcHRhaW4gQ3Jpc3AqIGNlcmVhbCB3ZSBjb3VsZCBtb2RpZnkgb3VyIGNvZGUuCgpgYGB7cn0KY2FwdF90ZXN0X3Jlc3VsdHMgPSB0LnRlc3QoY2FwdF9jcmlzcCR3ZWlnaHQsIG11ID0gMTYsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIGNvbmYubGV2ZWwgPSAwLjk1KQpgYGAKClRoaXMgdGltZSB3ZSBoYXZlIHN0b3JlZCB0aGUgcmVzdWx0cy4gQnkgZG9pbmcgc28sIHdlIGNhbiBkaXJlY3RseSBhY2Nlc3MgcG9ydGlvbnMgb2YgdGhlIG91dHB1dCBmcm9tIGB0LnRlc3QoKWAuIFRvIHNlZSB3aGF0IGluZm9ybWF0aW9uIGlzIGF2YWlsYWJsZSB3ZSB1c2UgdGhlIGBuYW1lcygpYCBmdW5jdGlvbi4KCmBgYHtyfQpuYW1lcyhjYXB0X3Rlc3RfcmVzdWx0cykKYGBgCgpXZSBhcmUgaW50ZXJlc3RlZCBpbiB0aGUgY29uZmlkZW5jZSBpbnRlcnZhbCB3aGljaCBpcyBzdG9yZWQgaW4gYGNvbmYuaW50YC4KCmBgYHtyfQpjYXB0X3Rlc3RfcmVzdWx0cyRjb25mLmludApgYGAKCkxldCdzIGNoZWNrIHRoaXMgaW50ZXJ2YWwgImJ5IGhhbmQuIiBUaGUgb25lIHBpZWNlIG9mIGluZm9ybWF0aW9uIHdlIGFyZSBtaXNzaW5nIGlzIHRoZSBjcml0aWNhbCB2YWx1ZSwgJHRfe24tMX0oXGFscGhhLzIpID0gdF97OH0oMC4wMjUpJCwgd2hpY2ggY2FuIGJlIGNhbGN1bGF0ZWQgaW4gYFJgIHVzaW5nIHRoZSBgcXQoKWAgZnVuY3Rpb24uCgpgYGB7cn0KcXQoMC45NzUsIGRmID0gOCkKYGBgCgpTbywgdGhlIDk1XCUgQ0kgZm9yIHRoZSBtZWFuIHdlaWdodCBvZiBhIGNlcmVhbCBib3ggaXMgY2FsY3VsYXRlZCBieSBwbHVnZ2luZyBpbnRvIHRoZSBmb3JtdWxhLAoKXFsKXGJhcnt4fSBccG0gdF97bi0xfShcYWxwaGEvMikgXGZyYWN7c317XHNxcnR7bn19ClxdCgpgYGB7cn0KYyhtZWFuKGNhcHRfY3Jpc3Akd2VpZ2h0KSAtIHF0KDAuOTc1LCBkZiA9IDgpICogc2QoY2FwdF9jcmlzcCR3ZWlnaHQpIC8gc3FydCg5KSwKICBtZWFuKGNhcHRfY3Jpc3Akd2VpZ2h0KSArIHF0KDAuOTc1LCBkZiA9IDgpICogc2QoY2FwdF9jcmlzcCR3ZWlnaHQpIC8gc3FydCg5KSkKYGBgCgoKIyMjIFR3byBTYW1wbGUgdC1UZXN0OiBFeGFtcGxlCgpBc3N1bWUgdGhhdCB0aGUgZGlzdHJpYnV0aW9ucyBvZiAkWCQgYW5kICRZJCBhcmUgJFxtYXRocm17Tn0oXG11X3sxfSxcc2lnbWFeezJ9KSQgYW5kICRcbWF0aHJte059KFxtdV97Mn0sXHNpZ21hXnsyfSkkLCByZXNwZWN0aXZlbHkuIEdpdmVuIHRoZSAkbiA9IDYkIG9ic2VydmF0aW9ucyBvZiAkWCQsCgpgYGB7cn0KeCA9IGMoNzAsIDgyLCA3OCwgNzQsIDk0LCA4MikKbiA9IGxlbmd0aCh4KQpgYGAKCmFuZCB0aGUgJG0gPSA4JCBvYnNlcnZhdGlvbnMgb2YgJFkkLAoKYGBge3J9CnkgPSBjKDY0LCA3MiwgNjAsIDc2LCA3MiwgODAsIDg0LCA2OCkKbSA9IGxlbmd0aCh5KQpgYGAKCndlIHdpbGwgdGVzdCAkSF97MH06IFxtdV97MX0gPSBcbXVfezJ9JCB2ZXJzdXMgJEhfezF9OiBcbXVfezF9ID4gXG11X3syfSQuCgpGaXJzdCwgbm90ZSB0aGF0IHdlIGNhbiBjYWxjdWxhdGUgdGhlIHNhbXBsZSBtZWFucyBhbmQgc3RhbmRhcmQgZGV2aWF0aW9ucy4KCmBgYHtyfQp4X2JhciA9IG1lYW4oeCkKc194ICAgPSBzZCh4KQp5X2JhciA9IG1lYW4oeSkKc195ICAgPSBzZCh5KQpgYGAKCldlIGNhbiB0aGVuIGNhbGN1bGF0ZSB0aGUgcG9vbGVkIHN0YW5kYXJkIGRldmlhdGlvbi4KClxbCnNfe3B9ID0gXHNxcnR7XGZyYWN7KG4tMSlzX3t4fV57Mn0rKG0tMSlzX3t5fV57Mn19e24rbS0yfX0KXF0KCmBgYHtyfQpzX3AgPSBzcXJ0KCgobiAtIDEpICogc194IF4gMiArIChtIC0gMSkgKiBzX3kgXiAyKSAvIChuICsgbSAtIDIpKQpgYGAKClRodXMsIHRoZSByZWxldmFudCAkdCQgdGVzdCBzdGF0aXN0aWMgaXMgZ2l2ZW4gYnkKClxbCnQgPSBcZnJhY3soXGJhcnt4fS1cYmFye3l9KS1cbXVfezB9fXtzX3twfVxzcXJ0e1xmcmFjezF9e259K1xmcmFjezF9e219fX0uClxdCgpgYGB7cn0KdCA9ICgoeF9iYXIgLSB5X2JhcikgLSAwKSAvIChzX3AgKiBzcXJ0KDEgLyBuICsgMSAvIG0pKQp0CmBgYAoKTm90ZSB0aGF0ICR0IFxzaW0gdF97biArIG0gLSAyfSA9IHRfe2ByIG4gKyBtIC0gMmB9JCwgc28gd2UgY2FuIGNhbGN1bGF0ZSB0aGUgcC12YWx1ZSwgd2hpY2ggaXMKClxbClAodF97YHIgbiArIG0gLSAyYH0gPiBgciB0YCkuClxdCgpgYGB7cn0KMSAtIHB0KHQsIGRmID0gbiArIG0gLSAyKQpgYGAKCkJ1dCwgdGhlbiBhZ2Fpbiwgd2UgY291bGQgaGF2ZSBzaW1wbHkgcGVyZm9ybWVkIHRoaXMgdGVzdCBpbiBvbmUgbGluZSBvZiBgUmAuCgpgYGB7cn0KdC50ZXN0KHgsIHksIGFsdGVybmF0aXZlID0gYygiZ3JlYXRlciIpLCB2YXIuZXF1YWwgPSBUUlVFKQpgYGAKClJlY2FsbCB0aGF0IGEgdHdvLXNhbXBsZSAkdCQtdGVzdCBjYW4gYmUgZG9uZSB3aXRoIG9yIHdpdGhvdXQgYW4gZXF1YWwgdmFyaWFuY2UgYXNzdW1wdGlvbi4gSGVyZSBgdmFyLmVxdWFsID0gVFJVRWAgdGVsbHMgYFJgIHdlIHdvdWxkIGxpa2UgdG8gcGVyZm9ybSB0aGUgdGVzdCB1bmRlciB0aGUgZXF1YWwgdmFyaWFuY2UgYXNzdW1wdGlvbi4KCkFib3ZlIHdlIGNhcnJpZWQgb3V0IHRoZSBhbmFseXNpcyB1c2luZyB0d28gdmVjdG9ycyBgeGAgYW5kIGB5YC4gSW4gZ2VuZXJhbCwgd2Ugd2lsbCBoYXZlIGEgcHJlZmVyZW5jZSBmb3IgdXNpbmcgZGF0YSBmcmFtZXMuCgpgYGB7cn0KdF90ZXN0X2RhdGEgPSBkYXRhLmZyYW1lKHZhbHVlcyA9IGMoeCwgeSksCiAgICAgICAgICAgICAgICAgICAgICAgICBncm91cCAgPSBjKHJlcCgiQSIsIGxlbmd0aCh4KSksIHJlcCgiQiIsIGxlbmd0aCh5KSkpKQpgYGAKCldlIG5vdyBoYXZlIHRoZSBkYXRhIHN0b3JlZCBpbiBhIHNpbmdsZSB2YXJpYWJsZXMgKGB2YWx1ZXNgKSBhbmQgaGF2ZSBjcmVhdGVkIGEgc2Vjb25kIHZhcmlhYmxlIChgZ3JvdXBgKSB3aGljaCBpbmRpY2F0ZXMgd2hpY2ggInNhbXBsZSIgdGhlIHZhbHVlIGJlbG9uZ3MgdG8uCgpgYGB7cn0KdF90ZXN0X2RhdGEKYGBgCgpOb3cgdG8gcGVyZm9ybSB0aGUgdGVzdCwgd2Ugc3RpbGwgdXNlIHRoZSBgdC50ZXN0KClgIGZ1bmN0aW9uIGJ1dCB3aXRoIHRoZSBgfmAgc3ludGF4IGFuZCBhIGBkYXRhYCBhcmd1bWVudC4KCmBgYHtyfQp0LnRlc3QodmFsdWVzIH4gZ3JvdXAsIGRhdGEgPSB0X3Rlc3RfZGF0YSwKICAgICAgIGFsdGVybmF0aXZlID0gYygiZ3JlYXRlciIpLCB2YXIuZXF1YWwgPSBUUlVFKQpgYGAKCiMjIENoaS1zcXVhcmUgdGVzdDogRWZmZWN0aXZlbmVzcyBvZiBhIERydWcgVHJlYXRtZW50CgpUbyB0ZXN0IHRoZSBlZmZlY3RpdmVuZXNzIG9mIGEgZHJ1ZyBmb3IgYSBjZXJ0YWluIG1lZGljYWwgY29uZGl0aW9uLCB3ZSB3aWxsIGNvbnNpZGVyIGEgaHlwb3RoZXRpY2FsIGNhc2UuCgpTdXBwb3NlIHdlIGhhdmUgMTA1IHBhdGllbnRzIHVuZGVyIHN0dWR5IGFuZCA1MCBvZiB0aGVtIHdlcmUgdHJlYXRlZCB3aXRoIHRoZSBkcnVnLiBNb3Jlb3ZlciwgdGhlIHJlbWFpbmluZyA1NSBwYXRpZW50cyB3ZXJlIGtlcHQgdW5kZXIgY29udHJvbCBzYW1wbGVzLiBUaHVzLCB0aGUgaGVhbHRoIGNvbmRpdGlvbiBvZiBhbGwgcGF0aWVudHMgd2FzIGNoZWNrZWQgYWZ0ZXIgYSB3ZWVrLgoKV2l0aCB0aGUgZm9sbG93aW5nIHRhYmxlLCB3ZSBjYW4gYXNzZXNzIGlmIHRoZWlyIGNvbmRpdGlvbiBoYXMgaW1wcm92ZWQgb3Igbm90LiBCeSBvYnNlcnZpbmcgdGhpcyB0YWJsZSwgb25lIGNhbiB5b3UgdGVsbCBpZiB0aGUgZHJ1ZyBoYWQgYSBwb3NpdGl2ZSBlZmZlY3Qgb24gdGhlIHBhdGllbnQ/CgpIZXJlIGluIHRoaXMgZXhhbXBsZSwgd2UgY2FuIHNlZSB0aGF0IDM1IG91dCBvZiB0aGUgNTAgcGF0aWVudHMgc2hvd2VkIGltcHJvdmVtZW50LiBTdXBwb3NlIGlmIHRoZSBkcnVnIGhhZCBubyBlZmZlY3QsIHRoZSA1MCB3aWxsIHNwbGl0IHRoZSBzYW1lIHByb3BvcnRpb24gb2YgdGhlIHBhdGllbnRzIHdobyB3ZXJlIG5vdCBnaXZlbiB0aGUgdHJlYXRtZW50LiBIZXJlLCBpbiB0aGlzIGNhc2UsIGltcHJvdmVtZW50IG9mIHRoZSBjb250cm9sIGNhc2UgaXMgaGlnaCBhcyBhYm91dCA3MCUgb2YgcGF0aWVudHMgc2hvd2VkIGltcHJvdmVtZW50LCBzaW5jZSBib3RoIGNhdGVnb3JpY2FsIHZhcmlhYmxlcyB3aGljaCB3ZSBoYXZlIGFscmVhZHkgZGVmaW5lZCBtdXN0IGhhdmUgb25seSAyIGxldmVscy4gQWxzbywgaXQgd2FzIHNvcnQgb2YgcGVyY2VwdGl2ZSB0b2RheSB0aGF0IHRoZSBkcnVnIHRyZWF0bWVudCBhbmQgaGVhbHRoIGNvbmRpdGlvbiBhcmUgZGVwZW5kZW50LgoKTXVzdCBMZWFybiDigJMgSG93IHRvIGNyZWF0ZSBjb250aW5nZW5jeSB0YWJsZXMgaW4gUgoKUGFydGljdWxhcmx5IGluIHRoaXMgdGVzdCwgd2UgaGF2ZSB0byBjaGVjayB0aGUgcC12YWx1ZXMuIE1vcmVvdmVyLCBsaWtlIGFsbCBzdGF0aXN0aWNhbCB0ZXN0cywgd2UgYXNzdW1lIHRoaXMgdGVzdCBhcyBhIG51bGwgaHlwb3RoZXNpcyBhbmQgYW4gYWx0ZXJuYXRlIGh5cG90aGVzaXMuCgpUaGUgbWFpbiB0aGluZyBpcywgd2UgcmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMgaWYgdGhlIHAtdmFsdWUgdGhhdCBjb21lcyBvdXQgaW4gdGhlIHJlc3VsdCBpcyBsZXNzIHRoYW4gYSBwcmVkZXRlcm1pbmVkIHNpZ25pZmljYW5jZSBsZXZlbCwgd2hpY2ggaXMgMC4wNSB1c3VhbGx5LCB0aGVuIHdlIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzLgoKSDA6IFRoZSB0d28gdmFyaWFibGVzIGFyZSBpbmRlcGVuZGVudC4KSDE6IFRoZSB0d28gdmFyaWFibGVzIHJlbGF0ZSB0byBlYWNoIG90aGVyLgoKSW4gdGhlIGNhc2Ugb2YgYSBudWxsIGh5cG90aGVzaXMsIGEgY2hpLXNxdWFyZSB0ZXN0IGlzIHRvIHRlc3QgdGhlIHR3byB2YXJpYWJsZXMgdGhhdCBhcmUgaW5kZXBlbmRlbnQuCgpgYGB7cn0KZGF0YV9mcmFtZSA8LSByZWFkLmNzdigiaHR0cHM6Ly9nb28uZ2wvajZsUlhEIikgICNSZWFkaW5nIENTVgp0YWJsZShkYXRhX2ZyYW1lJHRyZWF0bWVudCwgZGF0YV9mcmFtZSRpbXByb3ZlbWVudCkKYGBgCgpMZXTigJlzIGRvIHRoZSBjaGktc3F1YXJlZCB0ZXN0IHVzaW5nIHRoZSBjaGlzcS50ZXN0KCkgZnVuY3Rpb24uIEl0IHRha2VzIHRoZSB0d28gdmVjdG9ycyBhcyB0aGUgaW5wdXQuIFdlIGFsc28gc2V0IGBjb3JyZWN0PUZBTFNFYCB0byB0dXJuIG9mZiBZYXRlc+KAmSBjb250aW51aXR5IGNvcnJlY3Rpb24uCgpgYGB7cn0KY2hpc3EudGVzdChkYXRhX2ZyYW1lJHRyZWF0bWVudCwgZGF0YV9mcmFtZSRpbXByb3ZlbWVudCwgY29ycmVjdD1GQUxTRSkKYGBgCldlIGhhdmUgYSBjaGktc3F1YXJlZCB2YWx1ZSBvZiA1LjU1NjkuIFNpbmNlIHdlIGdldCBhIHAtVmFsdWUgbGVzcyB0aGFuIHRoZSBzaWduaWZpY2FuY2UgbGV2ZWwgb2YgMC4wNSwgd2UgcmVqZWN0IHRoZSBudWxsIGh5cG90aGVzaXMgYW5kIGNvbmNsdWRlIHRoYXQgdGhlIHR3byB2YXJpYWJsZXMgYXJlIGluIGZhY3QgZGVwZW5kZW50Cg==</div>
 
 
-</div>
-</div>
 
 </div>
 
@@ -767,35 +716,6 @@ $(document).ready(function () {
 });
 </script>
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

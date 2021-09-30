@@ -1,7 +1,10 @@
 name: "bioinformatics-for-pharmacy"
+author: "Mariam R. Rizkallah"
+email: "m.rizkallah@jacobs-university.de"
+date: "September 2021"
 output_dir: "docs"
 navbar:
-  type: default
+  # type: default
   title: "Bioinformatics for Pharmacy"
   left:
     - text: "Home"
@@ -18,15 +21,15 @@ navbar:
         href: func.html
       - text: "Lecture 3: Conditioning"
         href: cond.html
-      # - text: "Lecture 3: Chemical informatics I"
-      #   href: chem2.html
-      # - text: "Lecture 3: Chemical informatics II"
-      #   href: chem.html
+      - text: "Lecture 3: Chemical informatics I"
+        href: chem2.html
+      - text: "Lecture 3: Chemical informatics II"
+        href: chem.html
     - text: "Labs"
       menu:
-      - text: "Lab 1: DNA exercise"
+      - text: "Lab: DNA exercise"
         href: lab1.html
-      - text: "Lab 2: Air quality"
+      - text: "Lab: Air quality"
         href: lab2.html
 
   right:
@@ -37,6 +40,5 @@ output:
   html_document:
     theme: yeti
     highlight: zenburn
-    toc: true
     toc_float: true
     code_download: true

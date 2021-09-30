@@ -1,5 +1,6 @@
 ---
-title: "Lab 2: DNA exercise"
+title: "Lab: DNA exercise"
+pagetitle: "Lab: DNA exercise"
 ---
 
 ```{r setup, include=FALSE}

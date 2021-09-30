@@ -1,6 +1,6 @@
 ---
 title: "Lecture 3: Functions"
-
+pagetitle: "Lecture 3: Functions"
 questions:
 - "How do I make a function?"
 - "How can I test my functions?"
@@ -222,7 +222,7 @@ all.equal(sd(dat[, 4]), sd(centered))
 It's still possible that our function is wrong, but it seems unlikely enough that we should probably get back to doing our analysis.
 However, there are two other important tasks to consider: 1) we should ensure our function can provide informative errors when needed, and 2) we should write some **documentation** for our function to remind ourselves later what it's for and how to use it.
 
-```{r}
+```{r, eval = FALSE}
 dat[, 4] <- centered
 write.table(dat, file = "inflammation-centered.csv", col.names = FALSE, row.names = FALSE, quote = FALSE, sep = ",")
 ```
@@ -315,7 +315,7 @@ And in the likely situation that we want to change how the data is processed or 
 
 Here's how we can save all three plots of the first inflammation data set in a pdf file:
 
-```{r, results='hide'}
+```{r, results='hide', eval = FALSE}
 pdf("inflammation-01.pdf")
 analyze("data/inflammation-01.csv")
 dev.off()

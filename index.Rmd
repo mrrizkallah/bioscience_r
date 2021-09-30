@@ -1,8 +1,5 @@
 ---
-title:      "Bioinformatics for Pharmacy"
-author:     "Mariam R. Rizkallah"
-email:      "m.rizkallah@jacobs-university.de"
-date:       "September 2021"
+title:        "Bioinformatics for Pharmacy"
 # output:     beamer_presentation
 # theme:      boxes
 # colortheme: dolphin

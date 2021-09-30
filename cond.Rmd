@@ -159,7 +159,8 @@ analyze <- function(filename) {
   min_day_inflammation <- apply(dat, 2, min)
   plot(min_day_inflammation)
 }
-
+```
+```{r eval = FALSE}
 pdf("inflammation-01.pdf")
 analyze("data/inflammation-01.csv")
 dev.off()
